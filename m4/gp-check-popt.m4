@@ -95,15 +95,17 @@ if test "x$POPT_CFLAGS" = "x" && test "x$POPT_LIBS" = "x"; then
 	LDFLAGS_save="$LDFLAGS"
 	popt_links=no
 	for popt_prefix in "" /usr /usr/local; do
-		# We could have "/usr" and "lib64" at the beginning of the lists.
-		# Then the first tested location would incidentally be the right
-		# one on 64bit systems, and thus work around a bug in libtool on
-		# 32bit systems:
+		# We could have "/usr" and "lib64" at the beginning of the
+		# lists. Then the first tested location would
+		# incidentally be the right one on 64bit systems, and
+		# thus work around a bug in libtool on 32bit systems:
+		#
 		# 32bit libtool doesn't know about 64bit systems, and so the
 		# compilation will fail when linking a 32bit library from
 		# /usr/lib to a 64bit binary.
-		# This hack has been verified with a 32bit Debian Sarge
-		# and 64bit Fedora Core 3 system.
+		#
+		# This hack has been confirmed to workwith a
+		# 32bit Debian Sarge and 64bit Fedora Core 3 system.
 		for ldir in "" lib64 lib; do
 			popt_libdir="${popt_prefix}/${ldir}"
 			if test "${popt_libdir}" = "/"; then
