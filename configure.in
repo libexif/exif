@@ -14,7 +14,7 @@ AM_PROG_LIBTOOL
 AM_CFLAGS="$CFLAGS"
 GP_CONFIG_MSG([Compiler],[${CC}])
 
-AC_CHECK_FUNCS([isatty])
+AC_CHECK_FUNCS([isatty fileno])
 
 GP_PKG_CONFIG
 
@@ -34,6 +34,14 @@ GP_GETTEXT_FLAGS()
 AC_SUBST([localedir],["\$(datadir)/locale"])
 AM_CFLAGS="$AM_CFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
 
+# ---------------------------------------------------------------------------
+# locale.h: locale.h provides setlocale. It seems that some systems don't
+#           have it (at least if configured --without-nls).
+# ---------------------------------------------------------------------------
+AC_CHECK_HEADERS([locale.h])
+AC_CHECK_HEADER([iconv.h], [
+	AC_DEFINE(HAVE_ICONV,1,[whether iconv is available])])
+
 
 # ---------------------------------------------------------------------------
 # libraries needed
@@ -42,12 +50,9 @@ GP_CHECK_LIBRARY([LIBEXIF],[libexif])
 
 
 # ---------------------------------------------------------------------------
-# locale.h: locale.h provides setlocale. It seems that some systems don't
-#           have it (at least if configured --without-nls).
+# Check for misc headers
 # ---------------------------------------------------------------------------
-AC_CHECK_HEADERS([locale.h])
-AC_CHECK_HEADER([iconv.h], [
-	AC_DEFINE(HAVE_ICONV,1,[whether iconv is available])])
+AC_CHECK_HEADERS([unistd.h])
 
 
 # ---------------------------------------------------------------------------

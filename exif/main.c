@@ -26,6 +26,10 @@
 #include <string.h>
 #include <popt.h>
 
+#ifdef HAVE_UNISTD_H
+#  include <unistd.h>
+#endif
+
 #include <libexif/exif-data.h>
 #include <libexif/exif-utils.h>
 #include <libexif/exif-loader.h>
@@ -36,7 +40,7 @@
 #include "exif-i18n.h"
 #include "utils.h"
 
-#ifdef HAVE_LOCAL_H
+#ifdef HAVE_LOCALE_H
 #  include <locale.h>
 #endif
 
@@ -158,23 +162,29 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 	}
 }
 
-/* FIXME: We should make sure the terminal can actually understand these
- *        escape sequences
- */
+/* escape codes for output colors */
 #define COL_BLUE   "\033[34m"
 #define COL_GREEN  "\033[32m"
 #define COL_RED    "\033[31m"
 #define COL_NORMAL "\033[0m"
-#ifdef HAVE_ISATTY
+
+/* Ensure that we're actuall printing the escape codes to a TTY.
+ * FIXME: We should make sure the terminal can actually understand these
+ *        escape sequences
+ */
+
+#if defined(HAVE_ISATTY) && defined(HAVE_FILENO)
+#  define file_is_tty(file) (isatty(fileno(file)))
+#else
+#  define file_is_tty(file, colorstring) (0==1)
+#endif
+
 #define put_colorstring(file, colorstring) \
 	do { \
-		if (isatty(file)) { \
+		if (file_is_tty(file)) { \
 			fputs (colorstring, file); \
 		} \
 	} while (0)
-#else
-#define write_colorstring(file, colorstring) do { } while (0)
-#endif
 
 static void
 log_func_exit (ExifLog *log, ExifLogCode code, const char *domain,
