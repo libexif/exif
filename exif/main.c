@@ -182,19 +182,16 @@ log_func_exit (ExifLog *log, ExifLogCode code, const char *domain,
 }
 
 static int
-save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
+save_exif_data_to_file (ExifData *ed, ExifLog *log, 
+		const char *fname, const char *target)
 {
 	JPEGData *jdata;
 	unsigned char *d = NULL;
 	unsigned int ds;
-	ExifLog *log;
 
-	/* Parse the JPEG file. If anything goes wrong, fail. */
+	/* Parse the JPEG file. */
 	jdata = jpeg_data_new ();
-	log = exif_log_new ();
-	exif_log_set_func (log, log_func_exit, NULL);
 	jpeg_data_log (jdata, log);
-	exif_log_unref (log);
 	jpeg_data_load_file (jdata, fname);
 
 	/* Make sure the EXIF data is not too big. */
@@ -336,10 +333,12 @@ main (int argc, const char **argv)
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
 	while (poptGetNextOpt (ctx) > 0);
 
-	if (debug) {
-		log = exif_log_new ();
-		exif_log_set_func (log, log_func, NULL);
-	}
+	/*
+	 * When debugging, continue as far as possible. If not, make all errors
+	 * fatal.
+	 */
+	log = exif_log_new ();
+	exif_log_set_func (log, debug ? log_func : log_func_exit, NULL);
 
 	/* Any command line parameters ? */
 	if (argc <= 1) {
@@ -398,7 +397,12 @@ main (int argc, const char **argv)
 			exif_loader_write_file (l, *args);
 			ed = exif_loader_get_data (l);
 			exif_loader_unref (l);
-			if (!ed) {
+			if (!ed || ! (ed->data || ed->size ||
+						ed->ifd[EXIF_IFD_0]->count ||
+						ed->ifd[EXIF_IFD_1]->count ||
+						ed->ifd[EXIF_IFD_EXIF]->count ||
+						ed->ifd[EXIF_IFD_GPS]->count ||
+						ed->ifd[EXIF_IFD_INTEROPERABILITY]->count)) {
 				fprintf (stderr, _("'%s' does not "
 					 "contain EXIF data!"), *args);
 				fputc ('\n', stderr);
@@ -478,7 +482,7 @@ main (int argc, const char **argv)
 				ed->size = 0;
 
 				/* Save the new data. */
-				save_exif_data_to_file (ed, *args, fname);
+				save_exif_data_to_file (ed, log, *args, fname);
 
 			} else if (ithumbnail) {
 
@@ -529,7 +533,7 @@ main (int argc, const char **argv)
 				}
 				fclose (f);
 
-				save_exif_data_to_file (ed, *args, fname);
+				save_exif_data_to_file (ed, log, *args, fname);
 
 			} else if (set_value) {
 
@@ -561,7 +565,7 @@ main (int argc, const char **argv)
 				/* Now set the value and save the data. */
                                 convert_arg_to_entry (set_value, e,
 						exif_data_get_byte_order (ed));
-				save_exif_data_to_file (ed, *args, fname);
+				save_exif_data_to_file (ed, log, *args, fname);
 			} else if (remove_tag) {
 				
 				/* We need an IFD. */
@@ -596,7 +600,7 @@ main (int argc, const char **argv)
 				}
 
 				/* Save modified data. */
-				save_exif_data_to_file (ed, *args, fname);
+				save_exif_data_to_file (ed, log, *args, fname);
 
 			} else if (machine_readable) {
 				action_tag_list_machine (*args, ed, eo.use_ids);

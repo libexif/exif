@@ -1,3 +1,8 @@
+2005-03-30  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/main.c: Always use a logging function to make errors fatal. This
+	fixes #1169170.
+
 2005-03-29  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Abort if anything goes wrong. Fixes #1054322.
