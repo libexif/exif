@@ -1,11 +1,11 @@
 dnl @synopsis GP_CHECK_POPT(FLAG)
 dnl
-dnl FLAG must be one of "mandatory" or "optional"
-dnl
+dnl Check whether libpopt is available.
+dnl FLAG must be one of "mandatory" or "optional".
 dnl
 AC_DEFUN([GP_CHECK_POPT],[
 #
-# check for popt
+# [GP_CHECK_POPT]
 #
 AC_REQUIRE([GP_CONFIG_MSG])dnl
 
@@ -16,7 +16,7 @@ elif test "x$1" = "xoptional"; then
 else
 	AC_MSG_ERROR([
 Error in your configure.{ac,in}:
-GP_CHECK_POPT must be called with a valid argument
+[GP_CHECK_POPT] must be called with a valid argument
 ])
 fi
 

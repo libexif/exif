@@ -2,6 +2,9 @@ dnl @synopsis GP_PKG_CONFIG
 dnl
 dnl
 AC_DEFUN([GP_PKG_CONFIG],[
+#
+# [GP_PKG_CONFIG]
+#
 AC_ARG_VAR([PKG_CONFIG_PATH],[where pkg-config looks for *.pc files])
 AC_MSG_CHECKING([PKG_CONFIG_PATH])
 if test "x${PKG_CONFIG_PATH}" = "x"; then
