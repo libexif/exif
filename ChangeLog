@@ -1,3 +1,8 @@
+2005-03-29  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* libjpeg/jpeg-data.c: Don't crash. First part of fix for #1054322.
+	Remainder will follow in libexif.
+
 2005-03-16  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Fix for #994706.

@@ -425,6 +425,7 @@ jpeg_data_set_exif_data (JPEGData *data, ExifData *exif_data)
 	section = jpeg_data_get_section (data, JPEG_MARKER_APP1);
 	if (!section) {
 		jpeg_data_append_section (data);
+		if (data->count < 2) return;
 		memmove (&data->sections[2], &data->sections[1],
 			 sizeof (JPEGSection) * (data->count - 2));
 		section = &data->sections[1];
