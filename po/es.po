@@ -1,0 +1,216 @@
+# exif Spanish Translation.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# Fabian Mandelbaum <fabman@mandrakesoft.com>, 2002.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: exif\n"
+"POT-Creation-Date: 2002-07-25 18:37+0200\n"
+"PO-Revision-Date: 2002-09-03 20:07-0300\n"
+"Last-Translator: Fabian Mandelbaum <fabman@mandrakesoft.com>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: exif/main.c:70
+#, c-format
+msgid "Could not parse data of tag '%s'."
+msgstr "No se pueden analizar los datos de la etiqueta '%s'."
+
+#: exif/main.c:81
+#, c-format
+msgid "Tag '%s' does not contain known information."
+msgstr "La etiqueta '%s' no contiene información conocida."
+
+#: exif/main.c:86
+#, c-format
+msgid "Tag '%s' contains one piece of information:"
+msgstr "La etiqueta '%s' contiene información:"
+
+#: exif/main.c:90
+#, c-format
+msgid "Tag '%s' contains the following information:"
+msgstr "La etiqueta '%s' contiene la información siguiente:"
+
+#: exif/main.c:106
+#, c-format
+msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
+msgstr "La entrada EXIF '%s' (0x%x, '%s') existe en IFD '%s':"
+
+#: exif/main.c:110
+#, c-format
+msgid "  Format: '%s'"
+msgstr "  Formato: '%s'"
+
+#: exif/main.c:112
+#, c-format
+msgid "  Components: %i"
+msgstr "  Componentes: %i"
+
+#: exif/main.c:114
+#, c-format
+msgid "  Value: '%s'"
+msgstr "  Valor: '%s'"
+
+#: exif/main.c:116
+msgid "  Data:"
+msgstr "  Datos:"
+
+#: exif/main.c:148
+#, c-format
+msgid "Could not parse JPEG file '%s'."
+msgstr "No se pudo analizar archivo JPEG '%s'."
+
+#: exif/main.c:160 exif/main.c:328
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "Se escribió archivo '%s'."
+
+#: exif/main.c:188
+msgid "Show IDs instead of tag names"
+msgstr "Mostrar IDs en vez de nombres de etiqueta"
+
+#: exif/main.c:190
+msgid "Select tag"
+msgstr "Seleccionar etiqueta"
+
+#: exif/main.c:190
+msgid "tag"
+msgstr "etiqueta"
+
+#: exif/main.c:192
+msgid "Select IFD"
+msgstr "Seleccionar IFD"
+
+#: exif/main.c:192
+msgid "IFD"
+msgstr "IFD"
+
+#: exif/main.c:194
+msgid "List all EXIF tags"
+msgstr "Listar todas las etiquetas EXIF"
+
+#: exif/main.c:196
+msgid "Show description of tag"
+msgstr "Mostrar descripción de la etiqueta"
+
+#: exif/main.c:198
+msgid "Extract thumbnail"
+msgstr "Extraer diapositiva"
+
+#: exif/main.c:200
+msgid "Insert FILE as thumbnail"
+msgstr "Insertar ARCHIVO como diapositiva"
+
+#: exif/main.c:200 exif/main.c:202
+msgid "FILE"
+msgstr "ARCHIVO"
+
+#: exif/main.c:202
+msgid "Write output to FILE"
+msgstr "Escribir salida en ARCHIVO"
+
+#: exif/actions.c:136 exif/actions.c:138 exif/main.c:204
+msgid "Value"
+msgstr "Valor"
+
+#: exif/main.c:216
+msgid "[OPTION...] file"
+msgstr "[OPCIÓN...] archivo"
+
+#: exif/main.c:228
+#, c-format
+msgid "Invalid tag '%s'!"
+msgstr "¡Etiqueta '%s' no válida!"
+
+#: exif/main.c:238
+#, c-format
+msgid ""
+"Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and "
+"'Interoperability'."
+msgstr "IFD '%s' no válido. Los IFD válidos son '0', '1', 'EXIF', 'GPS', e 'Interoperability'."
+
+#: exif/main.c:248
+msgid "Please specify a tag!"
+msgstr "¡Especifique una etiqueta por favor!"
+
+#: exif/main.c:252
+#, c-format
+msgid "Tag '%s' (0x%04x, '%s'): %s"
+msgstr "Etiqueta '%s' (0x%04x, '%s'): %s"
+
+#: exif/main.c:271
+#, c-format
+msgid "'%s' does not contain EXIF data!"
+msgstr "¡'%s' no contiene datos EXIF!"
+
+#: exif/main.c:296
+#, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr "IFD '%s' no contiene la etiqueta '%s'."
+
+#: exif/main.c:310
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "¡'%s' no contiene una diapositiva!"
+
+#: exif/main.c:321
+#, c-format
+msgid "Could not open '%s' for writing (%m)!"
+msgstr "¡No se pudo abrir '%s' para escribir (%m)!"
+
+#: exif/main.c:343
+#, c-format
+msgid "Could not open '%s' (%m)!"
+msgstr "¡No se pudo abrir '%s' (%m)!"
+
+#: exif/main.c:352
+#, c-format
+msgid "Could not allocate %i byte(s)."
+msgstr "No se pudo asignar %i byte(s)."
+
+#: exif/main.c:361
+#, c-format
+msgid "Could not read '%s' (%m)."
+msgstr "No se pudo leer '%s' (%m)."
+
+#: exif/main.c:374
+msgid "You need to specify a tag!"
+msgstr "¡Debe especificar una etiqueta!"
+
+#: exif/main.c:382
+msgid "You need to specify an IFD!"
+msgstr "¡Debe especificar un IFD!"
+
+#. e->data[s * i] = ;
+#: exif/main.c:429 exif/main.c:465
+msgid "Not yet implemented!"
+msgstr "¡Todavía no implementado!"
+
+#: exif/main.c:436
+msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
+msgstr "Error interno. Por favor, contacte con <libexif-devel@lists.sourceforge.net>."
+
+#: exif/main.c:447
+msgid "Not enough memory."
+msgstr "No hay memoria suficiente."
+
+#: exif/actions.c:61
+#, c-format
+msgid "EXIF tags in '%s':"
+msgstr "Etiquetas EXIF en '%s':"
+
+#: exif/actions.c:126
+#, c-format
+msgid "EXIF tags in '%s' ('%s' byte order):"
+msgstr "Etiquetas EXIF en '%s' ('%s' es el orden de bytes):"
+
+#: exif/actions.c:131 exif/actions.c:133
+msgid "Tag"
+msgstr "Etiqueta"
+
+#: exif/actions.c:144
+#, c-format
+msgid "EXIF data contains a thumbnail (%i bytes)."
+msgstr "Los datos EXIF contienen una diapositiva (%i bytes)."
