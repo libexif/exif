@@ -28,6 +28,6 @@ exif_i18n_convert_utf8_to_lat1 (const char *in)
 	iconv (tr, (char **) &in, &t, (char **) &out, &buf_size);
 	return buf;
 #else
-	return in	
+	return in;
 #endif
 }
