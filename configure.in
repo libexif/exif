@@ -44,16 +44,25 @@ if $try_popt; then
 	CPPFLAGS_save="$CPPFLAGS"
 	CPPFLAGS="-I$popt_prefix/include $CPPFLAGS"
 	AC_CHECK_HEADER(popt.h, [
-		POPT_CFLAGS="-I$popt_prefix/include"
-		POPT_LIBS="-L$popt_prefix/lib -lpopt"
-		AC_DEFINE(HAVE_POPT,1,[whether we have popt])
-		LDFLAGS_save="$LDFLAGS"
-                LDFLAGS="$POPT_LIBS"
-		have_popt=true
-		popt_msg=yes
-		LDFLAGS="$LDFLAGS_save"],
-		[rl_msg="no (couldn't link against it or version too old)"]
-		)
+			AC_CHECK_LIB(popt, poptResetContext, [
+			have_popt=true
+			popt_msg=yes
+			AC_DEFINE(HAVE_POPT,1,[whether we have popt])
+			POPT_LIBS="-lpopt"
+			POPT_CFLAGS=$CPPFLAGS
+		], [
+			LDFLAGS_save="$LDFLAGS"
+			LDFLAGS="-L$popt_prefix/lib"
+			AC_CHECK_LIB(popt, poptStuffArgs, [
+				have_popt=true
+				popt_msg="yes (in '$popt_prefix')"
+				AC_DEFINE(HAVE_POPT,1,[whether we have popt])
+				POPT_LIBS="-L$popt_prefix/lib -lpopt"
+				POPT_CFLAGS=$CPPFLAGS
+		], [popt_pmsg="no (couldn't link)"])
+		LDFLAGS=$LDFLAGS_save
+		])
+	])
 	CPPFLAGS="$CPPFLAGS_save"
 fi
 AM_CONDITIONAL(HAVE_POPT, $have_popt)
