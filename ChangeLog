@@ -1,3 +1,16 @@
+2002-11-17  Rod Whitby <software.libexif@rwhitby.net>
+
+	* configure.in:
+	* exif/main.c:
+	* exif/actions.c:
+	* exif/actions.h:
+	* exif/utils.c:
+	* exif/utils.h: Added support for libmnote (MakerNote parsing).
+
+	* exif/main.c: Changed show_entry to use exif_entry_dump.
+
+	* exif/main.c: Fixed set_value for EXIF_FORMAT_ASCII.
+	
 2002-11-15  Lutz Müller <lutz@users.sourceforge.net>
 
 	* configure.in: Ok, I got the message. Let exif _optionally_ use
