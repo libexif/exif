@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-06-10 14:05+0200\n"
+"POT-Creation-Date: 2002-06-10 20:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Lutz Müller <lutz@users.sourceforge.net>\n"
 "Language-Team: Deutsch <de@li.org>\n"
@@ -78,95 +78,96 @@ msgstr "IFD 1"
 msgid "Interoperability IFD"
 msgstr "Interoperabilitäts-IFD"
 
-#: exif/main.c:170
+#: exif/main.c:172
 msgid "Show IDs instead of tag names"
 msgstr "Zeige IDs anstelle der Namen der Einträge"
 
-#: exif/main.c:172
+#: exif/main.c:174
 msgid "Select tag"
 msgstr "Wähle Eintrag"
 
-#: exif/main.c:172
+#: exif/main.c:174
 msgid "tag"
 msgstr "Eintrag"
 
-#: exif/main.c:174
+#: exif/main.c:176
 msgid "List all EXIF tags"
 msgstr "Liste alle EXIF Einträge auf"
 
-#: exif/main.c:176
+#: exif/main.c:178
 msgid "Show description of tag"
 msgstr "Zeige Beschreibung von Eintrag"
 
-#: exif/main.c:178
+#: exif/main.c:180
 msgid "Extract thumbnail"
 msgstr "Extrahiere Vorschau"
 
-#: exif/main.c:180
+#: exif/main.c:182
 msgid "Insert FILE as thumbnail"
 msgstr "Füge DATEI als Vorschau ein"
 
-#: exif/main.c:180 exif/main.c:182
+#: exif/main.c:182 exif/main.c:184
 msgid "FILE"
 msgstr "DATEI"
 
-#: exif/main.c:182
+#: exif/main.c:184
 msgid "Write output to FILE"
 msgstr "Schreibe Ergebnis in DATEI"
 
-#: exif/main.c:194
+#: exif/main.c:196
 msgid "[OPTION...] file"
 msgstr "[OPTION...] datei"
 
-#: exif/main.c:206
+#: exif/main.c:208
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Ungültiger Eintrag '%s'!"
 
-#: exif/main.c:214
+#: exif/main.c:216
 msgid "Please specify a tag!"
 msgstr "Bitte geben Sie einen Eintrag an!"
 
-#: exif/main.c:218
+#: exif/main.c:220
+#, c-format
 msgid "Tag '%s' (0x%04x, '%s'): %s"
 msgstr "Eintrag '%s' (0x%04x, '%s'): %s"
 
-#: exif/main.c:237
+#: exif/main.c:239
 #, c-format
 msgid "'%s' does not contain EXIF data!"
 msgstr "'%s' enthält keine EXIF Daten!"
 
-#: exif/main.c:251
+#: exif/main.c:253
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "'%s' enthält keine Vorschau!"
 
-#: exif/main.c:273
+#: exif/main.c:275
 #, c-format
 msgid "Could not open '%s' for writing (%m)!"
 msgstr "Konnte '%s' nicht zum Schreiben öffnen (%m)!"
 
-#: exif/main.c:280 exif/main.c:347
+#: exif/main.c:282 exif/main.c:349
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Schrieb Datei '%s'."
 
-#: exif/main.c:295
+#: exif/main.c:297
 #, c-format
 msgid "Could not open '%s' (%m)!"
 msgstr "Konnte '%s' nicht öffnen (%m)!"
 
-#: exif/main.c:304
+#: exif/main.c:306
 #, c-format
 msgid "Could not allocate %i byte(s)."
 msgstr "Konnte nicht %i Byte(s) zur Verfügung stellen."
 
-#: exif/main.c:313
+#: exif/main.c:315
 #, c-format
 msgid "Could not read '%s' (%m)."
 msgstr "Konnte nicht '%s' lesen (%m)."
 
-#: exif/main.c:335
+#: exif/main.c:337
 #, c-format
 msgid "Could not parse JPEG file '%s'."
 msgstr "Konnte die JPEG Datei '%s' nicht interpretieren."
