@@ -94,7 +94,7 @@ if test "x$POPT_CFLAGS" = "x" && test "x$POPT_LIBS" = "x"; then
 	# try to find options to link against popt
 	LDFLAGS_save="$LDFLAGS"
 	popt_links=no
-	for popt_prefix in "" /usr /usr/local; do
+	for popt_prefix in /usr "" /usr/local; do
 		# We could have "/usr" and "lib64" at the beginning of the
 		# lists. Then the first tested location would
 		# incidentally be the right one on 64bit systems, and
@@ -106,7 +106,7 @@ if test "x$POPT_CFLAGS" = "x" && test "x$POPT_LIBS" = "x"; then
 		#
 		# This hack has been confirmed to workwith a
 		# 32bit Debian Sarge and 64bit Fedora Core 3 system.
-		for ldir in "" lib64 lib; do
+		for ldir in lib64 "" lib; do
 			popt_libdir="${popt_prefix}/${ldir}"
 			if test "${popt_libdir}" = "/"; then
 				popt_libdir=""
