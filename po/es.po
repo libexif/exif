@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: exif\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2005-03-24 06:09+0100\n"
+"POT-Creation-Date: 2005-03-29 06:04+0200\n"
 "PO-Revision-Date: 2005-03-14 04:20+0100\n"
 "Last-Translator: Fabian Mandelbaum <fabman@mandrakesoft.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -47,25 +47,25 @@ msgstr ""
 msgid "Unknown value"
 msgstr ""
 
-#: exif/actions.c:161
+#: exif/actions.c:162
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "Etiquetas EXIF en '%s' ('%s' es el orden de bytes):"
 
-#: exif/actions.c:166 exif/actions.c:168
+#: exif/actions.c:167 exif/actions.c:169
 msgid "Tag"
 msgstr "Etiqueta"
 
-#: exif/actions.c:171 exif/actions.c:173 exif/main.c:297
+#: exif/actions.c:173 exif/actions.c:175 exif/main.c:297
 msgid "Value"
 msgstr "Valor"
 
-#: exif/actions.c:179
+#: exif/actions.c:181
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "Los datos EXIF contienen una diapositiva (%i bytes)."
 
-#: exif/actions.c:211
+#: exif/actions.c:216
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr ""
