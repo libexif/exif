@@ -23,7 +23,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
 
 /* #define DEBUG */
@@ -81,7 +80,7 @@ jpeg_data_save_file (JPEGData *data, const char *path)
 	if (!d)
 		return;
 
-	unlink (path);
+	remove (path);
 	f = fopen (path, "wb");
 	if (!f) {
 		free (d);
