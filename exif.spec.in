@@ -1,0 +1,35 @@
+Name: @PACKAGE@
+Summary: A utility to display exif headers from jpeg files
+Version: @VERSION@
+Release: 1
+Source: http://prdownloads.sourceforge.net/libexif/exif-0.5.tar.gz
+Url: http://sourceforge.net/projects/libexif/
+Group: Applications/Multimedia
+Copyright: GPL
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+BuildRequires: libexif-devel, libmnote-devel
+
+%description
+'exif' is a small command-line utility to show EXIF information hidden
+in JPEG files. I wrote it to demonstrate the power of libexif.
+
+%prep
+%setup
+
+%build
+%configure
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+%makeinstall
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%doc ChangeLog README
+%{_bindir}/*
+%{_mandir}/man*/*
+%{_datadir}/locale/*/LC_MESSAGES/*.mo

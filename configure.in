@@ -99,6 +99,7 @@ fi
 
 AC_OUTPUT([
   Makefile
+  exif.spec
   libjpeg/Makefile
   exif/Makefile
 ])
