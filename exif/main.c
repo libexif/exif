@@ -147,35 +147,42 @@ save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
 
 typedef struct _ExifOptions ExifOptions;
 struct _ExifOptions {
-	unsigned char use_ids;
+	unsigned int use_ids;
 	ExifTag tag;
 #ifdef HAVE_MNOTE
 	MNoteTag ntag;
 #endif
 };
 
+/*
+ * Static variables. I had them first in main (), but people
+ * compiling exif on IRIX complained about that not being compatible
+ * with the "SGI MIPSpro C compiler". I don't understand and still think
+ * these variables belong into main ().
+ */
+static unsigned int list_tags = 0, show_description = 0;
+static unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
+static unsigned int remove_tag = 0;
+#ifdef HAVE_MNOTE
+static unsigned int list_ntags = 0;
+#endif
+static const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
+#ifdef HAVE_MNOTE
+static const char *ntag_string = NULL;
+#endif
+static ExifIfd ifd = -1;
+static ExifTag tag = 0;
+#ifdef HAVE_MNOTE
+static MNoteTag ntag = 0;
+static ExifOptions eo = {0, 0, 0};
+#else
+static ExifOptions eo = {0, 0};
+#endif
+
 int
 main (int argc, const char **argv)
 {
 	/* POPT_ARG_NONE needs an int, not char! */
-	unsigned int list_tags = 0, show_description = 0;
-#ifdef HAVE_MNOTE
-	unsigned int list_ntags = 0;
-#endif
-	unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
-	unsigned int remove = 0;
-	const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
-#ifdef HAVE_MNOTE
-	const char *ntag_string = NULL;
-#endif
-	ExifIfd ifd = -1;
-	ExifTag tag = 0;
-#ifdef HAVE_MNOTE
-	MNoteTag ntag = 0;
-	ExifOptions eo = {0, 0, 0};
-#else
-	ExifOptions eo = {0, 0};
-#endif
 	poptContext ctx;
 	const char **args, *output = NULL;
 	const char *ithumbnail = NULL;
@@ -197,7 +204,7 @@ main (int argc, const char **argv)
 		{"list-ntags", '\0', POPT_ARG_NONE, &list_ntags, 0,
 		 N_("List all EXIF MakerNote tags"), NULL},
 #endif
-		{"remove", '\0', POPT_ARG_NONE, &remove, 0,
+		{"remove", '\0', POPT_ARG_NONE, &remove_tag, 0,
 		 N_("Remove tag or ifd"), NULL},
 		{"show-description", 's', POPT_ARG_NONE, &show_description, 0,
 		 N_("Show description of tag"), NULL},
@@ -591,7 +598,7 @@ main (int argc, const char **argv)
 	}
 }
 				save_exif_data_to_file (ed, *args, fname);
-			} else if (remove) {
+			} else if (remove_tag) {
 				
 				/* We need an IFD. */
 				if ((ifd < EXIF_IFD_0) ||

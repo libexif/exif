@@ -1,3 +1,8 @@
+2003-02-11  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/main.c: IRIS fixes by Andrea Suatoni
+	  <a.suatoni@telefonica.net>.
+
 2003-01-28  Lutz Mller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Change the description of '--output' from
