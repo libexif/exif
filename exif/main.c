@@ -194,7 +194,7 @@ main (int argc, const char **argv)
 	/* POPT_ARG_NONE needs an int, not char! */
 	unsigned int list_tags = 0, show_description = 0;
 	unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
-	unsigned int remove_tag = 0;
+	unsigned int remove = 0;
 	const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
 	ExifIfd ifd = -1;
 	ExifTag tag = 0;
@@ -212,8 +212,8 @@ main (int argc, const char **argv)
 		 N_("Select IFD"), N_("IFD")},
 		{"list-tags", 'l', POPT_ARG_NONE, &list_tags, 0,
 		 N_("List all EXIF tags"), NULL},
-		{"remove", '\0', POPT_ARG_NONE, &remove_tag, 0,
-		 N_("Remove tag"), NULL},
+		{"remove", '\0', POPT_ARG_NONE, &remove, 0,
+		 N_("Remove tag or ifd"), NULL},
 		{"show-description", 's', POPT_ARG_NONE, &show_description, 0,
 		 N_("Show description of tag"), NULL},
 		{"extract-thumbnail", 'e', POPT_ARG_NONE, &extract_thumbnail, 0,
@@ -526,35 +526,36 @@ main (int argc, const char **argv)
 	}
 }
 				save_exif_data_to_file (ed, *args, fname);
-			} else if (remove_tag) {
+			} else if (remove) {
 				
-				/* We need a tag... */
-				if (!tag) {
-					fprintf (stderr, _("You need to "
-						 "specify a tag!"));
-					fputc ('\n', stderr);
-					return (1);
-				}
-
-				/* ... and an IFD. */
+				/* We need an IFD. */
 				if (ifd < 0) {
 					fprintf (stderr, _("You need to "
 						 "specify an IFD!"));
 					fputc ('\n', stderr);
 					return (1);
 				}
-				
-				e = exif_content_get_entry (ed->ifd[ifd], tag);
-				if (!e) {
-					fprintf (stderr, _("IFD '%s' does "
-						 "not contain a tag '%s'!"),
-						 exif_ifd_get_name (ifd),
-						 exif_tag_get_name (tag));
-					fputc ('\n', stderr);
-					return (1);
-				}
 
-				exif_content_remove_entry (ed->ifd[ifd], e);
+				if (!tag) {
+					while (ed->ifd[ifd]->count)
+						exif_content_remove_entry (
+						    ed->ifd[ifd],
+						    ed->ifd[ifd]->entries[0]);
+				} else {
+					e = exif_content_get_entry (
+							ed->ifd[ifd], tag);
+					if (!e) {
+					    fprintf (stderr, _("IFD '%s' "
+						 "does not contain a "
+						 "tag '%s'!"),
+						exif_ifd_get_name (ifd),
+						exif_tag_get_name (tag));
+					    fputc ('\n', stderr);
+					    return (1);
+					}
+					exif_content_remove_entry (ed->ifd[ifd],
+								   e);
+				}
 			} else
 				action_tag_list (*args, ed, eo.use_ids);
 			exif_data_unref (ed);

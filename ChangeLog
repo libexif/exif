@@ -1,7 +1,7 @@
 2002-10-21  Lutz Müller <lutz@users.sourceforge.net>
 
-	* exif/main.c: --remove-thumbnail and --remove [tag] as requested by
-	  Marko Mäkelä <Marko.Makela@HUT.FI>.
+	* exif/main.c: --remove-thumbnail and --remove [tag,ifd] as
+	  requested by Marko Mäkelä <Marko.Makela@HUT.FI>.
 
 2002-09-16  Lutz Müller <lutz@users.sourceforge.net>
 
