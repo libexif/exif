@@ -18,7 +18,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include "config.h"
+#include <config.h>
 
 #include <errno.h>
 #include <stdlib.h>
@@ -36,26 +36,8 @@
 #include "libjpeg/jpeg-data.h"
 
 #include "actions.h"
+#include "exif-i18n.h"
 #include "utils.h"
-
-#ifdef ENABLE_NLS
-#  include <libintl.h>
-#  undef _
-#  define _(String) dgettext (PACKAGE, String)
-#  ifdef gettext_noop
-#    define N_(String) gettext_noop (String)
-#  else
-#    define N_(String) (String)
-#  endif
-#else
-#  define textdomain(String) (String)
-#  define gettext(String) (String)
-#  define dgettext(Domain,Message) (Message)
-#  define dcgettext(Domain,Message,Type) (Message)
-#  define bindtextdomain(Domain,Directory) (Domain)
-#  define _(String) (String)
-#  define N_(String) (String)
-#endif
 
 #ifdef HAVE_LOCAL_H
 #  include <locale.h>
@@ -70,8 +52,8 @@ static void
 show_entry (ExifEntry *entry, const char *caption)
 {
 	printf (_("EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"),
-		exif_tag_get_title (entry->tag), entry->tag,
-		exif_tag_get_name (entry->tag), caption);
+		C(exif_tag_get_title (entry->tag)), entry->tag,
+		C(exif_tag_get_name (entry->tag)), caption);
 	printf ("\n");
 
 	exif_entry_dump(entry, 0);
@@ -83,8 +65,8 @@ static void
 show_note_entry (MNoteData *note, MNoteTag tag)
 {
 	printf (_("MakerNote entry '%s' (0x%x, '%s'):"),
-		mnote_tag_get_title (note, tag), tag,
-		mnote_tag_get_name (note, tag));
+		C(mnote_tag_get_title (note, tag)), tag,
+		C(mnote_tag_get_name (note, tag)));
 	printf ("\n");
 
 	mnote_data_dump_entry(note, tag, 0);
@@ -278,9 +260,9 @@ main (int argc, const char **argv)
 			return (1);
 		}
 		printf (_("Tag '%s' (0x%04x, '%s'): %s"),
-			exif_tag_get_title (eo.tag), eo.tag,
-			exif_tag_get_name (eo.tag),
-			exif_tag_get_description (eo.tag));
+			C(exif_tag_get_title (eo.tag)), eo.tag,
+			C(exif_tag_get_name (eo.tag)),
+			C(exif_tag_get_description (eo.tag)));
 		printf ("\n");
 		return (0);
 	}

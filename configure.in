@@ -10,6 +10,8 @@ AC_PATH_PROG(PKG_CONFIG,pkg-config)
 dnl ---------------------------------------------------------------------------
 dnl i18n support
 dnl ---------------------------------------------------------------------------
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[The gettext domain we're
+using])
 ALL_LINGUAS="de es fr"
 AM_GNU_GETTEXT
 
@@ -102,6 +104,7 @@ AC_OUTPUT([
   exif.spec
   libjpeg/Makefile
   exif/Makefile
+  po/Makefile.in
 ])
 
 echo "

@@ -20,31 +20,13 @@
 
 #include "config.h"
 #include "actions.h"
+#include "exif-i18n.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include <libexif/exif-ifd.h>
-
-#ifdef ENABLE_NLS
-#  include <libintl.h>
-#  undef _
-#  define _(String) dgettext (PACKAGE, String)
-#  ifdef gettext_noop
-#    define N_(String) gettext_noop (String)
-#  else
-#    define N_(String) (String)
-#  endif
-#else
-#  define textdomain(String) (String)
-#  define gettext(String) (String)
-#  define dgettext(Domain,Message) (Message)
-#  define dcgettext(Domain,Message,Type) (Message)
-#  define bindtextdomain(Domain,Directory) (Domain)
-#  define _(String) (String)
-#  define N_(String) (String)
-#endif
 
 #define ENTRY_FOUND     "   *   "
 #define ENTRY_NOT_FOUND "   -   "
@@ -67,7 +49,7 @@ action_tag_table (const char *filename, ExifData *ed)
 		name = exif_tag_get_title (tag);
 		if (!name)
 			continue;
-		fprintf (stdout, "  0x%04x %-29.29s", tag, name);
+		fprintf (stdout, "  0x%04x %-29.29s", tag, C(name));
 		for (i = 0; i < EXIF_IFD_COUNT; i++)
 			if (exif_content_get_entry (ed->ifd[i], tag))
 				printf (ENTRY_FOUND);
@@ -107,19 +89,19 @@ action_ntag_table (const char *filename, MNoteData *en)
 #endif
 
 static void
-show_entry (ExifEntry *entry, void *data)
+show_entry (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
 
 	if (*ids)
-		fprintf (stdout, "0x%04x", entry->tag);
+		fprintf (stdout, "0x%04x", e->tag);
 	else
-		fprintf (stdout, "%-20.20s", exif_tag_get_title (entry->tag));
+		fprintf (stdout, "%-20.20s", C(exif_tag_get_title (e->tag)));
 	printf ("|");
 	if (*ids)
-		fprintf (stdout, "%-72.72s", exif_entry_get_value (entry));
+		fprintf (stdout, "%-72.72s", C(exif_entry_get_value (e)));
 	else
-		fprintf (stdout, "%-58.58s", exif_entry_get_value (entry));
+		fprintf (stdout, "%-58.58s", C(exif_entry_get_value (e)));
 	fputc ('\n', stdout);
 }
 

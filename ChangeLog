@@ -1,3 +1,8 @@
+2003-05-05  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/exif-i18n.[c,h]: New. Suggested by Gernot Jander
+	  <gernot@bigpond.com>.
+
 2003-03-13  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* libjpeg/jpeg-data.c: Aravind aravinds1@users.sourceforge.net found

@@ -9,6 +9,7 @@ bin_PROGRAMS = exif
 
 exif_SOURCES =			\
 	actions.h actions.c	\
+	exif-i18n.h exif-i18n.c	\
 	main.c			\
 	utils.h utils.c
 exif_LDADD =					\
