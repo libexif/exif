@@ -7,4 +7,5 @@ bin_PROGRAMS = exif
 exif_SOURCES =			\
 	main.c
 exif_LDADD =			\
+	-lpopt			\
 	$(LIBEXIF_LIBS)
