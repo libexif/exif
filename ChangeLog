@@ -1,3 +1,8 @@
+2002-10-21  Lutz Müller <lutz@users.sourceforge.net>
+
+	* exif/main.c: --remove-thumbnail and --remove [tag] as requested by
+	  Marko Mäkelä <Marko.Makela@HUT.FI>.
+
 2002-09-16  Lutz Müller <lutz@users.sourceforge.net>
 
 	* exif.1: Donated by Thomas Pircher <thomas.pircher@gmx.net>
@@ -5,8 +10,8 @@
 2002-09-15  Lutz Müller <lutz@users.sourceforge.net>
 
 	* configure.in:
-	* src/main.c:
-	* src/actions.c: IRIS fixes by Andrea Suatoni
+	* exif/main.c:
+	* exif/actions.c: IRIS fixes by Andrea Suatoni
 	  <a.suatoni@telefonica.net>
 
 2002-09-16  gettextize  <bug-gnu-gettext@gnu.org>
