@@ -102,7 +102,8 @@ show_entry (ExifEntry *entry, const char *caption)
 {
 	unsigned int i;
 
-	printf (_("EXIF entry 0x%x ('%s') exists in '%s':"), entry->tag,
+	printf (_("EXIF entry '%s' (0x%x, '%s') exists in '%s':"),
+		exif_tag_get_title (entry->tag), entry->tag,
 		exif_tag_get_name (entry->tag), caption);
 	printf ("\n");
 	printf (_("  Format: '%s'"), exif_format_get_name (entry->format));
@@ -157,8 +158,10 @@ struct _ExifOptions {
 int
 main (int argc, const char **argv)
 {
-	unsigned char list_tags = 0, show_description = 0;
-	unsigned char extract_thumbnail = 0;
+	/* POPT_ARG_NONE needs an int, not char! */
+	unsigned int list_tags = 0, show_description = 0;
+	unsigned int extract_thumbnail = 0;
+
 	ExifOptions eo = {0, 0};
 	poptContext ctx;
 	const char **args, *tag = NULL, *output = NULL;
@@ -202,7 +205,7 @@ main (int argc, const char **argv)
 	if (tag) {
 		eo.tag = exif_tag_from_string (tag);
 		if (!eo.tag || !exif_tag_get_name (eo.tag)) {
-			fprintf (stderr, ("Invalid tag '%s'!"), tag);
+			fprintf (stderr, _("Invalid tag '%s'!"), tag);
 			fprintf (stderr, "\n");
 			return (1);
 		}
@@ -214,7 +217,8 @@ main (int argc, const char **argv)
 			fprintf (stderr, "\n");
 			return (1);
 		}
-		printf (_("Tag 0x%04x ('%s'): %s"), eo.tag,
+		printf (_("Tag '%s' (0x%04x, '%s'): %s"),
+			exif_tag_get_title (eo.tag), eo.tag,
 			exif_tag_get_name (eo.tag),
 			exif_tag_get_description (eo.tag));
 		printf ("\n");

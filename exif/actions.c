@@ -22,6 +22,8 @@
 #include "actions.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #ifdef ENABLE_NLS
 #  include <libintl.h>
@@ -50,16 +52,19 @@ action_tag_table (const char *filename, ExifData *ed)
 {
 	unsigned int tag;
 	const char *name;
+	char txt[1024];
 
-	printf (_("EXIF tags in %-25.25s "), filename);
-	printf ("%-8.8s", _("IFD 0"));
-	printf ("%-8.8s", _("IFD 1"));
-	printf ("%-8.8s", _("EXIF"));
-	printf ("%-8.8s", _("GPS"));
-	printf ("%-8.8s", _("Interop."));
+	memset (txt, 0, sizeof (txt));
+	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), filename);
+	printf ("%-38.38s", txt);
+	printf ("%-7.7s", "IFD 0");
+	printf ("%-7.7s", "IFD 1");
+	printf ("%-7.7s", "EXIF");
+	printf ("%-7.7s", "GPS");
+	printf ("%-8.8s", "Interop.");
 	printf ("\n");
 	for (tag = 0; tag < 0xffff; tag++) {
-		name = exif_tag_get_name (tag);
+		name = exif_tag_get_title (tag);
 		if (!name)
 			continue;
 		printf ("  0x%04x %-29.29s", tag, name);
@@ -95,7 +100,7 @@ show_entry (ExifEntry *entry, void *data)
 	if (*ids)
 		printf ("0x%04x", entry->tag);
 	else
-		printf ("%-20.20s", exif_tag_get_name (entry->tag));
+		printf ("%-20.20s", exif_tag_get_title (entry->tag));
 	printf ("|");
 	if (*ids)
 		printf ("%-73.73s", exif_entry_get_value (entry));

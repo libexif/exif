@@ -34,9 +34,12 @@ exif_tag_from_string (const char *string)
 	if (!string)
 		return (0);
 
-	/* Is the string a tag's name? */
+	/* Is the string a tag's name or title? */
 	for (tag = 0xffff; tag > 0; tag--) {
 		name = exif_tag_get_name (tag);
+		if (name && !strcmp (string, name))
+			return (tag);
+		name = exif_tag_get_title (tag);
 		if (name && !strcmp (string, name))
 			return (tag);
 	}
