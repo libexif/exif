@@ -32,7 +32,9 @@ AM_CFLAGS="$AM_CFLAGS -DEXIF_LOCALEDIR=\\\"${localedir}\\\""
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES([LIBEXIF], [libexif >= 0.6.11])
+PKG_CHECK_MODULES([LIBEXIF], [libexif >= 0.6.11], [], [AC_MSG_ERROR([
+*** Fatal: exif needs libexif to build.
+])])
 AC_SUBST([LIBEXIF_LIBS])
 AC_SUBST([LIBEXIF_CFLAGS])
 
