@@ -1,3 +1,10 @@
+2005-01-08  Lutz Mueller <lutz@users.sourceforge.net>
+
+	Suggestion by Michael Rasmussen <mikeraz@patch.com>:
+
+	* exif/main.c: Make '-m' together with '--tag' only print the value of
+	  the tag, nothing else.
+
 2004-12-05  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/actions.c: Lars Ellenberg <l.g.e@web.de> found out that

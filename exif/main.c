@@ -56,18 +56,25 @@ internal_error (void)
 }
 
 static void
-show_entry (ExifEntry *entry, const char *caption)
+show_entry (ExifEntry *entry, const char *caption, unsigned int machine_readable)
 {
+	if (machine_readable) {
+		char b[1024];
+
+		fprintf (stdout, "%s\n", C(exif_entry_get_value (entry, b, sizeof (b))));
+		return;
+	}
+
 	printf (_("EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"),
 		C(exif_tag_get_title (entry->tag)), entry->tag,
 		C(exif_tag_get_name (entry->tag)), caption);
 	printf ("\n");
 
-	exif_entry_dump(entry, 0);
+	exif_entry_dump (entry, 0);
 }
 
 static void
-search_entry (ExifData *ed, ExifTag tag)
+search_entry (ExifData *ed, ExifTag tag, unsigned int machine_readable)
 {
 	ExifEntry *entry;
 	unsigned int i;
@@ -75,7 +82,7 @@ search_entry (ExifData *ed, ExifTag tag)
 	for (i = 0; i < EXIF_IFD_COUNT; i++) {
 		entry = exif_content_get_entry (ed->ifd[i], tag);
 		if (entry)
-			show_entry (entry, exif_ifd_get_name (i));
+			show_entry (entry, exif_ifd_get_name (i), machine_readable);
 	}
 }
 
@@ -399,7 +406,7 @@ main (int argc, const char **argv)
 					e = exif_content_get_entry (
 							ed->ifd[ifd], tag);
 					if (e)
-						show_entry (e, ifd_string);
+						show_entry (e, ifd_string, machine_readable);
 					else {
 						fprintf (stderr, _("IFD '%s' "
 							"does not contain tag "
@@ -409,7 +416,7 @@ main (int argc, const char **argv)
 						return (1);
 					}
 				} else {
-					search_entry (ed, eo.tag);
+					search_entry (ed, eo.tag, machine_readable);
 				}
 			} else if (extract_thumbnail) {
 
