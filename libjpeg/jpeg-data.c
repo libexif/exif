@@ -209,6 +209,7 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 
 		/* Append this section */
 		jpeg_data_append_section (data);
+		if (!data->count) return;
 		s = &data->sections[data->count - 1];
 		s->marker = marker;
 		s->content.generic.data = NULL;
