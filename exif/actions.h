@@ -33,9 +33,6 @@ void action_tag_list         (const char *filename, ExifData *,
 void action_tag_list_machine (const char *filename, ExifData *,
 			      unsigned char ids);
 
-#ifdef HAVE_MNOTE
-void action_ntag_table (const char *filename, MNoteData *en);
-void action_ntag_list  (const char *filename, MNoteData *en, unsigned char ids);
-#endif
+void action_mnote_list       (const char *filename, ExifData *);
 
 #endif /* __ACTIONS_H__ */
