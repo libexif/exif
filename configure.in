@@ -1,34 +1,51 @@
-AC_PREREQ(2.50)
-AC_INIT(exif/main.c)
-AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(exif,0.6.10)
-AM_MAINTAINER_MODE
+AC_PREREQ(2.59)
+AC_INIT([libexif CLI interface],[0.6.11],[libexif-devel@lists.sourceforge.net],[exif])
+AC_CONFIG_SRCDIR([exif/main.c])
+AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
+GP_CONFIG_INIT
+GP_CONFIG_MSG([Source code location],[${srcdir}])
 
+AC_PROG_CC
+AC_C_CONST
 AM_PROG_LIBTOOL
+AM_CFLAGS="$CFLAGS"
+GP_CONFIG_MSG([Compiler],[${CC}])
+
 AC_PATH_PROG(PKG_CONFIG,pkg-config)
 
 dnl ---------------------------------------------------------------------------
 dnl i18n support
 dnl ---------------------------------------------------------------------------
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[The gettext domain we're
-using])
+GP_GETTEXT_HACK([${PACKAGE}],[Lutz Müller and others])
 ALL_LINGUAS="de es fr"
+AM_GNU_GETTEXT_VERSION([0.14.1])
 AM_GNU_GETTEXT([external])
+GP_GETTEXT_FLAGS
+
+dnl We cannot use AC_DEFINE_UNQUOTED() for these definitions, as
+dnl we require make to do insert the proper $(datadir) value
+localedir="\$(datadir)/locale"
+AC_SUBST(localedir)
+AM_CFLAGS="$AM_CFLAGS -DEXIF_LOCALEDIR=\\\"${localedir}\\\""
+
 
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.6.11)
-AC_SUBST(LIBEXIF_LIBS)
-AC_SUBST(LIBEXIF_CFLAGS)
+PKG_CHECK_MODULES([LIBEXIF], [libexif >= 0.6.11])
+AC_SUBST([LIBEXIF_LIBS])
+AC_SUBST([LIBEXIF_CFLAGS])
+
 
 dnl ---------------------------------------------------------------------------
 dnl locale.h: locale.h provides setlocale. It seems that some systems don't
 dnl           have it (at least if configured --without-nls).
 dnl ---------------------------------------------------------------------------
-AC_CHECK_HEADERS(locale.h)
-AC_CHECK_HEADER(iconv.h, [
+AC_CHECK_HEADERS([locale.h])
+AC_CHECK_HEADER([iconv.h], [
 	AC_DEFINE(HAVE_ICONV,1,[whether iconv is available])])
+
 
 dnl ---------------------------------------------------------------------------
 dnl popt.h: Simplifies handling of command-line options enormously.
@@ -70,31 +87,33 @@ if $try_popt; then
 	])
 	CPPFLAGS="$CPPFLAGS_save"
 fi
-AM_CONDITIONAL(HAVE_POPT, $have_popt)
-AC_SUBST(POPT_LIBS)
-AC_SUBST(POPT_CFLAGS)
+AM_CONDITIONAL([HAVE_POPT], [$have_popt])
+AC_SUBST([POPT_LIBS])
+AC_SUBST([POPT_CFLAGS])
+
 
 dnl ---------------------------------------------------------------------------
 dnl Warnings: If we have GCC, be paranoid.
 dnl ---------------------------------------------------------------------------
 if test "x$GCC" = "xyes"; then
-    CFLAGS="$CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
-    AC_SUBST(CFLAGS)
+    AM_CFLAGS="$AM_CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
+    AM_LDFLAGS="$AM_LDFLAGS -g -Wall"
 fi
 
-AC_OUTPUT([ 
+AC_SUBST([AM_CFLAGS])
+AC_SUBST([AM_LDFLAGS])
+
+dnl ---------------------------------------------------------------------------
+dnl Output files
+dnl ---------------------------------------------------------------------------
+AC_CONFIG_FILES([
+  po/Makefile.in
   Makefile
+  m4/Makefile
   exif.spec
   libjpeg/Makefile
   exif/Makefile
-  m4/Makefile
-  po/Makefile.in
 ])
+AC_OUTPUT
 
-echo "
-
-Configuration:
-
-	Source code location:      ${srcdir}
-	Compiler:                  ${CC}
-"
+GP_CONFIG_OUTPUT
