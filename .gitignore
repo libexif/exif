@@ -35,6 +35,7 @@ configure
 config.status
 config.log
 config.h
+config.h.in
 config.cache
 aclocal.m4
 Makefile.in

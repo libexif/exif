@@ -47,11 +47,20 @@
 static void
 show_entry (ExifEntry *entry, const char *caption)
 {
+	unsigned int i;
+
 	printf (_("EXIF entry 0x%x ('%s') exists in '%s':\n"), entry->tag,
 		exif_tag_get_name (entry->tag), caption);
 	printf (_("  Format: '%s'\n"), exif_format_get_name (entry->format));
 	printf (_("  Components: %i\n"), (int) entry->components);
 	printf (_("  Value: '%s'\n"), exif_entry_get_value (entry));
+	printf (_("  Data:"));
+	for (i = 0; i < entry->size; i++) {
+		if (!(i % 10))
+			printf ("\n    ");
+		printf ("0x%02x ", entry->data[i]);
+	}
+	printf ("\n");
 }
 
 static void
