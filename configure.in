@@ -25,23 +25,19 @@ dnl libmnote: Useful for parsing MakerNote-tags.
 dnl ---------------------------------------------------------------------------
 mnote_msg=no
 try_mnote=true
-have_mnote=false
 AC_ARG_WITH(mnote, [  --without-mnote           Don't use libmnote],
 	if test x$withval = xno; then
 		try_mnote=false
 	fi)
 if $try_mnote; then
 	if ${PKG_CONFIG} --exists libmnote > /dev/null 2>&1; then
-		LIBMNOTE_LIBS=`$PKG_CONFIG --libs libmnote`
-		LIBMNOTE_CFLAGS=`$PKG_CONFIG --cflags libmnote`
+		PKG_CHECK_MODULES(LIBMNOTE, libmnote >= 0.5.4)
 		AC_DEFINE(HAVE_MNOTE,1,[whether we have mnote])
-		AC_SUBST(LIBMNOTE_CFLAGS)
 		AC_SUBST(LIBMNOTE_LIBS)
-		have_popt=true
+		AC_SUBST(LIBMNOTE_CFLAGS)
 		mnote_msg="yes"
 	fi
 fi
-AM_CONDITIONAL(HAVE_POPT, $have_popt)
 
 dnl ---------------------------------------------------------------------------
 dnl locale.h: locale.h provides setlocale. It seems that some systems don't
