@@ -1,0 +1,27 @@
+AC_INIT(exif/main.c)
+AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(exif,0.1)
+AM_MAINTAINER_MODE
+
+AM_PROG_LIBTOOL
+
+dnl ---------------------------------------------------------------------------
+dnl i18n support
+dnl ---------------------------------------------------------------------------
+dnl ALL_LINGUAS=""
+dnl AM_GNU_GETTEXT
+
+dnl ---------------------------------------------------------------------------
+dnl libraries needed
+dnl ---------------------------------------------------------------------------
+PKG_CHECK_MODULES(LIBEXIF, libexif)
+AC_SUBST(LIBEXIF_LIBS)
+AC_SUBST(LIBEXIF_CFLAGS)
+
+CFLAGS="$CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Werror"
+AC_SUBST(CFLAGS)
+
+AC_OUTPUT([
+  Makefile
+  exif/Makefile
+])
