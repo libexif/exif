@@ -1,3 +1,7 @@
+2005-03-16  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/main.c: Fix for #994706.
+
 2005-03-14  Hans Ulrich Niedermann <gp@n-dimensional.de>
 
 	* exif/main.c: remove email address from translatable string

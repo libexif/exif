@@ -400,7 +400,7 @@ main (int argc, const char **argv)
 
 			if (list_tags) {
 				action_tag_table (*args, ed);
-			} else if (tag && !set_value) {
+			} else if (tag && !set_value && !remove_tag) {
 				if ((ifd >= EXIF_IFD_0) &&
 				    (ifd < EXIF_IFD_COUNT)) {
 					e = exif_content_get_entry (
