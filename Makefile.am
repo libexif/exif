@@ -3,7 +3,7 @@ SUBDIRS = m4 po libjpeg exif
 man_MANS = exif.1
 
 # newer versions of automake/autoconf require this, OK?
-EXTRA_DIST = exif.1 @PACKAGE_TARNAME@.spec
+EXTRA_DIST = exif.1 @PACKAGE_TARNAME@.spec autogen.sh
 
 ACLOCAL_AMFLAGS = -I m4
 
