@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: exif\n"
-"POT-Creation-Date: 2002-11-20 15:43+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-05-27 19:45+0200\n"
 "PO-Revision-Date: 2002-11-20 15:43+0100\n"
 "Last-Translator: Arnaud Launay <asl@launay.org>\n"
 "Language-Team: Français <traduc@traduc.org>\n"
@@ -14,110 +15,171 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: exif/main.c:72
+#: exif/actions.c:43
+#, c-format
+msgid "EXIF tags in '%s':"
+msgstr "Marqueurs EXIF dans '%s' :"
+
+#: exif/actions.c:109
+#, c-format
+msgid "Unknown MakerNote format."
+msgstr ""
+
+#: exif/actions.c:116
+#, fuzzy, c-format
+msgid "MakerNote does not contain any value.\n"
+msgstr "Makernote ne contient pas le marqueur '%s'."
+
+#: exif/actions.c:119
+#, c-format
+msgid "MakerNote contains 1 value:\n"
+msgstr ""
+
+#: exif/actions.c:122
+#, fuzzy, c-format
+msgid "MakerNote contains %i values:\n"
+msgstr "Marqueurs EXIF MakerNote dans '%s' :"
+
+#: exif/actions.c:139
+#, c-format
+msgid "EXIF tags in '%s' ('%s' byte order):"
+msgstr "Marqueurs EXIF dans'%s' (ordre des octets '%s') :"
+
+#: exif/actions.c:144 exif/actions.c:146
+msgid "Tag"
+msgstr "Marqueur"
+
+#: exif/actions.c:149 exif/actions.c:151 exif/main.c:282
+msgid "Value"
+msgstr "Valeur"
+
+#: exif/actions.c:157
+#, c-format
+msgid "EXIF data contains a thumbnail (%i bytes)."
+msgstr "Les données EXIF contiennent une vignette (%i octets)."
+
+#: exif/actions.c:189
+#, c-format
+msgid "ThumbnailSize\t%i\n"
+msgstr ""
+
+#: exif/main.c:51
+#, c-format
+msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
+msgstr ""
+"Erreur interne. Veuillez contacter <libexif-devel@lists.sourceforge.net>."
+
+#: exif/main.c:61
 #, c-format
 msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
 msgstr "L'entrée EXIF '%s' (0x%x, '%s') existe dans l'IFD '%s' :"
 
-#: exif/main.c:85
+#: exif/main.c:98
 #, c-format
-msgid "MakerNote entry '%s' (0x%x, '%s'):"
-msgstr "Entrée MakerNote '%s' (0x%x, '%s') :"
+msgid "Not enough memory."
+msgstr "Pas assez de mémoire."
 
-#: exif/main.c:118
+#: exif/main.c:116
+#, c-format
+msgid "Too few components specified!"
+msgstr ""
+
+#: exif/main.c:146
+#, c-format
+msgid "Not yet implemented!"
+msgstr "Pas encore implémenté !"
+
+#: exif/main.c:165
 #, c-format
 msgid "Could not parse JPEG file '%s'."
 msgstr "Ne peut parcourir le fichier JPEG '%s'."
 
-#: exif/main.c:128
+#: exif/main.c:175
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Trop de données EXIF (%i octets). Seuls %i octets sont autorisés."
 
-#: exif/main.c:142 exif/main.c:422
+#: exif/main.c:189 exif/main.c:435
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Écrit le fichier '%s'."
 
-#: exif/main.c:185
+#: exif/main.c:260
 msgid "Show IDs instead of tag names"
 msgstr "Montre les ID plutôt que les noms des marqueurs"
 
-#: exif/main.c:187
+#: exif/main.c:262
 msgid "Select tag"
 msgstr "Sélection du marqueur"
 
-#: exif/main.c:187
+#: exif/main.c:262
 msgid "tag"
 msgstr "marqueur"
 
-#: exif/main.c:190
-msgid "Select MakerNote tag"
-msgstr "Sélection du marqueur MakerNote"
-
-#: exif/main.c:190
-msgid "ntag"
-msgstr "ntag"
-
-#: exif/main.c:193
+#: exif/main.c:264
 msgid "Select IFD"
 msgstr "Sélection de l'IFD"
 
-#: exif/main.c:193
+#: exif/main.c:264
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:195
+#: exif/main.c:266
 msgid "List all EXIF tags"
 msgstr "Liste tous les marqueurs EXIF"
 
-#: exif/main.c:198
-msgid "List all EXIF MakerNote tags"
-msgstr "Liste tous les marqueurs EXIF MakerNote"
+#: exif/main.c:268
+#, fuzzy
+msgid "Show contents of tag MakerNote"
+msgstr "Montre les ID plutôt que les noms des marqueurs"
 
-#: exif/main.c:201
+#: exif/main.c:270
 msgid "Remove tag or ifd"
 msgstr "Supprime le marqueur ou l'ifd"
 
-#: exif/main.c:203
+#: exif/main.c:272
 msgid "Show description of tag"
 msgstr "Montre la description du marqueur"
 
-#: exif/main.c:205
+#: exif/main.c:274
 msgid "Extract thumbnail"
 msgstr "Extrait la vignette"
 
-#: exif/main.c:207
+#: exif/main.c:276
 msgid "Remove thumbnail"
 msgstr "Supprime la vignette"
 
-#: exif/main.c:209
+#: exif/main.c:278
 msgid "Insert FILE as thumbnail"
 msgstr "Insère le FICHIER comme vignette"
 
-#: exif/main.c:209 exif/main.c:211
+#: exif/main.c:278 exif/main.c:280
 msgid "FILE"
 msgstr "FICHIER"
 
-#: exif/main.c:211
-msgid "Write output to FILE"
+#: exif/main.c:280
+#, fuzzy
+msgid "Write data to FILE"
 msgstr "Écrit la sortie vers le FICHIER"
 
-#: exif/main.c:213 exif/actions.c:186 exif/actions.c:188 exif/actions.c:221
-#: exif/actions.c:223
-msgid "Value"
-msgstr "Valeur"
+#: exif/main.c:284
+msgid "Output in a machine-readable (tab delimited) format"
+msgstr ""
 
-#: exif/main.c:232
+#: exif/main.c:287
+msgid "Show debugging messages"
+msgstr ""
+
+#: exif/main.c:304
 msgid "[OPTION...] file"
 msgstr "[OPTION...] fichier"
 
-#: exif/main.c:244
+#: exif/main.c:321
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Marqueur '%s' invalide !"
 
-#: exif/main.c:255
+#: exif/main.c:332
 #, c-format
 msgid ""
 "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and "
@@ -126,135 +188,101 @@ msgstr ""
 "IFD '%s' invalide. Les IFDs valides sont '0', '1', 'EXIF', 'GPS', "
 "et'Interoperability'."
 
-#: exif/main.c:269
+#: exif/main.c:342
+#, c-format
 msgid "Please specify a tag!"
 msgstr "Veuillez spécifier un marqueur !"
 
-#: exif/main.c:273 exif/main.c:346
+#: exif/main.c:346
 #, c-format
 msgid "Tag '%s' (0x%04x, '%s'): %s"
 msgstr "Marqueur '%s' (0x%04x, '%s'): %s"
 
-#: exif/main.c:292
+#: exif/main.c:370
 #, c-format
 msgid "'%s' does not contain EXIF data!"
 msgstr "'%s' ne contient pas de données EXIF !"
 
-#: exif/main.c:303
-#, c-format
-msgid "'%s' does not contain EXIF MakerNote data!"
-msgstr "'%s' ne contient pas de données EXIF MakerNote !"
-
-#: exif/main.c:332
-#, c-format
-msgid "Invalid MakerNote tag '%s'!"
-msgstr "Marqueur MakerNote '%s' invalide !"
-
-#: exif/main.c:342
-msgid "Please specify a MakerNote tag!"
-msgstr "Veuillez spécifier un marqueur MakerNote !"
-
-#: exif/main.c:369
+#: exif/main.c:396
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "L'IFD '%s' ne contient pas de marqueur '%s'."
 
-#: exif/main.c:385
-#, c-format
-msgid "Makernote does not contain tag '%s'."
-msgstr "Makernote ne contient pas le marqueur '%s'."
-
-#: exif/main.c:397
+#: exif/main.c:410
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "'%s' ne contient pas de vignette !"
 
-#: exif/main.c:409
+#: exif/main.c:422
 #, c-format
 msgid "Could not open '%s' for writing (%m)!"
 msgstr "Ne peut ouvrir '%s' pour l'écriture (%m) !"
 
-#: exif/main.c:413
+#: exif/main.c:426
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Ne peut ouvrir '%s' pour l'écriture (%s) !"
 
-#: exif/main.c:451
+#: exif/main.c:464
 #, c-format
 msgid "Could not open '%s' (%m)!"
 msgstr "Ne peut ouvrir '%s' (%m) !"
 
-#: exif/main.c:454
+#: exif/main.c:467
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Ne peut ouvrir '%s' (%s) !"
 
-#: exif/main.c:465
+#: exif/main.c:478
 #, c-format
 msgid "Could not allocate %i byte(s)."
 msgstr "Ne peut allouer %i octet(s)."
 
-#: exif/main.c:475
+#: exif/main.c:488
 #, c-format
 msgid "Could not read '%s' (%m)."
 msgstr "Ne peut lire '%s' (%m)."
 
-#: exif/main.c:478
+#: exif/main.c:491
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Ne peut lire '%s' (%s)."
 
-#: exif/main.c:493
+#: exif/main.c:506
+#, c-format
 msgid "You need to specify a tag!"
 msgstr "Vous devez spécifier un marqueur !"
 
-#: exif/main.c:502 exif/main.c:599
+#: exif/main.c:515 exif/main.c:538
+#, c-format
 msgid "You need to specify an IFD!"
 msgstr "Vous devez spécifier un IFD !"
 
-#: exif/main.c:549 exif/main.c:587
-msgid "Not yet implemented!"
-msgstr "Pas encore implémenté !"
-
-#: exif/main.c:556
-msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
-msgstr ""
-"Erreur interne. Veuillez contacter <libexif-devel@lists.sourceforge.net>."
-
-#: exif/main.c:567
-msgid "Not enough memory."
-msgstr "Pas assez de mémoire."
-
-#: exif/main.c:615
+#: exif/main.c:554
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "L'IFD '%s' ne contient pas de marqueur '%s' !"
 
-#: exif/actions.c:61
-#, c-format
-msgid "EXIF tags in '%s':"
-msgstr "Marqueurs EXIF dans '%s' :"
+#~ msgid "EXIF MakerNote tags in '%s' ('%s' byte order):"
+#~ msgstr "Marqueurs EXIF MakerNote dans '%s' (ordre des octets '%s') :"
 
-#: exif/actions.c:90
-#, c-format
-msgid "EXIF MakerNote tags in '%s':"
-msgstr "Marqueurs EXIF MakerNote dans '%s' :"
+#~ msgid "MakerNote entry '%s' (0x%x, '%s'):"
+#~ msgstr "Entrée MakerNote '%s' (0x%x, '%s') :"
 
-#: exif/actions.c:176
-#, c-format
-msgid "EXIF tags in '%s' ('%s' byte order):"
-msgstr "Marqueurs EXIF dans'%s' (ordre des octets '%s') :"
+#~ msgid "Select MakerNote tag"
+#~ msgstr "Sélection du marqueur MakerNote"
 
-#: exif/actions.c:181 exif/actions.c:183 exif/actions.c:216 exif/actions.c:218
-msgid "Tag"
-msgstr "Marqueur"
+#~ msgid "ntag"
+#~ msgstr "ntag"
 
-#: exif/actions.c:194
-#, c-format
-msgid "EXIF data contains a thumbnail (%i bytes)."
-msgstr "Les données EXIF contiennent une vignette (%i octets)."
+#~ msgid "List all EXIF MakerNote tags"
+#~ msgstr "Liste tous les marqueurs EXIF MakerNote"
 
-#: exif/actions.c:211
-#, c-format
-msgid "EXIF MakerNote tags in '%s' ('%s' byte order):"
-msgstr "Marqueurs EXIF MakerNote dans '%s' (ordre des octets '%s') :"
+#~ msgid "'%s' does not contain EXIF MakerNote data!"
+#~ msgstr "'%s' ne contient pas de données EXIF MakerNote !"
+
+#~ msgid "Invalid MakerNote tag '%s'!"
+#~ msgstr "Marqueur MakerNote '%s' invalide !"
+
+#~ msgid "Please specify a MakerNote tag!"
+#~ msgstr "Veuillez spécifier un marqueur MakerNote !"

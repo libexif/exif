@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: exif\n"
-"POT-Creation-Date: 2002-06-10 20:19+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-05-27 19:45+0200\n"
 "PO-Revision-Date: 2002-09-14 14:40+0200\n"
 "Last-Translator: Lutz Müller <lutz@users.sourceforge.net>\n"
 "Language-Team: Deutsch <de@li.org>\n"
@@ -13,210 +14,309 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: exif/main.c:70
+#: exif/actions.c:43
 #, c-format
-msgid "Could not parse data of tag '%s'."
-msgstr "Konnte den Inhalt von Abschnitt '%s' nicht interpretieren."
+msgid "EXIF tags in '%s':"
+msgstr "EXIF Einträge in '%s':"
 
-#: exif/main.c:81
+#: exif/actions.c:109
 #, c-format
-msgid "Tag '%s' does not contain known information."
-msgstr "Abschnitt '%s' enthält unbekannte Informationen."
+msgid "Unknown MakerNote format."
+msgstr ""
 
-#: exif/main.c:86
+#: exif/actions.c:116
+#, fuzzy, c-format
+msgid "MakerNote does not contain any value.\n"
+msgstr "'%s' enthält keine EXIF Daten!"
+
+#: exif/actions.c:119
 #, c-format
-msgid "Tag '%s' contains one piece of information:"
-msgstr "Abschnitt '%s' enthält eine Information:"
+msgid "MakerNote contains 1 value:\n"
+msgstr ""
 
-#: exif/main.c:90
+#: exif/actions.c:122
+#, fuzzy, c-format
+msgid "MakerNote contains %i values:\n"
+msgstr "EXIF Einträge in '%s':"
+
+#: exif/actions.c:139
 #, c-format
-msgid "Tag '%s' contains the following information:"
-msgstr "Abschitt '%s' enhält folgende Informationen:"
+msgid "EXIF tags in '%s' ('%s' byte order):"
+msgstr "EXIF Einträge in '%s' ('%s' Byte-Reihenfolge):"
 
-#: exif/main.c:106
+#: exif/actions.c:144 exif/actions.c:146
+msgid "Tag"
+msgstr "Eintrag"
+
+#: exif/actions.c:149 exif/actions.c:151 exif/main.c:282
+msgid "Value"
+msgstr "Wert"
+
+#: exif/actions.c:157
+#, c-format
+msgid "EXIF data contains a thumbnail (%i bytes)."
+msgstr "EXIF Daten enthalten eine Vorschau (%i Bytes)."
+
+#: exif/actions.c:189
+#, c-format
+msgid "ThumbnailSize\t%i\n"
+msgstr ""
+
+#: exif/main.c:51
+#, c-format
+msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
+msgstr ""
+
+#: exif/main.c:61
 #, fuzzy, c-format
 msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
 msgstr "Der EXIF Eintrag '%s' (0x%x, '%s') existiert in '%s':"
 
-#: exif/main.c:110
+#: exif/main.c:98
 #, c-format
-msgid "  Format: '%s'"
-msgstr "  Format: '%s'"
-
-#: exif/main.c:112
-#, c-format
-msgid "  Components: %i"
-msgstr "  Komponenten: %i"
-
-#: exif/main.c:114
-#, c-format
-msgid "  Value: '%s'"
-msgstr "  Wert: '%s'"
+msgid "Not enough memory."
+msgstr ""
 
 #: exif/main.c:116
-msgid "  Data:"
-msgstr "  Daten: '%s'"
+#, c-format
+msgid "Too few components specified!"
+msgstr ""
 
-#: exif/main.c:148
+#: exif/main.c:146
+#, c-format
+msgid "Not yet implemented!"
+msgstr ""
+
+#: exif/main.c:165
 #, c-format
 msgid "Could not parse JPEG file '%s'."
 msgstr "Konnte die JPEG Datei '%s' nicht interpretieren."
 
-#: exif/main.c:160 exif/main.c:328
+#: exif/main.c:175
+#, c-format
+msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
+msgstr ""
+
+#: exif/main.c:189 exif/main.c:435
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Schrieb Datei '%s'."
 
-#: exif/main.c:188
+#: exif/main.c:260
 msgid "Show IDs instead of tag names"
 msgstr "Zeige IDs anstelle der Namen der Einträge"
 
-#: exif/main.c:190
+#: exif/main.c:262
 msgid "Select tag"
 msgstr "Wähle Eintrag"
 
-#: exif/main.c:190
+#: exif/main.c:262
 msgid "tag"
 msgstr "Eintrag"
 
-#: exif/main.c:192
+#: exif/main.c:264
 #, fuzzy
 msgid "Select IFD"
 msgstr "Wähle Eintrag"
 
-#: exif/main.c:192
+#: exif/main.c:264
 #, fuzzy
 msgid "IFD"
 msgstr "IFD 0"
 
-#: exif/main.c:194
+#: exif/main.c:266
 msgid "List all EXIF tags"
 msgstr "Liste alle EXIF Einträge auf"
 
-#: exif/main.c:196
+#: exif/main.c:268
+#, fuzzy
+msgid "Show contents of tag MakerNote"
+msgstr "Zeige IDs anstelle der Namen der Einträge"
+
+#: exif/main.c:270
+msgid "Remove tag or ifd"
+msgstr ""
+
+#: exif/main.c:272
 msgid "Show description of tag"
 msgstr "Zeige Beschreibung von Eintrag"
 
-#: exif/main.c:198
+#: exif/main.c:274
 msgid "Extract thumbnail"
 msgstr "Extrahiere Vorschau"
 
-#: exif/main.c:200
+#: exif/main.c:276
+#, fuzzy
+msgid "Remove thumbnail"
+msgstr "Extrahiere Vorschau"
+
+#: exif/main.c:278
 msgid "Insert FILE as thumbnail"
 msgstr "Füge DATEI als Vorschau ein"
 
-#: exif/main.c:200 exif/main.c:202
+#: exif/main.c:278 exif/main.c:280
 msgid "FILE"
 msgstr "DATEI"
 
-#: exif/main.c:202
-msgid "Write output to FILE"
+#: exif/main.c:280
+#, fuzzy
+msgid "Write data to FILE"
 msgstr "Schreibe Ergebnis in DATEI"
 
-#: exif/actions.c:136 exif/actions.c:138 exif/main.c:204
-msgid "Value"
-msgstr "Wert"
+#: exif/main.c:284
+msgid "Output in a machine-readable (tab delimited) format"
+msgstr ""
 
-#: exif/main.c:216
+#: exif/main.c:287
+msgid "Show debugging messages"
+msgstr ""
+
+#: exif/main.c:304
 msgid "[OPTION...] file"
 msgstr "[OPTION...] datei"
 
-#: exif/main.c:228
+#: exif/main.c:321
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Ungültiger Eintrag '%s'!"
 
-#: exif/main.c:238
+#: exif/main.c:332
 #, c-format
 msgid ""
 "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and "
 "'Interoperability'."
 msgstr ""
 
-#: exif/main.c:248
+#: exif/main.c:342
+#, c-format
 msgid "Please specify a tag!"
 msgstr "Bitte geben Sie einen Eintrag an!"
 
-#: exif/main.c:252
+#: exif/main.c:346
 #, c-format
 msgid "Tag '%s' (0x%04x, '%s'): %s"
 msgstr "Eintrag '%s' (0x%04x, '%s'): %s"
 
-#: exif/main.c:271
+#: exif/main.c:370
 #, c-format
 msgid "'%s' does not contain EXIF data!"
 msgstr "'%s' enthält keine EXIF Daten!"
 
-#: exif/main.c:296
+#: exif/main.c:396
 #, fuzzy, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "'%s' enthält keine EXIF Daten!"
 
-#: exif/main.c:310
+#: exif/main.c:410
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "'%s' enthält keine Vorschau!"
 
-#: exif/main.c:321
+#: exif/main.c:422
 #, c-format
 msgid "Could not open '%s' for writing (%m)!"
 msgstr "Konnte '%s' nicht zum Schreiben öffnen (%m)!"
 
-#: exif/main.c:343
+#: exif/main.c:426
+#, fuzzy, c-format
+msgid "Could not open '%s' for writing (%s)!"
+msgstr "Konnte '%s' nicht zum Schreiben öffnen (%m)!"
+
+#: exif/main.c:464
 #, c-format
 msgid "Could not open '%s' (%m)!"
 msgstr "Konnte '%s' nicht öffnen (%m)!"
 
-#: exif/main.c:352
+#: exif/main.c:467
+#, fuzzy, c-format
+msgid "Could not open '%s' (%s)!"
+msgstr "Konnte '%s' nicht öffnen (%m)!"
+
+#: exif/main.c:478
 #, c-format
 msgid "Could not allocate %i byte(s)."
 msgstr "Konnte nicht %i Byte(s) zur Verfügung stellen."
 
-#: exif/main.c:361
+#: exif/main.c:488
 #, c-format
 msgid "Could not read '%s' (%m)."
 msgstr "Konnte nicht '%s' lesen (%m)."
 
-#: exif/main.c:374
-#, fuzzy
+#: exif/main.c:491
+#, fuzzy, c-format
+msgid "Could not read '%s' (%s)."
+msgstr "Konnte nicht '%s' lesen (%m)."
+
+#: exif/main.c:506
+#, fuzzy, c-format
 msgid "You need to specify a tag!"
 msgstr "Bitte geben Sie einen Eintrag an!"
 
-#: exif/main.c:382
+#: exif/main.c:515 exif/main.c:538
+#, c-format
 msgid "You need to specify an IFD!"
 msgstr ""
 
-#. e->data[s * i] = ;
-#: exif/main.c:429 exif/main.c:465
-msgid "Not yet implemented!"
-msgstr ""
+#: exif/main.c:554
+#, fuzzy, c-format
+msgid "IFD '%s' does not contain a tag '%s'!"
+msgstr "'%s' enthält keine EXIF Daten!"
 
-#: exif/main.c:436
-msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
-msgstr ""
+#, fuzzy
+#~ msgid "EXIF MakerNote tags in '%s' ('%s' byte order):"
+#~ msgstr "EXIF Einträge in '%s' ('%s' Byte-Reihenfolge):"
 
-#: exif/main.c:447
-msgid "Not enough memory."
-msgstr ""
+#, fuzzy
+#~ msgid "MakerNote entry '%s' (0x%x, '%s'):"
+#~ msgstr "Eintrag '%s' (0x%04x, '%s'): %s"
 
-#: exif/actions.c:61
-#, c-format
-msgid "EXIF tags in '%s':"
-msgstr "EXIF Einträge in '%s':"
+#, fuzzy
+#~ msgid "Select MakerNote tag"
+#~ msgstr "Wähle Eintrag"
 
-#: exif/actions.c:126
-#, c-format
-msgid "EXIF tags in '%s' ('%s' byte order):"
-msgstr "EXIF Einträge in '%s' ('%s' Byte-Reihenfolge):"
+#, fuzzy
+#~ msgid "ntag"
+#~ msgstr "Eintrag"
 
-#: exif/actions.c:131 exif/actions.c:133
-msgid "Tag"
-msgstr "Eintrag"
+#, fuzzy
+#~ msgid "List all EXIF MakerNote tags"
+#~ msgstr "Liste alle EXIF Einträge auf"
 
-#: exif/actions.c:144
-#, c-format
-msgid "EXIF data contains a thumbnail (%i bytes)."
-msgstr "EXIF Daten enthalten eine Vorschau (%i Bytes)."
+#, fuzzy
+#~ msgid "'%s' does not contain EXIF MakerNote data!"
+#~ msgstr "'%s' enthält keine EXIF Daten!"
+
+#, fuzzy
+#~ msgid "Invalid MakerNote tag '%s'!"
+#~ msgstr "Ungültiger Eintrag '%s'!"
+
+#, fuzzy
+#~ msgid "Please specify a MakerNote tag!"
+#~ msgstr "Bitte geben Sie einen Eintrag an!"
+
+#~ msgid "Could not parse data of tag '%s'."
+#~ msgstr "Konnte den Inhalt von Abschnitt '%s' nicht interpretieren."
+
+#~ msgid "Tag '%s' does not contain known information."
+#~ msgstr "Abschnitt '%s' enthält unbekannte Informationen."
+
+#~ msgid "Tag '%s' contains one piece of information:"
+#~ msgstr "Abschnitt '%s' enthält eine Information:"
+
+#~ msgid "Tag '%s' contains the following information:"
+#~ msgstr "Abschitt '%s' enhält folgende Informationen:"
+
+#~ msgid "  Format: '%s'"
+#~ msgstr "  Format: '%s'"
+
+#~ msgid "  Components: %i"
+#~ msgstr "  Komponenten: %i"
+
+#~ msgid "  Value: '%s'"
+#~ msgstr "  Wert: '%s'"
+
+#~ msgid "  Data:"
+#~ msgstr "  Daten: '%s'"
 
 #~ msgid "EXIF IFD"
 #~ msgstr "EXIF IFD"

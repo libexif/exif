@@ -13,7 +13,7 @@ dnl ---------------------------------------------------------------------------
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[The gettext domain we're
 using])
 ALL_LINGUAS="de es fr"
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
@@ -85,6 +85,8 @@ AC_OUTPUT([
   exif.spec
   libjpeg/Makefile
   exif/Makefile
+  m4/Makefile
+  po/Makefile.in
 ])
 
 echo "
