@@ -31,7 +31,7 @@
 #define ENTRY_FOUND     "   *   "
 #define ENTRY_NOT_FOUND "   -   "
 
-#define CN(s) (s) ? : "(NULL)"
+#define CN(s) ((s) ? (s) : "(NULL)")
 
 void
 action_tag_table (const char *filename, ExifData *ed)
@@ -142,7 +142,7 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
                 	fprintf (stdout, "%-20.20s", b1);
 		fputc ('|', stdout);
         	if (ids) {
-			fputs(CN(b2), stdout);
+			fputs (CN (b2), stdout);
         	} else {
                 	fprintf (stdout, "%-58.58s", b2);
 		}
@@ -163,10 +163,11 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 		exif_byte_order_get_name (order));
 	fputc ('\n', stdout);
 	print_hline (ids);
-        if (ids)
+        if (ids) {
                 fprintf (stdout, "%-6.6s", _("Tag"));
-        else
+        } else {
                 fprintf (stdout, "%-20.20s", _("Tag"));
+        }
 	fputc ('|', stdout);
         if (ids)
 		fprintf (stdout, "%-72.72s", _("Value"));
@@ -195,7 +196,7 @@ show_entry_machine (ExifEntry *e, void *data)
 		fputs (CN (exif_tag_get_title (e->tag)), stdout);
 	}
 	fputc ('\t', stdout);
-	puts (CN (exif_entry_get_value (e, v, sizeof (v))), stdout);
+	fputs (CN (exif_entry_get_value (e, v, sizeof (v))), stdout);
 	fputc ('\n', stdout);
 }
 
