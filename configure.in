@@ -10,7 +10,7 @@ dnl ---------------------------------------------------------------------------
 dnl i18n support
 dnl ---------------------------------------------------------------------------
 ALL_LINGUAS="de es"
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
@@ -25,10 +25,15 @@ dnl           have it (at least if configured --without-nls).
 dnl ---------------------------------------------------------------------------
 AC_CHECK_HEADERS(locale.h)
 
-CFLAGS="$CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Werror"
-AC_SUBST(CFLAGS)
+dnl ---------------------------------------------------------------------------
+dnl Warnings: If we have GCC, be paranoid.
+dnl ---------------------------------------------------------------------------
+if test "x$GCC" = "xyes"; then
+    CFLAGS="$CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Werror"
+    AC_SUBST(CFLAGS)
+fi
 
-AC_OUTPUT([
+AC_OUTPUT([ m4/Makefile  intl/Makefile 
   Makefile
   libjpeg/Makefile
   exif/Makefile

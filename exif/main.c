@@ -20,6 +20,7 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -73,7 +74,7 @@ show_maker_note (ExifEntry *entry)
 	if (!note) {
 		fprintf (stderr, _("Could not parse data of tag '%s'."), 
 			exif_tag_get_name (entry->tag));
-		fprintf (stderr, "\n");
+		fputc ('\n', stderr);
 		return;
 	}
 
@@ -84,7 +85,7 @@ show_maker_note (ExifEntry *entry)
 		fprintf (stderr, 
 			_("Tag '%s' does not contain known information."),
 			exif_tag_get_name (entry->tag));
-		fprintf (stderr, "\n");
+		fputc ('\n', stderr);
 		return;
 	} else if (!value[1]) {
 		printf (_("Tag '%s' contains one piece of information:"),
@@ -153,7 +154,7 @@ save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
 	if (!jdata) {
 		fprintf (stderr, _("Could not parse JPEG file '%s'."),
 			 fname);
-		fprintf (stderr, "\n");
+		fputc ('\n', stderr);
 		return (1);
 	}
 
@@ -163,7 +164,7 @@ save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
 		if (ds > 0xffff) {
 			fprintf (stderr, _("Too much EXIF data (%i bytes). "
 				"Only %i bytes are allowed."), ds, 0xffff);
-			fprintf (stderr, "\n");
+			fputc ('\n', stderr);
 			return (1);
 		}
 		free (d);
@@ -226,11 +227,13 @@ main (int argc, const char **argv)
 	char fname[1024];
 	FILE *f;
 
+#ifdef ENABLE_NLS
 #ifdef HAVE_LOCALE_H
 	setlocale (LC_ALL, "");
 #endif
 	bindtextdomain (PACKAGE, EXIF_LOCALEDIR);
 	textdomain (PACKAGE);
+#endif
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
@@ -246,7 +249,7 @@ main (int argc, const char **argv)
 		tag = exif_tag_from_string (tag_string);
 		if (!tag || !exif_tag_get_name (tag)) {
 			fprintf (stderr, _("Invalid tag '%s'!"), tag_string);
-			fprintf (stderr, "\n");
+			fputc ('\n', stderr);
 			return (1);
 		}
 		eo.tag = tag;
@@ -258,7 +261,7 @@ main (int argc, const char **argv)
 			fprintf (stderr, _("Invalid IFD '%s'. Valid IFDs are "
 				"'0', '1', 'EXIF', 'GPS', and "
 				"'Interoperability'."), ifd_string);
-			fprintf (stderr, "\n");
+			fputc ('\n', stderr);
 			return (1);
 		}
 	}
@@ -266,7 +269,7 @@ main (int argc, const char **argv)
 	if (show_description) {
 		if (!eo.tag) {
 			fprintf (stderr, _("Please specify a tag!"));
-			fprintf (stderr, "\n");
+			fputc ('\n', stderr);
 			return (1);
 		}
 		printf (_("Tag '%s' (0x%04x, '%s'): %s"),
@@ -290,7 +293,7 @@ main (int argc, const char **argv)
 			if (!ed) {
 				fprintf (stderr, _("'%s' does not "
 					 "contain EXIF data!"), *args);
-				fprintf (stderr, "\n");
+				fputc ('\n', stderr);
 				exit (1);
 			}
 
@@ -317,7 +320,7 @@ main (int argc, const char **argv)
 							"does not contain tag "
 							"'%s'."), 
 							ifd_string, tag_string);
-						fprintf (stderr, "\n");
+						fputc ('\n', stderr);
 						return (1);
 					}
 				} else {
@@ -330,17 +333,24 @@ main (int argc, const char **argv)
 					fprintf (stderr, _("'%s' does not "
 						"contain a thumbnail!"),
 						*args);
-					fprintf (stderr, "\n");
+					fputc ('\n', stderr);
 					return (1);
 				}
 
 				/* Save the thumbnail */
 				f = fopen (fname, "wb");
 				if (!f) {
+#ifdef __GNUC__
 					fprintf (stderr,
 						_("Could not open '%s' for "
 						"writing (%m)!"), fname);
-					fprintf (stderr, "\n");
+#else
+					fprintf (stderr,
+						_("Could not open '%s' for "
+						"writing (%s)!"), fname,
+						strerror (errno));
+#endif
+					fputc ('\n', stderr);
 					return (1);
 				}
 				fwrite (ed->data, 1, ed->size, f);
@@ -360,9 +370,15 @@ main (int argc, const char **argv)
 
 				f = fopen (ithumbnail, "rb");
 				if (!f) {
+#ifdef __GNUC__
 					fprintf (stderr, _("Could not open "
 						"'%s' (%m)!"), ithumbnail);
-					fprintf (stderr, "\n");
+#else
+					fprintf (stderr, _("Could not open "
+						"'%s' (%s)!"), ithumbnail,
+						strerror (errno));
+#endif
+					fputc ('\n', stderr);
 					return (1);
 				}
 				fseek (f, 0, SEEK_END);
@@ -372,15 +388,21 @@ main (int argc, const char **argv)
 					fprintf (stderr, _("Could not "
 						"allocate %i byte(s)."),
 						ed->size);
-					fprintf (stderr, "\n");
+					fputc ('\n', stderr);
 					return (1);
 				}
 				fseek (f, 0, SEEK_SET);
 				if (fread (ed->data, sizeof (char),
 					   ed->size, f) != ed->size) {
+#ifdef __GNUC__
 					fprintf (stderr, _("Could not read "
 						"'%s' (%m)."), ithumbnail);
-					fprintf (stderr, "\n");
+#else
+					fprintf (stderr, _("Could not read "
+						"'%s' (%s)."), ithumbnail,
+						strerror (errno));
+#endif
+					fputc ('\n', stderr);
 					return (1);
 				}
 				fclose (f);
@@ -393,7 +415,7 @@ main (int argc, const char **argv)
 				if (!tag) {
 					fprintf (stderr, _("You need to "
 						"specify a tag!"));
-					fprintf (stderr, "\n");
+					fputc ('\n', stderr);
 					return (1);
 				}
 
@@ -401,7 +423,7 @@ main (int argc, const char **argv)
 				if (ifd < 0) {
 					fprintf (stderr, _("You need to "
 						"specify an IFD!"));
-					fprintf (stderr, "\n");
+					fputc ('\n', stderr);
 					return (1);
 				}
 
@@ -433,7 +455,7 @@ main (int argc, const char **argv)
 						"'\\' followed by anything "
 						"except '\\' or ' ' is "
 						"invalid.");
-					fprintf (stderr, "\n");
+					fputc ('\n', stderr);
 					exit (1);
 				}
 			} else if (set_value[end] == ' ') {
@@ -447,7 +469,7 @@ main (int argc, const char **argv)
 			/* e->data[s * i] = ; */
 
 			fprintf (stderr, _("Not yet implemented!"));
-			fprintf (stderr, "\n");
+			fputc ('\n', stderr);
 			return (1);
 
 			break;
@@ -456,7 +478,7 @@ main (int argc, const char **argv)
 				fprintf (stderr, _("Internal error. Please "
 					"contact <libexif-devel@"
 					"lists.sourceforge.net>."));
-				fprintf (stderr, "\n");
+				fputc ('\n', stderr);
 				return (1);
 			}
 			if (e->data)
@@ -465,7 +487,7 @@ main (int argc, const char **argv)
 			e->data = malloc (sizeof (char) * e->size);
 			if (!e->data) {
 				fprintf (stderr, _("Not enough memory."));
-				fprintf (stderr, "\n");
+				fputc ('\n', stderr);
 				return (1);
 			}
 			strcpy (e->data, buf);
@@ -483,7 +505,7 @@ main (int argc, const char **argv)
 		case EXIF_FORMAT_SRATIONAL:
 		default:
 			fprintf (stderr, _("Not yet implemented!"));
-			fprintf (stderr, "\n");
+			fputc ('\n', stderr);
 			return (1);
 		}
 	}

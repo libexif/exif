@@ -59,21 +59,21 @@ action_tag_table (const char *filename, ExifData *ed)
 
 	memset (txt, 0, sizeof (txt));
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), filename);
-	printf ("%-38.38s", txt);
+	fprintf (stdout, "%-38.38s", txt);
 	for (i = 0; i < EXIF_IFD_COUNT; i++)
 		printf ("%-7.7s", exif_ifd_get_name (i));
-	printf ("\n");
+	fputc ('\n', stdout);
 	for (tag = 0; tag < 0xffff; tag++) {
 		name = exif_tag_get_title (tag);
 		if (!name)
 			continue;
-		printf ("  0x%04x %-29.29s", tag, name);
+		fprintf (stdout, "  0x%04x %-29.29s", tag, name);
 		for (i = 0; i < EXIF_IFD_COUNT; i++)
 			if (exif_content_get_entry (ed->ifd[i], tag))
 				printf (ENTRY_FOUND);
 			else
 				printf (ENTRY_NOT_FOUND);
-		printf ("\n");
+		fputc ('\n', stdout);
 	}
 }
 
@@ -83,15 +83,15 @@ show_entry (ExifEntry *entry, void *data)
 	unsigned char *ids = data;
 
 	if (*ids)
-		printf ("0x%04x", entry->tag);
+		fprintf (stdout, "0x%04x", entry->tag);
 	else
-		printf ("%-20.20s", exif_tag_get_title (entry->tag));
+		fprintf (stdout, "%-20.20s", exif_tag_get_title (entry->tag));
 	printf ("|");
 	if (*ids)
-		printf ("%-73.73s", exif_entry_get_value (entry));
+		fprintf (stdout, "%-72.72s", exif_entry_get_value (entry));
 	else
-		printf ("%-59.59s", exif_entry_get_value (entry));
-	printf ("\n");
+		fprintf (stdout, "%-58.58s", exif_entry_get_value (entry));
+	fputc ('\n', stdout);
 }
 
 static void
@@ -107,11 +107,11 @@ print_hline (unsigned char ids)
 
         width = (ids ? 6 : 20); 
         for (i = 0; i < width; i++)
-                printf ("-");
-        printf ("+");
-        for (i = 0; i < 79 - width; i++)
-                printf ("-");
-        printf ("\n");
+                fputc ('-', stdout);
+        fputc ('+', stdout);
+        for (i = 0; i < 78 - width; i++)
+		fputc ('-', stdout);
+	fputc ('\n', stdout);
 }
 
 void
@@ -123,26 +123,26 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 		return;
 
 	order = exif_data_get_byte_order (ed);
-	printf (_("EXIF tags in '%s' ('%s' byte order):"), filename,
+	fprintf (stdout, _("EXIF tags in '%s' ('%s' byte order):"), filename,
 		exif_byte_order_get_name (order));
-	printf ("\n");
+	fputc ('\n', stdout);
 	print_hline (ids);
         if (ids)
-                printf ("%-6.6s", _("Tag"));
+                fprintf (stdout, "%-6.6s", _("Tag"));
         else
-                printf ("%-20.20s", _("Tag"));
-        printf ("|");
+                fprintf (stdout, "%-20.20s", _("Tag"));
+	fputc ('|', stdout);
         if (ids)
-                printf ("%-73.73s", _("Value"));
+		fprintf (stdout, "%-72.72s", _("Value"));
         else
-                printf ("%-59.59s", _("Value"));
-        printf ("\n");
+                fprintf (stdout, "%-58.58s", _("Value"));
+        fputc ('\n', stdout);
         print_hline (ids);
 	exif_data_foreach_content (ed, show_ifd, &ids);
         print_hline (ids);
         if (ed->size) {
-                printf (_("EXIF data contains a thumbnail (%i bytes)."),
-                        ed->size);
-                printf ("\n");
+                fprintf (stdout, _("EXIF data contains a thumbnail "
+				   "(%i bytes)."), ed->size);
+                fputc ('\n', stdout);
         }
 }
