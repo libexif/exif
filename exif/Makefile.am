@@ -14,4 +14,5 @@ exif_SOURCES =			\
 exif_LDADD =			\
 	../libjpeg/libjpeg.la	\
 	$(LIBEXIF_LIBS)		\
-	$(POPT_LIBS)
+	$(POPT_LIBS)		\
+	$(INTLLIBS)
