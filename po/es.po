@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: exif\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2005-03-14 03:59+0100\n"
+"POT-Creation-Date: 2005-03-24 06:09+0100\n"
 "PO-Revision-Date: 2005-03-14 04:20+0100\n"
 "Last-Translator: Fabian Mandelbaum <fabman@mandrakesoft.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -21,7 +21,7 @@ msgstr "Etiquetas EXIF en '%s':"
 
 #: exif/actions.c:113
 #, c-format
-msgid "Unknown MakerNote format."
+msgid "Unknown MakerNote format.\n"
 msgstr ""
 
 #: exif/actions.c:120
