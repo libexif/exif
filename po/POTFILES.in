@@ -1,3 +1,2 @@
-exif/main.c
 exif/actions.c
-exif/utils.c
+exif/main.c
