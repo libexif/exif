@@ -246,7 +246,7 @@ main (int argc, const char **argv)
 
 	/* Any option? */
 	if (argc <= 1) {
-		poptPrintUsage (ctx, stdout, 0);
+		poptPrintHelp (ctx, stdout, 0);
 		return (0);
 	}
 
@@ -574,7 +574,7 @@ main (int argc, const char **argv)
 			args++;
 		}
 	} else
-		poptPrintUsage (ctx, stdout, 0);
+		poptPrintHelp (ctx, stdout, 0);
 
 	poptFreeContext (ctx);
 
