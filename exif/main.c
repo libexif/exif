@@ -262,7 +262,8 @@ main (int argc, const char **argv)
 
 	if (ifd_string) {
 		ifd = exif_ifd_from_string (ifd_string);
-		if ((ifd < 0) || !exif_ifd_get_name (ifd)) {
+		if ((ifd < EXIF_IFD_0) || (ifd >= EXIF_IFD_COUNT) ||
+		    !exif_ifd_get_name (ifd)) {
 			fprintf (stderr, _("Invalid IFD '%s'. Valid IFDs are "
 				"'0', '1', 'EXIF', 'GPS', and "
 				"'Interoperability'."), ifd_string);
