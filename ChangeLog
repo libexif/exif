@@ -1,3 +1,8 @@
+2003-01-28  Lutz Mller <lutz@users.sourceforge.net>
+
+	* exif/main.c: Change the description of '--output' from
+	  'write output' to 'write data'. Should fix #671440.
+
 2002-11-17  Rod Whitby <software.libexif@rwhitby.net>
 
 	* configure.in:

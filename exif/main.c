@@ -208,7 +208,7 @@ main (int argc, const char **argv)
 		{"insert-thumbnail", 'n', POPT_ARG_STRING, &ithumbnail, 0,
 		 N_("Insert FILE as thumbnail"), N_("FILE")},
 		{"output", 'o', POPT_ARG_STRING, &output, 0,
-		 N_("Write output to FILE"), N_("FILE")},
+		 N_("Write data to FILE"), N_("FILE")},
 		{"set-value", '\0', POPT_ARG_STRING, &set_value, 0,
 		 N_("Value"), NULL},
 		POPT_TABLEEND};
