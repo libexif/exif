@@ -29,6 +29,7 @@ core
 stamp-h.in
 stamp-h
 libtool
+intl
 conftest.c
 conftest
 configure
