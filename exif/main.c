@@ -26,6 +26,7 @@
 #include <popt.h>
 
 #include <libexif/exif-data.h>
+#include <libexif/exif-note.h>
 
 #include "actions.h"
 #include "utils.h"
@@ -49,6 +50,29 @@
 #  define N_(String) (String)
 #endif
 
+static void
+show_maker_note (ExifEntry *entry)
+{
+	ExifNote *note;
+	char **value;
+	unsigned int i;
+
+	note = exif_note_new_from_data (entry->data, entry->size);
+	if (!note) {
+		printf (_("Could not parse data."));
+		printf ("\n");
+		return;
+	}
+
+	value = exif_note_get_value (note);
+	exif_note_unref (note);
+
+	for (i = 0; value && value[i]; i++) {
+		printf (" %3i %s\n", i, value[i]);
+		free (value[i]);
+	}
+	free (value);
+}
 
 static void
 show_entry (ExifEntry *entry, const char *caption)
@@ -67,6 +91,10 @@ show_entry (ExifEntry *entry, const char *caption)
 		printf ("0x%02x ", entry->data[i]);
 	}
 	printf ("\n");
+	if (entry->tag == EXIF_TAG_MAKER_NOTE) {
+		printf (_("Parsing maker note...\n"));
+		show_maker_note (entry);
+	}
 }
 
 static void
