@@ -1,6 +1,11 @@
+2004-01-08  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/actions.c: Adapt to new API
+	* configure.in: Require libexif-0.5.13.
+
 2003-10-15  Lutz Mueller <lutz@users.sourceforge.net>
                                                                                 
-        * exif.spec.in: Patches by Peter Bieringer <pb@bieringer.de>.
+	* exif.spec.in: Patches by Peter Bieringer <pb@bieringer.de>.
                                                                                 
 2003-10-01  Lutz Mueller <lutz@users.sourceforge.net>
 

@@ -18,7 +18,7 @@ AM_GNU_GETTEXT
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.9)
+PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.13)
 AC_SUBST(LIBEXIF_LIBS)
 AC_SUBST(LIBEXIF_CFLAGS)
 
@@ -104,6 +104,7 @@ AC_OUTPUT([
   exif.spec
   libjpeg/Makefile
   exif/Makefile
+  po/Makefile.in
 ])
 
 echo "

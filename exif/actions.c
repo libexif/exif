@@ -78,7 +78,7 @@ action_ntag_table (const char *filename, MNoteData *en)
 		if (!name)
 			continue;
 		fprintf (stdout, "  0x%04x %-29.29s", tag, name);
-		if (mnote_data_get_value (en, tag))
+		if (mnote_data_get_value (en, tag, txt, 1))
 			printf (ENTRY_FOUND);
 		else
 			printf (ENTRY_NOT_FOUND);
@@ -92,6 +92,7 @@ static void
 show_entry (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
+	char v[128];
 
 	if (*ids)
 		fprintf (stdout, "0x%04x", e->tag);
@@ -99,9 +100,11 @@ show_entry (ExifEntry *e, void *data)
 		fprintf (stdout, "%-20.20s", C(exif_tag_get_title (e->tag)));
 	printf ("|");
 	if (*ids)
-		fprintf (stdout, "%-72.72s", C(exif_entry_get_value (e)));
+		fprintf (stdout, "%-72.72s",
+			 C(exif_entry_get_value (e, v, 73)));
 	else
-		fprintf (stdout, "%-58.58s", C(exif_entry_get_value (e)));
+		fprintf (stdout, "%-58.58s",
+			 C(exif_entry_get_value (e, v, 59)));
 	fputc ('\n', stdout);
 }
 
@@ -117,6 +120,7 @@ static void
 show_note_entry (MNoteData *note, MNoteTag tag, void *data)
 {
 	unsigned char *ids = data;
+	char v[73];
 
 	if (*ids)
 		fprintf (stdout, "0x%04x", tag);
@@ -124,9 +128,11 @@ show_note_entry (MNoteData *note, MNoteTag tag, void *data)
 		fprintf (stdout, "%-20.20s", mnote_tag_get_title (note, tag));
 	printf ("|");
 	if (*ids)
-		fprintf (stdout, "%-72.72s", mnote_data_get_value (note, tag));
+		fprintf (stdout, "%-72.72s",
+			 mnote_data_get_value (note, tag, v, 73));
 	else
-		fprintf (stdout, "%-58.58s", mnote_data_get_value (note, tag));
+		fprintf (stdout, "%-58.58s",
+			 mnote_data_get_value (note, tag, v, 58));
 	fputc ('\n', stdout);
 }
 
@@ -138,11 +144,9 @@ print_hline (unsigned char ids)
         unsigned int i, width;
 
         width = (ids ? 6 : 20); 
-        for (i = 0; i < width; i++)
-                fputc ('-', stdout);
+        for (i = 0; i < width; i++) fputc ('-', stdout);
         fputc ('+', stdout);
-        for (i = 0; i < 78 - width; i++)
-		fputc ('-', stdout);
+        for (i = 0; i < 78 - width; i++) fputc ('-', stdout);
 	fputc ('\n', stdout);
 }
 
@@ -180,15 +184,15 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 }
 
 static void
-show_entry_machine (ExifEntry *entry, void *data)
+show_entry_machine (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
+	char *v[1024];
 
-	if (*ids) fprintf (stdout, "0x%04x", entry->tag);
-	else fprintf (stdout, "%s", exif_tag_get_title (entry->tag));
+	if (*ids) fprintf (stdout, "0x%04x", e->tag);
+	else fprintf (stdout, "%s", exif_tag_get_title (e->tag));
 	printf ("\t");
-	if (*ids) fprintf (stdout, "%s", exif_entry_get_value (entry));
-	else fprintf (stdout, "%s", exif_entry_get_value (entry));
+	fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));
 	fputc ('\n', stdout);
 }
 
