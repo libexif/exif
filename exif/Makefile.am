@@ -2,7 +2,8 @@ INCLUDES =						\
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/intl				\
 	-DEXIF_LOCALEDIR=\""$(datadir)/locale"\"	\
-	$(LIBEXIF_CFLAGS)
+	$(LIBEXIF_CFLAGS)				\
+	$(POPT_CFLAGS)
 
 bin_PROGRAMS = exif
 
@@ -12,5 +13,5 @@ exif_SOURCES =			\
 	utils.h utils.c
 exif_LDADD =			\
 	../libjpeg/libjpeg.la	\
-	-lpopt			\
-	$(LIBEXIF_LIBS)
+	$(LIBEXIF_LIBS)		\
+	$(POPT_LIBS)
