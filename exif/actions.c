@@ -102,6 +102,7 @@ action_mnote_list (const char *filename, ExifData *ed)
 {
 	unsigned int i, bs = 1024, c;
 	char b[1024];
+	char b1[1024], b2[1024];
 	ExifMnoteData *n;
 
 	n = exif_data_get_mnote_data (ed);
@@ -121,9 +122,11 @@ action_mnote_list (const char *filename, ExifData *ed)
 	default:
 		printf (_("MakerNote contains %i values:\n"), c);
 	}
-	for (i = 0; i < c; i++)
-		printf ("%s: %s\n", C(exif_mnote_data_get_title (n, i)),
-			C(exif_mnote_data_get_value (n, i, b, bs)));
+	for (i = 0; i < c; i++) {
+		strncpy (b1, C (exif_mnote_data_get_title (n, i)), bs);
+		strncpy (b2, C (exif_mnote_data_get_value (n, i, b, bs)), bs);
+		printf ("%s: %s\n", b1, b2);
+	}
 	exif_mnote_data_unref (n);
 }
 
