@@ -14,6 +14,8 @@ AM_PROG_LIBTOOL
 AM_CFLAGS="$CFLAGS"
 GP_CONFIG_MSG([Compiler],[${CC}])
 
+AC_CHECK_FUNCS([isatty])
+
 GP_PKG_CONFIG
 
 # ---------------------------------------------------------------------------
