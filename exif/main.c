@@ -50,6 +50,11 @@
 #  define N_(String) (String)
 #endif
 
+/* Old versions of popt.h don't define POPT_TABLEEND */
+#ifndef POPT_TABLEEND
+#  define POPT_TABLEEND { NULL, '\0', 0, 0, 0, NULL, NULL }
+#endif
+
 static void
 show_maker_note (ExifEntry *entry)
 {
@@ -59,7 +64,8 @@ show_maker_note (ExifEntry *entry)
 
 	note = exif_note_new_from_data (entry->data, entry->size);
 	if (!note) {
-		printf (_("Could not parse data."));
+		printf (_("Could not parse data of tag '%s'."), 
+			exif_tag_get_name (entry->tag));
 		printf ("\n");
 		return;
 	}
@@ -67,6 +73,16 @@ show_maker_note (ExifEntry *entry)
 	value = exif_note_get_value (note);
 	exif_note_unref (note);
 
+	if (!value || !value[0]) {
+		printf (_("Tag '%s' does not contain known information.\n"),
+			exif_tag_get_name (entry->tag));
+		return;
+	} else if (!value[1])
+		printf (_("Tag '%s' contains one piece of information:\n"),
+			exif_tag_get_name (entry->tag));
+	else
+		printf (_("Tag '%s' contains the following information:\n"),
+			exif_tag_get_name (entry->tag));
 	for (i = 0; value && value[i]; i++) {
 		printf (" %3i %s\n", i, value[i]);
 		free (value[i]);
@@ -91,10 +107,8 @@ show_entry (ExifEntry *entry, const char *caption)
 		printf ("0x%02x ", entry->data[i]);
 	}
 	printf ("\n");
-	if (entry->tag == EXIF_TAG_MAKER_NOTE) {
-		printf (_("Parsing maker note...\n"));
+	if (entry->tag == EXIF_TAG_MAKER_NOTE)
 		show_maker_note (entry);
-	}
 }
 
 static void
