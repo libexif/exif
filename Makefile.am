@@ -31,7 +31,7 @@ $(srcdir)/ChangeLog.cvs:
 		usermap=""; \
 	fi; \
 	(cd "$(srcdir)" && cvs2cl $${usermap} -f "ChangeLog.cvs")
-	
+
 .PHONY: cvs-tag-release
 cvs-tag-release:
 	@tag="$$(echo "$(PACKAGE_TARNAME)-$(PACKAGE_VERSION)-release" | sed 's|\.|_|g')"; \
