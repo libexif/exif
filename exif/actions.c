@@ -141,10 +141,11 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
         	else
                 	fprintf (stdout, "%-20.20s", b1);
 		fputc ('|', stdout);
-        	if (ids)
-			fprintf (stdout, "%s", b2);
-        	else
+        	if (ids) {
+			fputs(CN(b2), stdout);
+        	} else {
                 	fprintf (stdout, "%-58.58s", b2);
+		}
         	fputc ('\n', stdout);
 	}
 }
@@ -189,9 +190,9 @@ show_entry_machine (ExifEntry *e, void *data)
 	char v[1024];
 
 	if (*ids) fprintf (stdout, "0x%04x", e->tag);
-	else fprintf (stdout, "%s", CN (exif_tag_get_title (e->tag)));
-	printf ("\t");
-	fprintf (stdout, "%s", CN (exif_entry_get_value (e, v, sizeof (v))));
+	else fputs (CN (exif_tag_get_title (e->tag)), stdout);
+	fputc ('\t', stdout);
+	puts (CN (exif_entry_get_value (e, v, sizeof (v))), stdout);
 	fputc ('\n', stdout);
 }
 
