@@ -49,8 +49,8 @@ static void
 internal_error (void)
 {
 	fprintf (stderr, _("Internal error. Please "
-			   "contact <libexif-devel@"
-			   "lists.sourceforge.net>."));
+			   "contact <%s>.)"),
+		 PACKAGE_BUGREPORT);
 	fputc ('\n', stderr);
 	exit (1);
 }
@@ -324,10 +324,10 @@ main (int argc, const char **argv)
 		exif_log_set_func (log, log_func, NULL);
 	}
 
-	/* Any option? */
+	/* Any command line parameters ? */
 	if (argc <= 1) {
 		poptPrintHelp (ctx, stdout, 0);
-		return (0);
+		return (1);
 	}
 
 	if (tag_string) {
@@ -590,8 +590,10 @@ main (int argc, const char **argv)
 			exif_data_unref (ed);
 			args++;
 		}
-	} else
+	} else {
 		poptPrintHelp (ctx, stdout, 0);
+		return(1);
+	}
 
 	poptFreeContext (ctx);
 
