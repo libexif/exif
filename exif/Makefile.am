@@ -7,15 +7,14 @@ exif_SOURCES =			\
 	exif-i18n.h exif-i18n.c	\
 	main.c			\
 	utils.h utils.c
-exif_CFLAGS = \
-	-I$(top_srcdir)				\
-	$(AM_CFLAGS) $(CFLAGS)			\
-	$(LIBEXIF_CFLAGS) $(LIBMNOTE_CFLAGS)	\
+exif_CPPFLAGS = \
+	$(AM_CPPFLAGS) $(CPPFLAGS)		\
+	$(LIBEXIF_CFLAGS)			\
 	$(POPT_CFLAGS)
 exif_LDADD = \
 	$(AM_LDFLAGS) $(LDFLAGS)		\
 	$(top_builddir)/libjpeg/libjpeg.la	\
-	$(LIBEXIF_LIBS) $(LIBMNOTE_LIBS)	\
+	$(LIBEXIF_LIBS)				\
 	$(POPT_LIBS)				\
 	$(INTLLIBS)
 

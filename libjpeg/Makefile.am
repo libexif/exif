@@ -1,7 +1,6 @@
 noinst_LTLIBRARIES = libjpeg.la
-libjpeg_la_CFLAGS = \
-	$(AM_CFLAGS) $(CFLAGS)		\
-	-I$(top_srcdir)			\
+libjpeg_la_CPPFLAGS = \
+	$(AM_CPPFLAGS) $(CPPFLAGS)	\
 	$(LIBEXIF_CFLAGS)
 libjpeg_la_SOURCES =			\
 	jpeg-data.c jpeg-data.h		\

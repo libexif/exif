@@ -11,7 +11,7 @@ GP_CONFIG_MSG([Source code location],[${srcdir}])
 AC_PROG_CC
 AC_C_CONST
 AM_PROG_LIBTOOL
-AM_CFLAGS="$CFLAGS"
+AM_CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)"
 GP_CONFIG_MSG([Compiler],[${CC}])
 
 AC_CHECK_FUNCS([isatty fileno])
@@ -32,7 +32,7 @@ GP_GETTEXT_FLAGS()
 # We cannot use [AC_DEFINE_UNQUOTED()] for these definitions, as
 # we require make to do insert the proper $(datadir) value
 AC_SUBST([localedir],["\$(datadir)/locale"])
-AM_CFLAGS="$AM_CFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
+AM_CPPFLAGS="$AM_CPPFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
 
 # ---------------------------------------------------------------------------
 # locale.h: locale.h provides setlocale. It seems that some systems don't
@@ -65,11 +65,11 @@ GP_CHECK_POPT([mandatory])dnl
 # Warnings: If we have GCC, be paranoid.
 # ---------------------------------------------------------------------------
 if test "x$GCC" = "xyes"; then
-    AM_CFLAGS="$AM_CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
+    AM_CPPFLAGS="$AM_CPPFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
     AM_LDFLAGS="$AM_LDFLAGS -g -Wall"
 fi
 
-AC_SUBST([AM_CFLAGS])dnl
+AC_SUBST([AM_CPPFLAGS])dnl
 AC_SUBST([AM_LDFLAGS])dnl
 
 
