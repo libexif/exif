@@ -15,7 +15,7 @@ AM_GNU_GETTEXT
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.4)
+PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.4 libmnote)
 AC_SUBST(LIBEXIF_LIBS)
 AC_SUBST(LIBEXIF_CFLAGS)
 
