@@ -33,9 +33,7 @@ AM_CFLAGS="$AM_CFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
 # ---------------------------------------------------------------------------
 # libraries needed
 # ---------------------------------------------------------------------------
-GP_CHECK_LIBEXIF
-GP_CONFIG_MSG([libexif library],[${LIBEXIF_LIBS}])
-GP_CONFIG_MSG([libexif cflags],[${LIBEXIF_CFLAGS}])
+GP_CHECK_LIBRARY([LIBEXIF],[libexif])
 
 
 # ---------------------------------------------------------------------------

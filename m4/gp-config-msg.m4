@@ -13,7 +13,7 @@ dnl    GP_CONFIG_MSG([Feature foo],[${foo}])
 dnl    GP_CONFIG_MSG([Location of bar],[${bar}])
 dnl    GP_CONFIG_OUTPUT
 dnl
-
+dnl
 AC_DEFUN([GP_CONFIG_INIT],
 [# the empty string must contain at least as many spaces as the substr length
 ndim_config_empty="                        "
@@ -24,13 +24,14 @@ Configuration (${PACKAGE_TARNAME} ${PACKAGE_VERSION}):
 dnl
 AC_DEFUN([GP_CONFIG_MSG],
 [AC_REQUIRE([GP_CONFIG_INIT])dnl
-if test -n "$1"; then
-   ndim_config_msg="${ndim_config_msg}	$(expr "$1:${ndim_config_empty}" : "\(.\{0,22\}\)") $2
+m4_if([$1],,[
+# Empty line in config message output
+ndim_config_msg="${ndim_config_msg}
 "
-else
-   ndim_config_msg="${ndim_config_msg}
+],[
+ndim_config_msg="${ndim_config_msg}	$(expr "$1:${ndim_config_empty}" : "\(.\{0,22\}\)") $2
 "
-fi;])dnl
+])])dnl
 dnl
 AC_DEFUN([GP_CONFIG_OUTPUT],
 [AC_REQUIRE([GP_CONFIG_INIT])dnl
