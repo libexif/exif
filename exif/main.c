@@ -311,7 +311,7 @@ main (int argc, const char **argv)
 #ifdef HAVE_LOCALE_H
 	setlocale (LC_ALL, "");
 #endif
-	bindtextdomain (PACKAGE, EXIF_LOCALEDIR);
+	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 #endif
 
