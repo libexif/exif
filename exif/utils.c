@@ -139,6 +139,8 @@ exif_ifd_from_string (const char *string)
 	return (-1);
 }
 
+#ifdef HAVE_MNOTE
+
 MNoteTag
 mnote_tag_from_string (MNoteData *note, const char *string)
 {
@@ -237,3 +239,5 @@ mnote_tag_from_string (MNoteData *note, const char *string)
 
         return (tag);
 }
+
+#endif

@@ -22,11 +22,17 @@
 #define __ACTIONS_H__
 
 #include <libexif/exif-data.h>
+
+#ifdef HAVE_MNOTE
 #include <libmnote/mnote-data.h>
+#endif
 
 void action_tag_table (const char *filename, ExifData *ed);
-void action_ntag_table (const char *filename, MNoteData *en);
 void action_tag_list  (const char *filename, ExifData *ed, unsigned char ids);
+
+#ifdef HAVE_MNOTE
+void action_ntag_table (const char *filename, MNoteData *en);
 void action_ntag_list  (const char *filename, MNoteData *en, unsigned char ids);
+#endif
 
 #endif /* __ACTIONS_H__ */

@@ -29,7 +29,9 @@
 #include <libexif/exif-data.h>
 #include <libexif/exif-utils.h>
 
+#ifdef HAVE_MNOTE
 #include <libmnote/mnote-data.h>
+#endif
 
 #include "libjpeg/jpeg-data.h"
 
@@ -75,6 +77,8 @@ show_entry (ExifEntry *entry, const char *caption)
 	exif_entry_dump(entry, 0);
 }
 
+#ifdef HAVE_MNOTE
+
 static void
 show_note_entry (MNoteData *note, MNoteTag tag)
 {
@@ -85,6 +89,8 @@ show_note_entry (MNoteData *note, MNoteTag tag)
 
 	mnote_data_dump_entry(note, tag, 0);
 }
+
+#endif
 
 static void
 search_entry (ExifData *ed, ExifTag tag)
@@ -143,22 +149,33 @@ typedef struct _ExifOptions ExifOptions;
 struct _ExifOptions {
 	unsigned char use_ids;
 	ExifTag tag;
+#ifdef HAVE_MNOTE
 	MNoteTag ntag;
+#endif
 };
 
 int
 main (int argc, const char **argv)
 {
 	/* POPT_ARG_NONE needs an int, not char! */
-	unsigned int list_tags = 0, list_ntags = 0, show_description = 0;
+	unsigned int list_tags = 0, show_description = 0;
+#ifdef HAVE_MNOTE
+	unsigned int list_ntags = 0;
+#endif
 	unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
 	unsigned int remove = 0;
-	const char *set_value = NULL, *ifd_string = NULL;
-	const char *tag_string = NULL, *ntag_string = NULL;
+	const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
+#ifdef HAVE_MNOTE
+	const char *ntag_string = NULL;
+#endif
 	ExifIfd ifd = -1;
 	ExifTag tag = 0;
+#ifdef HAVE_MNOTE
 	MNoteTag ntag = 0;
 	ExifOptions eo = {0, 0, 0};
+#else
+	ExifOptions eo = {0, 0};
+#endif
 	poptContext ctx;
 	const char **args, *output = NULL;
 	const char *ithumbnail = NULL;
@@ -168,14 +185,18 @@ main (int argc, const char **argv)
 		 N_("Show IDs instead of tag names"), NULL},
 		{"tag", 't', POPT_ARG_STRING, &tag_string, 0,
 		 N_("Select tag"), N_("tag")},
+#ifdef HAVE_MNOTE
 		{"ntag", '\0', POPT_ARG_STRING, &ntag_string, 0,
 		 N_("Select MakerNote tag"), N_("ntag")},
+#endif
 		{"ifd", '\0', POPT_ARG_STRING, &ifd_string, 0,
 		 N_("Select IFD"), N_("IFD")},
 		{"list-tags", 'l', POPT_ARG_NONE, &list_tags, 0,
 		 N_("List all EXIF tags"), NULL},
+#ifdef HAVE_MNOTE
 		{"list-ntags", '\0', POPT_ARG_NONE, &list_ntags, 0,
 		 N_("List all EXIF MakerNote tags"), NULL},
+#endif
 		{"remove", '\0', POPT_ARG_NONE, &remove, 0,
 		 N_("Remove tag or ifd"), NULL},
 		{"show-description", 's', POPT_ARG_NONE, &show_description, 0,
@@ -191,9 +212,11 @@ main (int argc, const char **argv)
 		{"set-value", '\0', POPT_ARG_STRING, &set_value, 0,
 		 N_("Value"), NULL},
 		POPT_TABLEEND};
-	ExifData *ed = NULL;
-	ExifEntry *e = NULL;
-	MNoteData *md = NULL;
+	ExifData *ed;
+	ExifEntry *e;
+#ifdef HAVE_MNOTE
+	MNoteData *md;
+#endif
 	char fname[1024];
 	FILE *f;
 
@@ -237,7 +260,11 @@ main (int argc, const char **argv)
 		}
 	}
 
-	if (show_description && !ntag_string) {
+	if (show_description
+#ifdef HAVE_MNOTE
+	    && !ntag_string
+#endif
+	    ) {
 		if (!eo.tag) {
 			fprintf (stderr, _("Please specify a tag!"));
 			fputc ('\n', stderr);
@@ -268,6 +295,7 @@ main (int argc, const char **argv)
 				exit (1);
 			}
 
+#ifdef HAVE_MNOTE
 			if (ntag_string || list_ntags || ntag) {
 				e = exif_content_get_entry(ed->ifd[EXIF_IFD_EXIF],
 							   EXIF_TAG_MAKER_NOTE);
@@ -285,6 +313,7 @@ main (int argc, const char **argv)
 					exit (1);
 				}
 			}
+#endif
 
 			/* Where do we save the output? */
 			memset (fname, 0, sizeof (fname));
@@ -296,6 +325,7 @@ main (int argc, const char **argv)
 					 sizeof (fname) - 1);
 			}
 
+#ifdef HAVE_MNOTE
 			if (ntag_string) {
 				ntag = mnote_tag_from_string (md, ntag_string);
 				if (!ntag || !mnote_tag_get_name (md, ntag)) {
@@ -320,11 +350,14 @@ main (int argc, const char **argv)
 				printf ("\n");
 				return (0);
 			}
+#endif
 
 			if (list_tags) {
 				action_tag_table (*args, ed);
+#ifdef HAVE_MNOTE
 			} else if (list_ntags) {
 				action_ntag_table (*args, md);
+#endif
 			} else if (tag && !set_value) {
 				if ((ifd >= EXIF_IFD_0) &&
 				    (ifd < EXIF_IFD_COUNT)) {
@@ -343,6 +376,7 @@ main (int argc, const char **argv)
 				} else {
 					search_entry (ed, eo.tag);
 				}
+#ifdef HAVE_MNOTE
 			} else if (ntag && !set_value) {
 				char *value = mnote_data_get_value (md, ntag);
 				if (value)
@@ -355,6 +389,7 @@ main (int argc, const char **argv)
 					fputc ('\n', stderr);
 					return (1);
 				}
+#endif
 			} else if (extract_thumbnail) {
 
 				/* No thumbnail? Exit. */

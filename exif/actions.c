@@ -77,6 +77,8 @@ action_tag_table (const char *filename, ExifData *ed)
 	}
 }
 
+#ifdef HAVE_MNOTE
+
 void
 action_ntag_table (const char *filename, MNoteData *en)
 {
@@ -102,6 +104,8 @@ action_ntag_table (const char *filename, MNoteData *en)
 	}
 }
 
+#endif
+
 static void
 show_entry (ExifEntry *entry, void *data)
 {
@@ -125,6 +129,8 @@ show_ifd (ExifContent *content, void *data)
 	exif_content_foreach_entry (content, show_entry, data);
 }
 
+#ifdef HAVE_MNOTE
+
 static void
 show_note_entry (MNoteData *note, MNoteTag tag, void *data)
 {
@@ -141,6 +147,8 @@ show_note_entry (MNoteData *note, MNoteTag tag, void *data)
 		fprintf (stdout, "%-58.58s", mnote_data_get_value (note, tag));
 	fputc ('\n', stdout);
 }
+
+#endif
 
 static void
 print_hline (unsigned char ids)
@@ -189,6 +197,8 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
         }
 }
 
+#ifdef HAVE_MNOTE
+
 void
 action_ntag_list (const char *filename, MNoteData *en, unsigned char ids)
 {
@@ -216,3 +226,5 @@ action_ntag_list (const char *filename, MNoteData *en, unsigned char ids)
 	mnote_data_foreach_entry (en, show_note_entry, &ids);
         print_hline (ids);
 }
+
+#endif
