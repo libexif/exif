@@ -569,7 +569,7 @@ main (int argc, const char **argv)
 			} else if (machine_readable) {
 				action_tag_list_machine (*args, ed, eo.use_ids);
 			} else if (list_mnote) {
-				action_mnote_list (*args, ed);
+				action_mnote_list (*args, ed, eo.use_ids);
 			} else
 				action_tag_list (*args, ed, eo.use_ids);
 			exif_data_unref (ed);

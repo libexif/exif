@@ -33,6 +33,7 @@ void action_tag_list         (const char *filename, ExifData *,
 void action_tag_list_machine (const char *filename, ExifData *,
 			      unsigned char ids);
 
-void action_mnote_list       (const char *filename, ExifData *);
+void action_mnote_list       (const char *filename, ExifData *,
+			      unsigned char ids);
 
 #endif /* __ACTIONS_H__ */

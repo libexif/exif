@@ -1,3 +1,9 @@
+2004-08-31  Jan Patera <patera@users.sourceforge.net>
+
+	* exif/main.c,actions.*: action_mnote_list can print
+	  mnote tag ID instead of its name.
+	  Code submitted by Serge Droz <serge.droz@psi.ch>.
+
 2004-08-27  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/exif-i18n.c: Some users don't have iconv.

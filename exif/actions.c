@@ -98,9 +98,9 @@ print_hline (unsigned char ids)
 }
 
 void
-action_mnote_list (const char *filename, ExifData *ed)
+action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
 {
-	unsigned int i, bs = 1024, c;
+	unsigned int i, bs = 1024, c, id;
 	char b[1024];
 	char b1[1024], b2[1024];
 	ExifMnoteData *n;
@@ -124,11 +124,26 @@ action_mnote_list (const char *filename, ExifData *ed)
 		printf (_("MakerNote contains %i values:\n"), c);
 	}
 	for (i = 0; i < c; i++) {
-		p = C (exif_mnote_data_get_title (n, i));
-		strncpy (b1, p ? p : _("Unknown tag"), bs);
+	        if ( ids ) {
+			id = exif_mnote_data_get_id  (n,i);
+			sprintf(b1,"0x%04x",id);
+		} else {
+			p = C (exif_mnote_data_get_title (n, i));
+			strncpy (b1, p ? p : _("Unknown tag"), bs);
+		}
 		p = C (exif_mnote_data_get_value (n, i, b, bs));
 		strncpy (b2, p ? p : _("Unknown value"), bs);
-		printf ("%s: %s\n", b1, b2);
+		/* printf ("%s|%s\n", b1, b2); */
+        	if (ids)
+                	fprintf (stdout, "%-6.6s", b1);
+        	else
+                	fprintf (stdout, "%-20.20s", b1);
+		fputc ('|', stdout);
+        	if (ids)
+			fprintf (stdout, "%s", b2);
+        	else
+                	fprintf (stdout, "%-58.58s", b2);
+        	fputc ('\n', stdout);
 	}
 }
 
