@@ -12,7 +12,7 @@ AM_PROG_LIBTOOL
 AM_CFLAGS="$CFLAGS"
 GP_CONFIG_MSG([Compiler],[${CC}])
 
-AC_PATH_PROG(PKG_CONFIG,pkg-config)
+GP_PKG_CONFIG
 
 dnl ---------------------------------------------------------------------------
 dnl i18n support
@@ -25,8 +25,7 @@ GP_GETTEXT_FLAGS
 
 dnl We cannot use AC_DEFINE_UNQUOTED() for these definitions, as
 dnl we require make to do insert the proper $(datadir) value
-localedir="\$(datadir)/locale"
-AC_SUBST(localedir)
+AC_SUBST([localedir],["\$(datadir)/locale"])
 AM_CFLAGS="$AM_CFLAGS -DEXIF_LOCALEDIR=\\\"${localedir}\\\""
 
 
@@ -50,46 +49,7 @@ AC_CHECK_HEADER([iconv.h], [
 dnl ---------------------------------------------------------------------------
 dnl popt.h: Simplifies handling of command-line options enormously.
 dnl ---------------------------------------------------------------------------
-popt_msg="no (Note that popt is mandatory, so exif won't compile)"
-try_popt=true
-have_popt=false
-AC_ARG_WITH(popt, [  --without-popt            Don't use popt.h],
-	if test "x${withval}" = "xno"; then
-		try_popt=false
-		popt_msg="no (not requested)"
-	fi
-)
-popt_prefix=$ac_default_prefix
-AC_ARG_WITH(popt-prefix, [  --with-popt-prefix=PREFIX  Location of popt], [
-	popt_prefix="$withval"])
-if $try_popt; then
-	CPPFLAGS_save="$CPPFLAGS"
-	CPPFLAGS="-I$popt_prefix/include $CPPFLAGS"
-	AC_CHECK_HEADER(popt.h, [
-			AC_CHECK_LIB(popt, poptResetContext, [
-			have_popt=true
-			popt_msg=yes
-			AC_DEFINE(HAVE_POPT,1,[whether we have popt])
-			POPT_LIBS="-lpopt"
-			POPT_CFLAGS=$CPPFLAGS
-		], [
-			LDFLAGS_save="$LDFLAGS"
-			LDFLAGS="-L$popt_prefix/lib"
-			AC_CHECK_LIB(popt, poptStuffArgs, [
-				have_popt=true
-				popt_msg="yes (in '$popt_prefix')"
-				AC_DEFINE(HAVE_POPT,1,[whether we have popt])
-				POPT_LIBS="-L$popt_prefix/lib -lpopt"
-				POPT_CFLAGS=$CPPFLAGS
-		], [popt_pmsg="no (couldn't link)"])
-		LDFLAGS=$LDFLAGS_save
-		])
-	])
-	CPPFLAGS="$CPPFLAGS_save"
-fi
-AM_CONDITIONAL([HAVE_POPT], [$have_popt])
-AC_SUBST([POPT_LIBS])
-AC_SUBST([POPT_CFLAGS])
+GP_CHECK_POPT([mandatory])
 
 
 dnl ---------------------------------------------------------------------------
@@ -102,6 +62,7 @@ fi
 
 AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_LDFLAGS])
+
 
 dnl ---------------------------------------------------------------------------
 dnl Output files
