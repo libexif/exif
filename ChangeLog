@@ -1,3 +1,8 @@
+2002-04-15  Lutz Müller <lutz@users.sourceforge.net>
+
+	* exif/main.c: Print a warning if no EXIF data can be found.
+	* exif/actions.c: Don't segfault.
+
 2002-04-04  Hans Ulrich Niedermann <gp@n-dimensional.de>
 
 	* Makefile.am: dded .tar.bz2 packaging to "make dist"

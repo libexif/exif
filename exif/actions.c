@@ -129,6 +129,9 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 {
 	ExifByteOrder order;
 
+	if (!ed)
+		return;
+
 	order = exif_data_get_byte_order (ed);
 	printf (_("EXIF tags in '%s' ('%s' byte order):\n"), filename,
 		exif_byte_order_get_name (order));

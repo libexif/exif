@@ -203,7 +203,19 @@ main (int argc, const char **argv)
 
 	if (args) {
 		while (*args) {
+
+			/*
+			 * Try to read EXIF data from the file. 
+			 * If there is no EXIF data, exit.
+			 */
 			ed = exif_data_new_from_file (*args);
+			if (!ed) {
+				fprintf (stderr, _("'%s' does not "
+					 "contain EXIF data!"), *args);
+				fprintf (stderr, "\n");
+				exit (1);
+			}
+			
 			if (list_tags) {
 				action_tag_table (*args, ed);
 			} else if (eo.tag)
@@ -212,9 +224,10 @@ main (int argc, const char **argv)
 
 				/* No thumbnail? Exit. */
 				if (!ed->data) {
-					fprintf (stderr, N_("'%s' does not "
+					fprintf (stderr, _("'%s' does not "
 						"contain a thumbnail!"),
 						*args);
+					fprintf (stderr, "\n");
 					return (1);
 				}
 
