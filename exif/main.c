@@ -109,9 +109,9 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 	 */
         if (e->format == EXIF_FORMAT_ASCII) {
 		if (e->data) free (e->data);
-		e->components = strlen (e->data) + 1;
-		e->size = strlen (set_value) + 1;
-		e->data = malloc (sizeof (char) * e->size);
+		e->components = strlen (set_value) + 1;
+		e->size = sizeof (char) * e->components;
+		e->data = malloc (e->size);
                 if (!e->data) {
                         fprintf (stderr, _("Not enough memory."));
                         fputc ('\n', stderr);
