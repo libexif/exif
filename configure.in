@@ -23,25 +23,6 @@ AC_SUBST(LIBEXIF_LIBS)
 AC_SUBST(LIBEXIF_CFLAGS)
 
 dnl ---------------------------------------------------------------------------
-dnl libmnote: Useful for parsing MakerNote-tags.
-dnl ---------------------------------------------------------------------------
-mnote_msg=no
-try_mnote=true
-AC_ARG_WITH(mnote, [  --without-mnote           Don't use libmnote],
-	if test x$withval = xno; then
-		try_mnote=false
-	fi)
-if $try_mnote; then
-	if ${PKG_CONFIG} --exists libmnote > /dev/null 2>&1; then
-		PKG_CHECK_MODULES(LIBMNOTE, libmnote >= 0.5.6)
-		AC_DEFINE(HAVE_MNOTE,1,[whether we have mnote])
-		AC_SUBST(LIBMNOTE_LIBS)
-		AC_SUBST(LIBMNOTE_CFLAGS)
-		mnote_msg="yes"
-	fi
-fi
-
-dnl ---------------------------------------------------------------------------
 dnl locale.h: locale.h provides setlocale. It seems that some systems don't
 dnl           have it (at least if configured --without-nls).
 dnl ---------------------------------------------------------------------------
@@ -99,7 +80,7 @@ if test "x$GCC" = "xyes"; then
     AC_SUBST(CFLAGS)
 fi
 
-AC_OUTPUT([
+AC_OUTPUT([ intl/Makefile po/Makefile.in m4/Makefile 
   Makefile
   exif.spec
   libjpeg/Makefile
@@ -112,6 +93,4 @@ Configuration:
 
 	Source code location:      ${srcdir}
 	Compiler:                  ${CC}
-
-	Support for MakerNotes:    $mnote_msg
 "
