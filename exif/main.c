@@ -210,11 +210,19 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		printf ("\n");
 		break;
 	case EXIF_LOG_CODE_NO_MEMORY:
-		printf (COL_RED);
-		printf ("%s: ", domain);
-		vprintf (format, args);
-		printf (COL_NORMAL);
-		printf ("\n");
+	case EXIF_LOG_CODE_CORRUPT_DATA:
+		fprintf (stderr, "\033[31;1m");
+		fprintf (stderr, "\033[31;4m");
+		fprintf (stderr, exif_log_code_get_title (code));
+		fprintf (stderr, "\n");
+		fprintf (stderr, "\033[;0m");
+		fprintf (stderr, COL_RED);
+		fprintf (stderr, exif_log_code_get_message (code));
+		fprintf (stderr, "\n");
+		fprintf (stderr, "%s: ", domain);
+		vfprintf (stderr, format, args);
+		fprintf (stderr, COL_NORMAL);
+		fprintf (stderr, "\n");
 		break;
 	default:
 		printf (COL_BLUE);

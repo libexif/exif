@@ -1,3 +1,8 @@
+2004-09-09  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/configure.in: We depend on libexif 0.6.11.
+	* exif/main.c: Use standard error titles and messages.
+
 2004-08-31  Jan Patera <patera@users.sourceforge.net>
 
 	* exif/main.c,actions.*: action_mnote_list can print
