@@ -49,6 +49,16 @@
 #endif
 
 static void
+internal_error (void)
+{
+	fprintf (stderr, _("Internal error. Please "
+			   "contact <libexif-devel@"
+			   "lists.sourceforge.net>."));
+	fputc ('\n', stderr);
+	exit (1);
+}
+
+static void
 show_entry (ExifEntry *entry, const char *caption)
 {
 	printf (_("EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"),
@@ -84,6 +94,79 @@ search_entry (ExifData *ed, ExifTag tag)
 		entry = exif_content_get_entry (ed->ifd[i], tag);
 		if (entry)
 			show_entry (entry, exif_ifd_get_name (i));
+	}
+}
+
+static void
+convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
+{
+	unsigned int i;
+	char *value_p;
+
+        /*
+	 * ASCII strings are handled separately,
+	 * since they don't require any conversion.
+	 */
+        if (e->format == EXIF_FORMAT_ASCII) {
+		if (e->data) free (e->data);
+		e->components = strlen (e->data) + 1;
+		e->size = strlen (set_value) + 1;
+		e->data = malloc (sizeof (char) * e->size);
+                if (!e->data) {
+                        fprintf (stderr, _("Not enough memory."));
+                        fputc ('\n', stderr);
+                        exit (1);
+                }
+                strcpy (e->data, set_value);
+                return;
+	}
+
+        value_p = (char*) set_value;
+	for (i = 0; i < e->components; i++) {
+                const char *begin, *end;
+                unsigned char *buf, s;
+                const char comp_separ = ' ';
+
+                begin = value_p;
+		value_p = index (begin, comp_separ);
+		if (!value_p) {
+                        if (i != e->components - 1) {
+                                fprintf (stderr, _("Too few components "
+						   "specified!"));
+				fputc ('\n', stderr);
+				exit (1);
+                        }
+                        end = begin + strlen (begin);
+                } else end = value_p++;
+
+                buf = malloc ((end - begin + 1) * sizeof (char));
+                strncpy (buf, begin, end - begin);
+                buf[end - begin] = '\0';
+
+		s = exif_format_get_size (e->format);
+		switch (e->format) {
+		case EXIF_FORMAT_ASCII:
+                        internal_error (); /* Previously handled */
+			break;
+		case EXIF_FORMAT_SHORT:
+			exif_set_short (e->data + (s * i), o, atoi (buf));
+			break;
+		case EXIF_FORMAT_LONG:
+			exif_set_long (e->data + (s * i), o, atol (buf));
+			break;
+		case EXIF_FORMAT_SLONG:
+			exif_set_slong (e->data + (s * i), o, atol (buf));
+			break;
+		case EXIF_FORMAT_RATIONAL:
+		case EXIF_FORMAT_SRATIONAL:
+		case EXIF_FORMAT_BYTE:
+		default:
+			fprintf (stderr, _("Not yet implemented!"));
+			fputc ('\n', stderr);
+			exit (1);
+		}
+
+                free (buf);
 	}
 }
 
@@ -494,91 +577,17 @@ main (int argc, const char **argv)
 					return (1);
 				}
 
+				/* If the entry doesn't exist, create it. */
 				e = exif_content_get_entry (ed->ifd[ifd], tag);
 				if (!e) {
 				    e = exif_entry_new ();
 				    exif_content_add_entry (ed->ifd[ifd], e);
 				    exif_entry_initialize (e, tag);
 				}
-{
-	unsigned int begin = 0, end = 0, i;
-	unsigned char buf[1024], s;
-	ExifByteOrder o;
 
-	o = exif_data_get_byte_order (ed);
-	for (i = 0; i < e->components; i++) {
-		memset (buf, 0, sizeof (buf));
-		for (begin = end; end < strlen (set_value); end++) {
-			if (set_value[end] == '\\') {
-				end++;
-				if (set_value[end] == '\\') {
-					buf[strlen(buf)] = set_value[end];
-				} else if (set_value[end] == ' ') {
-					buf[strlen(buf)] = set_value[end];
-				} else {
-					fprintf (stderr, "Wrong masking! "
-						"'\\\\' will be interpreted "
-						"as '\\', '\\ ' as ' '. "
-						"'\\' followed by anything "
-						"except '\\' or ' ' is "
-						"invalid.");
-					fputc ('\n', stderr);
-					exit (1);
-				}
-			} else if (set_value[end] == ' ') {
-				break;
-			} else
-				buf[strlen(buf)] = set_value[end];
-		}
-		s = exif_format_get_size (e->format);
-		switch (e->format) {
-		case EXIF_FORMAT_BYTE:
-			/* e->data[s * i] = ; */
-
-			fprintf (stderr, _("Not yet implemented!"));
-			fputc ('\n', stderr);
-			return (1);
-
-			break;
-		case EXIF_FORMAT_ASCII:
-			if (i != 0) {
-				fprintf (stderr, _("Internal error. Please "
-					"contact <libexif-devel@"
-					"lists.sourceforge.net>."));
-				fputc ('\n', stderr);
-				return (1);
-			}
-			if (e->data)
-				free (e->data);
-			e->size = strlen (buf) + 1;
-			e->data = malloc (sizeof (char) * e->size);
-			if (!e->data) {
-				fprintf (stderr, _("Not enough memory."));
-				fputc ('\n', stderr);
-				return (1);
-			}
-			strcpy (e->data, buf);
-			e->components = strlen(e->data) + 1;
-			i = e->components - 1;
-			break;
-		case EXIF_FORMAT_SHORT:
-			exif_set_short (e->data + (s * i), o, atoi (buf));
-			break;
-		case EXIF_FORMAT_LONG:
-			exif_set_long (e->data + (s * i), o, atol (buf));
-			break;
-		case EXIF_FORMAT_SLONG:
-			exif_set_slong (e->data + (s * i), o, atol (buf));
-			break;
-		case EXIF_FORMAT_RATIONAL:
-		case EXIF_FORMAT_SRATIONAL:
-		default:
-			fprintf (stderr, _("Not yet implemented!"));
-			fputc ('\n', stderr);
-			return (1);
-		}
-	}
-}
+				/* Now set the value and save the data. */
+                                convert_arg_to_entry (set_value, e,
+						exif_data_get_byte_order (ed));
 				save_exif_data_to_file (ed, *args, fname);
 			} else if (remove_tag) {
 				

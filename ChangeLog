@@ -1,3 +1,9 @@
+2003-08-21  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/exif-main.c: Patch by Roberto Costa <roberto.costa@ensta.org>
+	  without ChangeLog entry. Does something with --set-value and
+	  compiles without warnings...
+
 2003-05-05  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/exif-i18n.[c,h]: New. Suggested by Gernot Jander
