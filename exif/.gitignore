@@ -4,3 +4,4 @@ Makefile.in
 Makefile
 *.o
 exif
+*.sh

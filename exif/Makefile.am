@@ -1,3 +1,5 @@
+# The actual "exif" program
+
 bin_PROGRAMS = exif
 
 exif_SOURCES =			\
@@ -15,3 +17,15 @@ exif_LDADD = \
 	$(LIBEXIF_LIBS) $(LIBMNOTE_LIBS)	\
 	$(POPT_LIBS)				\
 	$(INTLLIBS)
+
+# And a few very simple tests
+
+check_SCRIPTS = check-param-validity.sh
+
+TESTS = $(check_SCRIPTS)
+
+%.sh: %.in
+	sed 's|@exif\@|./exif$(EXEEXT)|g' < $< > $@
+	chmod +x $@
+
+CLEAN_FILES = $(check_SCRIPTS)
