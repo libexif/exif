@@ -20,6 +20,8 @@
 
 #include <config.h>
 
+#include <stdlib.h>
+#include <string.h>
 #include <popt.h>
 
 #include <libexif/exif-data.h>
@@ -86,55 +88,68 @@ search_entry (ExifData *ed, ExifTag tag)
 }
 
 static void
-show_ifd (ExifContent *content)
+show_ifd (ExifContent *content, unsigned char use_ids)
 {
         ExifEntry *e;
         unsigned int i;
 
         for (i = 0; i < content->count; i++) {
                 e = content->entries[i];
-                printf ("%-20.20s", exif_tag_get_name (e->tag));
+		if (use_ids)
+			printf ("0x%04x", e->tag);
+		else
+			printf ("%-20.20s", exif_tag_get_name (e->tag));
                 printf ("|");
-                printf ("%-59.59s", exif_entry_get_value (e));
+		if (use_ids)
+			printf ("%-73.73s", exif_entry_get_value (e));
+		else
+			printf ("%-59.59s", exif_entry_get_value (e));
                 printf ("\n");
         }
 }
 
 static void
-print_hline (void)
+print_hline (unsigned char use_ids)
 {
-        int i;
+        unsigned int i, width;
 
-        for (i = 0; i < 20; i++)
+	width = (use_ids ? 6 : 20);
+        for (i = 0; i < width; i++)
                 printf ("-");
         printf ("+");
-        for (i = 0; i < 59; i++)
+        for (i = 0; i < 79 - width; i++)
                 printf ("-");
         printf ("\n");
 }
 
 static void
-show_exif (ExifData *ed)
+show_exif (ExifData *ed, unsigned char use_ids)
 {
 	printf (_("EXIF tags:"));
         printf ("\n");
-        print_hline ();
-        printf ("%-20.20s", _("Tag"));
+        print_hline (use_ids);
+	if (use_ids)
+		printf ("%-6.6s", _("Tag"));
+	else
+	        printf ("%-20.20s", _("Tag"));
         printf ("|");
-        printf ("%-59.59s", _("Value"));
+	if (use_ids)
+		printf ("%-73.73s", _("Value"));
+	else
+		printf ("%-59.59s", _("Value"));
         printf ("\n");
-        print_hline ();
+        print_hline (use_ids);
         if (ed->ifd0)
-                show_ifd (ed->ifd0);
+                show_ifd (ed->ifd0, use_ids);
         if (ed->ifd1)
-                show_ifd (ed->ifd1);
+                show_ifd (ed->ifd1, use_ids);
         if (ed->ifd_exif)
-                show_ifd (ed->ifd_exif);
+                show_ifd (ed->ifd_exif, use_ids);
         if (ed->ifd_gps)
-                show_ifd (ed->ifd_gps);
+                show_ifd (ed->ifd_gps, use_ids);
         if (ed->ifd_interoperability)
-                show_ifd (ed->ifd_interoperability);
-        print_hline ();
+                show_ifd (ed->ifd_interoperability, use_ids);
+        print_hline (use_ids);
         if (ed->size) {
                 printf (_("EXIF data contains a thumbnail (%i bytes)."),
                         ed->size);
@@ -142,22 +157,53 @@ show_exif (ExifData *ed)
 	}
 }
 
+typedef struct _ExifOptions ExifOptions;
+struct _ExifOptions {
+	unsigned char use_ids;
+	ExifTag tag;
+};
+
 int
 main (int argc, const char **argv)
 {
-	ExifTag tag = 0;
+	ExifOptions eo = {0, 0};
 	poptContext ctx;
+	const char **args, *tag = NULL, *name;
 	struct poptOption options[] = {
 		POPT_AUTOHELP
-		{"tag", 't', POPT_ARG_INT, &tag, 0, N_("Select entry with tag"),
-		 N_("tag")},
+		{"use-ids", 'i', POPT_ARG_NONE, &eo.use_ids, 0,
+		 N_("Use IDs instead of names"), NULL},
+		{"tag",      't', POPT_ARG_STRING, &tag, 0,
+		 N_("Select entry with tag"), N_("tag")},
 		POPT_TABLEEND};
-	const char **args;
+	unsigned int i;
 	ExifData *ed;
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 
 	while (poptGetNextOpt (ctx) > 0);
+	if (tag) {
+		if (!eo.use_ids) {
+			for (i = 0; i < 0xffff; i++) {
+				name = exif_tag_get_name (i);
+				if (name && !strcmp (tag, name))
+					break;
+			}
+			if (i < 0xffff)
+				eo.tag = i;
+			else {
+				fprintf (stderr, "Invalid tag '%s'!\n", tag);
+				return (1);
+			}
+		} else {
+			eo.tag = atoi (tag);
+			if (!exif_tag_get_name (eo.tag)) {
+				fprintf (stderr, "Invalid tag 0x%04x!\n",
+					 eo.tag);
+				return (1);
+			}
+		}
+	}
 
 	args = poptGetArgs (ctx);
 
@@ -165,10 +211,10 @@ main (int argc, const char **argv)
 		while (*args) {
 			printf (_("Processing '%s'...\n"), *args);
 			ed = exif_data_new_from_file (*args);
-			if (tag)
-				search_entry (ed, tag);
+			if (eo.tag)
+				search_entry (ed, eo.tag);
 			else
-				show_exif (ed);
+				show_exif (ed, eo.use_ids);
 			exif_data_unref (ed);
 			*args++;
 		}
