@@ -1,5 +1,10 @@
 2003-10-01  Lutz Mueller <lutz@users.sourceforge.net>
 
+	* exif/exif-i18n.c: Patch to fix 64bit related crash by
+	  Marcus Meissner (#784852).
+
+2003-10-01  Lutz Mueller <lutz@users.sourceforge.net>
+
 	* exif/actions.[c,h]:
 	* exif/main.c: Add option --machine-readable. Patch by
 	  Greg Baker (#761641).
