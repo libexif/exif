@@ -1,3 +1,9 @@
+2003-10-01  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/actions.[c,h]:
+	* exif/main.c: Add option --machine-readable. Patch by
+	  Greg Baker (#761641).
+
 2003-08-21  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/exif-main.c: Patch by Roberto Costa <roberto.costa@ensta.org>

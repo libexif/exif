@@ -225,7 +225,7 @@ struct _ExifOptions {
  * with the "SGI MIPSpro C compiler". I don't understand and still think
  * these variables belong into main ().
  */
-static unsigned int list_tags = 0, show_description = 0;
+static unsigned int list_tags = 0, show_description = 0, machine_readable = 0;
 static unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
 static unsigned int remove_tag = 0;
 #ifdef HAVE_MNOTE
@@ -283,6 +283,9 @@ main (int argc, const char **argv)
 		 N_("Write data to FILE"), N_("FILE")},
 		{"set-value", '\0', POPT_ARG_STRING, &set_value, 0,
 		 N_("Value"), NULL},
+		{"machine-readable", 'm', POPT_ARG_NONE, &machine_readable, 0,
+		 N_("Output in a machine-readable (tab delimited) format"),
+		 NULL},
 		POPT_TABLEEND};
 	ExifData *ed;
 	ExifEntry *e;
@@ -625,6 +628,8 @@ main (int argc, const char **argv)
 				/* Save modified data. */
 				save_exif_data_to_file (ed, *args, fname);
 
+			} else if (machine_readable) {
+				action_tag_list_machine (*args, ed, eo.use_ids);
 			} else
 				action_tag_list (*args, ed, eo.use_ids);
 			exif_data_unref (ed);

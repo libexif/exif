@@ -179,6 +179,35 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
         }
 }
 
+static void
+show_entry_machine (ExifEntry *entry, void *data)
+{
+	unsigned char *ids = data;
+
+	if (*ids) fprintf (stdout, "0x%04x", entry->tag);
+	else fprintf (stdout, "%s", exif_tag_get_title (entry->tag));
+	printf ("\t");
+	if (*ids) fprintf (stdout, "%s", exif_entry_get_value (entry));
+	else fprintf (stdout, "%s", exif_entry_get_value (entry));
+	fputc ('\n', stdout);
+}
+
+static void
+show_ifd_machine (ExifContent *content, void *data)
+{
+	exif_content_foreach_entry (content, show_entry_machine, data);
+}
+
+void
+action_tag_list_machine (const char *filename, ExifData *ed, unsigned char ids)
+{
+	if (!ed) return;
+
+	exif_data_foreach_content (ed, show_ifd_machine, &ids);
+	if (ed->size)
+		fprintf (stdout, _("ThumbnailSize\t%i\n"), ed->size);
+}
+
 #ifdef HAVE_MNOTE
 
 void

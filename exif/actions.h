@@ -27,8 +27,11 @@
 #include <libmnote/mnote-data.h>
 #endif
 
-void action_tag_table (const char *filename, ExifData *ed);
-void action_tag_list  (const char *filename, ExifData *ed, unsigned char ids);
+void action_tag_table        (const char *filename, ExifData *);
+void action_tag_list         (const char *filename, ExifData *,
+			      unsigned char ids);
+void action_tag_list_machine (const char *filename, ExifData *,
+			      unsigned char ids);
 
 #ifdef HAVE_MNOTE
 void action_ntag_table (const char *filename, MNoteData *en);
