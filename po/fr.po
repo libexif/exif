@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: exif\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2005-03-13 18:08+0100\n"
-"PO-Revision-Date: 2002-11-20 15:43+0100\n"
+"POT-Creation-Date: 2005-03-14 03:59+0100\n"
+"PO-Revision-Date: 2005-03-14 04:17+0100\n"
 "Last-Translator: Arnaud Launay <asl@launay.org>\n"
 "Language-Team: Français <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -73,9 +73,8 @@ msgstr ""
 
 #: exif/main.c:51
 #, c-format
-msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
-msgstr ""
-"Erreur interne. Veuillez contacter <libexif-devel@lists.sourceforge.net>."
+msgid "Internal error. Please contact <%s>.)"
+msgstr "Erreur interne. Veuillez contacter <%s>."
 
 #: exif/main.c:68
 #, c-format

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: exif\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2005-03-13 18:08+0100\n"
-"PO-Revision-Date: 2002-09-03 20:07-0300\n"
+"POT-Creation-Date: 2005-03-14 03:59+0100\n"
+"PO-Revision-Date: 2005-03-14 04:20+0100\n"
 "Last-Translator: Fabian Mandelbaum <fabman@mandrakesoft.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -72,9 +72,8 @@ msgstr ""
 
 #: exif/main.c:51
 #, c-format
-msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
-msgstr ""
-"Error interno. Por favor, contacte con <libexif-devel@lists.sourceforge.net>."
+msgid "Internal error. Please contact <%s>.)"
+msgstr "Error interno. Por favor, contacte con <%s>."
 
 #: exif/main.c:68
 #, c-format
@@ -227,9 +226,9 @@ msgid "Could not open '%s' for writing (%m)!"
 msgstr "¡No se pudo abrir '%s' para escribir (%m)!"
 
 #: exif/main.c:441
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open '%s' for writing (%s)!"
-msgstr "¡No se pudo abrir '%s' para escribir (%m)!"
+msgstr "¡No se pudo abrir '%s' para escribir (%s)!"
 
 #: exif/main.c:479
 #, c-format
@@ -237,9 +236,9 @@ msgid "Could not open '%s' (%m)!"
 msgstr "¡No se pudo abrir '%s' (%m)!"
 
 #: exif/main.c:482
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open '%s' (%s)!"
-msgstr "¡No se pudo abrir '%s' (%m)!"
+msgstr "¡No se pudo abrir '%s' (%s)!"
 
 #: exif/main.c:493
 #, c-format
@@ -252,9 +251,9 @@ msgid "Could not read '%s' (%m)."
 msgstr "No se pudo leer '%s' (%m)."
 
 #: exif/main.c:506
-#, fuzzy, c-format
+#, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "No se pudo leer '%s' (%m)."
+msgstr "No se pudo leer '%s' (%s)."
 
 #: exif/main.c:521
 #, c-format
@@ -267,7 +266,7 @@ msgid "You need to specify an IFD!"
 msgstr "¡Debe especificar un IFD!"
 
 #: exif/main.c:569
-#, fuzzy, c-format
+#, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD '%s' no contiene la etiqueta '%s'."
 
