@@ -117,7 +117,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
                 const char comp_separ = ' ';
 
                 begin = value_p;
-		value_p = index (begin, comp_separ);
+		value_p = strchr (begin, comp_separ);
 		if (!value_p) {
                         if (i != e->components - 1) {
                                 fprintf (stderr, _("Too few components "
