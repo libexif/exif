@@ -1,5 +1,6 @@
 INCLUDES =						\
 	-I$(top_srcdir)					\
+	-I$(top_srcdir)/intl				\
 	-DEXIF_LOCALEDIR=\""$(datadir)/locale"\"	\
 	$(LIBEXIF_CFLAGS)
 
