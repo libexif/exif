@@ -5,7 +5,9 @@ INCLUDES =			\
 bin_PROGRAMS = exif
 
 exif_SOURCES =			\
-	main.c
+	actions.h actions.c	\
+	main.c			\
+	utils.h utils.c
 exif_LDADD =			\
 	-lpopt			\
 	$(LIBEXIF_LIBS)

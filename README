@@ -1,0 +1,13 @@
+				      EXIF
+				      ----
+
+'exif' is a small command-line utility to show EXIF information hidden
+in JPEG files. I wrote it to demonstrate the power of libexif.
+
+It depends on 
+ * libexif (http://www.sourceforge.net/projects/libexif)
+ * popt.h
+
+Have fun!
+
+Lutz <lutz@users.sourceforge.net>
