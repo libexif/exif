@@ -5,6 +5,7 @@ dnl    GP_CHECK_LIBRARY([LIBEXIF],[libexif])dnl
 dnl    GP_CHECK_LIBRARY([LIBEXIF],[libexif-gtk], [>= 0.3.3])dnl
 dnl
 AC_DEFUN([_GP_CHECK_LIBRARY],[
+AC_REQUIRE([GP_CONFIG_MSG])dnl
 AC_ARG_VAR([$1][_CFLAGS], [CFLAGS for compiling with $2])dnl
 AC_ARG_VAR([$1][_LIBS],   [libs to add for linking against $2])dnl
 AC_MSG_CHECKING([which ][$2][ to use])
@@ -24,6 +25,8 @@ fi
 dnl AC_SUBST is done implicitly by AC_ARG_VAR :-)
 dnl AC_SUBST([$1][_LIBS])
 dnl AC_SUBST([$1][_CFLAGS])
+GP_CONFIG_MSG([$2][ library],[${[$1][_LIBS]}])dnl
+GP_CONFIG_MSG([$2][ cflags], [${[$1][_CFLAGS]}])dnl
 ])dnl
 dnl
 AC_DEFUN([GP_CHECK_LIBRARY], [m4_if([$#], 2,[
