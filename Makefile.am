@@ -1,4 +1,4 @@
-SUBDIRS = m4  libjpeg exif po
+SUBDIRS = libjpeg exif po
 
 man_MANS = exif.1
 
@@ -15,7 +15,3 @@ dist-hook:
 dist-bzip2:
 	-chmod -R a+r $(distdir)
 	-$(TAR) chojf $(distdir).tar.bz2 $(distdir)
-
-ACLOCAL_AMFLAGS = -I m4
-
-EXTRA_DIST = config.rpath
