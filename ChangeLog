@@ -1,5 +1,9 @@
 2002-10-22  Lutz Müller <lutz@users.sourceforge.net>
 
+	* exif/main.c: Fix segfault.
+
+2002-10-22  Lutz Müller <lutz@users.sourceforge.net>
+
 	* exif/main.c: Print usage if no arguments are given. Save modified
 	  files on --remove-ifd and --remove. Try to avoid a segfault.
 

@@ -316,7 +316,8 @@ main (int argc, const char **argv)
 			if (list_tags) {
 				action_tag_table (*args, ed);
 			} else if (tag && !set_value) {
-				if (ifd >= 0) {
+				if ((ifd >= EXIF_IFD_0) &&
+				    (ifd < EXIF_IFD_COUNT)) {
 					e = exif_content_get_entry (
 							ed->ifd[ifd], tag);
 					if (e)
@@ -439,7 +440,8 @@ main (int argc, const char **argv)
 				}
 
 				/* ... and an IFD. */
-				if (ifd < 0) {
+				if ((ifd < EXIF_IFD_0) ||
+				    (ifd >= EXIF_IFD_COUNT)) {
 					fprintf (stderr, _("You need to "
 						"specify an IFD!"));
 					fputc ('\n', stderr);
@@ -533,7 +535,8 @@ main (int argc, const char **argv)
 			} else if (remove) {
 				
 				/* We need an IFD. */
-				if (ifd < 0) {
+				if ((ifd < EXIF_IFD_0) ||
+				    (ifd >= EXIF_IFD_COUNT)) {
 					fprintf (stderr, _("You need to "
 						 "specify an IFD!"));
 					fputc ('\n', stderr);
