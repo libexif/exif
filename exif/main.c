@@ -163,25 +163,138 @@ struct _ExifOptions {
 	ExifTag tag;
 };
 
+static ExifTag get_tag (const char *string)
+{
+	unsigned int i, number = 0, factor;
+	ExifTag tag;
+
+	if (!string)
+		return (0);
+
+	if (!strlen (string))
+		return (0);
+
+	/*
+	 * Scan for 'x' in string. If not found, we have to deal
+	 * with a decimal number.
+	 */
+	for (i = 0; i < strlen (string); i++)
+		if (string[i] == 'x')
+			break;
+	if (i == strlen (string))
+		return (atoi (string));
+
+	string += i + 1;
+	if (strlen (string) > 4)
+		return (0);
+
+	tag = 0;
+	for (i = strlen (string); i > 0; i--) {
+		switch (string[i - 1]) {
+		case '0':
+			number = 0;
+			break;
+		case '1':
+			number = 1;
+			break;
+		case '2':
+			number = 2;
+			break;
+		case '3':
+			number = 3;
+			break;
+		case '4':
+			number = 4;
+			break;
+		case '5':
+			number = 5;
+			break;
+		case '6':
+			number = 6;
+			break;
+		case '7':
+			number = 7;
+			break;
+		case '8':
+			number = 8;
+			break;
+		case '9':
+			number = 9;
+			break;
+		case 'a':
+		case 'A':
+			number = 10;
+			break;
+		case 'b':
+		case 'B':
+			number = 11;
+			break;
+		case 'c':
+		case 'C':
+			number = 12;
+			break;
+		case 'd':
+		case 'D':
+			number = 13;
+			break;
+		case 'e':
+		case 'E':
+			number = 14;
+			break;
+		case 'f':
+		case 'F':
+			number = 15;
+			break;
+		default:
+			return (0);
+		}
+		factor = 1 << ((strlen (string) - i) * 4);
+		tag += (number * factor);
+	}
+
+	return (tag);
+}
+
 int
 main (int argc, const char **argv)
 {
+	unsigned char list_tags = 0, show_description = 0;
 	ExifOptions eo = {0, 0};
 	poptContext ctx;
 	const char **args, *tag = NULL, *name;
 	struct poptOption options[] = {
 		POPT_AUTOHELP
 		{"use-ids", 'i', POPT_ARG_NONE, &eo.use_ids, 0,
-		 N_("Use IDs instead of names"), NULL},
-		{"tag",      't', POPT_ARG_STRING, &tag, 0,
-		 N_("Select entry with tag"), N_("tag")},
+		 N_("Use IDs instead of tag names"), NULL},
+		{"tag", 't', POPT_ARG_STRING, &tag, 0,
+		 N_("Select tag"), N_("tag")},
+		{"list-tags", 'l', POPT_ARG_NONE, &list_tags, 0,
+		 N_("List all EXIF tags"), NULL},
+		{"show-description", 's', POPT_ARG_NONE, &show_description, 0,
+		 N_("Show description of tag"), NULL},
 		POPT_TABLEEND};
 	unsigned int i;
 	ExifData *ed;
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
-
+	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
 	while (poptGetNextOpt (ctx) > 0);
+
+	/* Any option? */
+	if (argc <= 1) {
+		poptPrintUsage (ctx, stdout, 0);
+		return (0);
+	}
+
+	if (list_tags) {
+		printf (_("Listing EXIF tags:\n"));
+		for (i = 0; i < 0xffff; i++) {
+			name = exif_tag_get_name (i);
+			if (name)
+				printf (_("  0x%04x '%s'\n"), i, name);
+		}
+	}
+
 	if (tag) {
 		if (!eo.use_ids) {
 			for (i = 0; i < 0xffff; i++) {
@@ -192,17 +305,28 @@ main (int argc, const char **argv)
 			if (i < 0xffff)
 				eo.tag = i;
 			else {
-				fprintf (stderr, "Invalid tag '%s'!\n", tag);
+				fprintf (stderr, ("Invalid tag '%s'!\n"), tag);
 				return (1);
 			}
 		} else {
-			eo.tag = atoi (tag);
+			eo.tag = get_tag (tag);
 			if (!exif_tag_get_name (eo.tag)) {
-				fprintf (stderr, "Invalid tag 0x%04x!\n",
+				fprintf (stderr, _("Invalid tag 0x%04x!\n"),
 					 eo.tag);
 				return (1);
 			}
 		}
+	}
+
+	if (show_description) {
+		if (!eo.tag) {
+			fprintf (stderr, _("Please specify a tag!\n"));
+			return (1);
+		}
+		printf (_("Tag 0x%04x ('%s'): %s\n"), eo.tag,
+			exif_tag_get_name (eo.tag),
+			exif_tag_get_description (eo.tag));
+		return (0);
 	}
 
 	args = poptGetArgs (ctx);
