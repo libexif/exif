@@ -110,7 +110,7 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
 
 	n = exif_data_get_mnote_data (ed);
 	if (!n) {
-		printf (_("Unknown MakerNote format."));
+		printf (_("Unknown MakerNote format.\n"));
 		return;
 	}
 
