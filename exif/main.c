@@ -373,6 +373,9 @@ main (int argc, const char **argv)
 				}
 				ed->size = 0;
 
+				/* Save the new data. */
+				save_exif_data_to_file (ed, *args, fname);
+
 			} else if (ithumbnail) {
 
 				/* Get rid of the old thumbnail */
@@ -537,7 +540,8 @@ main (int argc, const char **argv)
 				}
 
 				if (!tag) {
-					while (ed->ifd[ifd]->count)
+					while (ed->ifd[ifd] &&
+					       ed->ifd[ifd]->count)
 						exif_content_remove_entry (
 						    ed->ifd[ifd],
 						    ed->ifd[ifd]->entries[0]);
@@ -556,12 +560,17 @@ main (int argc, const char **argv)
 					exif_content_remove_entry (ed->ifd[ifd],
 								   e);
 				}
+
+				/* Save modified data. */
+				save_exif_data_to_file (ed, *args, fname);
+
 			} else
 				action_tag_list (*args, ed, eo.use_ids);
 			exif_data_unref (ed);
 			args++;
 		}
-	}
+	} else
+		poptPrintUsage (ctx, stdout, 0);
 
 	poptFreeContext (ctx);
 
