@@ -53,6 +53,10 @@
 #  define N_(String) (String)
 #endif
 
+#ifdef HAVE_LOCAL_H
+#  include <locale.h>
+#endif
+
 /* Old versions of popt.h don't define POPT_TABLEEND */
 #ifndef POPT_TABLEEND
 #  define POPT_TABLEEND { NULL, '\0', 0, 0, 0, NULL, NULL }
@@ -208,7 +212,9 @@ main (int argc, const char **argv)
 	char fname[1024];
 	FILE *f;
 
+#ifdef HAVE_LOCALE_H
 	setlocale (LC_ALL, "");
+#endif
 	bindtextdomain (PACKAGE, EXIF_LOCALEDIR);
 	textdomain (PACKAGE);
 

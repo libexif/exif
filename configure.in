@@ -19,6 +19,12 @@ PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.4)
 AC_SUBST(LIBEXIF_LIBS)
 AC_SUBST(LIBEXIF_CFLAGS)
 
+dnl ---------------------------------------------------------------------------
+dnl locale.h: locale.h provides setlocale. It seems that some systems don't
+dnl           have it (at least if configured --without-nls).
+dnl ---------------------------------------------------------------------------
+AC_CHECK_HEADERS(locale.h)
+
 CFLAGS="$CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Werror"
 AC_SUBST(CFLAGS)
 
