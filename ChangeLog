@@ -1,3 +1,8 @@
+2002-07-25  Lutz Müller <lutz@users.sourceforge.net>
+
+	* configure.in: Version 0.5. Require at least libexif-0.5.4.
+	* exif: Adapt to new API. Prepare --set-value.
+
 2002-06-10  Lutz Müller <lutz@users.sourceforge.net>
 
 	* configure.in: Version 0.4

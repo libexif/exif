@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-06-10 20:19+0200\n"
+"POT-Creation-Date: 2002-07-25 18:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Lutz Müller <lutz@users.sourceforge.net>\n"
 "Language-Team: Deutsch <de@li.org>\n"
@@ -14,186 +14,222 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: exif/main.c:69
+#: exif/main.c:70
 #, c-format
 msgid "Could not parse data of tag '%s'."
 msgstr "Konnte den Inhalt von Abschnitt '%s' nicht interpretieren."
 
-#: exif/main.c:80
+#: exif/main.c:81
 #, c-format
 msgid "Tag '%s' does not contain known information."
 msgstr "Abschnitt '%s' enthält unbekannte Informationen."
 
-#: exif/main.c:85
+#: exif/main.c:86
 #, c-format
 msgid "Tag '%s' contains one piece of information:"
 msgstr "Abschnitt '%s' enthält eine Information:"
 
-#: exif/main.c:89
+#: exif/main.c:90
 #, c-format
 msgid "Tag '%s' contains the following information:"
 msgstr "Abschitt '%s' enhält folgende Informationen:"
 
-#: exif/main.c:105
-#, c-format
-msgid "EXIF entry '%s' (0x%x, '%s') exists in '%s':"
+#: exif/main.c:106
+#, fuzzy, c-format
+msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
 msgstr "Der EXIF Eintrag '%s' (0x%x, '%s') existiert in '%s':"
 
-#: exif/main.c:109
+#: exif/main.c:110
 #, c-format
 msgid "  Format: '%s'"
 msgstr "  Format: '%s'"
 
-#: exif/main.c:111
+#: exif/main.c:112
 #, c-format
 msgid "  Components: %i"
 msgstr "  Komponenten: %i"
 
-#: exif/main.c:113
+#: exif/main.c:114
 #, c-format
 msgid "  Value: '%s'"
 msgstr "  Wert: '%s'"
 
-#: exif/main.c:115
+#: exif/main.c:116
 msgid "  Data:"
 msgstr "  Daten: '%s'"
 
-#: exif/main.c:133
-msgid "IFD 0"
-msgstr "IFD 0"
-
-#: exif/main.c:137
-msgid "EXIF IFD"
-msgstr "EXIF IFD"
-
-#: exif/main.c:141
-msgid "GPS IFD"
-msgstr "GPS IFD"
-
-#: exif/main.c:145
-msgid "IFD 1"
-msgstr "IFD 1"
-
-#: exif/main.c:149
-msgid "Interoperability IFD"
-msgstr "Interoperabilitäts-IFD"
-
-#: exif/main.c:172
-msgid "Show IDs instead of tag names"
-msgstr "Zeige IDs anstelle der Namen der Einträge"
-
-#: exif/main.c:174
-msgid "Select tag"
-msgstr "Wähle Eintrag"
-
-#: exif/main.c:174
-msgid "tag"
-msgstr "Eintrag"
-
-#: exif/main.c:176
-msgid "List all EXIF tags"
-msgstr "Liste alle EXIF Einträge auf"
-
-#: exif/main.c:178
-msgid "Show description of tag"
-msgstr "Zeige Beschreibung von Eintrag"
-
-#: exif/main.c:180
-msgid "Extract thumbnail"
-msgstr "Extrahiere Vorschau"
-
-#: exif/main.c:182
-msgid "Insert FILE as thumbnail"
-msgstr "Füge DATEI als Vorschau ein"
-
-#: exif/main.c:182 exif/main.c:184
-msgid "FILE"
-msgstr "DATEI"
-
-#: exif/main.c:184
-msgid "Write output to FILE"
-msgstr "Schreibe Ergebnis in DATEI"
-
-#: exif/main.c:196
-msgid "[OPTION...] file"
-msgstr "[OPTION...] datei"
-
-#: exif/main.c:208
-#, c-format
-msgid "Invalid tag '%s'!"
-msgstr "Ungültiger Eintrag '%s'!"
-
-#: exif/main.c:216
-msgid "Please specify a tag!"
-msgstr "Bitte geben Sie einen Eintrag an!"
-
-#: exif/main.c:220
-#, c-format
-msgid "Tag '%s' (0x%04x, '%s'): %s"
-msgstr "Eintrag '%s' (0x%04x, '%s'): %s"
-
-#: exif/main.c:239
-#, c-format
-msgid "'%s' does not contain EXIF data!"
-msgstr "'%s' enthält keine EXIF Daten!"
-
-#: exif/main.c:253
-#, c-format
-msgid "'%s' does not contain a thumbnail!"
-msgstr "'%s' enthält keine Vorschau!"
-
-#: exif/main.c:275
-#, c-format
-msgid "Could not open '%s' for writing (%m)!"
-msgstr "Konnte '%s' nicht zum Schreiben öffnen (%m)!"
-
-#: exif/main.c:282 exif/main.c:349
-#, c-format
-msgid "Wrote file '%s'."
-msgstr "Schrieb Datei '%s'."
-
-#: exif/main.c:297
-#, c-format
-msgid "Could not open '%s' (%m)!"
-msgstr "Konnte '%s' nicht öffnen (%m)!"
-
-#: exif/main.c:306
-#, c-format
-msgid "Could not allocate %i byte(s)."
-msgstr "Konnte nicht %i Byte(s) zur Verfügung stellen."
-
-#: exif/main.c:315
-#, c-format
-msgid "Could not read '%s' (%m)."
-msgstr "Konnte nicht '%s' lesen (%m)."
-
-#: exif/main.c:337
+#: exif/main.c:148
 #, c-format
 msgid "Could not parse JPEG file '%s'."
 msgstr "Konnte die JPEG Datei '%s' nicht interpretieren."
 
-#: exif/actions.c:58
+#: exif/main.c:160 exif/main.c:328
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "Schrieb Datei '%s'."
+
+#: exif/main.c:188
+msgid "Show IDs instead of tag names"
+msgstr "Zeige IDs anstelle der Namen der Einträge"
+
+#: exif/main.c:190
+msgid "Select tag"
+msgstr "Wähle Eintrag"
+
+#: exif/main.c:190
+msgid "tag"
+msgstr "Eintrag"
+
+#: exif/main.c:192
+#, fuzzy
+msgid "Select IFD"
+msgstr "Wähle Eintrag"
+
+#: exif/main.c:192
+#, fuzzy
+msgid "IFD"
+msgstr "IFD 0"
+
+#: exif/main.c:194
+msgid "List all EXIF tags"
+msgstr "Liste alle EXIF Einträge auf"
+
+#: exif/main.c:196
+msgid "Show description of tag"
+msgstr "Zeige Beschreibung von Eintrag"
+
+#: exif/main.c:198
+msgid "Extract thumbnail"
+msgstr "Extrahiere Vorschau"
+
+#: exif/main.c:200
+msgid "Insert FILE as thumbnail"
+msgstr "Füge DATEI als Vorschau ein"
+
+#: exif/main.c:200 exif/main.c:202
+msgid "FILE"
+msgstr "DATEI"
+
+#: exif/main.c:202
+msgid "Write output to FILE"
+msgstr "Schreibe Ergebnis in DATEI"
+
+#: exif/actions.c:136 exif/actions.c:138 exif/main.c:204
+msgid "Value"
+msgstr "Wert"
+
+#: exif/main.c:216
+msgid "[OPTION...] file"
+msgstr "[OPTION...] datei"
+
+#: exif/main.c:228
+#, c-format
+msgid "Invalid tag '%s'!"
+msgstr "Ungültiger Eintrag '%s'!"
+
+#: exif/main.c:238
+#, c-format
+msgid ""
+"Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and "
+"'Interoperability'."
+msgstr ""
+
+#: exif/main.c:248
+msgid "Please specify a tag!"
+msgstr "Bitte geben Sie einen Eintrag an!"
+
+#: exif/main.c:252
+#, c-format
+msgid "Tag '%s' (0x%04x, '%s'): %s"
+msgstr "Eintrag '%s' (0x%04x, '%s'): %s"
+
+#: exif/main.c:271
+#, c-format
+msgid "'%s' does not contain EXIF data!"
+msgstr "'%s' enthält keine EXIF Daten!"
+
+#: exif/main.c:296
+#, fuzzy, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr "'%s' enthält keine EXIF Daten!"
+
+#: exif/main.c:310
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "'%s' enthält keine Vorschau!"
+
+#: exif/main.c:321
+#, c-format
+msgid "Could not open '%s' for writing (%m)!"
+msgstr "Konnte '%s' nicht zum Schreiben öffnen (%m)!"
+
+#: exif/main.c:343
+#, c-format
+msgid "Could not open '%s' (%m)!"
+msgstr "Konnte '%s' nicht öffnen (%m)!"
+
+#: exif/main.c:352
+#, c-format
+msgid "Could not allocate %i byte(s)."
+msgstr "Konnte nicht %i Byte(s) zur Verfügung stellen."
+
+#: exif/main.c:361
+#, c-format
+msgid "Could not read '%s' (%m)."
+msgstr "Konnte nicht '%s' lesen (%m)."
+
+#: exif/main.c:374
+#, fuzzy
+msgid "You need to specify a tag!"
+msgstr "Bitte geben Sie einen Eintrag an!"
+
+#: exif/main.c:382
+msgid "You need to specify an IFD!"
+msgstr ""
+
+#. e->data[s * i] = ;
+#: exif/main.c:429 exif/main.c:465
+msgid "Not yet implemented!"
+msgstr ""
+
+#: exif/main.c:436
+msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
+msgstr ""
+
+#: exif/main.c:447
+msgid "Not enough memory."
+msgstr ""
+
+#: exif/actions.c:61
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "EXIF Einträge in '%s':"
 
-#: exif/actions.c:141
+#: exif/actions.c:126
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "EXIF Einträge in '%s' ('%s' Byte-Reihenfolge):"
 
-#: exif/actions.c:146 exif/actions.c:148
+#: exif/actions.c:131 exif/actions.c:133
 msgid "Tag"
 msgstr "Eintrag"
 
-#: exif/actions.c:151 exif/actions.c:153
-msgid "Value"
-msgstr "Wert"
-
-#: exif/actions.c:159
+#: exif/actions.c:144
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF Daten enthalten eine Vorschau (%i Bytes)."
+
+#~ msgid "EXIF IFD"
+#~ msgstr "EXIF IFD"
+
+#~ msgid "GPS IFD"
+#~ msgstr "GPS IFD"
+
+#~ msgid "IFD 1"
+#~ msgstr "IFD 1"
+
+#~ msgid "Interoperability IFD"
+#~ msgstr "Interoperabilitäts-IFD"
 
 #~ msgid "EXIF"
 #~ msgstr "EXIF"

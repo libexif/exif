@@ -22,7 +22,10 @@
 #define __UTILS_H__
 
 #include <libexif/exif-tag.h>
+#include <libexif/exif-ifd.h>
 
 ExifTag exif_tag_from_string (const char *string);
+
+ExifIfd exif_ifd_from_string (const char *string);
 
 #endif /* __UTILS_H__ */

@@ -122,3 +122,19 @@ exif_tag_from_string (const char *string)
 
         return (tag);
 }
+
+ExifIfd
+exif_ifd_from_string (const char *string)
+{
+	unsigned int i;
+
+	if (!string)
+		return (-1);
+
+	for (i = 0; i < EXIF_IFD_COUNT; i++) {
+		if (!strcmp (string, exif_ifd_get_name (i)))
+			return (i);
+	}
+
+	return (-1);
+}

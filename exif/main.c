@@ -27,6 +27,7 @@
 
 #include <libexif/exif-data.h>
 #include <libexif/exif-note.h>
+#include <libexif/exif-utils.h>
 
 #include "libjpeg/jpeg-data.h"
 
@@ -102,7 +103,7 @@ show_entry (ExifEntry *entry, const char *caption)
 {
 	unsigned int i;
 
-	printf (_("EXIF entry '%s' (0x%x, '%s') exists in '%s':"),
+	printf (_("EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"),
 		exif_tag_get_title (entry->tag), entry->tag,
 		exif_tag_get_name (entry->tag), caption);
 	printf ("\n");
@@ -127,26 +128,39 @@ static void
 search_entry (ExifData *ed, ExifTag tag)
 {
 	ExifEntry *entry;
+	unsigned int i;
 
-	entry = exif_content_get_entry (ed->ifd0, tag);
-	if (entry)
-		show_entry (entry, _("IFD 0"));
+	for (i = 0; i < EXIF_IFD_COUNT; i++) {
+		entry = exif_content_get_entry (ed->ifd[i], tag);
+		if (entry)
+			show_entry (entry, exif_ifd_get_name (i));
+	}
+}
 
-	entry = exif_content_get_entry (ed->ifd_exif, tag);
-	if (entry)
-		show_entry (entry, _("EXIF IFD"));
+static int
+save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
+{
+	JPEGData *jdata;
 
-	entry = exif_content_get_entry (ed->ifd_gps, tag);
-	if (entry)
-		show_entry (entry, _("GPS IFD"));
+	/* Parse the JPEG file */
+	jdata = jpeg_data_new_from_file (fname);
+	if (!jdata) {
+		fprintf (stderr, _("Could not parse JPEG file '%s'."),
+			 fname);
+		fprintf (stderr, "\n");
+		return (1);
+	}
 
-	entry = exif_content_get_entry (ed->ifd1, tag);
-	if (entry)
-		show_entry (entry, _("IFD 1"));
+	jpeg_data_set_exif_data (jdata, ed);
 
-	entry = exif_content_get_entry (ed->ifd_interoperability, tag);
-	if (entry)
-		show_entry (entry, _("Interoperability IFD"));
+	/* Save the modified image. */
+	jpeg_data_save_file (jdata, target);
+	jpeg_data_unref (jdata);
+
+	fprintf (stdout, _("Wrote file '%s'."), target);
+	fprintf (stdout, "\n");
+
+	return (0);
 }
 
 typedef struct _ExifOptions ExifOptions;
@@ -161,17 +175,21 @@ main (int argc, const char **argv)
 	/* POPT_ARG_NONE needs an int, not char! */
 	unsigned int list_tags = 0, show_description = 0;
 	unsigned int extract_thumbnail = 0;
-
+	const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
+	ExifIfd ifd = -1;
+	ExifTag tag = 0;
 	ExifOptions eo = {0, 0};
 	poptContext ctx;
-	const char **args, *tag = NULL, *output = NULL;
+	const char **args, *output = NULL;
 	const char *ithumbnail = NULL;
 	struct poptOption options[] = {
 		POPT_AUTOHELP
 		{"ids", 'i', POPT_ARG_NONE, &eo.use_ids, 0,
 		 N_("Show IDs instead of tag names"), NULL},
-		{"tag", 't', POPT_ARG_STRING, &tag, 0,
+		{"tag", 't', POPT_ARG_STRING, &tag_string, 0,
 		 N_("Select tag"), N_("tag")},
+		{"ifd", '\0', POPT_ARG_STRING, &ifd_string, 0,
+		 N_("Select IFD"), N_("IFD")},
 		{"list-tags", 'l', POPT_ARG_NONE, &list_tags, 0,
 		 N_("List all EXIF tags"), NULL},
 		{"show-description", 's', POPT_ARG_NONE, &show_description, 0,
@@ -182,11 +200,13 @@ main (int argc, const char **argv)
 		 N_("Insert FILE as thumbnail"), N_("FILE")},
 		{"output", 'o', POPT_ARG_STRING, &output, 0,
 		 N_("Write output to FILE"), N_("FILE")},
+		{"set-value", '\0', POPT_ARG_STRING, &set_value, 0,
+		 N_("Value"), NULL},
 		POPT_TABLEEND};
 	ExifData *ed;
-	char filename[1024];
+	ExifEntry *e;
+	char fname[1024];
 	FILE *f;
-	JPEGData *jdata;
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, EXIF_LOCALEDIR);
@@ -202,10 +222,22 @@ main (int argc, const char **argv)
 		return (0);
 	}
 
-	if (tag) {
-		eo.tag = exif_tag_from_string (tag);
-		if (!eo.tag || !exif_tag_get_name (eo.tag)) {
-			fprintf (stderr, _("Invalid tag '%s'!"), tag);
+	if (tag_string) {
+		tag = exif_tag_from_string (tag_string);
+		if (!tag || !exif_tag_get_name (tag)) {
+			fprintf (stderr, _("Invalid tag '%s'!"), tag_string);
+			fprintf (stderr, "\n");
+			return (1);
+		}
+		eo.tag = tag;
+	}
+
+	if (ifd_string) {
+		ifd = exif_ifd_from_string (ifd_string);
+		if ((ifd < 0) || !exif_ifd_get_name (ifd)) {
+			fprintf (stderr, _("Invalid IFD '%s'. Valid IFDs are "
+				"'0', '1', 'EXIF', 'GPS', and "
+				"'Interoperability'."), ifd_string);
 			fprintf (stderr, "\n");
 			return (1);
 		}
@@ -241,12 +273,37 @@ main (int argc, const char **argv)
 				fprintf (stderr, "\n");
 				exit (1);
 			}
-			
+
+			/* Where do we save the output? */
+			memset (fname, 0, sizeof (fname));
+			if (output)
+				strncpy (fname, output, sizeof (fname) - 1);
+			else {
+				strncpy (fname, *args, sizeof (fname) - 1);
+				strncat (fname, ".modified.jpeg",
+					 sizeof (fname) - 1);
+			}
+
 			if (list_tags) {
 				action_tag_table (*args, ed);
-			} else if (eo.tag)
-				search_entry (ed, eo.tag);
-			else if (extract_thumbnail) {
+			} else if (tag && !set_value) {
+				if (ifd >= 0) {
+					e = exif_content_get_entry (
+							ed->ifd[ifd], tag);
+					if (e)
+						show_entry (e, ifd_string);
+					else {
+						fprintf (stderr, _("IFD '%s' "
+							"does not contain tag "
+							"'%s'."), 
+							ifd_string, tag_string);
+						fprintf (stderr, "\n");
+						return (1);
+					}
+				} else {
+					search_entry (ed, eo.tag);
+				}
+			} else if (extract_thumbnail) {
 
 				/* No thumbnail? Exit. */
 				if (!ed->data) {
@@ -257,30 +314,19 @@ main (int argc, const char **argv)
 					return (1);
 				}
 
-				/* Where to save the thumbnail? */
-				if (output)
-					strncpy (filename, output,
-						 sizeof (filename));
-				else {
-					strncpy (filename, *args,
-						 sizeof (filename));
-					strncat (filename, ".thumb.jpeg",
-						 sizeof (filename));
-				}
-
 				/* Save the thumbnail */
-				f = fopen (filename, "wb");
+				f = fopen (fname, "wb");
 				if (!f) {
 					fprintf (stderr,
 						_("Could not open '%s' for "
-						"writing (%m)!"), filename);
+						"writing (%m)!"), fname);
 					fprintf (stderr, "\n");
 					return (1);
 				}
 				fwrite (ed->data, 1, ed->size, f);
 				fclose (f);
 				fprintf (stdout, _("Wrote file '%s'."),
-					 filename);
+					 fname);
 				fprintf (stdout, "\n");
 
 			} else if (ithumbnail) {
@@ -319,36 +365,110 @@ main (int argc, const char **argv)
 				}
 				fclose (f);
 
-				/* Where to save the resulting file? */
-				if (output)
-					strncpy (filename, output,
-						 sizeof (filename));
-				else {
-					strncpy (filename, *args,
-						 sizeof (filename));
-					strncat (filename, ".modified.jpeg",
-						 sizeof (filename));
-				}
+				save_exif_data_to_file (ed, *args, fname);
 
-				/* Parse the JPEG file */
-				jdata = jpeg_data_new_from_file (*args);
-				if (!jdata) {
-					fprintf (stderr,
-						_("Could not parse JPEG file "
-						"'%s'."), *args);
+			} else if (set_value) {
+
+				/* We need a tag... */
+				if (!tag) {
+					fprintf (stderr, _("You need to "
+						"specify a tag!"));
 					fprintf (stderr, "\n");
 					return (1);
 				}
 
-				jpeg_data_set_exif_data (jdata, ed);
+				/* ... and an IFD. */
+				if (ifd < 0) {
+					fprintf (stderr, _("You need to "
+						"specify an IFD!"));
+					fprintf (stderr, "\n");
+					return (1);
+				}
 
-				/* Save the modified image. */
-				jpeg_data_save_file (jdata, filename);
-				jpeg_data_unref (jdata);
+				e = exif_content_get_entry (ed->ifd[ifd], tag);
+				if (!e) {
+				    e = exif_entry_new ();
+				    exif_content_add_entry (ed->ifd[ifd], e);
+				    exif_entry_initialize (e, tag);
+				}
+{
+	unsigned int begin = 0, end = 0, i;
+	unsigned char buf[1024], s;
+	ExifByteOrder o;
 
-				fprintf (stdout, _("Wrote file '%s'."),
-					 filename);
-				fprintf (stdout, "\n");
+	o = exif_data_get_byte_order (ed);
+	for (i = 0; i < e->components; i++) {
+		memset (buf, 0, sizeof (buf));
+		for (begin = end; end < strlen (set_value); end++) {
+			if (set_value[end] == '\\') {
+				end++;
+				if (set_value[end] == '\\') {
+					buf[strlen(buf)] = set_value[end];
+				} else if (set_value[end] == ' ') {
+					buf[strlen(buf)] = set_value[end];
+				} else {
+					fprintf (stderr, "Wrong masking! "
+						"'\\\\' will be interpreted "
+						"as '\\', '\\ ' as ' '. "
+						"'\\' followed by anything "
+						"except '\\' or ' ' is "
+						"invalid.");
+					fprintf (stderr, "\n");
+					exit (1);
+				}
+			} else if (set_value[end] == ' ') {
+				break;
+			} else
+				buf[strlen(buf)] = set_value[end];
+		}
+		s = exif_format_get_size (e->format);
+		switch (e->format) {
+		case EXIF_FORMAT_BYTE:
+			/* e->data[s * i] = ; */
+
+			fprintf (stderr, _("Not yet implemented!"));
+			fprintf (stderr, "\n");
+			return (1);
+
+			break;
+		case EXIF_FORMAT_ASCII:
+			if (i != 0) {
+				fprintf (stderr, _("Internal error. Please "
+					"contact <libexif-devel@"
+					"lists.sourceforge.net>."));
+				fprintf (stderr, "\n");
+				return (1);
+			}
+			if (e->data)
+				free (e->data);
+			e->size = strlen (buf) + 1;
+			e->data = malloc (sizeof (char) * e->size);
+			if (!e->data) {
+				fprintf (stderr, _("Not enough memory."));
+				fprintf (stderr, "\n");
+				return (1);
+			}
+			strcpy (e->data, buf);
+			break;
+		case EXIF_FORMAT_SHORT:
+			exif_set_short (e->data + (s * i), o, atoi (buf));
+			break;
+		case EXIF_FORMAT_LONG:
+			exif_set_long (e->data + (s * i), o, atol (buf));
+			break;
+		case EXIF_FORMAT_SLONG:
+			exif_set_slong (e->data + (s * i), o, atol (buf));
+			break;
+		case EXIF_FORMAT_RATIONAL:
+		case EXIF_FORMAT_SRATIONAL:
+		default:
+			fprintf (stderr, _("Not yet implemented!"));
+			fprintf (stderr, "\n");
+			return (1);
+		}
+	}
+}
+				save_exif_data_to_file (ed, *args, fname);
 			} else
 				action_tag_list (*args, ed, eo.use_ids);
 			exif_data_unref (ed);

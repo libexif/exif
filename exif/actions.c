@@ -25,6 +25,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <libexif/exif-ifd.h>
+
 #ifdef ENABLE_NLS
 #  include <libintl.h>
 #  undef _
@@ -53,41 +55,24 @@ action_tag_table (const char *filename, ExifData *ed)
 	unsigned int tag;
 	const char *name;
 	char txt[1024];
+	unsigned int i;
 
 	memset (txt, 0, sizeof (txt));
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), filename);
 	printf ("%-38.38s", txt);
-	printf ("%-7.7s", "IFD 0");
-	printf ("%-7.7s", "IFD 1");
-	printf ("%-7.7s", "EXIF");
-	printf ("%-7.7s", "GPS");
-	printf ("%-8.8s", "Interop.");
+	for (i = 0; i < EXIF_IFD_COUNT; i++)
+		printf ("%-7.7s", exif_ifd_get_name (i));
 	printf ("\n");
 	for (tag = 0; tag < 0xffff; tag++) {
 		name = exif_tag_get_title (tag);
 		if (!name)
 			continue;
 		printf ("  0x%04x %-29.29s", tag, name);
-		if (exif_content_get_entry (ed->ifd0, tag))
-			printf (ENTRY_FOUND);
-		else
-			printf (ENTRY_NOT_FOUND);
-		if (exif_content_get_entry (ed->ifd1, tag))
-			printf (ENTRY_FOUND);
-		else
-			printf (ENTRY_NOT_FOUND);
-		if (exif_content_get_entry (ed->ifd_exif, tag))
-			printf (ENTRY_FOUND);
-		else
-			printf (ENTRY_NOT_FOUND);
-		if (exif_content_get_entry (ed->ifd_gps, tag))
-			printf (ENTRY_FOUND);
-		else
-			printf (ENTRY_NOT_FOUND);
-		if (exif_content_get_entry (ed->ifd_interoperability, tag))
-			printf (ENTRY_FOUND);
-		else
-			printf (ENTRY_NOT_FOUND);
+		for (i = 0; i < EXIF_IFD_COUNT; i++)
+			if (exif_content_get_entry (ed->ifd[i], tag))
+				printf (ENTRY_FOUND);
+			else
+				printf (ENTRY_NOT_FOUND);
 		printf ("\n");
 	}
 }
