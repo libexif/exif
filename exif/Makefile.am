@@ -4,7 +4,7 @@ INCLUDES =			\
 
 bin_PROGRAMS = exif
 
-gexif_SOURCES =			\
+exif_SOURCES =			\
 	main.c
-gexif_LDADD =			\
+exif_LDADD =			\
 	$(LIBEXIF_LIBS)
