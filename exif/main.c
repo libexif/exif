@@ -167,9 +167,9 @@ main (int argc, const char **argv)
 		{"extract-thumbnail", 'e', POPT_ARG_NONE, &extract_thumbnail, 0,
 		 N_("Extract thumbnail"), NULL},
 		{"insert-thumbnail", 'n', POPT_ARG_STRING, &ithumbnail, 0,
-		 N_("Insert thumbnail"), NULL},
+		 N_("Insert thumbnail"), N_("FILENAME")},
 		{"output", 'o', POPT_ARG_STRING, &output, 0,
-		 N_("Output file"), N_("filename")},
+		 N_("Output file"), N_("FILENAME")},
 		POPT_TABLEEND};
 	ExifData *ed;
 	char filename[1024];
