@@ -255,7 +255,7 @@ main (int argc, const char **argv)
 			} else 
 				action_tag_list (*args, ed, eo.use_ids);
 			exif_data_unref (ed);
-			*args++;
+			args++;
 		}
 	}
 

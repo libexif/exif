@@ -1,3 +1,9 @@
+2002-06-03  Lutz Müller <lutz@users.sourceforge.net>
+
+	Patch by Guido Ostkamp <Guido.Ostkamp@t-online.de>:
+
+	* exif/main.c: Fix pointer error.
+
 2002-04-15  Lutz Müller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Print a warning if no EXIF data can be found.
