@@ -215,7 +215,7 @@ main (int argc, const char **argv)
 	ExifData *ed;
 	ExifEntry *e;
 #ifdef HAVE_MNOTE
-	MNoteData *md;
+	MNoteData *md = 0;
 #endif
 	char fname[1024];
 	FILE *f;
