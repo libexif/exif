@@ -1,6 +1,6 @@
 New since 0.6.9 (2004-05-27):
 
-  * Bug fixes: #994706
+  * Bug fixes: #994706, #1005652
 
   * return exit code != 0 in case of invalid command line
 
