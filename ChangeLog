@@ -1,5 +1,10 @@
 2002-11-15  Lutz Müller <lutz@users.sourceforge.net>
 
+	* configure.in: Ok, I got the message. Let exif _optionally_ use
+	  libmnote if available.
+
+2002-11-15  Lutz Müller <lutz@users.sourceforge.net>
+
 	* configure.in: Make exif depend on libmnote. This library isn't used
 	  yet, but that's subject to change.
 

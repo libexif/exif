@@ -5,6 +5,7 @@ AM_INIT_AUTOMAKE(exif,0.5)
 AM_MAINTAINER_MODE
 
 AM_PROG_LIBTOOL
+AC_PATH_PROG(PKG_CONFIG,pkg-config)
 
 dnl ---------------------------------------------------------------------------
 dnl i18n support
@@ -15,9 +16,28 @@ AM_GNU_GETTEXT
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.4 libmnote)
+PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.4)
 AC_SUBST(LIBEXIF_LIBS)
 AC_SUBST(LIBEXIF_CFLAGS)
+
+dnl ---------------------------------------------------------------------------
+dnl libmnote: Useful for parsing MakerNote-tags.
+dnl ---------------------------------------------------------------------------
+mnote_msg=no
+try_mnote=true
+AC_ARG_WITH(mnote, [  --without-mnote           Don't use libmnote],
+	if test x$withval = xno; then
+		try_mnote=false
+	fi)
+if $try_mnote; then
+	if ${PKG_CONFIG} --exists libmnote > /dev/null 2>&1; then
+		LIBMNOTE_LIBS=`$PKG_CONFIG --libs libmnote`
+		LIBMNOTE_CFLAGS=`$PKG_CONFIG --cflags libmnote`
+		AC_SUBST(LIBMNOTE_CFLAGS)
+		AC_SUBST(LIBMNOTE_LIBS)
+		mnote_msg="yes"
+	fi
+fi
 
 dnl ---------------------------------------------------------------------------
 dnl locale.h: locale.h provides setlocale. It seems that some systems don't
@@ -89,4 +109,6 @@ Configuration:
 
 	Source code location:      ${srcdir}
 	Compiler:                  ${CC}
+
+	Support for MakerNotes:    $mnote_msg
 "
