@@ -28,6 +28,8 @@
 #include <libexif/exif-data.h>
 #include <libexif/exif-note.h>
 
+#include "libjpeg/jpeg-data.h"
+
 #include "actions.h"
 #include "utils.h"
 
@@ -151,6 +153,7 @@ main (int argc, const char **argv)
 	ExifOptions eo = {0, 0};
 	poptContext ctx;
 	const char **args, *tag = NULL, *output = NULL;
+	const char *ithumbnail = NULL;
 	struct poptOption options[] = {
 		POPT_AUTOHELP
 		{"ids", 'i', POPT_ARG_NONE, &eo.use_ids, 0,
@@ -163,12 +166,15 @@ main (int argc, const char **argv)
 		 N_("Show description of tag"), NULL},
 		{"extract-thumbnail", 'e', POPT_ARG_NONE, &extract_thumbnail, 0,
 		 N_("Extract thumbnail"), NULL},
+		{"insert-thumbnail", 'n', POPT_ARG_STRING, &ithumbnail, 0,
+		 N_("Insert thumbnail"), NULL},
 		{"output", 'o', POPT_ARG_STRING, &output, 0,
 		 N_("Output file"), N_("filename")},
 		POPT_TABLEEND};
 	ExifData *ed;
 	char filename[1024];
 	FILE *f;
+	JPEGData *jdata;
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
@@ -183,14 +189,16 @@ main (int argc, const char **argv)
 	if (tag) {
 		eo.tag = exif_tag_from_string (tag);
 		if (!eo.tag || !exif_tag_get_name (eo.tag)) {
-			fprintf (stderr, ("Invalid tag '%s'!\n"), tag);
+			fprintf (stderr, ("Invalid tag '%s'!"), tag);
+			fprintf (stderr, "\n");
 			return (1);
 		}
 	}
 
 	if (show_description) {
 		if (!eo.tag) {
-			fprintf (stderr, _("Please specify a tag!\n"));
+			fprintf (stderr, _("Please specify a tag!"));
+			fprintf (stderr, "\n");
 			return (1);
 		}
 		printf (_("Tag 0x%04x ('%s'): %s\n"), eo.tag,
@@ -248,11 +256,82 @@ main (int argc, const char **argv)
 					fprintf (stderr,
 						_("Could not open '%s' for "
 						"writing (%m)!"), filename);
+					fprintf (stderr, "\n");
 					return (1);
 				}
 				fwrite (ed->data, 1, ed->size, f);
 				fclose (f);
-			} else 
+				fprintf (stdout, _("Wrote file '%s'."),
+					 filename);
+				fprintf (stdout, "\n");
+
+			} else if (ithumbnail) {
+
+				/* Get rid of the old thumbnail */
+				if (ed->data) {
+					free (ed->data);
+					ed->data = NULL;
+				}
+				ed->size = 0;
+
+				f = fopen (ithumbnail, "rb");
+				if (!f) {
+					fprintf (stderr, _("Could not open "
+						"'%s' (%m)!"), ithumbnail);
+					fprintf (stderr, "\n");
+					return (1);
+				}
+				fseek (f, 0, SEEK_END);
+				ed->size = ftell (f);
+				ed->data = malloc (sizeof (char) * ed->size);
+				if (ed->size && !ed->data) {
+					fprintf (stderr, _("Could not "
+						"allocate %i byte(s)."),
+						ed->size);
+					fprintf (stderr, "\n");
+					return (1);
+				}
+				fseek (f, 0, SEEK_SET);
+				if (fread (ed->data, sizeof (char),
+					   ed->size, f) != ed->size) {
+					fprintf (stderr, _("Could not read "
+						"'%s' (%m)."), ithumbnail);
+					fprintf (stderr, "\n");
+					return (1);
+				}
+				fclose (f);
+
+				/* Where to save the resulting file? */
+				if (output)
+					strncpy (filename, output,
+						 sizeof (filename));
+				else {
+					strncpy (filename, *args,
+						 sizeof (filename));
+					strncat (filename, ".modified.jpeg",
+						 sizeof (filename));
+				}
+
+				/* Parse the JPEG file */
+				jdata = jpeg_data_new_from_file (*args);
+				if (!jdata) {
+					fprintf (stderr,
+						_("Could not parse JPEG file "
+						"'%s'."), *args);
+					fprintf (stderr, "\n");
+					return (1);
+				}
+
+				jpeg_data_set_exif_data (jdata, ed);
+
+				/* Save the modified image. */
+				jpeg_data_save_file (jdata, filename);
+				jpeg_data_unref (jdata);
+
+				fprintf (stdout, _("Wrote file '%s'."),
+					 filename);
+				fprintf (stdout, "\n");
+			} else
 				action_tag_list (*args, ed, eo.use_ids);
 			exif_data_unref (ed);
 			args++;

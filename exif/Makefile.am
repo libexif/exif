@@ -9,5 +9,6 @@ exif_SOURCES =			\
 	main.c			\
 	utils.h utils.c
 exif_LDADD =			\
+	../libjpeg/libjpeg.la	\
 	-lpopt			\
 	$(LIBEXIF_LIBS)

@@ -1,3 +1,11 @@
+2002-06-08  Lutz Müller <lutz@users.sourceforge.net>
+
+	* exif: --insert-thumbnail option.
+
+2002-06-03  Lutz Müller <lutz@users.sourceforge.net>
+
+	* configure.in: Version 0.3
+
 2002-06-03  Lutz Müller <lutz@users.sourceforge.net>
 
 	Patch by Guido Ostkamp <Guido.Ostkamp@t-online.de>:

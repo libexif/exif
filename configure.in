@@ -1,6 +1,6 @@
 AC_INIT(exif/main.c)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(exif,0.2)
+AM_INIT_AUTOMAKE(exif,0.3)
 AM_MAINTAINER_MODE
 
 AM_PROG_LIBTOOL
@@ -23,5 +23,14 @@ AC_SUBST(CFLAGS)
 
 AC_OUTPUT([
   Makefile
+  libjpeg/Makefile
   exif/Makefile
 ])
+
+echo "
+
+Configuration:
+
+	Source code location:      ${srcdir}
+	Compiler:                  ${CC}
+"
