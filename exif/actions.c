@@ -104,6 +104,7 @@ action_mnote_list (const char *filename, ExifData *ed)
 	char b[1024];
 	char b1[1024], b2[1024];
 	ExifMnoteData *n;
+	const char *p;
 
 	n = exif_data_get_mnote_data (ed);
 	if (!n) {
@@ -123,8 +124,10 @@ action_mnote_list (const char *filename, ExifData *ed)
 		printf (_("MakerNote contains %i values:\n"), c);
 	}
 	for (i = 0; i < c; i++) {
-		strncpy (b1, C (exif_mnote_data_get_title (n, i)), bs);
-		strncpy (b2, C (exif_mnote_data_get_value (n, i, b, bs)), bs);
+		p = C (exif_mnote_data_get_title (n, i));
+		strncpy (b1, p ? p : _("Unknown tag"), bs);
+		p = C (exif_mnote_data_get_value (n, i, b, bs));
+		strncpy (b2, p ? p : _("Unknown value"), bs);
 		printf ("%s: %s\n", b1, b2);
 	}
 }
@@ -166,7 +169,7 @@ static void
 show_entry_machine (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
-	char *v[1024];
+	char v[1024];
 
 	if (*ids) fprintf (stdout, "0x%04x", e->tag);
 	else fprintf (stdout, "%s", exif_tag_get_title (e->tag));

@@ -1,3 +1,9 @@
+2004-06-22  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/actions.c: Don't crash if return value is NULL. Spotted by
+	  Serge Droz <serge.droz@psi.ch>.
+	  Kill warning.
+
 2004-06-06  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/actions.c: Try to fix segfault.
