@@ -19,6 +19,9 @@ dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.4)
 AC_SUBST(LIBEXIF_LIBS)
 AC_SUBST(LIBEXIF_CFLAGS)
+PKG_CHECK_MODULES(LIBMNOTE, libmnote >= 0.5.4)
+AC_SUBST(LIBMNOTE_LIBS)
+AC_SUBST(LIBMNOTE_CFLAGS)
 
 dnl ---------------------------------------------------------------------------
 dnl libmnote: Useful for parsing MakerNote-tags.

@@ -61,7 +61,7 @@ action_tag_table (const char *filename, ExifData *ed)
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), filename);
 	fprintf (stdout, "%-38.38s", txt);
 	for (i = 0; i < EXIF_IFD_COUNT; i++)
-		printf ("%-7.7s", exif_ifd_get_name (i));
+		fprintf (stdout, "%-7.7s", exif_ifd_get_name (i));
 	fputc ('\n', stdout);
 	for (tag = 0; tag < 0xffff; tag++) {
 		name = exif_tag_get_title (tag);
@@ -73,6 +73,31 @@ action_tag_table (const char *filename, ExifData *ed)
 				printf (ENTRY_FOUND);
 			else
 				printf (ENTRY_NOT_FOUND);
+		fputc ('\n', stdout);
+	}
+}
+
+void
+action_ntag_table (const char *filename, MNoteData *en)
+{
+	unsigned int tag;
+	const char *name;
+	char txt[1024];
+
+	memset (txt, 0, sizeof (txt));
+	snprintf (txt, sizeof (txt) - 1, _("EXIF MakerNote tags in '%s':"), filename);
+	fprintf (stdout, "%-38.38s", txt);
+	fprintf (stdout, "%-7.7s", "MakerNote");
+	fputc ('\n', stdout);
+	for (tag = 0; tag < 0xffff; tag++) {
+		name = mnote_tag_get_title (en, tag);
+		if (!name)
+			continue;
+		fprintf (stdout, "  0x%04x %-29.29s", tag, name);
+		if (mnote_data_get_value (en, tag))
+			printf (ENTRY_FOUND);
+		else
+			printf (ENTRY_NOT_FOUND);
 		fputc ('\n', stdout);
 	}
 }
@@ -98,6 +123,23 @@ static void
 show_ifd (ExifContent *content, void *data)
 {
 	exif_content_foreach_entry (content, show_entry, data);
+}
+
+static void
+show_note_entry (MNoteData *note, MNoteTag tag, void *data)
+{
+	unsigned char *ids = data;
+
+	if (*ids)
+		fprintf (stdout, "0x%04x", tag);
+	else
+		fprintf (stdout, "%-20.20s", mnote_tag_get_title (note, tag));
+	printf ("|");
+	if (*ids)
+		fprintf (stdout, "%-72.72s", mnote_data_get_value (note, tag));
+	else
+		fprintf (stdout, "%-58.58s", mnote_data_get_value (note, tag));
+	fputc ('\n', stdout);
 }
 
 static void
@@ -145,4 +187,32 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 				   "(%i bytes)."), ed->size);
                 fputc ('\n', stdout);
         }
+}
+
+void
+action_ntag_list (const char *filename, MNoteData *en, unsigned char ids)
+{
+	ExifByteOrder order;
+
+	if (!en)
+		return;
+
+	order = mnote_data_get_byte_order (en);
+	fprintf (stdout, _("EXIF MakerNote tags in '%s' ('%s' byte order):"), filename,
+		exif_byte_order_get_name (order));
+	fputc ('\n', stdout);
+	print_hline (ids);
+        if (ids)
+                fprintf (stdout, "%-6.6s", _("Tag"));
+        else
+                fprintf (stdout, "%-20.20s", _("Tag"));
+	fputc ('|', stdout);
+        if (ids)
+		fprintf (stdout, "%-72.72s", _("Value"));
+        else
+                fprintf (stdout, "%-58.58s", _("Value"));
+        fputc ('\n', stdout);
+        print_hline (ids);
+	mnote_data_foreach_entry (en, show_note_entry, &ids);
+        print_hline (ids);
 }

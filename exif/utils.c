@@ -138,3 +138,102 @@ exif_ifd_from_string (const char *string)
 
 	return (-1);
 }
+
+MNoteTag
+mnote_tag_from_string (MNoteData *note, const char *string)
+{
+	MNoteTag tag;
+	unsigned int i, number, factor;
+	const char *name;
+
+	if (!string)
+		return (0);
+
+	/* Is the string a tag's name or title? */
+	for (tag = 0xffff; tag > 0; tag--) {
+		name = mnote_tag_get_name (note, tag);
+		if (name && !strcmp (string, name))
+			return (tag);
+		name = mnote_tag_get_title (note, tag);
+		if (name && !strcmp (string, name))
+			return (tag);
+	}
+
+	/* Is the string a decimal number? */
+	if (strspn (string, "0123456789") == strlen (string))
+		return (atoi (string));
+
+	/* Is the string a hexadecimal number? */
+	for (i = 0; i < strlen (string); i++)
+		if (string[i] == 'x')
+			break;
+	if (i == strlen (string))
+		return (0);
+
+	string += i + 1;
+        tag = 0;
+        for (i = strlen (string); i > 0; i--) {
+                switch (string[i - 1]) {
+                case '0':
+                        number = 0;
+                        break;
+                case '1':
+                        number = 1;
+                        break;
+                case '2':
+                        number = 2;
+                        break;
+                case '3':
+                        number = 3;
+                        break;
+                case '4':
+                        number = 4;
+                        break;
+                case '5':
+                        number = 5;
+                        break;
+                case '6':
+                        number = 6;
+                        break;
+                case '7':
+                        number = 7;
+                        break;
+                case '8':
+                        number = 8;
+                        break;
+                case '9':
+                        number = 9;
+                        break;
+                case 'a':
+                case 'A':
+                        number = 10;
+                        break;
+                case 'b':
+                case 'B':
+                        number = 11;
+                        break;
+                case 'c':
+                case 'C':
+                        number = 12;
+                        break;
+                case 'd':
+                case 'D':
+                        number = 13;
+                        break;
+                case 'e':
+                case 'E':
+                        number = 14;
+                        break; 
+                case 'f':
+                case 'F':
+                        number = 15;
+                        break; 
+                default:
+                        return (0);
+                }
+                factor = 1 << ((strlen (string) - i) * 4);
+                tag += (number * factor);
+        }
+
+        return (tag);
+}

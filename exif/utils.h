@@ -23,9 +23,12 @@
 
 #include <libexif/exif-tag.h>
 #include <libexif/exif-ifd.h>
+#include <libmnote/mnote-data.h>
 
 ExifTag exif_tag_from_string (const char *string);
 
 ExifIfd exif_ifd_from_string (const char *string);
+
+MNoteTag mnote_tag_from_string (MNoteData *note, const char *string);
 
 #endif /* __UTILS_H__ */

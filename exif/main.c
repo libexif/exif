@@ -27,8 +27,9 @@
 #include <popt.h>
 
 #include <libexif/exif-data.h>
-#include <libexif/exif-note.h>
 #include <libexif/exif-utils.h>
+
+#include <libmnote/mnote-data.h>
 
 #include "libjpeg/jpeg-data.h"
 
@@ -64,69 +65,25 @@
 #endif
 
 static void
-show_maker_note (ExifEntry *entry)
-{
-	ExifNote *note;
-	char **value;
-	unsigned int i;
-
-	note = exif_note_new_from_data (entry->data, entry->size);
-	if (!note) {
-		fprintf (stderr, _("Could not parse data of tag '%s'."), 
-			exif_tag_get_name (entry->tag));
-		fputc ('\n', stderr);
-		return;
-	}
-
-	value = exif_note_get_value (note);
-	exif_note_unref (note);
-
-	if (!value || !value[0]) {
-		fprintf (stderr, 
-			_("Tag '%s' does not contain known information."),
-			exif_tag_get_name (entry->tag));
-		fputc ('\n', stderr);
-		return;
-	} else if (!value[1]) {
-		printf (_("Tag '%s' contains one piece of information:"),
-			exif_tag_get_name (entry->tag));
-		printf ("\n");
-	} else {
-		printf (_("Tag '%s' contains the following information:"),
-			exif_tag_get_name (entry->tag));
-		printf ("\n");
-	}
-	for (i = 0; value && value[i]; i++) {
-		printf (" %3i %s\n", i, value[i]);
-		free (value[i]);
-	}
-	free (value);
-}
-
-static void
 show_entry (ExifEntry *entry, const char *caption)
 {
-	unsigned int i;
-
 	printf (_("EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"),
 		exif_tag_get_title (entry->tag), entry->tag,
 		exif_tag_get_name (entry->tag), caption);
 	printf ("\n");
-	printf (_("  Format: '%s'"), exif_format_get_name (entry->format));
+
+	exif_entry_dump(entry, 0);
+}
+
+static void
+show_note_entry (MNoteData *note, MNoteTag tag)
+{
+	printf (_("MakerNote entry '%s' (0x%x, '%s'):"),
+		mnote_tag_get_title (note, tag), tag,
+		mnote_tag_get_name (note, tag));
 	printf ("\n");
-	printf (_("  Components: %i"), (int) entry->components);
-	printf ("\n");
-	printf (_("  Value: '%s'"), exif_entry_get_value (entry));
-	printf ("\n");
-	printf (_("  Data:"));
-	for (i = 0; i < entry->size; i++) {
-		if (!(i % 10))
-			printf ("\n    ");
-		printf ("0x%02x ", entry->data[i]);
-	}
-	printf ("\n");
-	if (entry->tag == EXIF_TAG_MAKER_NOTE)
-		show_maker_note (entry);
+
+	mnote_data_dump_entry(note, tag, 0);
 }
 
 static void
@@ -186,19 +143,22 @@ typedef struct _ExifOptions ExifOptions;
 struct _ExifOptions {
 	unsigned char use_ids;
 	ExifTag tag;
+	MNoteTag ntag;
 };
 
 int
 main (int argc, const char **argv)
 {
 	/* POPT_ARG_NONE needs an int, not char! */
-	unsigned int list_tags = 0, show_description = 0;
+	unsigned int list_tags = 0, list_ntags = 0, show_description = 0;
 	unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
 	unsigned int remove = 0;
-	const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
+	const char *set_value = NULL, *ifd_string = NULL;
+	const char *tag_string = NULL, *ntag_string = NULL;
 	ExifIfd ifd = -1;
 	ExifTag tag = 0;
-	ExifOptions eo = {0, 0};
+	MNoteTag ntag = 0;
+	ExifOptions eo = {0, 0, 0};
 	poptContext ctx;
 	const char **args, *output = NULL;
 	const char *ithumbnail = NULL;
@@ -208,10 +168,14 @@ main (int argc, const char **argv)
 		 N_("Show IDs instead of tag names"), NULL},
 		{"tag", 't', POPT_ARG_STRING, &tag_string, 0,
 		 N_("Select tag"), N_("tag")},
+		{"ntag", '\0', POPT_ARG_STRING, &ntag_string, 0,
+		 N_("Select MakerNote tag"), N_("ntag")},
 		{"ifd", '\0', POPT_ARG_STRING, &ifd_string, 0,
 		 N_("Select IFD"), N_("IFD")},
 		{"list-tags", 'l', POPT_ARG_NONE, &list_tags, 0,
 		 N_("List all EXIF tags"), NULL},
+		{"list-ntags", '\0', POPT_ARG_NONE, &list_ntags, 0,
+		 N_("List all EXIF MakerNote tags"), NULL},
 		{"remove", '\0', POPT_ARG_NONE, &remove, 0,
 		 N_("Remove tag or ifd"), NULL},
 		{"show-description", 's', POPT_ARG_NONE, &show_description, 0,
@@ -227,8 +191,9 @@ main (int argc, const char **argv)
 		{"set-value", '\0', POPT_ARG_STRING, &set_value, 0,
 		 N_("Value"), NULL},
 		POPT_TABLEEND};
-	ExifData *ed;
-	ExifEntry *e;
+	ExifData *ed = NULL;
+	ExifEntry *e = NULL;
+	MNoteData *md = NULL;
 	char fname[1024];
 	FILE *f;
 
@@ -272,7 +237,7 @@ main (int argc, const char **argv)
 		}
 	}
 
-	if (show_description) {
+	if (show_description && !ntag_string) {
 		if (!eo.tag) {
 			fprintf (stderr, _("Please specify a tag!"));
 			fputc ('\n', stderr);
@@ -303,6 +268,24 @@ main (int argc, const char **argv)
 				exit (1);
 			}
 
+			if (ntag_string || list_ntags || ntag) {
+				e = exif_content_get_entry(ed->ifd[EXIF_IFD_EXIF],
+							   EXIF_TAG_MAKER_NOTE);
+				if (!e) {
+					fprintf (stderr, _("'%s' does not "
+							   "contain EXIF MakerNote data!"), *args);
+					fputc ('\n', stderr);
+					exit (1);
+				}
+
+				md = mnote_data_new_from_data (e->data, e->size);
+				if (!md) {
+					fprintf (stderr, "Could not parse EXIF tag MakerNote in '%s'!", *args);
+					fputc ('\n', stderr);
+					exit (1);
+				}
+			}
+
 			/* Where do we save the output? */
 			memset (fname, 0, sizeof (fname));
 			if (output)
@@ -313,8 +296,35 @@ main (int argc, const char **argv)
 					 sizeof (fname) - 1);
 			}
 
+			if (ntag_string) {
+				ntag = mnote_tag_from_string (md, ntag_string);
+				if (!ntag || !mnote_tag_get_name (md, ntag)) {
+					fprintf (stderr, _("Invalid MakerNote tag '%s'!"), ntag_string);
+					fputc ('\n', stderr);
+					return (1);
+				}
+				eo.ntag = ntag;
+
+			}
+
+			if (show_description && ntag_string) {
+				if (!eo.ntag) {
+					fprintf (stderr, _("Please specify a MakerNote tag!"));
+					fputc ('\n', stderr);
+					return (1);
+				}
+				printf (_("Tag '%s' (0x%04x, '%s'): %s"),
+					mnote_tag_get_title (md, eo.ntag), eo.ntag,
+					mnote_tag_get_name (md, eo.ntag),
+					mnote_tag_get_description (md, eo.ntag));
+				printf ("\n");
+				return (0);
+			}
+
 			if (list_tags) {
 				action_tag_table (*args, ed);
+			} else if (list_ntags) {
+				action_ntag_table (*args, md);
 			} else if (tag && !set_value) {
 				if ((ifd >= EXIF_IFD_0) &&
 				    (ifd < EXIF_IFD_COUNT)) {
@@ -332,6 +342,18 @@ main (int argc, const char **argv)
 					}
 				} else {
 					search_entry (ed, eo.tag);
+				}
+			} else if (ntag && !set_value) {
+				char *value = mnote_data_get_value (md, ntag);
+				if (value)
+					show_note_entry (md, ntag);
+				else {
+					fprintf (stderr, _("Makernote "
+						"does not contain tag "
+						"'%s'."), 
+						ntag_string);
+					fputc ('\n', stderr);
+					return (1);
 				}
 			} else if (extract_thumbnail) {
 
@@ -512,6 +534,8 @@ main (int argc, const char **argv)
 				return (1);
 			}
 			strcpy (e->data, buf);
+			e->components = strlen(e->data) + 1;
+			i = e->components - 1;
 			break;
 		case EXIF_FORMAT_SHORT:
 			exif_set_short (e->data + (s * i), o, atoi (buf));
