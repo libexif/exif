@@ -80,7 +80,7 @@ if test "x$GCC" = "xyes"; then
     AC_SUBST(CFLAGS)
 fi
 
-AC_OUTPUT([ intl/Makefile po/Makefile.in m4/Makefile 
+AC_OUTPUT([ 
   Makefile
   exif.spec
   libjpeg/Makefile
