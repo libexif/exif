@@ -104,7 +104,6 @@ AC_OUTPUT([
   exif.spec
   libjpeg/Makefile
   exif/Makefile
-  po/Makefile.in
 ])
 
 echo "
