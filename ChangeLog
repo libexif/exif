@@ -1,3 +1,7 @@
+2004-08-27  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/exif-i18n.c: Some users don't have iconv.
+
 2004-06-22  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/actions.c: Don't crash if return value is NULL. Spotted by

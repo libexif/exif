@@ -27,6 +27,8 @@ dnl locale.h: locale.h provides setlocale. It seems that some systems don't
 dnl           have it (at least if configured --without-nls).
 dnl ---------------------------------------------------------------------------
 AC_CHECK_HEADERS(locale.h)
+AC_CHECK_HEADER(iconv.h, [
+	AC_DEFINE(HAVE_ICONV,1,[whether iconv is available])])
 
 dnl ---------------------------------------------------------------------------
 dnl popt.h: Simplifies handling of command-line options enormously.
