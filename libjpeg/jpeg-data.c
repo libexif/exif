@@ -25,11 +25,13 @@
 #include <stdio.h>
 #include <string.h>
 
-/* #define DEBUG */
+#include <exif/exif-i18n.h>
 
 struct _JPEGDataPrivate
 {
 	unsigned int ref_count;
+
+	ExifLog *log;
 };
 
 JPEGData *
@@ -57,13 +59,18 @@ jpeg_data_append_section (JPEGData *data)
 {
 	JPEGSection *s;
 
+	if (!data) return;
+
 	if (!data->count)
 		s = malloc (sizeof (JPEGSection));
 	else
 		s = realloc (data->sections,
 			     sizeof (JPEGSection) * (data->count + 1));
-	if (!s)
+	if (!s) {
+		EXIF_LOG_NO_MEMORY (data->priv->log, "jpeg-data", 
+				sizeof (JPEGSection) * (data->count + 1));
 		return;
+	}
 
 	data->sections = s;
 	data->count++;
@@ -113,10 +120,6 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 
 	for (*ds = i = 0; i < data->count; i++) {
 		s = data->sections[i];
-#ifdef DEBUG
-		printf ("Writing marker 0x%x at position %i...\n",
-			s.marker, *ds);
-#endif
 
 		/* Write the marker */
 		*d = realloc (*d, sizeof (char) * (*ds + 2));
@@ -180,14 +183,8 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 	JPEGSection *s;
 	JPEGMarker marker;
 
-	if (!data)
-		return;
-	if (!d)
-		return;
-
-#ifdef DEBUG
-	printf ("Parsing %i bytes...\n", size);
-#endif
+	if (!data) return;
+	if (!d) return;
 
 	for (o = 0; o < size;) {
 
@@ -198,14 +195,12 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 		for (i = 0; i < 7; i++)
 			if (d[o + i] != 0xff)
 				break;
-		if (!JPEG_IS_MARKER (d[o + i]))
+		if (!JPEG_IS_MARKER (d[o + i])) {
+			exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
+					_("Data does not follow JPEG specification."));
 			return;
+		}
 		marker = d[o + i];
-
-#ifdef DEBUG
-		printf ("Found marker 0x%x ('%s') at %i.\n", marker,
-			jpeg_marker_get_name (marker), o + i);
-#endif
 
 		/* Append this section */
 		jpeg_data_append_section (data);
@@ -272,27 +267,31 @@ jpeg_data_load_file (JPEGData *data, const char *path)
 	unsigned char *d;
 	unsigned int size;
 
-	if (!data)
-		return;
-	if (!path)
-		return;
+	if (!data) return;
+	if (!path) return;
 
 	f = fopen (path, "rb");
-	if (!f)
+	if (!f) {
+		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
+				_("Path '%s' invalid."), path);
 		return;
+	}
 
 	/* For now, we read the data into memory. Patches welcome... */
 	fseek (f, 0, SEEK_END);
 	size = ftell (f);
 	fseek (f, 0, SEEK_SET);
-	d = malloc (sizeof (char) * size);
+	d = malloc (size);
 	if (!d) {
+		EXIF_LOG_NO_MEMORY (data->priv->log, "jpeg-data", size);
 		fclose (f);
 		return;
 	}
 	if (fread (d, 1, size, f) != size) {
 		free (d);
 		fclose (f);
+		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
+				_("Could not read '%s'."), path);
 		return;
 	}
 	fclose (f);
@@ -316,9 +315,11 @@ jpeg_data_unref (JPEGData *data)
 	if (!data)
 		return;
 
-	data->priv->ref_count--;
-	if (!data->priv->ref_count)
-		jpeg_data_free (data);
+	if (data->priv) {
+		data->priv->ref_count--;
+		if (!data->priv->ref_count)
+			jpeg_data_free (data);
+	}
 }
 
 void
@@ -350,7 +351,15 @@ jpeg_data_free (JPEGData *data)
 
 	if (data->data)
 		free (data->data);
-	free (data->priv);
+
+	if (data->priv) {
+		if (data->priv->log) {
+			exif_log_unref (data->priv->log);
+			data->priv->log = NULL;
+		}
+		free (data->priv);
+	}
+
 	free (data);
 }
 
@@ -438,4 +447,13 @@ jpeg_data_set_exif_data (JPEGData *data, ExifData *exif_data)
 	section->marker = JPEG_MARKER_APP1;
 	section->content.app1 = exif_data;
 	exif_data_ref (exif_data);
+}
+
+void
+jpeg_data_log (JPEGData *data, ExifLog *log)
+{
+	if (!data || !data->priv) return;
+	if (data->priv->log) exif_log_unref (data->priv->log);
+	data->priv->log = log;
+	exif_log_ref (log);
 }

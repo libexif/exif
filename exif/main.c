@@ -154,8 +154,30 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 			fputc ('\n', stderr);
 			exit (1);
 		}
+		free (buf);
+	}
+}
 
-                free (buf);
+#define COL_BLUE   "\033[34m"
+#define COL_GREEN  "\033[32m"
+#define COL_RED    "\033[31m"
+#define COL_NORMAL "\033[0m"
+
+static void
+log_func_exit (ExifLog *log, ExifLogCode code, const char *domain,
+		const char *format, va_list args, void *data)
+{
+	switch (code) {
+	case EXIF_LOG_CODE_NO_MEMORY:
+	case EXIF_LOG_CODE_CORRUPT_DATA:
+		fprintf (stderr, COL_RED);
+		fprintf (stderr, "%s (%s):\n", exif_log_code_get_title (code), domain);
+		vfprintf (stderr, format, args);
+		fprintf (stderr, "\n");
+		fprintf (stderr, COL_NORMAL);
+		exit (1);
+	default:
+		return;
 	}
 }
 
@@ -165,15 +187,15 @@ save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
 	JPEGData *jdata;
 	unsigned char *d = NULL;
 	unsigned int ds;
+	ExifLog *log;
 
-	/* Parse the JPEG file */
-	jdata = jpeg_data_new_from_file (fname);
-	if (!jdata) {
-		fprintf (stderr, _("Could not parse JPEG file '%s'."),
-			 fname);
-		fputc ('\n', stderr);
-		return (1);
-	}
+	/* Parse the JPEG file. If anything goes wrong, fail. */
+	jdata = jpeg_data_new ();
+	log = exif_log_new ();
+	exif_log_set_func (log, log_func_exit, NULL);
+	jpeg_data_log (jdata, log);
+	exif_log_unref (log);
+	jpeg_data_load_file (jdata, fname);
 
 	/* Make sure the EXIF data is not too big. */
 	exif_data_save_data (ed, &d, &ds);
@@ -198,11 +220,6 @@ save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
 
 	return (0);
 }
-
-#define COL_BLUE   "\033[34m"
-#define COL_GREEN  "\033[32m"
-#define COL_RED    "\033[31m"
-#define COL_NORMAL "\033[0m"
 
 static void
 log_func (ExifLog *log, ExifLogCode code, const char *domain,

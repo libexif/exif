@@ -1,5 +1,9 @@
 2005-03-29  Lutz Mueller <lutz@users.sourceforge.net>
 
+	* exif/main.c: Abort if anything goes wrong. Fixes #1054322.
+
+2005-03-29  Lutz Mueller <lutz@users.sourceforge.net>
+
 	* libjpeg/jpeg-data.c: Bring it in sync with libexif/libjpeg/jpeg-data.c
 
 2005-03-29  Lutz Mueller <lutz@users.sourceforge.net>

@@ -22,7 +22,9 @@
 #define __JPEG_DATA_H__
 
 #include <libjpeg/jpeg-marker.h>
+
 #include <libexif/exif-data.h>
+#include <libexif/exif-log.h>
 
 typedef ExifData * JPEGContentAPP1;
 
@@ -84,5 +86,7 @@ ExifData *jpeg_data_get_exif_data (JPEGData *data);
 void      jpeg_data_dump (JPEGData *data);
 
 void      jpeg_data_append_section (JPEGData *data);
+
+void      jpeg_data_log (JPEGData *data, ExifLog *log);
 
 #endif /* __JPEG_DATA_H__ */
