@@ -29,7 +29,7 @@ dnl ---------------------------------------------------------------------------
 dnl Warnings: If we have GCC, be paranoid.
 dnl ---------------------------------------------------------------------------
 if test "x$GCC" = "xyes"; then
-    CFLAGS="$CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Werror"
+    CFLAGS="$CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
     AC_SUBST(CFLAGS)
 fi
 
