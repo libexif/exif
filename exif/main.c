@@ -157,7 +157,6 @@ main (int argc, const char **argv)
 
 	if (args) {
 		while (*args) {
-			printf (_("Processing '%s'...\n"), *args);
 			ed = exif_data_new_from_file (*args);
 			if (list_tags) {
 				action_tag_table (*args, ed);
