@@ -158,10 +158,23 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 	}
 }
 
+/* FIXME: We should make sure the terminal can actually understand these
+ *        escape sequences
+ */
 #define COL_BLUE   "\033[34m"
 #define COL_GREEN  "\033[32m"
 #define COL_RED    "\033[31m"
 #define COL_NORMAL "\033[0m"
+#ifdef HAVE_ISATTY
+#define put_colorstring(file, colorstring) \
+	do { \
+		if (isatty(file)) { \
+			fputs (colorstring, file); \
+		} \
+	} while (0)
+#else
+#define write_colorstring(file, colorstring) do { } while (0)
+#endif
 
 static void
 log_func_exit (ExifLog *log, ExifLogCode code, const char *domain,
@@ -170,11 +183,11 @@ log_func_exit (ExifLog *log, ExifLogCode code, const char *domain,
 	switch (code) {
 	case EXIF_LOG_CODE_NO_MEMORY:
 	case EXIF_LOG_CODE_CORRUPT_DATA:
-		fprintf (stderr, COL_RED);
+		put_colorstring (stderr, COL_RED);
 		fprintf (stderr, "%s (%s):\n", exif_log_code_get_title (code), domain);
 		vfprintf (stderr, format, args);
 		fprintf (stderr, "\n");
-		fprintf (stderr, COL_NORMAL);
+		put_colorstring (stderr, COL_NORMAL);
 		exit (1);
 	default:
 		return;
@@ -224,32 +237,32 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 {
 	switch (code) {
 	case EXIF_LOG_CODE_DEBUG:
-		printf (COL_GREEN);
+		put_colorstring (stdout, COL_GREEN);
 		printf ("%s: ", domain);
 		vprintf (format, args);
-		printf (COL_NORMAL);
+		put_colorstring (stdout, COL_NORMAL);
 		printf ("\n");
 		break;
 	case EXIF_LOG_CODE_NO_MEMORY:
 	case EXIF_LOG_CODE_CORRUPT_DATA:
-		fprintf (stderr, "\033[31;1m");
-		fprintf (stderr, "\033[31;4m");
+		put_colorstring (stderr, "\033[31;1m");
+		put_colorstring (stderr, "\033[31;4m");
 		fprintf (stderr, exif_log_code_get_title (code));
 		fprintf (stderr, "\n");
-		fprintf (stderr, "\033[;0m");
-		fprintf (stderr, COL_RED);
+		put_colorstring (stderr, "\033[;0m");
+		put_colorstring (stderr, COL_RED);
 		fprintf (stderr, exif_log_code_get_message (code));
 		fprintf (stderr, "\n");
 		fprintf (stderr, "%s: ", domain);
 		vfprintf (stderr, format, args);
-		fprintf (stderr, COL_NORMAL);
+		put_colorstring (stderr, COL_NORMAL);
 		fprintf (stderr, "\n");
 		break;
 	default:
-		printf (COL_BLUE);
+		put_colorstring (stdout, COL_BLUE);
 		printf ("%s: ", domain);
 		vprintf (format, args);
-		printf (COL_NORMAL);
+		put_colorstring (stdout, COL_NORMAL);
 		printf ("\n");
 		break;
 	}
