@@ -71,7 +71,7 @@ jpeg_data_append_section (JPEGData *data)
 				sizeof (JPEGSection) * (data->count + 1));
 		return;
 	}
-
+	memset(s + data->count, 0, sizeof (JPEGSection));
 	data->sections = s;
 	data->count++;
 }
@@ -207,7 +207,6 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 		if (!data->count) return;
 		s = &data->sections[data->count - 1];
 		s->marker = marker;
-		s->content.generic.data = NULL;
 		o += i + 1;
 
 		switch (s->marker) {
@@ -235,7 +234,15 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 
 				/* In case of SOS, image data will follow. */
 				if (s->marker == JPEG_MARKER_SOS) {
+					/* -2 means 'take all but the last 2 bytes which are hoped to be JPEG_MARKER_EOI */
 					data->size = size - 2 - o - len;
+					if (d[o + len + data->size] != 0xFF) {
+						/* A truncated file (i.e. w/o JPEG_MARKER_EOI at the end).
+						   Instead of trying to use the last two bytes as marker,
+						   touching memory beyond allocated memory and posssibly saving
+						   back screwed file, we rather take the rest of the file. */
+						data->size += 2;
+					}
 					data->data = malloc (
 						sizeof (char) * data->size);
 					memcpy (data->data, d + o + len,

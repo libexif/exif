@@ -1,3 +1,10 @@
+2005-03-30  Jan Patera <patera@users.sourceforge.net>
+
+	* libjpeg/jpeg-data/c: memset in jpeg_data_append_section().
+	  Fix for truncated JPEGs: if 1st to the last byte was between 0xC0
+	  and 0xFE, reading beyond allocated memory & possible crashes occured,
+	  eventually screwed file was saved.
+
 2005-03-30  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Always use a logging function to make errors fatal. This
