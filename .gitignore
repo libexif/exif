@@ -40,3 +40,4 @@ config.cache
 aclocal.m4
 Makefile.in
 Makefile
+*.tar.gz

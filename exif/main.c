@@ -89,6 +89,10 @@ search_entry (ExifData *ed, ExifTag tag)
 	entry = exif_content_get_entry (ed->ifd1, tag);
 	if (entry)
 		show_entry (entry, _("IFD 1"));
+
+	entry = exif_content_get_entry (ed->ifd_interoperability, tag);
+	if (entry)
+		show_entry (entry, _("Interoperability IFD"));
 }
 
 typedef struct _ExifOptions ExifOptions;
@@ -136,7 +140,7 @@ main (int argc, const char **argv)
 
 	if (tag) {
 		eo.tag = exif_tag_from_string (tag);
-		if (!eo.tag) {
+		if (!eo.tag || !exif_tag_get_name (eo.tag)) {
 			fprintf (stderr, ("Invalid tag '%s'!\n"), tag);
 			return (1);
 		}

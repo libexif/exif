@@ -42,8 +42,8 @@
 #  define N_(String) (String)
 #endif
 
-#define ENTRY_FOUND     "    *    "
-#define ENTRY_NOT_FOUND "    -    "
+#define ENTRY_FOUND     "   *   "
+#define ENTRY_NOT_FOUND "   -   "
 
 void
 action_tag_table (const char *filename, ExifData *ed)
@@ -52,10 +52,11 @@ action_tag_table (const char *filename, ExifData *ed)
 	const char *name;
 
 	printf (_("EXIF tags in %-25.25s "), filename);
-	printf ("%-10.10s", _("IFD 0     "));
-	printf ("%-10.10s", _("EXIF IFD  "));
-	printf ("%-10.10s", _("GPS IFD   "));
-	printf ("%-10.10s", _("IFD 1     "));
+	printf ("%-8.8s", _("IFD 0"));
+	printf ("%-8.8s", _("EXIF"));
+	printf ("%-8.8s", _("GPS"));
+	printf ("%-8.8s", _("IFD 1"));
+	printf ("%-8.8s", _("Interop."));
 	printf ("\n");
 	for (tag = 0; tag < 0xffff; tag++) {
 		name = exif_tag_get_name (tag);
@@ -75,6 +76,10 @@ action_tag_table (const char *filename, ExifData *ed)
 		else
 			printf (ENTRY_NOT_FOUND);
 		if (exif_content_get_entry (ed->ifd1, tag))
+			printf (ENTRY_FOUND);
+		else
+			printf (ENTRY_NOT_FOUND);
+		if (exif_content_get_entry (ed->ifd_interoperability, tag))
 			printf (ENTRY_FOUND);
 		else
 			printf (ENTRY_NOT_FOUND);
