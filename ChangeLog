@@ -1,3 +1,9 @@
+2004-12-05  Lutz Mueller <lutz@users.sourceforge.net>
+
+	* exif/actions.c: Lars Ellenberg <l.g.e@web.de> found out that
+	  on his system, fprintf ("%s", NULL) does not work.
+	* exif/exif-utils.[c,h]: Remove some unused code.
+
 2004-09-09  Lutz Mueller <lutz@users.sourceforge.net>
 
 	* exif/configure.in: We depend on libexif 0.6.11.

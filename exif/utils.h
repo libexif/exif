@@ -24,16 +24,7 @@
 #include <libexif/exif-tag.h>
 #include <libexif/exif-ifd.h>
 
-#ifdef HAVE_MNOTE
-#include <libmnote/mnote-data.h>
-#endif
-
 ExifTag exif_tag_from_string (const char *string);
-
 ExifIfd exif_ifd_from_string (const char *string);
-
-#ifdef HAVE_MNOTE
-MNoteTag mnote_tag_from_string (MNoteData *note, const char *string);
-#endif
 
 #endif /* __UTILS_H__ */

@@ -31,6 +31,8 @@
 #define ENTRY_FOUND     "   *   "
 #define ENTRY_NOT_FOUND "   -   "
 
+#define CN(s) (s) ? : "(NULL)"
+
 void
 action_tag_table (const char *filename, ExifData *ed)
 {
@@ -187,9 +189,9 @@ show_entry_machine (ExifEntry *e, void *data)
 	char v[1024];
 
 	if (*ids) fprintf (stdout, "0x%04x", e->tag);
-	else fprintf (stdout, "%s", exif_tag_get_title (e->tag));
+	else fprintf (stdout, "%s", CN (exif_tag_get_title (e->tag)));
 	printf ("\t");
-	fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));
+	fprintf (stdout, "%s", CN (exif_entry_get_value (e, v, sizeof (v))));
 	fputc ('\n', stdout);
 }
 
