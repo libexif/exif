@@ -62,7 +62,7 @@ action_tag_table (const char *filename, ExifData *ed)
 		name = exif_tag_get_name (tag);
 		if (!name)
 			continue;
-		printf (_("  0x%04x %-29.29s"), tag, name);
+		printf ("  0x%04x %-29.29s", tag, name);
 		if (exif_content_get_entry (ed->ifd0, tag))
 			printf (ENTRY_FOUND);
 		else
@@ -133,8 +133,9 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 		return;
 
 	order = exif_data_get_byte_order (ed);
-	printf (_("EXIF tags in '%s' ('%s' byte order):\n"), filename,
+	printf (_("EXIF tags in '%s' ('%s' byte order):"), filename,
 		exif_byte_order_get_name (order));
+	printf ("\n");
 	print_hline (ids);
         if (ids)
                 printf ("%-6.6s", _("Tag"));

@@ -8,8 +8,8 @@ AM_PROG_LIBTOOL
 dnl ---------------------------------------------------------------------------
 dnl i18n support
 dnl ---------------------------------------------------------------------------
-dnl ALL_LINGUAS=""
-dnl AM_GNU_GETTEXT
+ALL_LINGUAS="de"
+AM_GNU_GETTEXT
 
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
@@ -25,6 +25,8 @@ AC_OUTPUT([
   Makefile
   libjpeg/Makefile
   exif/Makefile
+  intl/Makefile
+  po/Makefile.in
 ])
 
 echo "

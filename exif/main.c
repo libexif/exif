@@ -66,9 +66,9 @@ show_maker_note (ExifEntry *entry)
 
 	note = exif_note_new_from_data (entry->data, entry->size);
 	if (!note) {
-		printf (_("Could not parse data of tag '%s'."), 
+		fprintf (stderr, _("Could not parse data of tag '%s'."), 
 			exif_tag_get_name (entry->tag));
-		printf ("\n");
+		fprintf (stderr, "\n");
 		return;
 	}
 
@@ -76,15 +76,20 @@ show_maker_note (ExifEntry *entry)
 	exif_note_unref (note);
 
 	if (!value || !value[0]) {
-		printf (_("Tag '%s' does not contain known information.\n"),
+		fprintf (stderr, 
+			_("Tag '%s' does not contain known information."),
 			exif_tag_get_name (entry->tag));
+		fprintf (stderr, "\n");
 		return;
-	} else if (!value[1])
-		printf (_("Tag '%s' contains one piece of information:\n"),
+	} else if (!value[1]) {
+		printf (_("Tag '%s' contains one piece of information:"),
 			exif_tag_get_name (entry->tag));
-	else
-		printf (_("Tag '%s' contains the following information:\n"),
+		printf ("\n");
+	} else {
+		printf (_("Tag '%s' contains the following information:"),
 			exif_tag_get_name (entry->tag));
+		printf ("\n");
+	}
 	for (i = 0; value && value[i]; i++) {
 		printf (" %3i %s\n", i, value[i]);
 		free (value[i]);
@@ -97,11 +102,15 @@ show_entry (ExifEntry *entry, const char *caption)
 {
 	unsigned int i;
 
-	printf (_("EXIF entry 0x%x ('%s') exists in '%s':\n"), entry->tag,
+	printf (_("EXIF entry 0x%x ('%s') exists in '%s':"), entry->tag,
 		exif_tag_get_name (entry->tag), caption);
-	printf (_("  Format: '%s'\n"), exif_format_get_name (entry->format));
-	printf (_("  Components: %i\n"), (int) entry->components);
-	printf (_("  Value: '%s'\n"), exif_entry_get_value (entry));
+	printf ("\n");
+	printf (_("  Format: '%s'"), exif_format_get_name (entry->format));
+	printf ("\n");
+	printf (_("  Components: %i"), (int) entry->components);
+	printf ("\n");
+	printf (_("  Value: '%s'"), exif_entry_get_value (entry));
+	printf ("\n");
 	printf (_("  Data:"));
 	for (i = 0; i < entry->size; i++) {
 		if (!(i % 10))
@@ -176,6 +185,10 @@ main (int argc, const char **argv)
 	FILE *f;
 	JPEGData *jdata;
 
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, EXIF_LOCALEDIR);
+	textdomain (PACKAGE);
+
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
 	while (poptGetNextOpt (ctx) > 0);
@@ -201,9 +214,10 @@ main (int argc, const char **argv)
 			fprintf (stderr, "\n");
 			return (1);
 		}
-		printf (_("Tag 0x%04x ('%s'): %s\n"), eo.tag,
+		printf (_("Tag 0x%04x ('%s'): %s"), eo.tag,
 			exif_tag_get_name (eo.tag),
 			exif_tag_get_description (eo.tag));
+		printf ("\n");
 		return (0);
 	}
 

@@ -1,5 +1,6 @@
-INCLUDES =			\
-	-I$(top_srcdir)		\
+INCLUDES =						\
+	-I$(top_srcdir)					\
+	-DEXIF_LOCALEDIR=\""$(datadir)/locale"\"	\
 	$(LIBEXIF_CFLAGS)
 
 bin_PROGRAMS = exif
