@@ -12,49 +12,80 @@
 .\" Formatted or processed versions of this manual, if unaccompanied by
 .\" the source, must acknowledge the copyright and authors of this work.
 .\" License.
-.\" Modified Sun Sep 8 2002 by thomas
+.\" Modified 2002-09-08 by thomas
+.\" Modified 2005-03-23 by hun
 .\"
-.TH exif 1 "SEPTEMBER 2002" libexif "User Manuals"
-.SH NAME
+.TH exif 1 "2005-03-23" "" "libexif command line frontend"
+.SH "NAME"
 exif \- shows EXIF information in JPEG files
-.SH SYNOPSIS
-.BI "exif [ " OPTION " ]"
-.I file
+.SH "SYNOPSIS"
+.BI "exif [ " "OPTION" " ] " "file"
 .SH DESCRIPTION
-.B exif
-is a small command-line utility to show EXIF information hidden in JPEG files.
+.B "exif"
+is a small command-line utility to show and change EXIF information in JPEG files.
 .PP
-Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. The \fBexif\fR command line utility allows you to read the EXIF information from those files.
+Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. The
+.B "exif"
+command line utility allows you to read EXIF information from and write EXIF information to those files.
 .PP
-.SH OPTIONS
+.B "exif"
+internall uses the
+.B "libexif"
+library.
+.SH "OPTIONS"
 .TP
-\fB\-i, \-\-ids\fR
+.BI "\-i, \-\-ids"
 Show IDs instead of tag names
 .TP
-\fB\-t, \-\-tag=\fItag\fR
-Select \fItag\fR
+.BI "\-t, \-\-tag=" "tag"
+Select
+.I "tag"
 .TP
-\fB    \-\-ifd=\fIIFD\fR
-Select \fIIFD\fR
+.BI "\-\-ifd=" "IFD"
+Select
+.I "IFD"
 .TP
-\fB\-l, \-\-list\-tags\fR
+.BI "\-l, \-\-list\-tags"
 List all EXIF tags
 .TP
-\fB\-s, \-\-show\-description\fR
+.BI "\-|, \-\-show\-mnote"
+Show contents of tag MakerNote
+.TP
+.BI "\-\-remove"
+Remove tag or ifd
+.TP
+.BI "\-s, \-\-show\-description"
 Show description of tag
 .TP
-\fB\-e, \-\-extract\-thumbnail\fR
+.BI "\-e, \-\-extract\-thumbnail"
 Extract thumbnail
 .TP
-\fB\-n, \-\-insert\-thumbnail=\fIFILE\fR
-Insert \fIFILE\fR as thumbnail
+.BI "\-r, \-\-remove\-thumbnail"
+Remove thumbnail
 .TP
-\fB\-o, \-\-output=\fIFILE\fR
-Write output to \fIFILE\fR
+.BI "-n, \-\-insert\-thumbnail=" "FILE"
+Insert
+.I "FILE"
+as thumbnail
 .TP
-\fB    \-\-set\-value=\fIValue\fR
-.SH AUTHOR
+.BI "\-o, \-\-output=" "FILE"
+Write output to
+.I "FILE"
+.TP
+.BI "\-\-set\-value=" "VALUE"
+Set value
+.TP
+.BI "\-m, \-\-machine\-readable"
+Output in machine-readable (tab delimited) format
+.SS "Help options"
+.TP
+.BI "\-?, \-\-help"
+Show help message
+.TP
+.BI "\-\-usage"
+Display brief usage message
+.SH "AUTHOR"
 Written by Lutz Mueller <lutz@users.sourceforge.net>
 .SH "SEE ALSO"
-.BR libexif " http://www.sourceforge.net/projects/libexif"
-
+.UR "http://www.sourceforge.net/projects/libexif"
+.BR "http://www.sourceforge.net/projects/libexif"
