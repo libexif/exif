@@ -127,7 +127,6 @@ action_mnote_list (const char *filename, ExifData *ed)
 		strncpy (b2, C (exif_mnote_data_get_value (n, i, b, bs)), bs);
 		printf ("%s: %s\n", b1, b2);
 	}
-	exif_mnote_data_unref (n);
 }
 
 void

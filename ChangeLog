@@ -1,5 +1,9 @@
 2004-06-06  Lutz Mueller <lutz@users.sourceforge.net>
 
+	* exif/actions.c: Try to fix segfault.
+
+2004-06-06  Lutz Mueller <lutz@users.sourceforge.net>
+
 	* exif/actions.c: Fix --show-mnote.
 
 2004-05-27  Lutz Mueller <lutz@users.sourceforge.net>
