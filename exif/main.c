@@ -145,6 +145,8 @@ static int
 save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
 {
 	JPEGData *jdata;
+	unsigned char *d = NULL;
+	unsigned int ds;
 
 	/* Parse the JPEG file */
 	jdata = jpeg_data_new_from_file (fname);
@@ -154,6 +156,18 @@ save_exif_data_to_file (ExifData *ed, const char *fname, const char *target)
 		fprintf (stderr, "\n");
 		return (1);
 	}
+
+	/* Make sure the EXIF data is not too big. */
+	exif_data_save_data (ed, &d, &ds);
+	if (ds) {
+		if (ds > 0xffff) {
+			fprintf (stderr, _("Too much EXIF data (%i bytes). "
+				"Only %i bytes are allowed."), ds, 0xffff);
+			fprintf (stderr, "\n");
+			return (1);
+		}
+		free (d);
+	};
 
 	jpeg_data_set_exif_data (jdata, ed);
 
