@@ -53,9 +53,9 @@ action_tag_table (const char *filename, ExifData *ed)
 
 	printf (_("EXIF tags in %-25.25s "), filename);
 	printf ("%-8.8s", _("IFD 0"));
+	printf ("%-8.8s", _("IFD 1"));
 	printf ("%-8.8s", _("EXIF"));
 	printf ("%-8.8s", _("GPS"));
-	printf ("%-8.8s", _("IFD 1"));
 	printf ("%-8.8s", _("Interop."));
 	printf ("\n");
 	for (tag = 0; tag < 0xffff; tag++) {
@@ -67,15 +67,15 @@ action_tag_table (const char *filename, ExifData *ed)
 			printf (ENTRY_FOUND);
 		else
 			printf (ENTRY_NOT_FOUND);
+		if (exif_content_get_entry (ed->ifd1, tag))
+			printf (ENTRY_FOUND);
+		else
+			printf (ENTRY_NOT_FOUND);
 		if (exif_content_get_entry (ed->ifd_exif, tag))
 			printf (ENTRY_FOUND);
 		else
 			printf (ENTRY_NOT_FOUND);
 		if (exif_content_get_entry (ed->ifd_gps, tag))
-			printf (ENTRY_FOUND);
-		else
-			printf (ENTRY_NOT_FOUND);
-		if (exif_content_get_entry (ed->ifd1, tag))
 			printf (ENTRY_FOUND);
 		else
 			printf (ENTRY_NOT_FOUND);
@@ -88,24 +88,26 @@ action_tag_table (const char *filename, ExifData *ed)
 }
 
 static void
-show_ifd (ExifContent *content, unsigned char ids)
+show_entry (ExifEntry *entry, void *data)
 {
-        ExifEntry *e;
-        unsigned int i;
+	unsigned char *ids = data;
 
-        for (i = 0; i < content->count; i++) {
-                e = content->entries[i];
-                if (ids)
-                        printf ("0x%04x", e->tag);
-                else
-                        printf ("%-20.20s", exif_tag_get_name (e->tag));
-                printf ("|");
-                if (ids)
-                        printf ("%-73.73s", exif_entry_get_value (e));
-                else
-                        printf ("%-59.59s", exif_entry_get_value (e));
-                printf ("\n");
-        }
+	if (*ids)
+		printf ("0x%04x", entry->tag);
+	else
+		printf ("%-20.20s", exif_tag_get_name (entry->tag));
+	printf ("|");
+	if (*ids)
+		printf ("%-73.73s", exif_entry_get_value (entry));
+	else
+		printf ("%-59.59s", exif_entry_get_value (entry));
+	printf ("\n");
+}
+
+static void
+show_ifd (ExifContent *content, void *data)
+{
+	exif_content_foreach_entry (content, show_entry, data);
 }
 
 static void
@@ -125,7 +127,11 @@ print_hline (unsigned char ids)
 void
 action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 {
-	printf (_("EXIF tags in '%s':\n"), filename);
+	ExifByteOrder order;
+
+	order = exif_data_get_byte_order (ed);
+	printf (_("EXIF tags in '%s' ('%s' byte order):\n"), filename,
+		exif_byte_order_get_name (order));
 	print_hline (ids);
         if (ids)
                 printf ("%-6.6s", _("Tag"));
@@ -138,16 +144,7 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
                 printf ("%-59.59s", _("Value"));
         printf ("\n");
         print_hline (ids);
-        if (ed->ifd0)
-                show_ifd (ed->ifd0, ids);
-        if (ed->ifd1)
-                show_ifd (ed->ifd1, ids);
-        if (ed->ifd_exif)
-                show_ifd (ed->ifd_exif, ids);
-        if (ed->ifd_gps)
-                show_ifd (ed->ifd_gps, ids);
-        if (ed->ifd_interoperability)
-                show_ifd (ed->ifd_interoperability, ids);
+	exif_data_foreach_content (ed, show_ifd, &ids);
         print_hline (ids);
         if (ed->size) {
                 printf (_("EXIF data contains a thumbnail (%i bytes)."),
