@@ -1,5 +1,9 @@
 SUBDIRS = m4  libjpeg exif po
 
+man_MANS = exif.1
+
+EXTRA_DIST = exif.1
+
 
 ########################################################################
 # create .tar.bz2 distribution package for convenience if the

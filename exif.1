@@ -1,0 +1,60 @@
+.\" $Id: eglob.1,v 0.5 2002/07/05 12:43:52 thomas Exp $
+.\" (c) 2002 by Thomas Pircher (tehpeh at gmx dot net)
+.\"
+.\" Permission is granted to make and distribute verbatim copies of this
+.\" manual provided the copyright notice and this permission notice are
+.\" preserved on all copies.
+.\"
+.\" Permission is granted to copy and distribute modified versions of this
+.\" manual under the conditions for verbatim copying, provided that the
+.\" entire resulting derived work is distributed under the terms of a
+.\" permission notice identical to this one
+.\"
+.\" Formatted or processed versions of this manual, if unaccompanied by
+.\" the source, must acknowledge the copyright and authors of this work.
+.\" License.
+.\" Modified Sun Sep 8 2002 by thomas
+.\"
+.TH exif 1 "SEPTEMBER 2002" libexif "User Manuals"
+.SH NAME
+exif \- shows EXIF information in JPEG files
+.SH SYNOPSIS
+.BI "exif [ " OPTION " ]"
+.I file
+.SH DESCRIPTION
+.B exif
+is a small command-line utility to show EXIF information hidden in JPEG files.
+.PP
+Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. The \fBexif\fR command line utility allows you to read the EXIF information from those files.
+.PP
+.SH OPTIONS
+.TP
+\fB\-i, \-\-ids\fR
+Show IDs instead of tag names
+.TP
+\fB\-t, \-\-tag=\fItag\fR
+Select \fItag\fR
+.TP
+\fB    \-\-idf=\fIIDF\fR
+Select \fIIFD\fR
+\fB\-l, \-\-list\-tags\fR
+List all EXIF tags
+.TP
+\fB\-s, \-\-show\-description\fR
+Show description of tag
+.TP
+\fB\-e, \-\-extract\-thumbnail\fR
+Extract thumbnail
+.TP
+\fB\-n, \-\-insert\-thumbnail=\fIFILE\fR
+Insert \fIFILE\fR as thumbnail
+.TP
+\fB\-o, \-\-output=\fIFILE\fR
+Write output to \fIFILE\fR
+.TP
+\fB    \-\-set\-value=\fIValue\fR
+.SH AUTHOR
+Written by Lutz Mueller <lutz@users.sourceforge.net>
+.SH "SEE ALSO"
+.BR libexif " http://www.sourceforge.net/projects/libexif"
+
