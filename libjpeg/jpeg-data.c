@@ -192,7 +192,7 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 		 * JPEG sections start with 0xff. The first byte that is
 		 * not 0xff is a marker (hopefully).
 		 */
-		for (i = 0; i < 7; i++)
+		for (i = 0; i < MIN(7, size - o); i++)
 			if (d[o + i] != 0xff)
 				break;
 		if (!JPEG_IS_MARKER (d[o + i])) {
