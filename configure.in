@@ -37,14 +37,24 @@ AC_ARG_WITH(popt, [  --without-popt            Don't use popt.h],
 		popt_msg="no (not requested)"
 	fi
 )
+popt_prefix=$ac_default_prefix
+AC_ARG_WITH(popt-prefix, [  --with-popt-prefix=PREFIX  Location of popt], [
+	popt_prefix="$withval"])
 if $try_popt; then
+	CPPFLAGS_save="$CPPFLAGS"
+	CPPFLAGS="-I$popt_prefix/include $CPPFLAGS"
 	AC_CHECK_HEADER(popt.h, [
-		POPT_CFLAGS=""
-		POPT_LIBS="-lpopt"
+		POPT_CFLAGS="-I$popt_prefix/include"
+		POPT_LIBS="-L$popt_prefix/lib -lpopt"
+		AC_DEFINE(HAVE_POPT,1,[whether we have popt])
+		LDFLAGS_save="$LDFLAGS"
+                LDFLAGS="$POPT_LIBS"
 		have_popt=true
 		popt_msg=yes
-		AC_DEFINE(HAVE_POPT,1,[whether we use popt])],
-		[rl_msg="no (couldn't link against it or version too old)"])
+		LDFLAGS="$LDFLAGS_save"],
+		[rl_msg="no (couldn't link against it or version too old)"]
+		)
+	CPPFLAGS="$CPPFLAGS_save"
 fi
 AM_CONDITIONAL(HAVE_POPT, $have_popt)
 AC_SUBST(POPT_LIBS)
