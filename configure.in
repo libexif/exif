@@ -1,7 +1,7 @@
 AC_PREREQ(2.50)
 AC_INIT(exif/main.c)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(exif,0.6)
+AM_INIT_AUTOMAKE(exif,0.6.9)
 AM_MAINTAINER_MODE
 
 AM_PROG_LIBTOOL
@@ -18,7 +18,7 @@ AM_GNU_GETTEXT
 dnl ---------------------------------------------------------------------------
 dnl libraries needed
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.5.13)
+PKG_CHECK_MODULES(LIBEXIF, libexif >= 0.6.9)
 AC_SUBST(LIBEXIF_LIBS)
 AC_SUBST(LIBEXIF_CFLAGS)
 
