@@ -1,7 +1,3 @@
-dnl ################################################################
-dnl # THIS FILE IS OBSOLETE - USE configure.ac INSTEAD.            #
-dnl ################################################################
-
 AC_PREREQ(2.59)
 AC_INIT([libexif command line interface],[0.6.13],[libexif-devel@lists.sourceforge.net],[exif])
 AC_CONFIG_SRCDIR([exif/main.c])
