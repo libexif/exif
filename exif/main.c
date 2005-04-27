@@ -60,8 +60,10 @@ internal_error (void)
 }
 
 static void
-show_entry (ExifEntry *entry, const char *caption, unsigned int machine_readable)
+show_entry (ExifEntry *entry, unsigned int machine_readable)
 {
+	ExifIfd ifd = exif_entry_get_ifd (entry);
+
 	if (machine_readable) {
 		char b[1024];
 
@@ -70,8 +72,9 @@ show_entry (ExifEntry *entry, const char *caption, unsigned int machine_readable
 	}
 
 	printf (_("EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"),
-		C(exif_tag_get_title (entry->tag)), entry->tag,
-		C(exif_tag_get_name (entry->tag)), caption);
+		C(exif_tag_get_title_in_ifd (entry->tag, ifd)), entry->tag,
+		C(exif_tag_get_name_in_ifd (entry->tag, ifd)), 
+		C(exif_ifd_get_name (ifd)));
 	printf ("\n");
 
 	exif_entry_dump (entry, 0);
@@ -86,7 +89,7 @@ search_entry (ExifData *ed, ExifTag tag, unsigned int machine_readable)
 	for (i = 0; i < EXIF_IFD_COUNT; i++) {
 		entry = exif_content_get_entry (ed->ifd[i], tag);
 		if (entry)
-			show_entry (entry, exif_ifd_get_name (i), machine_readable);
+			show_entry (entry, machine_readable);
 	}
 }
 
@@ -139,7 +142,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 		s = exif_format_get_size (e->format);
 		switch (e->format) {
 		case EXIF_FORMAT_ASCII:
-                        internal_error (); /* Previously handled */
+			internal_error (); /* Previously handled */
 			break;
 		case EXIF_FORMAT_SHORT:
 			exif_set_short (e->data + (s * i), o, atoi (buf));
@@ -191,6 +194,12 @@ log_func_exit (ExifLog *log, ExifLogCode code, const char *domain,
 		const char *format, va_list args, void *data)
 {
 	switch (code) {
+	case -1:
+		put_colorstring (stderr, COL_RED);
+		vfprintf (stderr, format, args);
+		fprintf (stderr, "\n");
+		put_colorstring (stderr, COL_NORMAL);
+		exit (1);
 	case EXIF_LOG_CODE_NO_MEMORY:
 	case EXIF_LOG_CODE_CORRUPT_DATA:
 		put_colorstring (stderr, COL_RED);
@@ -246,10 +255,16 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 	  const char *format, va_list args, void *data)
 {
 	switch (code) {
+	case -1:
+		put_colorstring (stderr, COL_RED);
+		vfprintf (stderr, format, args);
+		fprintf (stderr, "\n");
+		put_colorstring (stderr, COL_NORMAL);
+		exit (1);
 	case EXIF_LOG_CODE_DEBUG:
 		put_colorstring (stdout, COL_GREEN);
-		printf ("%s: ", domain);
-		vprintf (format, args);
+		fprintf (stdout, "%s: ", domain);
+		vfprintf (stdout, format, args);
 		put_colorstring (stdout, COL_NORMAL);
 		printf ("\n");
 		break;
@@ -295,7 +310,7 @@ static unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
 static unsigned int remove_tag = 0;
 static unsigned int list_mnote = 0, debug = 0;
 static const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
-static ExifIfd ifd = -1;
+static ExifIfd ifd = EXIF_IFD_0;
 static ExifTag tag = 0;
 static ExifOptions eo = {0, 0};
 
@@ -369,38 +384,28 @@ main (int argc, const char **argv)
 		return (1);
 	}
 
-	if (tag_string) {
-		tag = exif_tag_from_string (tag_string);
-		if (!tag || !exif_tag_get_name (tag)) {
-			fprintf (stderr, _("Invalid tag '%s'!"), tag_string);
-			fputc ('\n', stderr);
-			return (1);
-		}
-		eo.tag = tag;
-	}
-
 	if (ifd_string) {
 		ifd = exif_ifd_from_string (ifd_string);
 		if ((ifd < EXIF_IFD_0) || (ifd >= EXIF_IFD_COUNT) ||
-		    !exif_ifd_get_name (ifd)) {
-			fprintf (stderr, _("Invalid IFD '%s'. Valid IFDs are "
-				"'0', '1', 'EXIF', 'GPS', and "
-				"'Interoperability'."), ifd_string);
-			fputc ('\n', stderr);
-			return (1);
-		}
+		    !exif_ifd_get_name (ifd))
+			exif_log (log, -1, "exif", _("Invalid IFD '%s'. Valid IFDs are "
+						"'0', '1', 'EXIF', 'GPS', and "
+						"'Interoperability'."), ifd_string);
+	}
+
+	if (tag_string) {
+		tag = exif_tag_from_string (tag_string);
+		if (tag == 0xffff)
+			exif_log (log, -1, "exif", _("Invalid tag '%s'!"), tag_string);
+		eo.tag = tag;
 	}
 
 	if (show_description) {
-		if (!eo.tag) {
-			fprintf (stderr, _("Please specify a tag!"));
-			fputc ('\n', stderr);
-			return (1);
-		}
+		if (!eo.tag) exif_log (log, -1, "exif", _("Please specify a tag!"));
 		printf (_("Tag '%s' (0x%04x, '%s'): %s"),
-			C(exif_tag_get_title (eo.tag)), eo.tag,
-			C(exif_tag_get_name (eo.tag)),
-			C(exif_tag_get_description (eo.tag)));
+			C(exif_tag_get_title_in_ifd (eo.tag, ifd)), eo.tag,
+			C(exif_tag_get_name_in_ifd (eo.tag, ifd)),
+			C(exif_tag_get_description_in_ifd (eo.tag, ifd)));
 		printf ("\n");
 		return (0);
 	}
@@ -425,12 +430,9 @@ main (int argc, const char **argv)
 						ed->ifd[EXIF_IFD_1]->count ||
 						ed->ifd[EXIF_IFD_EXIF]->count ||
 						ed->ifd[EXIF_IFD_GPS]->count ||
-						ed->ifd[EXIF_IFD_INTEROPERABILITY]->count)) {
-				fprintf (stderr, _("'%s' does not "
-					 "contain EXIF data!"), *args);
-				fputc ('\n', stderr);
-				exit (1);
-			}
+						ed->ifd[EXIF_IFD_INTEROPERABILITY]->count))
+				exif_log (log, -1, "exif", _("'%s' does not "
+							"contain EXIF data!"), *args);
 
 			/* Where do we save the output? */
 			memset (fname, 0, sizeof (fname));
@@ -450,45 +452,33 @@ main (int argc, const char **argv)
 					e = exif_content_get_entry (
 							ed->ifd[ifd], tag);
 					if (e)
-						show_entry (e, ifd_string, machine_readable);
-					else {
-						fprintf (stderr, _("IFD '%s' "
-							"does not contain tag "
-							"'%s'."), 
-							ifd_string, tag_string);
-						fputc ('\n', stderr);
-						return (1);
-					}
+						show_entry (e, machine_readable);
+					else
+						exif_log (log, -1, "exif", _("IFD '%s' "
+									"does not contain tag '%s'."), ifd_string, tag_string);
 				} else {
 					search_entry (ed, eo.tag, machine_readable);
 				}
 			} else if (extract_thumbnail) {
 
 				/* No thumbnail? Exit. */
-				if (!ed->data) {
-					fprintf (stderr, _("'%s' does not "
-						"contain a thumbnail!"),
-						*args);
-					fputc ('\n', stderr);
-					return (1);
-				}
+				if (!ed->data)
+					exif_log (log, -1, "exif", _("'%s' does not "
+								"contain a thumbnail!"), *args);
 
 				/* Save the thumbnail */
 				f = fopen (fname, "wb");
-				if (!f) {
+				if (!f)
 #ifdef __GNUC__
-					fprintf (stderr,
+					exif_log (log, -1, "exif",
 						_("Could not open '%s' for "
 						"writing (%m)!"), fname);
 #else
-					fprintf (stderr,
+					exif_log (log, -1, "exif", 
 						_("Could not open '%s' for "
 						"writing (%s)!"), fname,
 						strerror (errno));
 #endif
-					fputc ('\n', stderr);
-					return (1);
-				}
 				fwrite (ed->data, 1, ed->size, f);
 				fclose (f);
 				fprintf (stdout, _("Wrote file '%s'."),
@@ -518,42 +508,30 @@ main (int argc, const char **argv)
 
 				/* Insert new thumbnail */
 				f = fopen (ithumbnail, "rb");
-				if (!f) {
+				if (!f)
 #ifdef __GNUC__
-					fprintf (stderr, _("Could not open "
+					exif_log (log, -1, "exif", _("Could not open "
 						"'%s' (%m)!"), ithumbnail);
 #else
-					fprintf (stderr, _("Could not open "
+					exif_log (log, -1, "exif", _("Could not open "
 						"'%s' (%s)!"), ithumbnail,
 						strerror (errno));
 #endif
-					fputc ('\n', stderr);
-					return (1);
-				}
 				fseek (f, 0, SEEK_END);
 				ed->size = ftell (f);
 				ed->data = malloc (sizeof (char) * ed->size);
-				if (ed->size && !ed->data) {
-					fprintf (stderr, _("Could not "
-						"allocate %i byte(s)."),
-						ed->size);
-					fputc ('\n', stderr);
-					return (1);
-				}
+				if (ed->size && !ed->data) EXIF_LOG_NO_MEMORY (log, "exif", ed->size);
 				fseek (f, 0, SEEK_SET);
 				if (fread (ed->data, sizeof (char),
-					   ed->size, f) != ed->size) {
+					   ed->size, f) != ed->size)
 #ifdef __GNUC__
-					fprintf (stderr, _("Could not read "
+					exif_log (log, -1, "exif", _("Could not read "
 						"'%s' (%m)."), ithumbnail);
 #else
-					fprintf (stderr, _("Could not read "
+					exif_log (log, -1, "exif", _("Could not read "
 						"'%s' (%s)."), ithumbnail,
 						strerror (errno));
 #endif
-					fputc ('\n', stderr);
-					return (1);
-				}
 				fclose (f);
 
 				save_exif_data_to_file (ed, log, *args, fname);
@@ -561,21 +539,12 @@ main (int argc, const char **argv)
 			} else if (set_value) {
 
 				/* We need a tag... */
-				if (!tag) {
-					fprintf (stderr, _("You need to "
-						"specify a tag!"));
-					fputc ('\n', stderr);
-					return (1);
-				}
+				if (!tag) exif_log (log, -1, "exif", _("You need to specify a tag!"));
 
 				/* ... and an IFD. */
 				if ((ifd < EXIF_IFD_0) ||
-				    (ifd >= EXIF_IFD_COUNT)) {
-					fprintf (stderr, _("You need to "
-						"specify an IFD!"));
-					fputc ('\n', stderr);
-					return (1);
-				}
+				    (ifd >= EXIF_IFD_COUNT))
+					exif_log (log, -1, "exif", _("You need to specify an IFD!"));
 
 				/* If the entry doesn't exist, create it. */
 				e = exif_content_get_entry (ed->ifd[ifd], tag);
@@ -593,12 +562,8 @@ main (int argc, const char **argv)
 				
 				/* We need an IFD. */
 				if ((ifd < EXIF_IFD_0) ||
-				    (ifd >= EXIF_IFD_COUNT)) {
-					fprintf (stderr, _("You need to "
-						 "specify an IFD!"));
-					fputc ('\n', stderr);
-					return (1);
-				}
+				    (ifd >= EXIF_IFD_COUNT))
+					exif_log (log, -1, "exif", _("You need to specify an IFD!"));
 
 				if (!tag) {
 					while (ed->ifd[ifd] &&
@@ -609,17 +574,12 @@ main (int argc, const char **argv)
 				} else {
 					e = exif_content_get_entry (
 							ed->ifd[ifd], tag);
-					if (!e) {
-					    fprintf (stderr, _("IFD '%s' "
-						 "does not contain a "
+					if (!e)
+					    exif_log (log, -1, "exif", _("IFD '%s' does not contain a "
 						 "tag '%s'!"),
 						exif_ifd_get_name (ifd),
-						exif_tag_get_name (tag));
-					    fputc ('\n', stderr);
-					    return (1);
-					}
-					exif_content_remove_entry (ed->ifd[ifd],
-								   e);
+						exif_tag_get_name_in_ifd (tag, ifd));
+					exif_content_remove_entry (ed->ifd[ifd], e);
 				}
 
 				/* Save modified data. */

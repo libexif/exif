@@ -32,7 +32,7 @@ exif_tag_from_string (const char *string)
 	const char *name;
 
 	if (!string)
-		return (0);
+		return 0xffff;
 
 	/* Is the string a tag's name or title? */
 	for (tag = 0xffff; tag > 0; tag--) {
@@ -53,7 +53,7 @@ exif_tag_from_string (const char *string)
 		if (string[i] == 'x')
 			break;
 	if (i == strlen (string))
-		return (0);
+		return 0xffff;
 
 	string += i + 1;
         tag = 0;
