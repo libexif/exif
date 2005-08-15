@@ -3,6 +3,7 @@
 
 #ifdef HAVE_ICONV
 #  include <iconv.h>
+#  include <langinfo.h>
 #endif
 
 #include <string.h>
@@ -24,7 +25,7 @@ exif_i18n_convert_utf8_to_lat1 (const char *in)
 	if (!in) return NULL;
 
 	memset (buf, 0, sizeof (buf));
-	if (!tr) tr = iconv_open ("ISO-8859-1", "UTF-8");
+	if (!tr) tr = iconv_open (nl_langinfo (CODESET), "UTF-8");
 	iconv (tr, (char **) &in, &t, (char **) &out, &buf_size);
 	return buf;
 #else
