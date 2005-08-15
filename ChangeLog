@@ -3,6 +3,7 @@
 	Patch by Jakub Bogusz <qboosh@pld-linux.org>:
 
 	* libexif/exif-i18n.h: Fix translation.
+	* po/pl.po: New
 
 2005-04-27  Lutz Mueller <lutz@users.sourceforge.net>
 
