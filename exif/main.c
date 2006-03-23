@@ -113,7 +113,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
                         fputc ('\n', stderr);
                         exit (1);
                 }
-                strcpy (e->data, set_value);
+                strcpy ((char *) e->data, (char *) set_value);
                 return;
 	}
 
@@ -136,7 +136,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
                 } else end = value_p++;
 
                 buf = malloc ((end - begin + 1) * sizeof (char));
-                strncpy (buf, begin, end - begin);
+                strncpy ((char *) buf, (char *) begin, end - begin);
                 buf[end - begin] = '\0';
 
 		s = exif_format_get_size (e->format);
@@ -145,13 +145,13 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 			internal_error (); /* Previously handled */
 			break;
 		case EXIF_FORMAT_SHORT:
-			exif_set_short (e->data + (s * i), o, atoi (buf));
+			exif_set_short (e->data + (s * i), o, atoi ((char *) buf));
 			break;
 		case EXIF_FORMAT_LONG:
-			exif_set_long (e->data + (s * i), o, atol (buf));
+			exif_set_long (e->data + (s * i), o, atol ((char *) buf));
 			break;
 		case EXIF_FORMAT_SLONG:
-			exif_set_slong (e->data + (s * i), o, atol (buf));
+			exif_set_slong (e->data + (s * i), o, atol ((char *) buf));
 			break;
 		case EXIF_FORMAT_RATIONAL:
 		case EXIF_FORMAT_SRATIONAL:
@@ -309,6 +309,7 @@ static unsigned int list_tags = 0, show_description = 0, machine_readable = 0;
 static unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
 static unsigned int remove_tag = 0;
 static unsigned int list_mnote = 0, debug = 0;
+static unsigned int show_version = 0;
 static const char *set_value = NULL, *ifd_string = NULL, *tag_string = NULL;
 static ExifIfd ifd = EXIF_IFD_0;
 static ExifTag tag = 0;
@@ -323,6 +324,8 @@ main (int argc, const char **argv)
 	const char *ithumbnail = NULL;
 	struct poptOption options[] = {
 		POPT_AUTOHELP
+    {"version", 'v', POPT_ARG_NONE, &show_version, 0,
+      N_("Display software version"), NULL},
 		{"ids", 'i', POPT_ARG_NONE, &eo.use_ids, 0,
 		 N_("Show IDs instead of tag names"), NULL},
 		{"tag", 't', POPT_ARG_STRING, &tag_string, 0,
@@ -383,6 +386,11 @@ main (int argc, const char **argv)
 		poptPrintHelp (ctx, stdout, 0);
 		return (1);
 	}
+
+  if (show_version) {
+    printf ("%s\n", VERSION);
+    return 0;
+  }
 
 	if (ifd_string) {
 		ifd = exif_ifd_from_string (ifd_string);
