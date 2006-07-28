@@ -1,3 +1,11 @@
+2006-07-28  Lutz Mueller <lutz@users.sourceforge.net>
+
+  Patch by Marek 'marx' Grac <mgrac@redhat.com>:
+
+  * exif/actions.c: (show_entry_xml, show_xml, action_tag_list_xml) New.
+	* exif/actions.h: Remove cruft.
+	* exif/main.c: Provide an 'xml-output' option.
+
 2006-03-23  Lutz Mueller <lutz@users.sourceforge.net>
 
   * exif/main.c: Add the command line option '--version'/'-v'.

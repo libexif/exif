@@ -23,17 +23,15 @@
 
 #include <libexif/exif-data.h>
 
-#ifdef HAVE_MNOTE
-#include <libmnote/mnote-data.h>
-#endif
-
 void action_tag_table        (const char *filename, ExifData *);
 void action_tag_list         (const char *filename, ExifData *,
-			      unsigned char ids);
+                              unsigned char ids);
 void action_tag_list_machine (const char *filename, ExifData *,
-			      unsigned char ids);
+                              unsigned char ids);
+void action_tag_list_xml     (const char *filename, ExifData *,
+                              unsigned char ids);
 
 void action_mnote_list       (const char *filename, ExifData *,
-			      unsigned char ids);
+                              unsigned char ids);
 
 #endif /* __ACTIONS_H__ */

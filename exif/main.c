@@ -306,6 +306,7 @@ struct _ExifOptions {
  * these variables belong into main ().
  */
 static unsigned int list_tags = 0, show_description = 0, machine_readable = 0;
+static unsigned int xml_output = 0;
 static unsigned int extract_thumbnail = 0, remove_thumbnail = 0;
 static unsigned int remove_tag = 0;
 static unsigned int list_mnote = 0, debug = 0;
@@ -352,6 +353,9 @@ main (int argc, const char **argv)
 		 N_("Value"), NULL},
 		{"machine-readable", 'm', POPT_ARG_NONE, &machine_readable, 0,
 		 N_("Output in a machine-readable (tab delimited) format"),
+		 NULL},
+		{"xml-output", 'x', POPT_ARG_NONE, &xml_output, 0,
+		 N_("Output in a XML format"),
 		 NULL},
 		{"debug", 'd', POPT_ARG_NONE, &debug, 0,
 		 N_("Show debugging messages"), NULL},
@@ -595,6 +599,8 @@ main (int argc, const char **argv)
 
 			} else if (machine_readable) {
 				action_tag_list_machine (*args, ed, eo.use_ids);
+			} else if (xml_output) {
+				action_tag_list_xml (*args, ed, eo.use_ids);
 			} else if (list_mnote) {
 				action_mnote_list (*args, ed, eo.use_ids);
 			} else

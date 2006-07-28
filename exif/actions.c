@@ -217,3 +217,44 @@ action_tag_list_machine (const char *filename, ExifData *ed, unsigned char ids)
 	if (ed->size)
 		fprintf (stdout, _("ThumbnailSize\t%i\n"), ed->size);
 }
+
+static void
+show_entry_xml (ExifEntry *e, void *data)
+{
+	unsigned char *ids = data;
+	char v[1024], t[1024];
+
+	if (*ids) {
+		fprintf (stdout, "<0x%04x>", e->tag);
+		fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));
+		fprintf (stdout, "</0x%04x>", e->tag);
+	} else {
+		int x;
+		strncpy (t, exif_tag_get_title (e->tag), sizeof (t));
+
+    /* Remove invalid characters from tag eg. (, ), space */
+		for (x = 0; x < strlen (t); x++)
+			if ((t[x] == '(') || (t[x] == ')') || (t[x] == ' '))
+				t[x] = '_';
+
+		fprintf (stdout, "\t<%s>", t);
+		fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));
+		fprintf (stdout, "</%s>\n", t);
+	}
+}
+
+static void
+show_xml (ExifContent *content, void *data)
+{
+	exif_content_foreach_entry (content, show_entry_xml, data);
+}
+
+void
+action_tag_list_xml (const char *filename, ExifData *ed, unsigned char ids)
+{
+	if (!ed) return;
+
+	fprintf(stdout, "<exif>\n");
+	exif_data_foreach_content (ed, show_xml, &ids);
+	fprintf(stdout, "</exif>\n");
+}
