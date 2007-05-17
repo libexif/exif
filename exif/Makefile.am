@@ -26,7 +26,7 @@ EXTRA_DIST = check-param-validity.in
 
 TESTS = $(check_SCRIPTS)
 
-%.sh: %.in
+.in.sh:
 	sed 's|@exif\@|./exif$(EXEEXT)|g' < $< > $@
 	chmod +x $@
 
