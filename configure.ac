@@ -28,6 +28,7 @@ AC_C_CONST
 AM_PROG_LIBTOOL
 AM_CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)"
 GP_CONFIG_MSG([Compiler],[${CC}])
+AM_PROG_CC_C_O
 
 AC_CHECK_FUNCS([isatty fileno])
 
