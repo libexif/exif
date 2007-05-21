@@ -18,7 +18,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <config.h>
+#include "config.h"
 
 #include <errno.h>
 #include <stdlib.h>
@@ -179,7 +179,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 #if defined(HAVE_ISATTY) && defined(HAVE_FILENO)
 #  define file_is_tty(file) (isatty(fileno(file)))
 #else
-#  define file_is_tty(file, colorstring) (0==1)
+#  define file_is_tty(file) (0==1)
 #endif
 
 #define put_colorstring(file, colorstring) \
