@@ -25,7 +25,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <libexif/exif-i18n.h>
+/* This refers to the exif-i18n.h file from the "exif" package and is
+ * NOT to be confused with the libexif/i18n.h file.
+ */
+#include "exif/exif-i18n.h"
 
 struct _JPEGDataPrivate
 {
