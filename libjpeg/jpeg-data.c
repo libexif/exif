@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <exif/exif-i18n.h>
+#include <libexif/exif-i18n.h>
 
 struct _JPEGDataPrivate
 {
