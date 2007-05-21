@@ -101,6 +101,6 @@ AC_CONFIG_FILES([
   libjpeg/Makefile
   exif/Makefile
 ])
-AC_OUTPUT()dnl
+AC_OUTPUT
 
 GP_CONFIG_OUTPUT()dnl
