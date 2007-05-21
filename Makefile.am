@@ -5,7 +5,7 @@ man_MANS = exif.1
 # newer versions of automake/autoconf require adding exif.1 here
 EXTRA_DIST = exif.1 @PACKAGE_TARNAME@.spec autogen.sh
 
-ACLOCAL_AMFLAGS = -I m4m
+ACLOCAL_AMFLAGS = -I auto-m4 -I m4m
 
 #######################################################################
 # Help for the maintainer

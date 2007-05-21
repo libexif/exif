@@ -1,8 +1,9 @@
 AC_PREREQ(2.59)
-AC_INIT([libexif command line interface],[0.6.13],[libexif-devel@lists.sourceforge.net],[exif])
+AC_INIT([libexif command line interface], [0.6.14cvs1], [libexif-devel@lists.sourceforge.net], [exif])
 AC_CONFIG_SRCDIR([exif/main.c])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
+AC_CONFIG_MACRO_DIR([auto-m4])
+AM_INIT_AUTOMAKE([-Wall gnu 1.9 dist-bzip2 check-news])
 
 if test ! -d "$srcdir/m4m"; then
 AC_MSG_ERROR([
@@ -26,7 +27,7 @@ GP_CONFIG_MSG([Source code location],[${srcdir}])
 AC_PROG_CC
 AC_C_CONST
 AM_PROG_LIBTOOL
-AM_CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)"
+AM_CPPFLAGS="$CPPFLAGS -I\$(top_srcdir) -I\$(top_builddir)"
 GP_CONFIG_MSG([Compiler],[${CC}])
 AM_PROG_CC_C_O
 
