@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: exif 0.6.9\n"
-"POT-Creation-Date: 2004-05-27 19:45+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-17 17:23+0200\n"
 "PO-Revision-Date: 2005-03-21 18:01+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -13,257 +14,267 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: exif/actions.c:43
+#: exif/actions.c:45
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "Znaczniki EXIF w '%s':"
 
-#: exif/actions.c:109
-#, c-format
-msgid "Unknown MakerNote format."
+#: exif/actions.c:114
+#, fuzzy, c-format
+msgid "Unknown MakerNote format.\n"
 msgstr "Nieznany format MakerNote."
 
-#: exif/actions.c:116
+#: exif/actions.c:121
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote nie zawiera żadnej wartości.\n"
 
-#: exif/actions.c:119
+#: exif/actions.c:124
 #, c-format
 msgid "MakerNote contains 1 value:\n"
 msgstr "MakerNote zawiera 1 wartość:\n"
 
-#: exif/actions.c:122
+#: exif/actions.c:127
 #, c-format
 msgid "MakerNote contains %i values:\n"
 msgstr "MakerNote zawiera %i wartości:\n"
 
-#: exif/actions.c:139
+#: exif/actions.c:135
+msgid "Unknown tag"
+msgstr ""
+
+#: exif/actions.c:138
+msgid "Unknown value"
+msgstr ""
+
+#: exif/actions.c:163
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "Znaczniki EXIF w '%s' (kolejność bajtów '%s'):"
 
-#: exif/actions.c:144 exif/actions.c:146
+#: exif/actions.c:168 exif/actions.c:170
 msgid "Tag"
 msgstr "Znacznik"
 
-#: exif/actions.c:149 exif/actions.c:151 exif/main.c:282
+#: exif/actions.c:174 exif/actions.c:176 exif/main.c:353
 msgid "Value"
 msgstr "Wartość"
 
-#: exif/actions.c:157
+#: exif/actions.c:182
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "Dane EXIF zawierają miniaturkę (%i bajtów)."
 
-#: exif/actions.c:189
+#: exif/actions.c:218
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "ThumbnailSize\t%i\n"
 
-#: exif/main.c:51
-#, c-format
-msgid "Internal error. Please contact <libexif-devel@lists.sourceforge.net>."
-msgstr "Błąd wewnętrzny. Proszę skontaktować się z <libexif-devel@lists.sourceforge.net>."
+#: exif/main.c:55
+#, fuzzy, c-format
+msgid "Internal error. Please contact <%s>.)"
+msgstr ""
+"Błąd wewnętrzny. Proszę skontaktować się z <libexif-devel@lists.sourceforge."
+"net>."
 
-#: exif/main.c:61
+#: exif/main.c:74
 #, c-format
 msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
 msgstr "Wpis EXIF '%s' (0x%x, '%s') istnieje w IFD '%s':"
 
-#: exif/main.c:98
+#: exif/main.c:112
 #, c-format
 msgid "Not enough memory."
 msgstr "Za mało pamięci."
 
-#: exif/main.c:116
+#: exif/main.c:130
 #, c-format
 msgid "Too few components specified!"
 msgstr "Podano za mało składowych!"
 
-#: exif/main.c:146
+#: exif/main.c:160
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Jeszcze nie zaimplementowane!"
 
-#: exif/main.c:165
-#, c-format
-msgid "Could not parse JPEG file '%s'."
-msgstr "Nie można przeanalizować pliku JPEG '%s'."
-
-#: exif/main.c:175
+#: exif/main.c:233
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Zbyt dużo danych EXIF (%i bajtów). Dozwolone jest tylko %i bajtów."
 
-#: exif/main.c:189 exif/main.c:435
+#: exif/main.c:247 exif/main.c:496
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Zapisano plik '%s'."
 
-#: exif/main.c:260
+#: exif/main.c:329
+msgid "Display software version"
+msgstr ""
+
+#: exif/main.c:331
 msgid "Show IDs instead of tag names"
 msgstr "Pokazywanie ID zamiast nazw znaczników"
 
-#: exif/main.c:262
+#: exif/main.c:333
 msgid "Select tag"
 msgstr "Wybór znacznika"
 
-#: exif/main.c:262
+#: exif/main.c:333
 msgid "tag"
 msgstr "znacznik"
 
-#: exif/main.c:264
+#: exif/main.c:335
 msgid "Select IFD"
 msgstr "Wybór IFD"
 
-#: exif/main.c:264
+#: exif/main.c:335
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:266
+#: exif/main.c:337
 msgid "List all EXIF tags"
 msgstr "Wypisanie wszystkich znaczników EXIF"
 
-#: exif/main.c:268
+#: exif/main.c:339
 msgid "Show contents of tag MakerNote"
 msgstr "Pokazanie zawartości znacznika MakerNote"
 
-#: exif/main.c:270
+#: exif/main.c:341
 msgid "Remove tag or ifd"
 msgstr "Usunięcie znacznika lub IFD"
 
-#: exif/main.c:272
+#: exif/main.c:343
 msgid "Show description of tag"
 msgstr "Pokazanie opisu znacznika"
 
-#: exif/main.c:274
+#: exif/main.c:345
 msgid "Extract thumbnail"
 msgstr "Wyciągnięcie miniaturki"
 
-#: exif/main.c:276
+#: exif/main.c:347
 msgid "Remove thumbnail"
 msgstr "Usunięcie miniaturki"
 
-#: exif/main.c:278
+#: exif/main.c:349
 msgid "Insert FILE as thumbnail"
 msgstr "Wstawienie PLIKU jako miniaturki"
 
-#: exif/main.c:278 exif/main.c:280
+#: exif/main.c:349 exif/main.c:351
 msgid "FILE"
 msgstr "PLIK"
 
-#: exif/main.c:280
+#: exif/main.c:351
 msgid "Write data to FILE"
 msgstr "Zapis danych do PLIKU"
 
-#: exif/main.c:284
+#: exif/main.c:355
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "Wyjście w formacie czytelnym dla maszyny (ograniczonym tabulacjami)"
 
-#: exif/main.c:287
+#: exif/main.c:358
+msgid "Output in a XML format"
+msgstr ""
+
+#: exif/main.c:361
 msgid "Show debugging messages"
 msgstr "Pokazywanie komunikatów diagnostycznych"
 
-#: exif/main.c:304
+#: exif/main.c:378
 msgid "[OPTION...] file"
 msgstr "[OPCJA...] plik"
 
-#: exif/main.c:321
-#, c-format
-msgid "Invalid tag '%s'!"
-msgstr "Błędny znacznik '%s'!"
-
-#: exif/main.c:332
+#: exif/main.c:403
 #, c-format
 msgid ""
 "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and "
 "'Interoperability'."
 msgstr ""
-"Błędny IFD '%s'. Poprawne IFD to '0', '1', 'EXIF', 'GPS' oraz 'Interoperability'."
+"Błędny IFD '%s'. Poprawne IFD to '0', '1', 'EXIF', 'GPS' oraz "
+"'Interoperability'."
 
-#: exif/main.c:342
+#: exif/main.c:411
 #, c-format
+msgid "Invalid tag '%s'!"
+msgstr "Błędny znacznik '%s'!"
+
+#: exif/main.c:416
 msgid "Please specify a tag!"
 msgstr "Proszę podać znacznik!"
 
-#: exif/main.c:346
+#: exif/main.c:417
 #, c-format
 msgid "Tag '%s' (0x%04x, '%s'): %s"
 msgstr "Znacznik '%s' (0x%04x, '%s'): %s"
 
-#: exif/main.c:370
+#: exif/main.c:446
 #, c-format
 msgid "'%s' does not contain EXIF data!"
 msgstr "'%s' nie zawiera danych EXIF!"
 
-#: exif/main.c:396
+#: exif/main.c:469
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD '%s' nie zawiera znacznika '%s'."
 
-#: exif/main.c:410
+#: exif/main.c:478
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "'%s' nie zawiera miniaturki!"
 
-#: exif/main.c:422
+#: exif/main.c:486
 #, c-format
 msgid "Could not open '%s' for writing (%m)!"
 msgstr "Nie można otworzyć '%s' do zapisu (%m)!"
 
-#: exif/main.c:426
+#: exif/main.c:490
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Nie można otworzyć '%s' do zapisu (%s)!"
 
-#: exif/main.c:464
+#: exif/main.c:525
 #, c-format
 msgid "Could not open '%s' (%m)!"
 msgstr "Nie można otworzyć '%s' (%m)!"
 
-#: exif/main.c:467
+#: exif/main.c:528
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Nie można otworzyć '%s' (%s)!"
 
-#: exif/main.c:478
-#, c-format
-msgid "Could not allocate %i byte(s)."
-msgstr "Nie można przydzielić %i bajtów."
-
-#: exif/main.c:488
+#: exif/main.c:540
 #, c-format
 msgid "Could not read '%s' (%m)."
 msgstr "Nie można odczytać '%s' (%m)."
 
-#: exif/main.c:491
+#: exif/main.c:543
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Nie można odczytać '%s' (%s)."
 
-#: exif/main.c:506
-#, c-format
+#: exif/main.c:554
 msgid "You need to specify a tag!"
 msgstr "Trzeba podać znacznik!"
 
-#: exif/main.c:515 exif/main.c:538
-#, c-format
+#: exif/main.c:559 exif/main.c:578
 msgid "You need to specify an IFD!"
 msgstr "Trzeba podać IFD!"
 
-#: exif/main.c:554
+#: exif/main.c:590
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD '%s' nie zawiera znacznika '%s'!"
 
-#. popt.h:
-msgid "Help options:"
-msgstr "Opcje pomocy:"
+#~ msgid "Could not parse JPEG file '%s'."
+#~ msgstr "Nie można przeanalizować pliku JPEG '%s'."
 
-#. popt
-msgid "Show this help message"
-msgstr "Pokazanie tej pomocy"
+#~ msgid "Could not allocate %i byte(s)."
+#~ msgstr "Nie można przydzielić %i bajtów."
 
-msgid "Display brief usage message"
-msgstr "Wyświetlenie skróconego sposóbu użycia"
+#~ msgid "Help options:"
+#~ msgstr "Opcje pomocy:"
+
+#~ msgid "Show this help message"
+#~ msgstr "Pokazanie tej pomocy"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Wyświetlenie skróconego sposóbu użycia"
