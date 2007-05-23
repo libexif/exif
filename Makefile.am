@@ -30,7 +30,7 @@ $(srcdir)/ChangeLog.cvs:
 	else \
 		usermap=""; \
 	fi; \
-	(cd "$(srcdir)" && cvs2cl $${usermap} -f "ChangeLog.cvs")
+	(cd "$(srcdir)" && cvs2cl $${usermap} --utc --domain users.sourceforge.net -f "ChangeLog.cvs")
 
 .PHONY: cvs-tag-release
 cvs-tag-release:
@@ -39,5 +39,10 @@ cvs-tag-release:
 	echo "Press Ctrl-C to abort, Enter to continue."; \
 	read; \
 	cd "$(srcdir)" && cvs tag "$${tag}"
+
+.PHONY: upload-release
+upload-release:
+	echo ncftpput upload.sourceforge.net incoming/ $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).*
+
 
 # End of Makefile.am.
