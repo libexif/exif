@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: exif\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-17 17:23+0200\n"
-"PO-Revision-Date: 2005-03-14 04:20+0100\n"
+"POT-Creation-Date: 2007-06-06 16:27+0200\n"
+"PO-Revision-Date: 2007-06-06 16:29+0200\n"
 "Last-Translator: Fabian Mandelbaum <fabman@mandrakesoft.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr ""
 
 #: exif/main.c:55
 #, c-format
-msgid "Internal error. Please contact <%s>.)"
+msgid "Internal error. Please contact <%s>."
 msgstr "Error interno. Por favor, contacte con <%s>."
 
 #: exif/main.c:74

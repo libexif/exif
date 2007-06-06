@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-17 17:23+0200\n"
-"PO-Revision-Date: 2005-09-28 08:54+0200\n"
+"POT-Creation-Date: 2007-06-06 16:27+0200\n"
+"PO-Revision-Date: 2007-06-06 16:30+0200\n"
 "Last-Translator: Marcus Meissner <marcus@jet.franken.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,7 @@ msgstr "Thumbnailgröße\t%i\n"
 
 #: exif/main.c:55
 #, c-format
-msgid "Internal error. Please contact <%s>.)"
+msgid "Internal error. Please contact <%s>."
 msgstr "Interner Fehler. Bitte nehmen Sie Kontakt mit <%s> auf."
 
 #: exif/main.c:74

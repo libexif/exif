@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: exif 0.6.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-17 17:23+0200\n"
-"PO-Revision-Date: 2007-05-26 20:10+0200\n"
+"POT-Creation-Date: 2007-06-06 16:27+0200\n"
+"PO-Revision-Date: 2007-06-06 16:28+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "ThumbnailSize\t%i\n"
 
 #: exif/main.c:55
 #, c-format
-msgid "Internal error. Please contact <%s>.)"
+msgid "Internal error. Please contact <%s>."
 msgstr "Błąd wewnętrzny. Proszę skontaktować się z <%s>."
 
 #: exif/main.c:74

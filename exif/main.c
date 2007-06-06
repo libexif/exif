@@ -53,7 +53,7 @@ static void
 internal_error (void)
 {
 	fprintf (stderr, _("Internal error. Please "
-			   "contact <%s>.)"),
+			   "contact <%s>."),
 		 PACKAGE_BUGREPORT);
 	fputc ('\n', stderr);
 	exit (1);
