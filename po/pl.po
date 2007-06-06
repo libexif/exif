@@ -1,13 +1,13 @@
 # Polish translation for exif.
 # This file is distributed under the same license as the exif package.
-# Jakub Bogusz <qboosh@pld-linux.org>, 2005.
+# Jakub Bogusz <qboosh@pld-linux.org>, 2005-2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.9\n"
+"Project-Id-Version: exif 0.6.15\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-17 17:23+0200\n"
-"PO-Revision-Date: 2005-03-21 18:01+0100\n"
+"PO-Revision-Date: 2007-05-26 20:10+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -20,9 +20,9 @@ msgid "EXIF tags in '%s':"
 msgstr "Znaczniki EXIF w '%s':"
 
 #: exif/actions.c:114
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown MakerNote format.\n"
-msgstr "Nieznany format MakerNote."
+msgstr "Nieznany format MakerNote.\n"
 
 #: exif/actions.c:121
 #, c-format
@@ -41,11 +41,11 @@ msgstr "MakerNote zawiera %i wartości:\n"
 
 #: exif/actions.c:135
 msgid "Unknown tag"
-msgstr ""
+msgstr "Nieznany znacznik"
 
 #: exif/actions.c:138
 msgid "Unknown value"
-msgstr ""
+msgstr "Nieznana wartość"
 
 #: exif/actions.c:163
 #, c-format
@@ -71,11 +71,9 @@ msgid "ThumbnailSize\t%i\n"
 msgstr "ThumbnailSize\t%i\n"
 
 #: exif/main.c:55
-#, fuzzy, c-format
+#, c-format
 msgid "Internal error. Please contact <%s>.)"
-msgstr ""
-"Błąd wewnętrzny. Proszę skontaktować się z <libexif-devel@lists.sourceforge."
-"net>."
+msgstr "Błąd wewnętrzny. Proszę skontaktować się z <%s>."
 
 #: exif/main.c:74
 #, c-format
@@ -109,7 +107,7 @@ msgstr "Zapisano plik '%s'."
 
 #: exif/main.c:329
 msgid "Display software version"
-msgstr ""
+msgstr "Wyświetlenie wersji programu"
 
 #: exif/main.c:331
 msgid "Show IDs instead of tag names"
@@ -173,7 +171,7 @@ msgstr "Wyjście w formacie czytelnym dla maszyny (ograniczonym tabulacjami)"
 
 #: exif/main.c:358
 msgid "Output in a XML format"
-msgstr ""
+msgstr "Wyjście w formacie XML"
 
 #: exif/main.c:361
 msgid "Show debugging messages"
@@ -263,18 +261,3 @@ msgstr "Trzeba podać IFD!"
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD '%s' nie zawiera znacznika '%s'!"
-
-#~ msgid "Could not parse JPEG file '%s'."
-#~ msgstr "Nie można przeanalizować pliku JPEG '%s'."
-
-#~ msgid "Could not allocate %i byte(s)."
-#~ msgstr "Nie można przydzielić %i bajtów."
-
-#~ msgid "Help options:"
-#~ msgstr "Opcje pomocy:"
-
-#~ msgid "Show this help message"
-#~ msgstr "Pokazanie tej pomocy"
-
-#~ msgid "Display brief usage message"
-#~ msgstr "Wyświetlenie skróconego sposóbu użycia"
