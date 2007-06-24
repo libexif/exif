@@ -376,7 +376,8 @@ main (int argc, const char **argv)
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
-	while (poptGetNextOpt (ctx) > 0);
+	while (poptGetNextOpt (ctx) > 0)
+		;
 
 	/*
 	 * When debugging, continue as far as possible. If not, make all errors
@@ -388,11 +389,13 @@ main (int argc, const char **argv)
 	/* Any command line parameters ? */
 	if (argc <= 1) {
 		poptPrintHelp (ctx, stdout, 0);
+		poptFreeContext(ctx);
 		return (1);
 	}
 
   if (show_version) {
     printf ("%s\n", VERSION);
+    poptFreeContext(ctx);
     return 0;
   }
 
@@ -610,9 +613,11 @@ main (int argc, const char **argv)
 		}
 	} else {
 		poptPrintHelp (ctx, stdout, 0);
+		poptFreeContext(ctx);
 		return(1);
 	}
 
+	exif_log_free(log);
 	poptFreeContext (ctx);
 
 	return (0);
