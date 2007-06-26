@@ -46,10 +46,6 @@ AM_PO_SUBDIRS()
 AM_ICONV()
 GP_GETTEXT_FLAGS()
 
-# We cannot use [AC_DEFINE_UNQUOTED()] for these definitions, as
-# we require make to do insert the proper $(datadir) value
-AC_SUBST([localedir],["\$(datadir)/locale"])
-AM_CPPFLAGS="$AM_CPPFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
 
 # ---------------------------------------------------------------------------
 # locale.h: locale.h provides setlocale. It seems that some systems don't
