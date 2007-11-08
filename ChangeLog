@@ -1,3 +1,7 @@
+2007-11-07  Dan Fandrich <dan@coneharvesters.com>
+
+	* exif/main.c: Fixed the output of -t and -s when iconv is configured.
+
 2006-07-28  Lutz Mueller <lutz@users.sourceforge.net>
 
   Patch by Marek 'marx' Grac <mgrac@redhat.com>:

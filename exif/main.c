@@ -71,11 +71,17 @@ show_entry (ExifEntry *entry, unsigned int machine_readable)
 		return;
 	}
 
-	printf (_("EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"),
-		C(exif_tag_get_title_in_ifd (entry->tag, ifd)), entry->tag,
-		C(exif_tag_get_name_in_ifd (entry->tag, ifd)), 
+	/*
+	 * The C() macro can point to a static buffer so these printfs
+	 * must be done separately.
+	 */
+	printf (_("EXIF entry '%s' "),
+		C(exif_tag_get_title_in_ifd (entry->tag, ifd)));
+	printf (_("(0x%x, '%s') "),
+		entry->tag,
+		C(exif_tag_get_name_in_ifd (entry->tag, ifd)));
+	printf (_("exists in IFD '%s':\n"),
 		C(exif_ifd_get_name (ifd)));
-	printf ("\n");
 
 	exif_entry_dump (entry, 0);
 }
@@ -417,11 +423,17 @@ main (int argc, const char **argv)
 
 	if (show_description) {
 		if (!eo.tag) exif_log (log, -1, "exif", _("Please specify a tag!"));
-		printf (_("Tag '%s' (0x%04x, '%s'): %s"),
-			C(exif_tag_get_title_in_ifd (eo.tag, ifd)), eo.tag,
-			C(exif_tag_get_name_in_ifd (eo.tag, ifd)),
+		/*
+		 * The C() macro can point to a static buffer so these printfs
+		 * must be done separately.
+		 */
+		printf (_("Tag '%s' "),
+			C(exif_tag_get_title_in_ifd (eo.tag, ifd)));
+		printf (_("(0x%04x, '%s'): "),
+			eo.tag,
+			C(exif_tag_get_name_in_ifd (eo.tag, ifd)));
+		printf ("%s\n",
 			C(exif_tag_get_description_in_ifd (eo.tag, ifd)));
-		printf ("\n");
 		return (0);
 	}
 
