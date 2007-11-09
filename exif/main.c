@@ -24,7 +24,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <popt.h>
 
 #ifdef HAVE_UNISTD_H
 #  include <unistd.h>
@@ -39,6 +38,9 @@
 #include "actions.h"
 #include "exif-i18n.h"
 #include "utils.h"
+
+/* Must be loaded after exif-i18n.h */
+#include <popt.h>
 
 #ifdef HAVE_LOCALE_H
 #  include <locale.h>

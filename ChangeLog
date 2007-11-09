@@ -1,6 +1,7 @@
 2007-11-07  Dan Fandrich <dan@coneharvesters.com>
 
 	* exif/main.c: Fixed the output of -t and -s when iconv is configured.
+	Load popt.h later so it works with popt-1.12.
 
 2006-07-28  Lutz Mueller <lutz@users.sourceforge.net>
 
