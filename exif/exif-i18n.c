@@ -15,6 +15,9 @@
 const char *
 exif_i18n_convert_utf8_to_lat1 (const char *in)
 {
+	if (!in)
+		return "";
+
 #ifdef HAVE_ICONV
 	static iconv_t tr = 0;
 	size_t t = (in ? strlen (in) : 0);

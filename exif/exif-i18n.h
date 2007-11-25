@@ -43,7 +43,7 @@
 
 
 const char *exif_i18n_convert_utf8_to_lat1 (const char *);
-#define C(s) ((s) ? exif_i18n_convert_utf8_to_lat1(s) : "")
+#define C(s) (exif_i18n_convert_utf8_to_lat1(s))
 
 
 #endif /* __I18N_H__ */
