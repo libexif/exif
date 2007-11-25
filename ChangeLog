@@ -1,3 +1,7 @@
+2007-11-24  Dan Fandrich <dan@coneharvesters.com>
+	* exif/main.c: Fixed a NULL dereference when the description of an
+	the invalid tag is requested.
+
 2007-11-07  Dan Fandrich <dan@coneharvesters.com>
 
 	* exif/main.c: Fixed the output of -t and -s when iconv is configured.
