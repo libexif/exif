@@ -120,11 +120,10 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
 	case 0:
 		printf (_("MakerNote does not contain any value.\n"));
 		break;
-	case 1:
-		printf (_("MakerNote contains 1 value:\n"));
-		break;
 	default:
-		printf (_("MakerNote contains %i values:\n"), c);
+		printf (ngettext("MakerNote contains %i value:\n",
+			         "MakerNote contains %i values:\n",
+			 	 c), c);
 	}
 	for (i = 0; i < c; i++) {
 	        if ( ids ) {
@@ -132,7 +131,7 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
 			sprintf(b1,"0x%04x",id);
 		} else {
 			p = C (exif_mnote_data_get_title (n, i));
-			strncpy (b1, p ? p : _("Unknown tag"), bs);
+			strncpy (b1, p && *p ? p : _("Unknown tag"), bs);
 		}
 		p = C (exif_mnote_data_get_value (n, i, b, bs));
 		strncpy (b2, p ? p : _("Unknown value"), bs);
