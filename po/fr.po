@@ -26,9 +26,9 @@ msgid "Unknown MakerNote format.\n"
 msgstr ""
 
 #: exif/actions.c:121
-#, fuzzy, c-format
+#, c-format
 msgid "MakerNote does not contain any value.\n"
-msgstr "Makernote ne contient pas le marqueur '%s'."
+msgstr ""
 
 #: exif/actions.c:124
 #, c-format
@@ -36,9 +36,9 @@ msgid "MakerNote contains 1 value:\n"
 msgstr ""
 
 #: exif/actions.c:127
-#, fuzzy, c-format
+#, c-format
 msgid "MakerNote contains %i values:\n"
-msgstr "Marqueurs EXIF MakerNote dans '%s' :"
+msgstr ""
 
 #: exif/actions.c:135
 msgid "Unknown tag"
@@ -135,9 +135,8 @@ msgid "List all EXIF tags"
 msgstr "Liste tous les marqueurs EXIF"
 
 #: exif/main.c:339
-#, fuzzy
 msgid "Show contents of tag MakerNote"
-msgstr "Montre les ID plutôt que les noms des marqueurs"
+msgstr ""
 
 #: exif/main.c:341
 msgid "Remove tag or ifd"
@@ -164,9 +163,8 @@ msgid "FILE"
 msgstr "FICHIER"
 
 #: exif/main.c:351
-#, fuzzy
 msgid "Write data to FILE"
-msgstr "Écrit la sortie vers le FICHIER"
+msgstr ""
 
 #: exif/main.c:355
 msgid "Output in a machine-readable (tab delimited) format"
