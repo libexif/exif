@@ -1,18 +1,19 @@
 # Polish translation for exif.
 # This file is distributed under the same license as the exif package.
-# Jakub Bogusz <qboosh@pld-linux.org>, 2005-2007.
+# Jakub Bogusz <qboosh@pld-linux.org>, 2005-2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.15\n"
+"Project-Id-Version: exif 0.6.16-pre1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-06 16:27+0200\n"
-"PO-Revision-Date: 2007-06-06 16:28+0200\n"
+"POT-Creation-Date: 2008-01-21 14:29-0800\n"
+"PO-Revision-Date: 2008-01-22 22:14+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: exif/actions.c:45
 #, c-format
@@ -31,233 +32,242 @@ msgstr "MakerNote nie zawiera żadnej wartości.\n"
 
 #: exif/actions.c:124
 #, c-format
-msgid "MakerNote contains 1 value:\n"
-msgstr "MakerNote zawiera 1 wartość:\n"
+msgid "MakerNote contains %i value:\n"
+msgid_plural "MakerNote contains %i values:\n"
+msgstr[0] "MakerNote zawiera %i wartość:\n"
+msgstr[1] "MakerNote zawiera %i wartości:\n"
+msgstr[2] "MakerNote zawiera %i wartości:\n"
 
-#: exif/actions.c:127
-#, c-format
-msgid "MakerNote contains %i values:\n"
-msgstr "MakerNote zawiera %i wartości:\n"
-
-#: exif/actions.c:135
+#: exif/actions.c:134
 msgid "Unknown tag"
 msgstr "Nieznany znacznik"
 
-#: exif/actions.c:138
+#: exif/actions.c:137
 msgid "Unknown value"
 msgstr "Nieznana wartość"
 
-#: exif/actions.c:163
+#: exif/actions.c:162
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "Znaczniki EXIF w '%s' (kolejność bajtów '%s'):"
 
-#: exif/actions.c:168 exif/actions.c:170
+#: exif/actions.c:167 exif/actions.c:169
 msgid "Tag"
 msgstr "Znacznik"
 
-#: exif/actions.c:174 exif/actions.c:176 exif/main.c:353
+#: exif/actions.c:173 exif/actions.c:175 exif/main.c:361
 msgid "Value"
 msgstr "Wartość"
 
-#: exif/actions.c:182
+#: exif/actions.c:181
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "Dane EXIF zawierają miniaturkę (%i bajtów)."
 
-#: exif/actions.c:218
+#: exif/actions.c:217
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "ThumbnailSize\t%i\n"
 
-#: exif/main.c:55
+#: exif/main.c:57
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "Błąd wewnętrzny. Proszę skontaktować się z <%s>."
 
-#: exif/main.c:74
+#: exif/main.c:80
 #, c-format
-msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
-msgstr "Wpis EXIF '%s' (0x%x, '%s') istnieje w IFD '%s':"
+msgid "EXIF entry '%s' "
+msgstr "Znacznik EXIF '%s' "
 
-#: exif/main.c:112
+#: exif/main.c:82
+#, c-format
+msgid "(0x%x, '%s') "
+msgstr "(0x%x, '%s') "
+
+#: exif/main.c:85
+#, c-format
+msgid "exists in IFD '%s':\n"
+msgstr "istnieje w IFD '%s':\n"
+
+#: exif/main.c:120
 #, c-format
 msgid "Not enough memory."
 msgstr "Za mało pamięci."
 
-#: exif/main.c:130
+#: exif/main.c:138
 #, c-format
 msgid "Too few components specified!"
 msgstr "Podano za mało składowych!"
 
-#: exif/main.c:160
+#: exif/main.c:168
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Jeszcze nie zaimplementowane!"
 
-#: exif/main.c:233
+#: exif/main.c:241
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Zbyt dużo danych EXIF (%i bajtów). Dozwolone jest tylko %i bajtów."
 
-#: exif/main.c:247 exif/main.c:496
+#: exif/main.c:255 exif/main.c:513
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Zapisano plik '%s'."
 
-#: exif/main.c:329
+#: exif/main.c:337
 msgid "Display software version"
 msgstr "Wyświetlenie wersji programu"
 
-#: exif/main.c:331
+#: exif/main.c:339
 msgid "Show IDs instead of tag names"
 msgstr "Pokazywanie ID zamiast nazw znaczników"
 
-#: exif/main.c:333
+#: exif/main.c:341
 msgid "Select tag"
 msgstr "Wybór znacznika"
 
-#: exif/main.c:333
+#: exif/main.c:341
 msgid "tag"
 msgstr "znacznik"
 
-#: exif/main.c:335
+#: exif/main.c:343
 msgid "Select IFD"
 msgstr "Wybór IFD"
 
-#: exif/main.c:335
+#: exif/main.c:343
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:337
+#: exif/main.c:345
 msgid "List all EXIF tags"
 msgstr "Wypisanie wszystkich znaczników EXIF"
 
-#: exif/main.c:339
+#: exif/main.c:347
 msgid "Show contents of tag MakerNote"
 msgstr "Pokazanie zawartości znacznika MakerNote"
 
-#: exif/main.c:341
+#: exif/main.c:349
 msgid "Remove tag or ifd"
 msgstr "Usunięcie znacznika lub IFD"
 
-#: exif/main.c:343
+#: exif/main.c:351
 msgid "Show description of tag"
 msgstr "Pokazanie opisu znacznika"
 
-#: exif/main.c:345
+#: exif/main.c:353
 msgid "Extract thumbnail"
 msgstr "Wyciągnięcie miniaturki"
 
-#: exif/main.c:347
+#: exif/main.c:355
 msgid "Remove thumbnail"
 msgstr "Usunięcie miniaturki"
 
-#: exif/main.c:349
+#: exif/main.c:357
 msgid "Insert FILE as thumbnail"
 msgstr "Wstawienie PLIKU jako miniaturki"
 
-#: exif/main.c:349 exif/main.c:351
+#: exif/main.c:357 exif/main.c:359
 msgid "FILE"
 msgstr "PLIK"
 
-#: exif/main.c:351
+#: exif/main.c:359
 msgid "Write data to FILE"
 msgstr "Zapis danych do PLIKU"
 
-#: exif/main.c:355
+#: exif/main.c:363
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "Wyjście w formacie czytelnym dla maszyny (ograniczonym tabulacjami)"
 
-#: exif/main.c:358
+#: exif/main.c:366
 msgid "Output in a XML format"
 msgstr "Wyjście w formacie XML"
 
-#: exif/main.c:361
+#: exif/main.c:369
 msgid "Show debugging messages"
 msgstr "Pokazywanie komunikatów diagnostycznych"
 
-#: exif/main.c:378
+#: exif/main.c:386
 msgid "[OPTION...] file"
 msgstr "[OPCJA...] plik"
 
-#: exif/main.c:403
+#: exif/main.c:414
 #, c-format
-msgid ""
-"Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and "
-"'Interoperability'."
-msgstr ""
-"Błędny IFD '%s'. Poprawne IFD to '0', '1', 'EXIF', 'GPS' oraz "
-"'Interoperability'."
+msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
+msgstr "Błędny IFD '%s'. Poprawne IFD to '0', '1', 'EXIF', 'GPS' oraz 'Interoperability'."
 
-#: exif/main.c:411
+#: exif/main.c:422
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Błędny znacznik '%s'!"
 
-#: exif/main.c:416
+#: exif/main.c:427
 msgid "Please specify a tag!"
 msgstr "Proszę podać znacznik!"
 
-#: exif/main.c:417
+#: exif/main.c:432
 #, c-format
-msgid "Tag '%s' (0x%04x, '%s'): %s"
-msgstr "Znacznik '%s' (0x%04x, '%s'): %s"
+msgid "Tag '%s' "
+msgstr "Znacznik '%s' "
 
-#: exif/main.c:446
+#: exif/main.c:434
+#, c-format
+msgid "(0x%04x, '%s'): "
+msgstr "(0x%04x, '%s'): "
+
+#: exif/main.c:463
 #, c-format
 msgid "'%s' does not contain EXIF data!"
 msgstr "'%s' nie zawiera danych EXIF!"
 
-#: exif/main.c:469
+#: exif/main.c:486
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD '%s' nie zawiera znacznika '%s'."
 
-#: exif/main.c:478
+#: exif/main.c:495
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "'%s' nie zawiera miniaturki!"
 
-#: exif/main.c:486
+#: exif/main.c:503
 #, c-format
 msgid "Could not open '%s' for writing (%m)!"
 msgstr "Nie można otworzyć '%s' do zapisu (%m)!"
 
-#: exif/main.c:490
+#: exif/main.c:507
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Nie można otworzyć '%s' do zapisu (%s)!"
 
-#: exif/main.c:525
+#: exif/main.c:542
 #, c-format
 msgid "Could not open '%s' (%m)!"
 msgstr "Nie można otworzyć '%s' (%m)!"
 
-#: exif/main.c:528
+#: exif/main.c:545
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Nie można otworzyć '%s' (%s)!"
 
-#: exif/main.c:540
+#: exif/main.c:557
 #, c-format
 msgid "Could not read '%s' (%m)."
 msgstr "Nie można odczytać '%s' (%m)."
 
-#: exif/main.c:543
+#: exif/main.c:560
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Nie można odczytać '%s' (%s)."
 
-#: exif/main.c:554
+#: exif/main.c:571
 msgid "You need to specify a tag!"
 msgstr "Trzeba podać znacznik!"
 
-#: exif/main.c:559 exif/main.c:578
+#: exif/main.c:576 exif/main.c:595
 msgid "You need to specify an IFD!"
 msgstr "Trzeba podać IFD!"
 
-#: exif/main.c:590
+#: exif/main.c:607
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD '%s' nie zawiera znacznika '%s'!"
