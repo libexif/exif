@@ -1,6 +1,6 @@
 /* actions.c
  *
- * Copyright © 2002 Lutz Müller <lutz@users.sourceforge.net>
+ * Copyright © 2002-2008 Lutz Müller <lutz@users.sourceforge.net>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -132,9 +132,11 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
 		} else {
 			p = C (exif_mnote_data_get_title (n, i));
 			strncpy (b1, p && *p ? p : _("Unknown tag"), bs);
+			b1[sizeof(b1)-1] = 0;
 		}
 		p = C (exif_mnote_data_get_value (n, i, b, bs));
 		strncpy (b2, p ? p : _("Unknown value"), bs);
+		b2[sizeof(b2)-1] = 0;
 		/* printf ("%s|%s\n", b1, b2); */
         	if (ids)
                 	fprintf (stdout, "%-6.6s", b1);
@@ -142,7 +144,7 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
                 	fprintf (stdout, "%-20.20s", b1);
 		fputc ('|', stdout);
         	if (ids) {
-			fputs (CN (b2), stdout);
+			fputs (b2, stdout);
         	} else {
                 	fprintf (stdout, "%-58.58s", b2);
 		}
