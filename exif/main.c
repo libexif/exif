@@ -104,7 +104,7 @@ search_entry (ExifData *ed, ExifTag tag, unsigned int machine_readable)
 static void
 convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 {
-	unsigned int i;
+	unsigned int i, numcomponents;
 	char *value_p;
 
         /*
@@ -125,16 +125,27 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
                 return;
 	}
 
+	/*
+	 * Make sure we can handle this entry
+	 */
+	if ((e->components == 0) && *set_value) {
+		fprintf (stderr, _("Setting a value for this tag "
+				   "is unsupported!"));
+		fputc ('\n', stderr);
+		exit (1);
+	}
+
         value_p = (char*) set_value;
-	for (i = 0; i < e->components; i++) {
+	numcomponents = e->components;
+	for (i = 0; i < numcomponents; ++i) {
                 const char *begin, *end;
                 unsigned char *buf, s;
-                const char comp_separ = ' ';
+		static const char comp_separ = ' ';
 
                 begin = value_p;
 		value_p = strchr (begin, comp_separ);
 		if (!value_p) {
-                        if (i != e->components - 1) {
+                        if (i != numcomponents - 1) {
                                 fprintf (stderr, _("Too few components "
 						   "specified!"));
 				fputc ('\n', stderr);
@@ -155,21 +166,46 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o)
 		case EXIF_FORMAT_SHORT:
 			exif_set_short (e->data + (s * i), o, atoi ((char *) buf));
 			break;
+		case EXIF_FORMAT_SSHORT:
+			exif_set_sshort (e->data + (s * i), o, atoi ((char *) buf));
+			break;
+		case EXIF_FORMAT_RATIONAL:
+			/*
+			 * Hack to simplify the loop for rational numbers.
+			 * Should really be using exif_set_rational instead
+			 */
+			if (i == 0) numcomponents *= 2;
+			s /= 2;
+			/* Fall through to LONG handler */
 		case EXIF_FORMAT_LONG:
 			exif_set_long (e->data + (s * i), o, atol ((char *) buf));
 			break;
+		case EXIF_FORMAT_SRATIONAL:
+			/*
+			 * Hack to simplify the loop for rational numbers.
+			 * Should really be using exif_set_srational instead
+			 */
+			if (i == 0) numcomponents *= 2;
+			s /= 2;
+			/* Fall through to SLONG handler */
 		case EXIF_FORMAT_SLONG:
 			exif_set_slong (e->data + (s * i), o, atol ((char *) buf));
 			break;
-		case EXIF_FORMAT_RATIONAL:
-		case EXIF_FORMAT_SRATIONAL:
 		case EXIF_FORMAT_BYTE:
+		case EXIF_FORMAT_SBYTE:
+		case EXIF_FORMAT_FLOAT:
+		case EXIF_FORMAT_DOUBLE:
+		case EXIF_FORMAT_UNDEFINED:
 		default:
 			fprintf (stderr, _("Not yet implemented!"));
 			fputc ('\n', stderr);
 			exit (1);
 		}
 		free (buf);
+	}
+	if (value_p && *value_p) {
+		fprintf (stderr, _("Warning; Too many components specified!"));
+		fputc ('\n', stderr);
 	}
 }
 
