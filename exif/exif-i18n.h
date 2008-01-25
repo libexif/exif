@@ -43,8 +43,14 @@
 #endif
 
 
-const char *exif_i18n_convert_utf8_to_lat1 (const char *);
-#define C(s) (exif_i18n_convert_utf8_to_lat1(s))
+/*! Convert a string from UTF-8 into one appropriate for the current locale
+ *  if gettext doesn't doesn't do the conversion itself.
+ *  If given a NULL pointer, returns a pointer to an empty string.
+ * \param[in] in the string to convert
+ * \returns pointer to converted string, which may be in a static buffer
+ */
+const char *exif_i18n_convert_utf8_to_locale (const char *);
+#define C(s) (exif_i18n_convert_utf8_to_locale(s))
 
 
 #endif /* __I18N_H__ */

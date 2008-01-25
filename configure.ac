@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT([libexif command line interface], [0.6.15], [libexif-devel@lists.sourceforge.net], [exif])
+AC_INIT([libexif command line interface], [0.6.15.1], [libexif-devel@lists.sourceforge.net], [exif])
 AC_CONFIG_SRCDIR([exif/main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([auto-m4])
@@ -54,6 +54,13 @@ GP_GETTEXT_FLAGS()
 AC_CHECK_HEADERS([locale.h])
 AC_CHECK_HEADER([iconv.h], [
 	AC_DEFINE(HAVE_ICONV,1,[whether iconv is available])])
+
+dnl Versions of GNU gettext >= 0.10.36 automatically convert messages into
+dnl the correct locale encoding, but with older versions and maybe non-GNU
+dnl versions the app needs to do that itself.
+AC_ARG_ENABLE(gettext-iconv,
+	      [  --enable-gettext-iconv  convert character encodings (only needed when gettext doesn't do it itself)],
+	      [ AC_DEFINE(ENABLE_GETTEXT_ICONV,1,[whether to run iconv on gettext output]) ])
 
 
 # ---------------------------------------------------------------------------
