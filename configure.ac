@@ -39,7 +39,7 @@ GP_PKG_CONFIG
 # i18n support
 # ---------------------------------------------------------------------------
 GP_GETTEXT_HACK([${PACKAGE}],[Lutz Müller and others])
-ALL_LINGUAS="de es fr pl sv"
+ALL_LINGUAS="de es fr nl pl sv"
 AM_GNU_GETTEXT_VERSION([0.14.1])
 AM_GNU_GETTEXT([external])
 AM_PO_SUBDIRS()
