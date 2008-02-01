@@ -273,13 +273,13 @@ save_exif_data_to_file (ExifData *ed, ExifLog *log,
 	/* Make sure the EXIF data is not too big. */
 	exif_data_save_data (ed, &d, &ds);
 	if (ds) {
+		free (d);
 		if (ds > 0xffff) {
 			fprintf (stderr, _("Too much EXIF data (%i bytes). "
 				"Only %i bytes are allowed."), ds, 0xffff);
 			fputc ('\n', stderr);
 			return (1);
 		}
-		free (d);
 	};
 
 	jpeg_data_set_exif_data (jdata, ed);
@@ -495,9 +495,11 @@ main (int argc, const char **argv)
 						ed->ifd[EXIF_IFD_1]->count ||
 						ed->ifd[EXIF_IFD_EXIF]->count ||
 						ed->ifd[EXIF_IFD_GPS]->count ||
-						ed->ifd[EXIF_IFD_INTEROPERABILITY]->count))
+						ed->ifd[EXIF_IFD_INTEROPERABILITY]->count)) {
 				exif_log (log, -1, "exif", _("'%s' does not "
 							"contain EXIF data!"), *args);
+				/* Never gets here--exif_log has exit()ed */
+			}
 
 			/* Where do we save the output? */
 			memset (fname, 0, sizeof (fname));
@@ -658,6 +660,7 @@ main (int argc, const char **argv)
 				action_mnote_list (*args, ed, eo.use_ids);
 			} else
 				action_tag_list (*args, ed, eo.use_ids);
+
 			exif_data_unref (ed);
 			args++;
 		}
