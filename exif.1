@@ -16,11 +16,11 @@
 .\" Modified 2005-03-23 by hun
 .\" Modified 2008-01-24 by dfandrich
 .\"
-.TH exif 1 "2008-01-24" "" "libexif command line frontend"
+.TH exif 1 "2008-02-01" "" "libexif command line frontend"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
-.BI "exif [ " "OPTION" " ] " "file"
+.BI "exif [ " "OPTION" " ] [ " "file..." " ]"
 .SH DESCRIPTION
 .B "exif"
 is a small command-line utility to show and change EXIF information in JPEG files.
@@ -28,11 +28,14 @@ is a small command-line utility to show and change EXIF information in JPEG file
 Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. The
 .B "exif"
 command line utility allows you to read EXIF information from and write EXIF information to those files.
-.PP
 .B "exif"
 internally uses the
 .B "libexif"
 library.
+.PP
+Each input file given on the command line is acted upon in turn, using 
+all the options given. Execution will be aborted immediately if one
+file is not readable or does not contain EXIF tags.
 .SH "OPTIONS"
 .TP
 .BI "\-v, \-\-version"
@@ -44,8 +47,10 @@ Show ID numbers instead of tag names
 .BI "\-t, \-\-tag=" "tag"
 Select only the given EXIF
 .I "tag"
-which is the textual short tag name or numeric tag number (hexadecimal
-numbers are prefixed with 0x), from the IFD specified with \-\-ifd
+which is the textual short tag name, tag title, or numeric tag number
+(hexadecimal numbers are prefixed with 0x), from the IFD specified
+with \-\-ifd.  The tag title is dependent on the current locale, whereas the
+name and number are locale-independent.
 .TP
 .BI "\-\-ifd=" "IFD"
 Select
@@ -60,7 +65,7 @@ be given to use this option, but its contents are ignored.
 .BI "\-|, \-\-show\-mnote"
 Show contents of tag MakerNote. The contents of this tag is nonstandard (and
 often undocumented) and may therefore not be recognized, or if it is
-recognized it may not be correctly interpreted.
+recognized it may not be necessarily correctly interpreted.
 .TP
 .BI "\-\-remove"
 Remove tag or entire IFD (if no tag is specified).
