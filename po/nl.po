@@ -58,17 +58,17 @@ msgstr "Tag"
 
 #: exif/actions.c:173 exif/actions.c:175 exif/main.c:361
 msgid "Value"
-msgstr "Waarde"
+msgstr "waarde"
 
 #: exif/actions.c:181
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
-msgstr "EXIF-gegevens bevatten een thumbnail (%i bytes)."
+msgstr "EXIF-gegevens bevatten een miniatuur (%i bytes)."
 
 #: exif/actions.c:217
 #, c-format
 msgid "ThumbnailSize\t%i\n"
-msgstr "Thumbnailgrootte\t%i\n"
+msgstr "Miniatuurgrootte\t%i\n"
 
 #: exif/main.c:57
 #, c-format
@@ -113,11 +113,11 @@ msgstr "Te veel EXIF-gegevens (%i bytes). Slechts %i bytes toegestaan."
 #: exif/main.c:255 exif/main.c:513
 #, c-format
 msgid "Wrote file '%s'."
-msgstr "Bestand '%s' aangemaakt."
+msgstr "Bestand '%s' is aangemaakt."
 
 #: exif/main.c:337
 msgid "Display software version"
-msgstr "Programmaversie tonen"
+msgstr "programmaversie tonen"
 
 #: exif/main.c:339
 msgid "Show IDs instead of tag names"
@@ -125,7 +125,7 @@ msgstr "ID's in plaats van tagnamen tonen"
 
 #: exif/main.c:341
 msgid "Select tag"
-msgstr "Selecteer tag"
+msgstr "deze tag selecteren"
 
 #: exif/main.c:341
 msgid "tag"
@@ -133,7 +133,7 @@ msgstr "tag"
 
 #: exif/main.c:343
 msgid "Select IFD"
-msgstr "Selecteer IFD"
+msgstr "deze IFD selecteren"
 
 #: exif/main.c:343
 msgid "IFD"
@@ -141,31 +141,31 @@ msgstr "IFD"
 
 #: exif/main.c:345
 msgid "List all EXIF tags"
-msgstr "Alle EXIF-tags tonen"
+msgstr "alle EXIF-tags tonen"
 
 #: exif/main.c:347
 msgid "Show contents of tag MakerNote"
-msgstr "Inhoud van de tag MakerNote tonen"
+msgstr "inhoud van de tag MakerNote tonen"
 
 #: exif/main.c:349
 msgid "Remove tag or ifd"
-msgstr "Tag of IFD verwijderen"
+msgstr "tag of IFD verwijderen"
 
 #: exif/main.c:351
 msgid "Show description of tag"
-msgstr "Beschrijving van tag tonen"
+msgstr "beschrijving van tag tonen"
 
 #: exif/main.c:353
 msgid "Extract thumbnail"
-msgstr "Thumbnail uitlezen"
+msgstr "miniatuur uitlezen"
 
 #: exif/main.c:355
 msgid "Remove thumbnail"
-msgstr "Thumbnail verwijderen"
+msgstr "miniatuur verwijderen"
 
 #: exif/main.c:357
 msgid "Insert FILE as thumbnail"
-msgstr "BESTAND als thumbnail toevoegen"
+msgstr "BESTAND als miniatuur toevoegen"
 
 #: exif/main.c:357 exif/main.c:359
 msgid "FILE"
@@ -173,19 +173,19 @@ msgstr "BESTAND"
 
 #: exif/main.c:359
 msgid "Write data to FILE"
-msgstr "Gegevens naar BESTAND schrijven"
+msgstr "gegevens naar BESTAND schrijven"
 
 #: exif/main.c:363
 msgid "Output in a machine-readable (tab delimited) format"
-msgstr "Uitvoer in een machineleesbaar (tabgescheiden) formaat"
+msgstr "machineleesbare uitvoer produceren (tabgescheiden)"
 
 #: exif/main.c:366
 msgid "Output in a XML format"
-msgstr "Uitvoer in een XML-formaat"
+msgstr "XML-uitvoer produceren"
 
 #: exif/main.c:369
 msgid "Show debugging messages"
-msgstr "Debugmeldingen tonen"
+msgstr "debugmeldingen tonen"
 
 #: exif/main.c:386
 msgid "[OPTION...] file"
@@ -228,7 +228,7 @@ msgstr "IFD '%s' bevat geen tag '%s'."
 #: exif/main.c:495
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
-msgstr "'%s' bevat geen thumbnail!"
+msgstr "'%s' bevat geen miniatuur!"
 
 #: exif/main.c:503
 #, c-format
