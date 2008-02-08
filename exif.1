@@ -15,8 +15,9 @@
 .\" Modified 2002-09-08 by thomas
 .\" Modified 2005-03-23 by hun
 .\" Modified 2008-01-24 by dfandrich
+.\" Modified 2008-02-05 by Benno Schulenberg
 .\"
-.TH exif 1 "2008-02-01" "" "libexif command line frontend"
+.TH exif 1 "2008-02-05" "" "libexif command line frontend"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
@@ -27,7 +28,7 @@ is a small command-line utility to show and change EXIF information in JPEG file
 .PP
 Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. The
 .B "exif"
-command line utility allows you to read EXIF information from and write EXIF information to those files.
+command-line utility allows you to read EXIF information from and write EXIF information to those files.
 .B "exif"
 internally uses the
 .B "libexif"
@@ -39,23 +40,24 @@ file is not readable or does not contain EXIF tags.
 .SH "OPTIONS"
 .TP
 .BI "\-v, \-\-version"
-Display the exif version number
+Display the exif version number.
 .TP
 .BI "\-i, \-\-ids"
-Show ID numbers instead of tag names
+Show ID numbers instead of tag names.
 .TP
-.BI "\-t, \-\-tag=" "tag"
-Select only the given EXIF
-.I "tag"
-which is the textual short tag name, tag title, or numeric tag number
+.BI "\-t, \-\-tag=" "TAG"
+Select only this
+.IR "TAG" .
+.I "TAG"
+is the tag title, the short tag name, or the tag number
 (hexadecimal numbers are prefixed with 0x), from the IFD specified
-with \-\-ifd.  The tag title is dependent on the current locale, whereas the
+with \-\-ifd.  The tag title is dependent on the current locale, whereas
 name and number are locale-independent.
 .TP
 .BI "\-\-ifd=" "IFD"
-Select
-.I "IFD"
-where valid IFDs are "0", "1", "EXIF", "GPS", and "Interoperability".
+Select a tag from this
+.IR "IFD" .
+Valid IFDs are "0", "1", "EXIF", "GPS", and "Interoperability".
 Defaults to "0".
 .TP
 .BI "\-l, \-\-list\-tags"
@@ -63,60 +65,62 @@ List all known EXIF tags.  A JPEG file with valid EXIF information must
 be given to use this option, but its contents are ignored.
 .TP
 .BI "\-|, \-\-show\-mnote"
-Show contents of tag MakerNote. The contents of this tag is nonstandard (and
-often undocumented) and may therefore not be recognized, or if it is
-recognized it may not be necessarily correctly interpreted.
+Show the contents of the MakerNote tag.  The contents of this tag are nonstandard
+(and often undocumented) and may therefore not be recognized, or if they are
+recognized they may not necessarily be interpreted correctly.
 .TP
 .BI "\-\-remove"
-Remove tag or entire IFD (if no tag is specified).
+Remove the tag or (if no tag is specified) the entire IFD.
 .TP
 .BI "\-s, \-\-show\-description"
 Show description of tag.  The \-\-tag option must also be given.
 .TP
 .BI "\-e, \-\-extract\-thumbnail"
-Extract thumbnail, writing the thumbnail image to the file specified
+Extract the thumbnail, writing the thumbnail image to the file specified
 with \-\-output.
 .TP
 .BI "\-r, \-\-remove\-thumbnail"
-Remove thumbnail from image, writing the new image to the file specified
+Remove the thumbnail from the image, writing the new image to the file specified
 with \-\-output.
 .TP
 .BI "-n, \-\-insert\-thumbnail=" "FILE"
 Insert
 .I "FILE"
-as thumbnail.  No attempt is made to ensure that the contents of "FILE" is
-in a valid thumbnail format.
+as thumbnail.  No attempt is made to ensure that the contents of
+.I "FILE"
+are in a valid thumbnail format.
 .TP
 .BI "\-o, \-\-output=" "FILE"
 Write output image to
 .IR "FILE" .
 If this option is not given and an image file must be written, the
-name used is the same as the input file with a suffix ".modified.jpeg".
+name used is the same as the input file with the suffix ".modified.jpeg".
 .TP
 .BI "\-\-set\-value=" "VALUE"
-Set the data for the tag specified with \-\-tag and \-\-ifd to "VALUE".
+Set the data for the tag specified with \-\-tag and \-\-ifd to
+.IR "VALUE" .
 Compound values consisting of multiple components are separated with
 spaces.
 .TP
 .BI "\-m, \-\-machine\-readable"
-Output in machine-readable (tab delimited) format
+Produce output in a machine-readable (tab-delimited) format.
 The \-\-xml-output and \-\-machine\-readable options are mutually exclusive.
 .TP
 .BI "\-x, \-\-xml-output"
-Output in an XML format (when possible).
+Produce output in an XML format (when possible).
 The \-\-xml-output and \-\-machine\-readable options are mutually exclusive.
 .TP
 .BI "\-d, \-\-debug"
-Show debugging messages
+Show debugging messages.
 .SS "Help options"
 .TP
 .BI "\-?, \-\-help"
-Show help message
+Show help message.
 .TP
 .BI "\-\-usage"
-Display brief usage message
+Display brief usage message.
 .SH "AUTHOR"
-Written by Lutz Mueller <lutz@users.sourceforge.net>
+Written by Lutz Mueller <lutz@users.sourceforge.net>.
 .SH "SEE ALSO"
 .UR "http://www.sourceforge.net/projects/libexif"
 .BR "http://www.sourceforge.net/projects/libexif"
