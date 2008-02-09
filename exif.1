@@ -61,8 +61,9 @@ Valid IFDs are "0", "1", "EXIF", "GPS", and "Interoperability".
 Defaults to "0".
 .TP
 .BI "\-l, \-\-list\-tags"
-List all known EXIF tags.  A JPEG file with valid EXIF information must
-be given to use this option, but its contents are ignored.
+List all known EXIF tags and IFDs.  A JPEG image must be provided, and
+those tags which appear in the file are shown with an asterisk in the
+corresponding position in the list.
 .TP
 .BI "\-|, \-\-show\-mnote"
 Show the contents of the MakerNote tag.  The contents of this tag are nonstandard
