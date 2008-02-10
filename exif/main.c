@@ -46,6 +46,10 @@
 #  include <locale.h>
 #endif
 
+#ifdef ENABLE_GLIBC_MEMDEBUG
+#include <mcheck.h>
+#endif
+
 /* Old versions of popt.h don't define POPT_TABLEEND */
 #ifndef POPT_TABLEEND
 #  define POPT_TABLEEND { NULL, '\0', 0, 0, 0, NULL, NULL }
@@ -367,7 +371,7 @@ main (int argc, const char **argv)
 	poptContext ctx;
 	const char **args, *output = NULL;
 	const char *ithumbnail = NULL;
-	struct poptOption options[] = {
+	const struct poptOption options[] = {
 		POPT_AUTOHELP
     {"version", 'v', POPT_ARG_NONE, &show_version, 0,
       N_("Display software version"), NULL},
@@ -410,6 +414,11 @@ main (int argc, const char **argv)
 	FILE *f;
 	ExifLog *log = NULL;
 
+#ifdef ENABLE_GLIBC_MEMDEBUG
+	mcheck(NULL);
+	mtrace();
+#endif
+
 #ifdef ENABLE_NLS
 #ifdef HAVE_LOCALE_H
 	setlocale (LC_ALL, "");
@@ -423,13 +432,6 @@ main (int argc, const char **argv)
 	while (poptGetNextOpt (ctx) > 0)
 		;
 
-	/*
-	 * When debugging, continue as far as possible. If not, make all errors
-	 * fatal.
-	 */
-	log = exif_log_new ();
-	exif_log_set_func (log, debug ? log_func : log_func_exit, NULL);
-
 	/* Any command line parameters ? */
 	if (argc <= 1) {
 		poptPrintHelp (ctx, stdout, 0);
@@ -437,11 +439,19 @@ main (int argc, const char **argv)
 		return (1);
 	}
 
-  if (show_version) {
-    printf ("%s\n", VERSION);
-    poptFreeContext(ctx);
-    return 0;
-  }
+	/*
+	 * When debugging, continue as far as possible. If not, make all errors
+	 * fatal.
+	 */
+	log = exif_log_new ();
+	exif_log_set_func (log, debug ? log_func : log_func_exit, NULL);
+
+	if (show_version) {
+		printf ("%s\n", VERSION);
+		exif_log_free(log);
+		poptFreeContext(ctx);
+		return 0;
+	}
 
 	if (ifd_string) {
 		ifd = exif_ifd_from_string (ifd_string);
@@ -472,6 +482,9 @@ main (int argc, const char **argv)
 			C(exif_tag_get_name_in_ifd (eo.tag, ifd)));
 		printf ("%s\n",
 			C(exif_tag_get_description_in_ifd (eo.tag, ifd)));
+
+		exif_log_free(log);
+		poptFreeContext(ctx);
 		return (0);
 	}
 
@@ -513,6 +526,7 @@ main (int argc, const char **argv)
 
 			if (list_tags) {
 				action_tag_table (*args, ed);
+
 			} else if (tag && !set_value && !remove_tag) {
 				if ((ifd >= EXIF_IFD_0) &&
 				    (ifd < EXIF_IFD_COUNT)) {
@@ -526,6 +540,7 @@ main (int argc, const char **argv)
 				} else {
 					search_entry (ed, eo.tag, machine_readable);
 				}
+
 			} else if (extract_thumbnail) {
 
 				/* No thumbnail? Exit. */
@@ -625,6 +640,7 @@ main (int argc, const char **argv)
                                 convert_arg_to_entry (set_value, e,
 						exif_data_get_byte_order (ed));
 				save_exif_data_to_file (ed, log, *args, fname);
+
 			} else if (remove_tag) {
 				
 				/* We need an IFD. */
@@ -654,10 +670,13 @@ main (int argc, const char **argv)
 
 			} else if (machine_readable) {
 				action_tag_list_machine (*args, ed, eo.use_ids);
+
 			} else if (xml_output) {
 				action_tag_list_xml (*args, ed, eo.use_ids);
+
 			} else if (list_mnote) {
 				action_mnote_list (*args, ed, eo.use_ids);
+
 			} else
 				action_tag_list (*args, ed, eo.use_ids);
 
@@ -666,6 +685,7 @@ main (int argc, const char **argv)
 		}
 	} else {
 		poptPrintHelp (ctx, stdout, 0);
+		exif_log_free(log);
 		poptFreeContext(ctx);
 		return(1);
 	}

@@ -30,6 +30,13 @@
  */
 #include "exif/exif-i18n.h"
 
+/* realloc that cleans up on memory failure and returns to caller */
+#define CLEANUP_REALLOC(p,s) { \
+	unsigned char *cleanup_ptr = realloc((p),(s)); \
+	if (!cleanup_ptr) { free(p); (p) = NULL; return; } \
+	(p) = cleanup_ptr; \
+}
+
 struct _JPEGDataPrivate
 {
 	unsigned int ref_count;
@@ -125,7 +132,7 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 		s = data->sections[i];
 
 		/* Write the marker */
-		*d = realloc (*d, sizeof (char) * (*ds + 2));
+		CLEANUP_REALLOC (*d, sizeof (char) * (*ds + 2));
 		(*d)[*ds + 0] = 0xff;
 		(*d)[*ds + 1] = s.marker;
 		*ds += 2;
@@ -137,17 +144,17 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 		case JPEG_MARKER_APP1:
 			exif_data_save_data (s.content.app1, &ed, &eds);
 			if (!ed) break;
-			*d = realloc (*d, sizeof (char) * (*ds + 2));
+			CLEANUP_REALLOC (*d, sizeof (char) * (*ds + 2));
 			(*d)[*ds + 0] = (eds + 2) >> 8;
 			(*d)[*ds + 1] = (eds + 2) >> 0;
 			*ds += 2;
-			*d = realloc (*d, sizeof (char) * (*ds + eds));
+			CLEANUP_REALLOC (*d, sizeof (char) * (*ds + eds));
 			memcpy (*d + *ds, ed, eds);
 			*ds += eds;
 			free (ed);
 			break;
 		default:
-			*d = realloc (*d, sizeof (char) *
+			CLEANUP_REALLOC (*d, sizeof (char) *
 					(*ds + s.content.generic.size + 2));
 			(*d)[*ds + 0] = (s.content.generic.size + 2) >> 8;
 			(*d)[*ds + 1] = (s.content.generic.size + 2) >> 0;
@@ -158,7 +165,7 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 
 			/* In case of SOS, we need to write the data. */
 			if (s.marker == JPEG_MARKER_SOS) {
-				*d = realloc (*d, *ds + data->size);
+				CLEANUP_REALLOC (*d, *ds + data->size);
 				memcpy (*d + *ds, data->data, data->size);
 				*ds += data->size;
 			}
@@ -230,9 +237,10 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 							d + o - 4, len + 4);
 				break;
 			default:
-				s->content.generic.size = len;
 				s->content.generic.data =
 						malloc (sizeof (char) * len);
+				if (!s->content.generic.data) return;
+				s->content.generic.size = len;
 				memcpy (s->content.generic.data, &d[o], len);
 
 				/* In case of SOS, image data will follow. */
@@ -248,6 +256,7 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 					}
 					data->data = malloc (
 						sizeof (char) * data->size);
+					if (!data->data) return;
 					memcpy (data->data, d + o + len,
 						data->size);
 					o += data->size;
