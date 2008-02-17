@@ -31,11 +31,19 @@ typedef struct {
 	unsigned int use_ids;
 
 	const char *fin;
-	char fout[1024];
+
+	const char *set_value;
+	const char *set_thumb;
 } ExifParams;
 
-void action_extract_thumb    (ExifData *, ExifLog *, ExifParams);
+void action_insert_thumb     (ExifData *, ExifLog *, ExifParams);
+void action_remove_thumb     (ExifData *, ExifLog *, ExifParams);
 void action_show_tag         (ExifData *, ExifLog *, ExifParams);
+void action_set_value        (ExifData *, ExifLog *, ExifParams);
+void action_remove_tag       (ExifData *, ExifLog *, ExifParams);
+
+void action_save             (ExifData *, ExifLog *, ExifParams, const char *);
+void action_save_thumb       (ExifData *, ExifLog *, ExifParams, const char *);
 
 void action_tag_table        (ExifData *, ExifParams);
 void action_tag_list         (ExifData *, ExifParams);

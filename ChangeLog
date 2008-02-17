@@ -1,5 +1,13 @@
 2008-02-17  Lutz Mueller <lutz@users.sourceforge.net>
 
+	* exif/main.c: Move the remaining actions to...
+	* exif/actions.[c,h]: ...here. While at it, implement a --create-exif
+	option (suggestion and patch by Alexander Drozdov
+	<dzal_mail@mtu-net.ru>). This needs latest libexif, therefore ...
+	* configure.ac: ...require at least libexif 0.6.16.2.
+
+2008-02-17  Lutz Mueller <lutz@users.sourceforge.net>
+
 	In preparation of adding new command line options:
 
 	* exif/main.c: Move more individual actions to...

@@ -38,7 +38,7 @@ GP_PKG_CONFIG
 # ---------------------------------------------------------------------------
 # i18n support
 # ---------------------------------------------------------------------------
-GP_GETTEXT_HACK([${PACKAGE}],[Lutz Müller and others])
+GP_GETTEXT_HACK([${PACKAGE}],[Lutz Mueller and others])
 ALL_LINGUAS="de es fr nl pl sv"
 AM_GNU_GETTEXT_VERSION([0.14.1])
 AM_GNU_GETTEXT([external])
@@ -66,7 +66,7 @@ AC_ARG_ENABLE(gettext-iconv,
 # ---------------------------------------------------------------------------
 # libraries needed
 # ---------------------------------------------------------------------------
-GP_CHECK_LIBRARY([LIBEXIF],[libexif],[>= 0.6.13])
+GP_CHECK_LIBRARY([LIBEXIF],[libexif],[>= 0.6.16.2])
 
 
 # ---------------------------------------------------------------------------

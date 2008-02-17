@@ -21,6 +21,7 @@
 #include "config.h"
 #include "actions.h"
 #include "exif-i18n.h"
+#include "libjpeg/jpeg-data.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,6 +33,147 @@
 #define ENTRY_NOT_FOUND "   -   "
 
 #define CN(s) ((s) ? (s) : "(NULL)")
+
+static void
+convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, ExifLog *log)
+{
+	unsigned int i, numcomponents;
+	char *value_p;
+
+        /*
+	 * ASCII strings are handled separately,
+	 * since they don't require any conversion.
+	 */
+        if (e->format == EXIF_FORMAT_ASCII) {
+		if (e->data) free (e->data);
+		e->components = strlen (set_value) + 1;
+		e->size = sizeof (char) * e->components;
+		e->data = malloc (e->size);
+                if (!e->data) {
+                        fprintf (stderr, _("Not enough memory."));
+                        fputc ('\n', stderr);
+                        exit (1);
+                }
+                strcpy ((char *) e->data, (char *) set_value);
+                return;
+	}
+
+	/*
+	 * Make sure we can handle this entry
+	 */
+	if ((e->components == 0) && *set_value) {
+		fprintf (stderr, _("Setting a value for this tag "
+				   "is unsupported!"));
+		fputc ('\n', stderr);
+		exit (1);
+	}
+
+        value_p = (char*) set_value;
+	numcomponents = e->components;
+	for (i = 0; i < numcomponents; ++i) {
+                const char *begin, *end;
+                unsigned char *buf, s;
+		static const char comp_separ = ' ';
+
+                begin = value_p;
+		value_p = strchr (begin, comp_separ);
+		if (!value_p) {
+                        if (i != numcomponents - 1) {
+                                fprintf (stderr, _("Too few components "
+						   "specified!"));
+				fputc ('\n', stderr);
+				exit (1);
+                        }
+                        end = begin + strlen (begin);
+                } else end = value_p++;
+
+                buf = malloc ((end - begin + 1) * sizeof (char));
+                strncpy ((char *) buf, (char *) begin, end - begin);
+                buf[end - begin] = '\0';
+
+		s = exif_format_get_size (e->format);
+		switch (e->format) {
+		case EXIF_FORMAT_ASCII:
+			exif_log (log, -1, "exif", _("Internal error. "
+				"Please contact <%s>."), PACKAGE_BUGREPORT);
+			break;
+		case EXIF_FORMAT_SHORT:
+			exif_set_short (e->data + (s * i), o, atoi ((char *) buf));
+			break;
+		case EXIF_FORMAT_SSHORT:
+			exif_set_sshort (e->data + (s * i), o, atoi ((char *) buf));
+			break;
+		case EXIF_FORMAT_RATIONAL:
+			/*
+			 * Hack to simplify the loop for rational numbers.
+			 * Should really be using exif_set_rational instead
+			 */
+			if (i == 0) numcomponents *= 2;
+			s /= 2;
+			/* Fall through to LONG handler */
+		case EXIF_FORMAT_LONG:
+			exif_set_long (e->data + (s * i), o, atol ((char *) buf));
+			break;
+		case EXIF_FORMAT_SRATIONAL:
+			/*
+			 * Hack to simplify the loop for rational numbers.
+			 * Should really be using exif_set_srational instead
+			 */
+			if (i == 0) numcomponents *= 2;
+			s /= 2;
+			/* Fall through to SLONG handler */
+		case EXIF_FORMAT_SLONG:
+			exif_set_slong (e->data + (s * i), o, atol ((char *) buf));
+			break;
+		case EXIF_FORMAT_BYTE:
+		case EXIF_FORMAT_SBYTE:
+		case EXIF_FORMAT_FLOAT:
+		case EXIF_FORMAT_DOUBLE:
+		case EXIF_FORMAT_UNDEFINED:
+		default:
+			fprintf (stderr, _("Not yet implemented!"));
+			fputc ('\n', stderr);
+			exit (1);
+		}
+		free (buf);
+	}
+	if (value_p && *value_p) {
+		fprintf (stderr, _("Warning; Too many components specified!"));
+		fputc ('\n', stderr);
+	}
+}
+
+void
+action_save (ExifData *ed, ExifLog *log, ExifParams p, const char *fout)
+{
+	JPEGData *jdata;
+	unsigned char *d = NULL;
+	unsigned int ds;
+
+	/* Parse the JPEG file. */
+	jdata = jpeg_data_new ();
+	jpeg_data_log (jdata, log);
+	jpeg_data_load_file (jdata, p.fin);
+
+	/* Make sure the EXIF data is not too big. */
+	exif_data_save_data (ed, &d, &ds);
+	if (ds) {
+		free (d);
+		if (ds > 0xffff)
+			exif_log (log, -1, "exif", _("Too much EXIF data "
+				"(%i bytes). Only %i bytes are allowed."),
+				ds, 0xffff);
+	};
+
+	jpeg_data_set_exif_data (jdata, ed);
+
+	/* Save the modified image. */
+	jpeg_data_save_file (jdata, fout);
+	jpeg_data_unref (jdata);
+
+	fprintf (stdout, _("Wrote file '%s'."), fout);
+	fprintf (stdout, "\n");
+}
 
 static void
 show_entry (ExifEntry *entry, unsigned int machine_readable)
@@ -61,6 +203,88 @@ show_entry (ExifEntry *entry, unsigned int machine_readable)
 }
 
 void
+action_set_value (ExifData *ed, ExifLog *log, ExifParams p)
+{
+	ExifEntry *e;
+
+	/* If the entry doesn't exist, create it. */
+	if (!((e = exif_content_get_entry (ed->ifd[p.ifd], p.tag)))) {
+	    e = exif_entry_new ();
+	    exif_content_add_entry (ed->ifd[p.ifd], e);
+	    exif_entry_initialize (e, p.tag);
+	}
+
+	/* Now set the value and save the data. */
+	convert_arg_to_entry (p.set_value, e, exif_data_get_byte_order (ed), log);
+}
+
+void
+action_remove_tag (ExifData *ed, ExifLog *log, ExifParams p)
+{
+	ExifEntry *e;
+
+	if (!p.tag) {
+		while (ed->ifd[p.ifd] && ed->ifd[p.ifd]->count)
+			exif_content_remove_entry (
+			    ed->ifd[p.ifd],
+			    ed->ifd[p.ifd]->entries[0]);
+	} else {
+		if (!((e = exif_content_get_entry (ed->ifd[p.ifd], p.tag))))
+		    exif_log (log, -1, "exif", _("IFD '%s' does not contain a "
+			 "tag '%s'!"), exif_ifd_get_name (p.ifd),
+			exif_tag_get_name_in_ifd (p.tag, p.ifd));
+		else
+			exif_content_remove_entry (ed->ifd[p.ifd], e);
+	}
+}
+
+void
+action_remove_thumb (ExifData *ed, ExifLog *log, ExifParams p)
+{
+	if (ed->data) {
+		free (ed->data);
+		ed->data = NULL;
+	}
+	ed->size = 0;
+}
+
+void
+action_insert_thumb (ExifData *ed, ExifLog *log, ExifParams p)
+{
+	FILE *f;
+
+	if (!ed) return;
+
+	/* Get rid of the thumbnail */
+	action_remove_thumb (ed, log, p);
+
+	/* Insert new thumbnail */
+	f = fopen (p.set_thumb, "rb");
+	if (!f)
+#ifdef __GNUC__
+		exif_log (log, -1, "exif", _("Could not open "
+			"'%s' (%m)!"), p.set_thumb);
+#else
+		exif_log (log, -1, "exif", _("Could not open "
+			"'%s' (%s)!"), p.set_thumb, strerror (errno));
+#endif
+	fseek (f, 0, SEEK_END);
+	ed->size = ftell (f);
+	ed->data = malloc (sizeof (char) * ed->size);
+	if (ed->size && !ed->data) EXIF_LOG_NO_MEMORY (log, "exif", ed->size);
+	fseek (f, 0, SEEK_SET);
+	if (fread (ed->data, sizeof (char), ed->size, f) != ed->size)
+#ifdef __GNUC__
+		exif_log (log, -1, "exif", _("Could not read "
+			"'%s' (%m)."), p.set_thumb);
+#else
+		exif_log (log, -1, "exif", _("Could not read "
+			"'%s' (%s)."), p.set_thumb, strerror (errno));
+#endif
+	fclose (f);
+}
+
+void
 action_show_tag (ExifData *ed, ExifLog *log, ExifParams p)
 {
 	ExifEntry *e;
@@ -84,7 +308,7 @@ action_show_tag (ExifData *ed, ExifLog *log, ExifParams p)
 }
 
 void
-action_extract_thumb (ExifData *ed, ExifLog *log, ExifParams p)
+action_save_thumb (ExifData *ed, ExifLog *log, ExifParams p, const char *fout)
 {
 	FILE *f;
 
@@ -98,18 +322,18 @@ action_extract_thumb (ExifData *ed, ExifLog *log, ExifParams p)
 	}
 
 	/* Save the thumbnail */
-	f = fopen (p.fout, "wb");
+	f = fopen (fout, "wb");
 	if (!f)
 #ifdef __GNUC__
 	exif_log (log, -1, "exif", _("Could not open '%s' for "
-		"writing (%m)!"), p.fout);
+		"writing (%m)!"), fout);
 #else
 	exif_log (log, -1, "exif", _("Could not open '%s' for "
-		"writing (%s)!"), p.fout, strerror (errno));
+		"writing (%s)!"), fout, strerror (errno));
 #endif
 	fwrite (ed->data, 1, ed->size, f);
 	fclose (f);
-	fprintf (stdout, _("Wrote file '%s'."), p.fout);
+	fprintf (stdout, _("Wrote file '%s'."), fout);
 	fprintf (stdout, "\n");
 }
 
