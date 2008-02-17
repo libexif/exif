@@ -23,15 +23,25 @@
 
 #include <libexif/exif-data.h>
 
-void action_tag_table        (const char *filename, ExifData *);
-void action_tag_list         (const char *filename, ExifData *,
-                              unsigned char ids);
-void action_tag_list_machine (const char *filename, ExifData *,
-                              unsigned char ids);
-void action_tag_list_xml     (const char *filename, ExifData *,
-                              unsigned char ids);
+typedef struct {
+	ExifTag tag;
+	ExifIfd ifd;
 
-void action_mnote_list       (const char *filename, ExifData *,
-                              unsigned char ids);
+	unsigned int machine_readable;
+	unsigned int use_ids;
+
+	const char *fin;
+	char fout[1024];
+} ExifParams;
+
+void action_extract_thumb    (ExifData *, ExifLog *, ExifParams);
+void action_show_tag         (ExifData *, ExifLog *, ExifParams);
+
+void action_tag_table        (ExifData *, ExifParams);
+void action_tag_list         (ExifData *, ExifParams);
+void action_tag_list_machine (ExifData *, ExifParams);
+void action_tag_list_xml     (ExifData *, ExifParams);
+
+void action_mnote_list       (ExifData *, ExifParams);
 
 #endif /* __ACTIONS_H__ */

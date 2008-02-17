@@ -33,8 +33,88 @@
 
 #define CN(s) ((s) ? (s) : "(NULL)")
 
+static void
+show_entry (ExifEntry *entry, unsigned int machine_readable)
+{
+	ExifIfd ifd = exif_entry_get_ifd (entry);
+
+	if (machine_readable) {
+		char b[1024];
+
+		fprintf (stdout, "%s\n", C(exif_entry_get_value (entry, b, sizeof (b))));
+		return;
+	}
+
+	/*
+	 * The C() macro can point to a static buffer so these printfs
+	 * must be done separately.
+	 */
+	printf (_("EXIF entry '%s' "),
+		C(exif_tag_get_title_in_ifd (entry->tag, ifd)));
+	printf (_("(0x%x, '%s') "),
+		entry->tag,
+		C(exif_tag_get_name_in_ifd (entry->tag, ifd)));
+	printf (_("exists in IFD '%s':\n"),
+		C(exif_ifd_get_name (ifd)));
+
+	exif_entry_dump (entry, 0);
+}
+
 void
-action_tag_table (const char *filename, ExifData *ed)
+action_show_tag (ExifData *ed, ExifLog *log, ExifParams p)
+{
+	ExifEntry *e;
+	unsigned int i;
+
+	if (!ed) return;
+
+	if ((p.ifd >= EXIF_IFD_0) && (p.ifd < EXIF_IFD_COUNT)) {
+		if ((e = exif_content_get_entry (ed->ifd[p.ifd], p.tag)))
+			show_entry (e, p.machine_readable);
+		else
+			exif_log (log, -1, "exif", _("IFD '%s' "
+				"does not contain tag '%s'."),
+					exif_ifd_get_name (p.ifd),
+					exif_tag_get_name (p.tag));
+	} else {
+		for (i = 0; i < EXIF_IFD_COUNT; i++)
+			if ((e = exif_content_get_entry (ed->ifd[i], p.tag)))
+				show_entry (e, p.machine_readable);
+	}
+}
+
+void
+action_extract_thumb (ExifData *ed, ExifLog *log, ExifParams p)
+{
+	FILE *f;
+
+	if (!ed) return;
+
+	/* No thumbnail? Exit. */
+	if (!ed->data) {
+		exif_log (log, -1, "exif", _("'%s' does not "
+			"contain a thumbnail!"), p.fin);
+		return;
+	}
+
+	/* Save the thumbnail */
+	f = fopen (p.fout, "wb");
+	if (!f)
+#ifdef __GNUC__
+	exif_log (log, -1, "exif", _("Could not open '%s' for "
+		"writing (%m)!"), p.fout);
+#else
+	exif_log (log, -1, "exif", _("Could not open '%s' for "
+		"writing (%s)!"), p.fout, strerror (errno));
+#endif
+	fwrite (ed->data, 1, ed->size, f);
+	fclose (f);
+	fprintf (stdout, _("Wrote file '%s'."), p.fout);
+	fprintf (stdout, "\n");
+}
+
+void
+action_tag_table (ExifData *ed, ExifParams p)
 {
 	unsigned int tag;
 	const char *name;
@@ -42,7 +122,7 @@ action_tag_table (const char *filename, ExifData *ed)
 	unsigned int i;
 
 	memset (txt, 0, sizeof (txt));
-	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), filename);
+	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), p.fin);
 	fprintf (stdout, "%-38.38s", txt);
 	for (i = 0; i < EXIF_IFD_COUNT; i++)
 		fprintf (stdout, "%-7.7s", exif_ifd_get_name (i));
@@ -62,7 +142,7 @@ action_tag_table (const char *filename, ExifData *ed)
 }
 
 static void
-show_entry (ExifEntry *e, void *data)
+show_entry_list (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
 	char v[128];
@@ -85,7 +165,7 @@ show_entry (ExifEntry *e, void *data)
 static void
 show_ifd (ExifContent *content, void *data)
 {
-	exif_content_foreach_entry (content, show_entry, data);
+	exif_content_foreach_entry (content, show_entry_list, data);
 }
 
 static void
@@ -101,13 +181,13 @@ print_hline (unsigned char ids)
 }
 
 void
-action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
+action_mnote_list (ExifData *ed, ExifParams p)
 {
 	unsigned int i, bs = 1024, c, id;
 	char b[1024];
 	char b1[1024], b2[1024];
 	ExifMnoteData *n;
-	const char *p;
+	const char *s;
 
 	n = exif_data_get_mnote_data (ed);
 	if (!n) {
@@ -126,24 +206,24 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
 			 	 c), c);
 	}
 	for (i = 0; i < c; i++) {
-	        if ( ids ) {
+	        if (p.use_ids) {
 			id = exif_mnote_data_get_id  (n,i);
 			sprintf(b1,"0x%04x",id);
 		} else {
-			p = C (exif_mnote_data_get_title (n, i));
-			strncpy (b1, p && *p ? p : _("Unknown tag"), bs);
+			s = C (exif_mnote_data_get_title (n, i));
+			strncpy (b1, s && *s ? s : _("Unknown tag"), bs);
 			b1[sizeof(b1)-1] = 0;
 		}
-		p = C (exif_mnote_data_get_value (n, i, b, bs));
-		strncpy (b2, p ? p : _("Unknown value"), bs);
+		s = C (exif_mnote_data_get_value (n, i, b, bs));
+		strncpy (b2, s ? s : _("Unknown value"), bs);
 		b2[sizeof(b2)-1] = 0;
 		/* printf ("%s|%s\n", b1, b2); */
-        	if (ids)
+        	if (p.use_ids)
                 	fprintf (stdout, "%-6.6s", b1);
         	else
                 	fprintf (stdout, "%-20.20s", b1);
 		fputc ('|', stdout);
-        	if (ids) {
+        	if (p.use_ids) {
 			fputs (b2, stdout);
         	} else {
                 	fprintf (stdout, "%-58.58s", b2);
@@ -153,7 +233,7 @@ action_mnote_list (const char *filename, ExifData *ed, unsigned char ids)
 }
 
 void
-action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
+action_tag_list (ExifData *ed, ExifParams p)
 {
 	ExifByteOrder order;
 
@@ -161,24 +241,24 @@ action_tag_list (const char *filename, ExifData *ed, unsigned char ids)
 		return;
 
 	order = exif_data_get_byte_order (ed);
-	fprintf (stdout, _("EXIF tags in '%s' ('%s' byte order):"), filename,
+	fprintf (stdout, _("EXIF tags in '%s' ('%s' byte order):"), p.fin,
 		exif_byte_order_get_name (order));
 	fputc ('\n', stdout);
-	print_hline (ids);
-        if (ids) {
+	print_hline (p.use_ids);
+        if (p.use_ids) {
                 fprintf (stdout, "%-6.6s", _("Tag"));
         } else {
                 fprintf (stdout, "%-20.20s", _("Tag"));
         }
 	fputc ('|', stdout);
-        if (ids)
+        if (p.use_ids)
 		fprintf (stdout, "%-72.72s", _("Value"));
         else
                 fprintf (stdout, "%-58.58s", _("Value"));
         fputc ('\n', stdout);
-        print_hline (ids);
-	exif_data_foreach_content (ed, show_ifd, &ids);
-        print_hline (ids);
+        print_hline (p.use_ids);
+	exif_data_foreach_content (ed, show_ifd, &p.use_ids);
+        print_hline (p.use_ids);
         if (ed->size) {
                 fprintf (stdout, _("EXIF data contains a thumbnail "
 				   "(%i bytes)."), ed->size);
@@ -210,11 +290,11 @@ show_ifd_machine (ExifContent *content, void *data)
 }
 
 void
-action_tag_list_machine (const char *filename, ExifData *ed, unsigned char ids)
+action_tag_list_machine (ExifData *ed, ExifParams p)
 {
 	if (!ed) return;
 
-	exif_data_foreach_content (ed, show_ifd_machine, &ids);
+	exif_data_foreach_content (ed, show_ifd_machine, &p.use_ids);
 	if (ed->size)
 		fprintf (stdout, _("ThumbnailSize\t%i\n"), ed->size);
 }
@@ -251,11 +331,11 @@ show_xml (ExifContent *content, void *data)
 }
 
 void
-action_tag_list_xml (const char *filename, ExifData *ed, unsigned char ids)
+action_tag_list_xml (ExifData *ed, ExifParams p)
 {
 	if (!ed) return;
 
 	fprintf(stdout, "<exif>\n");
-	exif_data_foreach_content (ed, show_xml, &ids);
+	exif_data_foreach_content (ed, show_xml, &p.use_ids);
 	fprintf(stdout, "</exif>\n");
 }

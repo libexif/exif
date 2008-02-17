@@ -1,3 +1,11 @@
+2008-02-17  Lutz Mueller <lutz@users.sourceforge.net>
+
+	In preparation of adding new command line options:
+
+	* exif/main.c: Move more individual actions to...
+	* exif/actions.[c,h]: ...here. That should make the file main.c more
+	readable.
+
 2008-02-10  Lutz Mueller <lutz@users.sourceforge.net>
 
 	Patch by Alexander Drozdov <dzal_mail@mtu-net.ru>:
