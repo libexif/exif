@@ -259,7 +259,7 @@ main (int argc, const char **argv)
 		return 1;
 	}
 	if (((p.ifd < EXIF_IFD_0) || (p.ifd >= EXIF_IFD_COUNT)) &&
-	    (p.set_value || remove_tag || show_description)) {
+	    (p.set_value || show_description)) {
 		exif_log (log, -1, "exif", _("You need to specify an IFD!"));
 		return 1;
 	}
