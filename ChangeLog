@@ -1,3 +1,13 @@
+2008-06-15  Lutz Mueller <lutz@users.sourceforge.net>
+
+	Patch by Matthieu Castet <castet.matthieu@free.fr> (slightly
+	modified):
+
+	* actions.c (convert_arg_to_entry): Allow the setting of the user
+	  comment tag.
+	  (action_set_value): Add some debugging information.
+	* main.c (main): When setting values, save the resulting data.
+
 2008-04-10  Dan Fandrich <dan@coneharvesters.com>
 
 	Added Slovak translation by Ivan Masár

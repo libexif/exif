@@ -44,9 +44,12 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 	 * ASCII strings are handled separately,
 	 * since they don't require any conversion.
 	 */
-        if (e->format == EXIF_FORMAT_ASCII) {
+        if (e->format == EXIF_FORMAT_ASCII ||
+	    e->tag == EXIF_TAG_USER_COMMENT) {
 		if (e->data) free (e->data);
 		e->components = strlen (set_value) + 1;
+		if (e->tag == EXIF_TAG_USER_COMMENT)
+			e->components += 8 - 1;
 		e->size = sizeof (char) * e->components;
 		e->data = malloc (e->size);
                 if (!e->data) {
@@ -54,7 +57,13 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
                         fputc ('\n', stderr);
                         exit (1);
                 }
-                strcpy ((char *) e->data, (char *) set_value);
+		if (e->tag == EXIF_TAG_USER_COMMENT) {
+			/* assume ASCII charset */
+			memcpy ((char *) e->data, "ASCII\0\0\0", 8);
+			memcpy ((char *) e->data + 8, (char *) set_value, 
+				strlen (set_value));
+		} else
+			strcpy ((char *) e->data, (char *) set_value);
                 return;
 	}
 
@@ -209,6 +218,7 @@ action_set_value (ExifData *ed, ExifLog *log, ExifParams p)
 
 	/* If the entry doesn't exist, create it. */
 	if (!((e = exif_content_get_entry (ed->ifd[p.ifd], p.tag)))) {
+	    exif_log (log, EXIF_LOG_CODE_DEBUG, "exif", "Adding entry...");
 	    e = exif_entry_new ();
 	    exif_content_add_entry (ed->ifd[p.ifd], e);
 	    exif_entry_initialize (e, p.tag);

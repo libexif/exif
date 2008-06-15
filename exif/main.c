@@ -367,7 +367,8 @@ main (int argc, const char **argv)
 		else
 			action_tag_list (ed, p);
 
-		if (create_exif || p.set_thumb || remove_tag || remove_thumb)
+		if (create_exif || p.set_thumb || remove_tag || remove_thumb ||
+		    p.set_value)
 			action_save (ed, log, p, fout);
 
 		exif_data_unref (ed);
