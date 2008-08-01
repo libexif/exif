@@ -1,7 +1,7 @@
 exif-0.6.16.x:
   * Fixed the output of -s and -t when iconv is configured
   * Updated translations: pl
-  * Added translations: nl sk sv vi zh_CN
+  * Added translations: id nl sk sv vi zh_CN
   * Fixed a double character encoding conversion problem with recent
     GNU gettext because version >= 0.10.36 does the conversion of message
     texts itself.
