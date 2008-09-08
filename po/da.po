@@ -1,0 +1,277 @@
+# Danish translation of exif.
+# Copyright (C) 2008 exif.
+# This file is distributed under the same license as the exif package.
+# Joe Hansen <joedalton2@yahoo.dk>, 2008.
+#
+# Konventioner
+# har bevaret ' ' som de fremgår af engelsk tekst (kunne også være »« eller "")
+# tag -> mærke
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: exif-0.6.16-pre1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-01-21 14:29-0800\n"
+"PO-Revision-Date: 2008-09-07 00:00+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: exif/actions.c:45
+#, c-format
+msgid "EXIF tags in '%s':"
+msgstr "EXIF-mærker i '%s':"
+
+#: exif/actions.c:114
+#, c-format
+msgid "Unknown MakerNote format.\n"
+msgstr "Ukendt MakerNote-format.\n"
+
+#: exif/actions.c:121
+#, c-format
+msgid "MakerNote does not contain any value.\n"
+msgstr "MakerNote indeholder ingen værdier.\n"
+
+#: exif/actions.c:124
+#, c-format
+msgid "MakerNote contains %i value:\n"
+msgid_plural "MakerNote contains %i values:\n"
+msgstr[0] "MakerNote indeholder %i værdi:\n"
+msgstr[1] "MakerNote indeholder %i værdier:\n"
+
+#: exif/actions.c:134
+msgid "Unknown tag"
+msgstr "Ukendt mærke"
+
+#: exif/actions.c:137
+msgid "Unknown value"
+msgstr "Ukendt værdi"
+
+#: exif/actions.c:162
+#, c-format
+msgid "EXIF tags in '%s' ('%s' byte order):"
+msgstr "EXIF-mærke i '%s' ('%s' byte orden):"
+
+#: exif/actions.c:167 exif/actions.c:169
+msgid "Tag"
+msgstr "Mærke"
+
+#: exif/actions.c:173 exif/actions.c:175 exif/main.c:361
+msgid "Value"
+msgstr "Værdi"
+
+#: exif/actions.c:181
+#, c-format
+msgid "EXIF data contains a thumbnail (%i bytes)."
+msgstr "EXIF-data indeholder et miniatureportræt (%i byte)."
+
+#: exif/actions.c:217
+#, c-format
+msgid "ThumbnailSize\t%i\n"
+msgstr "MiniatureportrætStørrelse\t%i\n"
+
+#: exif/main.c:57
+#, c-format
+msgid "Internal error. Please contact <%s>."
+msgstr "Intern fejl. Kontakt venligst <%s>."
+
+#: exif/main.c:80
+#, c-format
+msgid "EXIF entry '%s' "
+msgstr "EXIF-post '%s' "
+
+#: exif/main.c:82
+#, c-format
+msgid "(0x%x, '%s') "
+msgstr "(0x%x, '%s') "
+
+#: exif/main.c:85
+#, c-format
+msgid "exists in IFD '%s':\n"
+msgstr "eksisterer i IFD '%s':\n"
+
+#: exif/main.c:120
+#, c-format
+msgid "Not enough memory."
+msgstr "Ikke nok hukommelse."
+
+#: exif/main.c:138
+#, c-format
+msgid "Too few components specified!"
+msgstr "For få komponenter specificeret!"
+
+#: exif/main.c:168
+#, c-format
+msgid "Not yet implemented!"
+msgstr "Ikke implementeret endnu!"
+
+#: exif/main.c:241
+#, c-format
+msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
+msgstr "For megen EXIF-data (%i byte). Kun %i byte er tilladt."
+
+#: exif/main.c:255 exif/main.c:513
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "Skrev fil '%s'."
+
+#: exif/main.c:337
+msgid "Display software version"
+msgstr "Vis softwareversion"
+
+#: exif/main.c:339
+msgid "Show IDs instead of tag names"
+msgstr "Vis ID'er i steden for mærkenavne"
+
+#: exif/main.c:341
+msgid "Select tag"
+msgstr "Vælg mærke"
+
+#: exif/main.c:341
+msgid "tag"
+msgstr "mærke"
+
+#: exif/main.c:343
+msgid "Select IFD"
+msgstr "Vælg IFD"
+
+#: exif/main.c:343
+msgid "IFD"
+msgstr "IFD"
+
+#: exif/main.c:345
+msgid "List all EXIF tags"
+msgstr "Vis alle EXIF-mærker"
+
+#: exif/main.c:347
+msgid "Show contents of tag MakerNote"
+msgstr "Vis indhold af mærke MakerNote"
+
+#: exif/main.c:349
+msgid "Remove tag or ifd"
+msgstr "Fjern mærke eller ifd"
+
+#: exif/main.c:351
+msgid "Show description of tag"
+msgstr "Vis beskrivelse af mærke"
+
+#: exif/main.c:353
+msgid "Extract thumbnail"
+msgstr "Udtræk miniatureportræt"
+
+#: exif/main.c:355
+msgid "Remove thumbnail"
+msgstr "Fjern miniatureportræt"
+
+#: exif/main.c:357
+msgid "Insert FILE as thumbnail"
+msgstr "Indæst FIl som miniatureportræt"
+
+#: exif/main.c:357 exif/main.c:359
+msgid "FILE"
+msgstr "FIL"
+
+#: exif/main.c:359
+msgid "Write data to FILE"
+msgstr "Skriv data til FIL"
+
+#: exif/main.c:363
+msgid "Output in a machine-readable (tab delimited) format"
+msgstr "Uddata i maskinlæsbart format (faneblad afgrænset)"
+
+#: exif/main.c:366
+msgid "Output in a XML format"
+msgstr "Uddata i XML-format"
+
+#: exif/main.c:369
+msgid "Show debugging messages"
+msgstr "Vis fejlsøgningsbeskeder"
+
+#: exif/main.c:386
+msgid "[OPTION...] file"
+msgstr "[INDSTILLING...] fil"
+
+#: exif/main.c:414
+#, c-format
+msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
+msgstr "Ugyldig IFD '%s'. Gyldige IFD'er er '0', '1', 'EXIF', 'GPS', og 'Interoperability'."
+
+#: exif/main.c:422
+#, c-format
+msgid "Invalid tag '%s'!"
+msgstr "Ugyldig mærke '%s'!"
+
+#: exif/main.c:427
+msgid "Please specify a tag!"
+msgstr "Vælg venligst et mærke!"
+
+#: exif/main.c:432
+#, c-format
+msgid "Tag '%s' "
+msgstr "Mærke '%s' "
+
+#: exif/main.c:434
+#, c-format
+msgid "(0x%04x, '%s'): "
+msgstr "(0x%04x, '%s'): "
+
+#: exif/main.c:463
+#, c-format
+msgid "'%s' does not contain EXIF data!"
+msgstr "'%s' indeholder ikke EXIF-data!"
+
+#: exif/main.c:486
+#, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr "IFD '%s' indeholder ikke mærke '%s'."
+
+#: exif/main.c:495
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "'%s' indeholder ikke et miniatureportræt!"
+
+#: exif/main.c:503
+#, c-format
+msgid "Could not open '%s' for writing (%m)!"
+msgstr "Kunne ikke åbne '%s' til skrivning (%m)!"
+
+#: exif/main.c:507
+#, c-format
+msgid "Could not open '%s' for writing (%s)!"
+msgstr "Ikke ikke åbne '%s' til skrivning (%s)!"
+
+#: exif/main.c:542
+#, c-format
+msgid "Could not open '%s' (%m)!"
+msgstr "Kunne ikke åbne '%s' (%m)!"
+
+#: exif/main.c:545
+#, c-format
+msgid "Could not open '%s' (%s)!"
+msgstr "Kunne ikke åbne '%s' (%s)!"
+
+#: exif/main.c:557
+#, c-format
+msgid "Could not read '%s' (%m)."
+msgstr "Kunne ikke læse '%s' (%m)."
+
+#: exif/main.c:560
+#, c-format
+msgid "Could not read '%s' (%s)."
+msgstr "Kunne ikke læse '%s' (%s)."
+
+#: exif/main.c:571
+msgid "You need to specify a tag!"
+msgstr "Du skal angive et mærke!"
+
+#: exif/main.c:576 exif/main.c:595
+msgid "You need to specify an IFD!"
+msgstr "Du skal angive en IFD!"
+
+#: exif/main.c:607
+#, c-format
+msgid "IFD '%s' does not contain a tag '%s'!"
+msgstr "IFD '%s' indeholder ikke et mærke '%s'!"
