@@ -397,7 +397,7 @@ show_entry_list (ExifEntry *e, void *data)
 	if (*ids)
 		fprintf (stdout, "0x%04x", e->tag);
 	else
-		fprintf (stdout, "%-20.20s", C(CN(exif_tag_get_title_in_ifd (e->tag, ifd))));
+		fprintf (stdout, "%-20.20s", C(exif_tag_get_title_in_ifd (e->tag, ifd)));
 	printf ("|");
 	if (*ids)
 		fprintf (stdout, "%-72.72s",
