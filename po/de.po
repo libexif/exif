@@ -1,20 +1,23 @@
+# translation of de.po to Deutsch
 # German translation for exif.
-# Copyright © 2002 Free Software Foundation, Inc.
-# Lutz Müller <lutz@users.sourceforge.net>, 2002.
-# Marcus Meissner <marcus@jet.franken.de>, 2005.
+# This file is distributed under the same license as the exif package.                                                   
+# Copyright © 2002, 2008 Free Software Foundation, Inc.
 #
+# Lutz Müller <lutz@users.sourceforge.net>, 2002.
+# Marcus Meissner <marcus@jet.franken.de>, 2005, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.15\n"
+"Project-Id-Version: exif 0.6.16-pre1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-21 14:29-0800\n"
-"PO-Revision-Date: 2007-06-06 16:30+0200\n"
+"PO-Revision-Date: 2008-11-05 16:17+0100\n"
 "Last-Translator: Marcus Meissner <marcus@jet.franken.de>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
 #: exif/actions.c:45
 #, c-format
@@ -32,10 +35,10 @@ msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote enthält keinen Wert!\n"
 
 #: exif/actions.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
-msgstr[0] "MakerNote enthält %i Werte:\n"
+msgstr[0] "MakerNote %i Wert:\n"
 msgstr[1] "MakerNote enthält %i Werte:\n"
 
 #: exif/actions.c:134
@@ -75,19 +78,19 @@ msgid "Internal error. Please contact <%s>."
 msgstr "Interner Fehler. Bitte nehmen Sie Kontakt mit <%s> auf."
 
 #: exif/main.c:80
-#, fuzzy, c-format
+#, c-format
 msgid "EXIF entry '%s' "
-msgstr "EXIF Einträge in '%s':"
+msgstr "EXIF Eintrag '%s'"
 
 #: exif/main.c:82
-#, fuzzy, c-format
+#, c-format
 msgid "(0x%x, '%s') "
-msgstr "Eintrag '%s' (0x%04x, '%s'): %s"
+msgstr "(0x%x, '%s') "
 
 #: exif/main.c:85
 #, c-format
 msgid "exists in IFD '%s':\n"
-msgstr ""
+msgstr "existiert in IFD %s:\n"
 
 #: exif/main.c:120
 #, c-format
@@ -116,7 +119,7 @@ msgstr "Datei '%s' geschrieben."
 
 #: exif/main.c:337
 msgid "Display software version"
-msgstr ""
+msgstr "Zeige Software Version an"
 
 #: exif/main.c:339
 msgid "Show IDs instead of tag names"
@@ -180,7 +183,7 @@ msgstr "Gebe maschinenlesbares Format (tab delimited) aus."
 
 #: exif/main.c:366
 msgid "Output in a XML format"
-msgstr ""
+msgstr "Ausgabe in einem XML Format"
 
 #: exif/main.c:369
 msgid "Show debugging messages"
@@ -201,18 +204,19 @@ msgid "Invalid tag '%s'!"
 msgstr "Ungültiger Eintrag '%s'!"
 
 #: exif/main.c:427
+#, fuzzy
 msgid "Please specify a tag!"
 msgstr "Bitte geben Sie einen Eintrag an!"
 
 #: exif/main.c:432
 #, c-format
 msgid "Tag '%s' "
-msgstr ""
+msgstr "Eintrag '%s'"
 
 #: exif/main.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "(0x%04x, '%s'): "
-msgstr "Eintrag '%s' (0x%04x, '%s'): %s"
+msgstr "(0x%04x, '%s'): "
 
 #: exif/main.c:463
 #, c-format
@@ -272,8 +276,14 @@ msgstr "Bitte geben Sie einen IFD an!"
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD '%s' enthält keinen Eintrag '%s'!"
 
-#~ msgid "MakerNote contains 1 value:\n"
-#~ msgstr "MakerNote enthält einen Wert:\n"
+#~ msgid "Setting a value for this tag is unsupported!"
+#~ msgstr "Das Setzen eines Wertes für dieses Tag ist nicht unterstützt!"
 
-#~ msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
-#~ msgstr "Der EXIF Eintrag '%s' (0x%x, '%s') existiert in IFD '%s':"
+#~ msgid "Warning; Too many components specified!"
+#~ msgstr "Warnung: Zu viele Komponenten angegeben!"
+
+#~ msgid "'%s' does not contain tag '%s'."
+#~ msgstr "'%s' enthält keinen Eintrag '%s'."
+
+#~ msgid "Create EXIF data if not existing"
+#~ msgstr "Erzeuge EXIF Daten wenn noch nicht vorhanden"
