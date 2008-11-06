@@ -1,3 +1,6 @@
+exif-0.6.x:
+  * 
+
 exif-0.6.17 (2008-11-06):
   * Fixed the output of -s and -t when iconv is configured
   * Updated translations: pl
