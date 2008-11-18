@@ -1,274 +1,291 @@
 # translation of nl.po to Dutch
-# Copyright (C) YEAR Lutz Müller and others
+# Copyright (C) 2008 Lutz Müller and others
 # This file is distributed under the same license as the exif package.
 #
 # Erwin Poeze <erwin.poeze@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif-0.6.16-pre1\n"
+"Project-Id-Version: exif-0.6.17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-21 14:29-0800\n"
-"PO-Revision-Date: 2008-01-29 20:57+0100\n"
+"POT-Creation-Date: 2008-11-06 01:03-0800\n"
+"PO-Revision-Date: 2008-11-18 16:45+0100\n"
 "Last-Translator: Erwin Poeze <erwin.poeze@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
 
-#: exif/actions.c:45
+#: exif/actions.c:56
+#, c-format
+msgid "Not enough memory."
+msgstr "Onvoldoende geheugen."
+
+#: exif/actions.c:74
+#, c-format
+msgid "Setting a value for this tag is unsupported!"
+msgstr "Een waarde kiezen voor dit label wordt niet ondersteund!"
+
+#: exif/actions.c:91
+#, c-format
+msgid "Too few components specified!"
+msgstr "Te weinig componenten opgegeven!"
+
+#: exif/actions.c:106
+#, c-format
+msgid "Internal error. Please contact <%s>."
+msgstr "Interne fout. Neem contact op met <%s>."
+
+#: exif/actions.c:143
+#, c-format
+msgid "Not yet implemented!"
+msgstr "Nog niet geïmplementeerd!"
+
+#: exif/actions.c:150
+#, c-format
+msgid "Warning; Too many components specified!"
+msgstr "Waarschuwing; te weinig componenten opgegeven!"
+
+#: exif/actions.c:172
+#, c-format
+msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
+msgstr "Te veel EXIF-gegevens (%i bytes). Slechts %i bytes toegestaan."
+
+#: exif/actions.c:183 exif/actions.c:358
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "Bestand '%s' is aangemaakt."
+
+#: exif/actions.c:203
+#, c-format
+msgid "EXIF entry '%s' "
+msgstr "EXIF-invoer '%s' "
+
+#: exif/actions.c:205
+#, c-format
+msgid "(0x%x, '%s') "
+msgstr "(0x%x, '%s') "
+
+#: exif/actions.c:208
+#, c-format
+msgid "exists in IFD '%s':\n"
+msgstr "bestaat in IFD '%s':\n"
+
+#: exif/actions.c:251
+#, c-format
+msgid "IFD '%s' does not contain a tag '%s'!"
+msgstr "IFD '%s' bevat geen label '%s'!"
+
+#: exif/actions.c:282
+#, c-format
+msgid "Could not open '%s' (%m)!"
+msgstr "Kon '%s' niet openen (%m)!"
+
+#: exif/actions.c:285
+#, c-format
+msgid "Could not open '%s' (%s)!"
+msgstr "Kon '%s' niet openen (%s)!"
+
+#: exif/actions.c:295
+#, c-format
+msgid "Could not read '%s' (%m)."
+msgstr "Kon '%s' niet lezen (%m)!"
+
+#: exif/actions.c:298
+#, c-format
+msgid "Could not read '%s' (%s)."
+msgstr "Kon '%s' niet lezen (%s)."
+
+#: exif/actions.c:317
+#, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr "IFD '%s' bevat geen label '%s'."
+
+#: exif/actions.c:323
+#, c-format
+msgid "'%s' does not contain tag '%s'."
+msgstr "'%s' bevat geen label '%s'."
+
+#: exif/actions.c:341
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "'%s' bevat geen miniatuur!"
+
+#: exif/actions.c:350
+#, c-format
+msgid "Could not open '%s' for writing (%m)!"
+msgstr "Kon '%s' niet openen om naar te schrijven (%m)!"
+
+#: exif/actions.c:353
+#, c-format
+msgid "Could not open '%s' for writing (%s)!"
+msgstr "Kon '%s' niet openen om naar te schrijven (%s)!"
+
+#: exif/actions.c:371
 #, c-format
 msgid "EXIF tags in '%s':"
-msgstr "EXIF-tags in '%s':"
+msgstr "EXIF-labels in '%s':"
 
-#: exif/actions.c:114
+#: exif/actions.c:440
 #, c-format
 msgid "Unknown MakerNote format.\n"
 msgstr "Onbekend formaat van MakerNote.\n"
 
-#: exif/actions.c:121
+#: exif/actions.c:447
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote bevat geen waarde.\n"
 
-#: exif/actions.c:124
+#: exif/actions.c:450
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote bevat één waarde:\n"
 msgstr[1] "MakerNote bevat %i waarden:\n"
 
-#: exif/actions.c:134
+#: exif/actions.c:460
 msgid "Unknown tag"
-msgstr "Onbekende tag"
+msgstr "Onbekend label"
 
-#: exif/actions.c:137
+#: exif/actions.c:464
 msgid "Unknown value"
 msgstr "Onbekende waarde"
 
-#: exif/actions.c:162
+#: exif/actions.c:490
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
-msgstr "EXIF-tags in '%s' ('%s' byte-volgorde):"
+msgstr "EXIF-labels in '%s' ('%s' byte-volgorde):"
 
-#: exif/actions.c:167 exif/actions.c:169
+#: exif/actions.c:495 exif/actions.c:497
 msgid "Tag"
-msgstr "Tag"
+msgstr "Label"
 
-#: exif/actions.c:173 exif/actions.c:175 exif/main.c:361
+#: exif/actions.c:501 exif/actions.c:503 exif/main.c:199
 msgid "Value"
 msgstr "waarde"
 
-#: exif/actions.c:181
+#: exif/actions.c:509
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF-gegevens bevatten een miniatuur (%i bytes)."
 
-#: exif/actions.c:217
+#: exif/actions.c:545
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "Miniatuurgrootte\t%i\n"
 
-#: exif/main.c:57
-#, c-format
-msgid "Internal error. Please contact <%s>."
-msgstr "Interne fout. Neem contact op met <%s>."
-
-#: exif/main.c:80
-#, c-format
-msgid "EXIF entry '%s' "
-msgstr "EXIF-invoer '%s' "
-
-#: exif/main.c:82
-#, c-format
-msgid "(0x%x, '%s') "
-msgstr "(0x%x, '%s') "
-
-#: exif/main.c:85
-#, c-format
-msgid "exists in IFD '%s':\n"
-msgstr "bestaat in IFD '%s':\n"
-
-#: exif/main.c:120
-#, c-format
-msgid "Not enough memory."
-msgstr "Onvoldoende geheugen."
-
-#: exif/main.c:138
-#, c-format
-msgid "Too few components specified!"
-msgstr "Te weinig componenten opgegeven!"
-
-#: exif/main.c:168
-#, c-format
-msgid "Not yet implemented!"
-msgstr "Nog niet geïmplementeerd!"
-
-#: exif/main.c:241
-#, c-format
-msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
-msgstr "Te veel EXIF-gegevens (%i bytes). Slechts %i bytes toegestaan."
-
-#: exif/main.c:255 exif/main.c:513
-#, c-format
-msgid "Wrote file '%s'."
-msgstr "Bestand '%s' is aangemaakt."
-
-#: exif/main.c:337
+#: exif/main.c:175
 msgid "Display software version"
 msgstr "programmaversie tonen"
 
-#: exif/main.c:339
+#: exif/main.c:177
 msgid "Show IDs instead of tag names"
-msgstr "ID's in plaats van tagnamen tonen"
+msgstr "ID's in plaats van labelnamen tonen"
 
-#: exif/main.c:341
+#: exif/main.c:179
 msgid "Select tag"
-msgstr "deze tag selecteren"
+msgstr "dit label selecteren"
 
-#: exif/main.c:341
+#: exif/main.c:179
 msgid "tag"
-msgstr "tag"
+msgstr "label"
 
-#: exif/main.c:343
+#: exif/main.c:181
 msgid "Select IFD"
 msgstr "deze IFD selecteren"
 
-#: exif/main.c:343
+#: exif/main.c:181
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:345
+#: exif/main.c:183
 msgid "List all EXIF tags"
-msgstr "alle EXIF-tags tonen"
+msgstr "Alle EXIF-labels tonen"
 
-#: exif/main.c:347
+#: exif/main.c:185
 msgid "Show contents of tag MakerNote"
-msgstr "inhoud van de tag MakerNote tonen"
+msgstr "inhoud van het label MakerNote tonen"
 
-#: exif/main.c:349
+#: exif/main.c:187
 msgid "Remove tag or ifd"
-msgstr "tag of IFD verwijderen"
+msgstr "label of IFD verwijderen"
 
-#: exif/main.c:351
+#: exif/main.c:189
 msgid "Show description of tag"
-msgstr "beschrijving van tag tonen"
+msgstr "beschrijving van label tonen"
 
-#: exif/main.c:353
+#: exif/main.c:191
 msgid "Extract thumbnail"
 msgstr "miniatuur uitlezen"
 
-#: exif/main.c:355
+#: exif/main.c:193
 msgid "Remove thumbnail"
 msgstr "miniatuur verwijderen"
 
-#: exif/main.c:357
+#: exif/main.c:195
 msgid "Insert FILE as thumbnail"
 msgstr "BESTAND als miniatuur toevoegen"
 
-#: exif/main.c:357 exif/main.c:359
+#: exif/main.c:195 exif/main.c:197
 msgid "FILE"
 msgstr "BESTAND"
 
-#: exif/main.c:359
+#: exif/main.c:197
 msgid "Write data to FILE"
 msgstr "gegevens naar BESTAND schrijven"
 
-#: exif/main.c:363
+#: exif/main.c:201
+msgid "Create EXIF data if not existing"
+msgstr "EXIF-gegevens aanmaken als ze ontbreken"
+
+#: exif/main.c:203
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "machineleesbare uitvoer produceren (tabgescheiden)"
 
-#: exif/main.c:366
+#: exif/main.c:206
 msgid "Output in a XML format"
 msgstr "XML-uitvoer produceren"
 
-#: exif/main.c:369
+#: exif/main.c:209
 msgid "Show debugging messages"
 msgstr "debugmeldingen tonen"
 
-#: exif/main.c:386
+#: exif/main.c:229
 msgid "[OPTION...] file"
 msgstr "[OPTIE...] bestand"
 
-#: exif/main.c:414
+#: exif/main.c:241
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Ongeldige IFD '%s'. Geldige IFD's zijn '0', '1', 'EXIF', 'GPS' en 'Interoperability'."
 
-#: exif/main.c:422
+#: exif/main.c:250
 #, c-format
 msgid "Invalid tag '%s'!"
-msgstr "Ongeldige tag '%s'!"
+msgstr "Ongeldig label '%s'!"
 
-#: exif/main.c:427
-msgid "Please specify a tag!"
-msgstr "Geef alstublieft een tag op."
+#: exif/main.c:258
+msgid "You need to specify a tag!"
+msgstr "Het is nodig een label op te geven."
 
-#: exif/main.c:432
+#: exif/main.c:263
+msgid "You need to specify an IFD!"
+msgstr "Het is nodig een IFD op te geven."
+
+#: exif/main.c:286
 #, c-format
 msgid "Tag '%s' "
-msgstr "Tag '%s' "
+msgstr "Label '%s' "
 
-#: exif/main.c:434
+#: exif/main.c:288
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, '%s'): "
 
-#: exif/main.c:463
+#: exif/main.c:338
 #, c-format
 msgid "'%s' does not contain EXIF data!"
 msgstr "'%s' bevat geen EXIF-gegevens."
 
-#: exif/main.c:486
-#, c-format
-msgid "IFD '%s' does not contain tag '%s'."
-msgstr "IFD '%s' bevat geen tag '%s'."
-
-#: exif/main.c:495
-#, c-format
-msgid "'%s' does not contain a thumbnail!"
-msgstr "'%s' bevat geen miniatuur!"
-
-#: exif/main.c:503
-#, c-format
-msgid "Could not open '%s' for writing (%m)!"
-msgstr "Kon '%s' niet openen om naar te schrijven (%m)!"
-
-#: exif/main.c:507
-#, c-format
-msgid "Could not open '%s' for writing (%s)!"
-msgstr "Kon '%s' niet openen om naar te schrijven (%s)!"
-
-#: exif/main.c:542
-#, c-format
-msgid "Could not open '%s' (%m)!"
-msgstr "Kon '%s' niet openen (%m)!"
-
-#: exif/main.c:545
-#, c-format
-msgid "Could not open '%s' (%s)!"
-msgstr "Kon '%s' niet openen (%s)!"
-
-#: exif/main.c:557
-#, c-format
-msgid "Could not read '%s' (%m)."
-msgstr "Kon '%s' niet lezen (%m)!"
-
-#: exif/main.c:560
-#, c-format
-msgid "Could not read '%s' (%s)."
-msgstr "Kon '%s' niet lezen (%s)."
-
-#: exif/main.c:571
-msgid "You need to specify a tag!"
-msgstr "Het is nodig een tag op te geven."
-
-#: exif/main.c:576 exif/main.c:595
-msgid "You need to specify an IFD!"
-msgstr "Het is nodig een IFD op te geven."
-
-#: exif/main.c:607
-#, c-format
-msgid "IFD '%s' does not contain a tag '%s'!"
-msgstr "IFD '%s' bevat geen tag '%s'!"
+#~ msgid "Please specify a tag!"
+#~ msgstr "Geef alstublieft een tag op."
