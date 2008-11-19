@@ -437,7 +437,7 @@ action_mnote_list (ExifData *ed, ExifParams p)
 
 	n = exif_data_get_mnote_data (ed);
 	if (!n) {
-		printf (_("Unknown MakerNote format.\n"));
+		printf (_("Unknown format or nonexistent MakerNote.\n"));
 		return;
 	}
 
