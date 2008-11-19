@@ -123,6 +123,46 @@ Show help message.
 .TP
 .BI "\-\-usage"
 Display brief usage message.
+.SH "EXAMPLES"
+Display all recognized EXIF tags in an image and the tag contents:
+.LP
+.RS
+exif image.jpg
+.RE
+.LP
+Display a table listing all known EXIF tags and whether each one exists in the
+given image:
+.LP
+.RS
+exif --list-tags image.jpg
+.RE
+.LP
+Extract the thumbnail into the file thumbnail.jpg:
+.LP
+.RS
+exif --extract-thumbnail --output=thumbnail.jpg image.jpg
+.RE
+.LP
+Display a list of the numeric values of all recognized EXIF tags and the
+tag contents:
+.LP
+.RS
+exif --ids image.jpg
+.RE
+.LP
+Display the meaning of tag 0x9209 in the "EXIF" IFD according to the EXIF
+specification:
+.LP
+.RS
+exif --show-description --ifd=EXIF --tag=0x9209 
+.RE
+.LP
+Add an Orientation tag with value "bottom - left" to an existing image:
+.LP
+.RS
+exif --output=new.jpg --ifd=0 --tag=0x0112 --set-value=4 image.jpg
+.RE
+.LP
 .SH "AUTHOR"
 Written by Lutz Mueller <lutz@users.sourceforge.net>.
 .SH "SEE ALSO"
