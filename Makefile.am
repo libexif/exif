@@ -44,5 +44,8 @@ cvs-tag-release:
 upload-release:
 	echo ncftpput upload.sourceforge.net incoming/ $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).*
 
+# Create an HTML version of the man page for the web site
+.1.html:
+	man2html -r -H libexif.sourceforge.net -M / "$^" | sed '1,/^$$/d' >"$@"
 
 # End of Makefile.am.
