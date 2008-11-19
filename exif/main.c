@@ -53,15 +53,18 @@
 #  define POPT_TABLEEND { NULL, '\0', 0, 0, 0, NULL, NULL }
 #endif
 
-/* escape codes for output colors */
-#define COL_BLUE   "\033[34m"
-#define COL_GREEN  "\033[32m"
-#define COL_RED    "\033[31m"
-#define COL_NORMAL "\033[0m"
+/* ANSI escape codes for output colors */
+#define COL_BLUE        "\033[34m"
+#define COL_GREEN       "\033[32m"
+#define COL_RED         "\033[31m"
+#define COL_BOLD        "\033[1m"
+#define COL_UNDERLINE   "\033[4m"
+#define COL_NORMAL      "\033[m"
 
-/* Ensure that we're actuall printing the escape codes to a TTY.
+/* Ensure that we're actually printing the escape codes to a TTY.
  * FIXME: We should make sure the terminal can actually understand these
- *        escape sequences
+ *        escape sequences, or better yet, use vidattr(3X) to set colours
+ *        instead.
  */
 
 #if defined(HAVE_ISATTY) && defined(HAVE_FILENO)
@@ -120,12 +123,10 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		if (log_arg->ignore_corrupted)
 			return;
 	case EXIF_LOG_CODE_NO_MEMORY:
-		put_colorstring (stderr, "\033[31;1m");
-		put_colorstring (stderr, "\033[31;4m");
+		put_colorstring (stderr, COL_RED COL_BOLD COL_UNDERLINE);
 		fprintf (stderr, exif_log_code_get_title (code));
 		fprintf (stderr, "\n");
-		put_colorstring (stderr, "\033[;0m");
-		put_colorstring (stderr, COL_RED);
+		put_colorstring (stderr, COL_NORMAL COL_RED);
 		fprintf (stderr, exif_log_code_get_message (code));
 		fprintf (stderr, "\n");
 		fprintf (stderr, "%s: ", domain);
@@ -311,7 +312,8 @@ main (int argc, const char **argv)
 		else {
 			strncpy (fout, *args, sizeof (fout) - 1);
 			strncat (fout, ".modified.jpeg",
-				sizeof (fout) - 1);
+				sizeof (fout) - strlen(fout) - 1);
+			/* Should really abort if this file name is too long */
 		}
 		p.fin = *args;
 
