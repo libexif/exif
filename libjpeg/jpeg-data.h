@@ -21,7 +21,7 @@
 #ifndef __JPEG_DATA_H__
 #define __JPEG_DATA_H__
 
-#include <libjpeg/jpeg-marker.h>
+#include "jpeg-marker.h"
 
 #include <libexif/exif-data.h>
 #include <libexif/exif-log.h>
