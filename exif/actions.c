@@ -365,20 +365,27 @@ action_tag_table (ExifData *ed, ExifParams p)
 	unsigned int tag;
 	const char *name;
 	char txt[1024];
-	unsigned int i;
+	ExifIfd i;
 
 	memset (txt, 0, sizeof (txt));
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), p.fin);
 	fprintf (stdout, "%-38.38s", txt);
-	for (i = 0; i < EXIF_IFD_COUNT; i++)
+	for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++)
 		fprintf (stdout, "%-7.7s", exif_ifd_get_name (i));
 	fputc ('\n', stdout);
+
 	for (tag = 0; tag < 0xffff; tag++) {
-		name = exif_tag_get_title (tag);
+		/*
+		 * Display the name of the first tag of this number found.
+		 * Since there is some overlap (e.g. with GPS tags), this
+		 * name could sometimes be incorrect for the specific tags
+		 * found in this file.
+		 */
+		name = exif_tag_get_title(tag);
 		if (!name)
 			continue;
 		fprintf (stdout, "  0x%04x %-29.29s", tag, C(name));
-		for (i = 0; i < EXIF_IFD_COUNT; i++)
+		for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++)
 			if (exif_content_get_entry (ed->ifd[i], tag))
 				printf (ENTRY_FOUND);
 			else
@@ -557,7 +564,7 @@ show_entry_xml (ExifEntry *e, void *data)
 		fprintf (stdout, "</0x%04x>", e->tag);
 	} else {
 		int x;
-		strncpy (t, exif_tag_get_title (e->tag), sizeof (t));
+		strncpy (t, exif_tag_get_title_in_ifd(e->tag, exif_entry_get_ifd(e)), sizeof (t));
 
     /* Remove invalid characters from tag eg. (, ), space */
 		for (x = 0; x < strlen (t); x++)
