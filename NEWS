@@ -1,5 +1,5 @@
 exif-0.6.x:
-  * Updated translations: id, nl, pl, sv, zh_CN
+  * Updated translations: id, nl, pl, sk, sv, zh_CN
 
 exif-0.6.17 (2008-11-06):
   * Fixed the output of -s and -t when iconv is configured
