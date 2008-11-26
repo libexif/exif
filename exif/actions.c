@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include <libexif/exif-ifd.h>
 
@@ -279,28 +280,20 @@ action_insert_thumb (ExifData *ed, ExifLog *log, ExifParams p)
 
 	/* Insert new thumbnail */
 	f = fopen (p.set_thumb, "rb");
-	if (!f)
-#ifdef __GNUC__
-		exif_log (log, -1, "exif", _("Could not open "
-			"'%s' (%m)!"), p.set_thumb);
-#else
+	if (!f) {
 		exif_log (log, -1, "exif", _("Could not open "
 			"'%s' (%s)!"), p.set_thumb, strerror (errno));
-#endif
-	fseek (f, 0, SEEK_END);
-	ed->size = ftell (f);
-	ed->data = malloc (sizeof (char) * ed->size);
-	if (ed->size && !ed->data) EXIF_LOG_NO_MEMORY (log, "exif", ed->size);
-	fseek (f, 0, SEEK_SET);
-	if (fread (ed->data, sizeof (char), ed->size, f) != ed->size)
-#ifdef __GNUC__
-		exif_log (log, -1, "exif", _("Could not read "
-			"'%s' (%m)."), p.set_thumb);
-#else
-		exif_log (log, -1, "exif", _("Could not read "
-			"'%s' (%s)."), p.set_thumb, strerror (errno));
-#endif
-	fclose (f);
+	} else {
+		fseek (f, 0, SEEK_END);
+		ed->size = ftell (f);
+		ed->data = malloc (sizeof (char) * ed->size);
+		if (ed->size && !ed->data) EXIF_LOG_NO_MEMORY (log, "exif", ed->size);
+		fseek (f, 0, SEEK_SET);
+		if (fread (ed->data, sizeof (char), ed->size, f) != ed->size)
+			exif_log (log, -1, "exif", _("Could not read "
+				"'%s' (%s)."), p.set_thumb, strerror (errno));
+		fclose (f);
+	}
 }
 
 void
@@ -348,17 +341,14 @@ action_save_thumb (ExifData *ed, ExifLog *log, ExifParams p, const char *fout)
 	/* Save the thumbnail */
 	f = fopen (fout, "wb");
 	if (!f)
-#ifdef __GNUC__
-	exif_log (log, -1, "exif", _("Could not open '%s' for "
-		"writing (%m)!"), fout);
-#else
-	exif_log (log, -1, "exif", _("Could not open '%s' for "
-		"writing (%s)!"), fout, strerror (errno));
-#endif
-	fwrite (ed->data, 1, ed->size, f);
-	fclose (f);
-	fprintf (stdout, _("Wrote file '%s'."), fout);
-	fprintf (stdout, "\n");
+		exif_log (log, -1, "exif", _("Could not open '%s' for "
+			"writing (%s)!"), fout, strerror (errno));
+	else {
+		fwrite (ed->data, 1, ed->size, f);
+		fclose (f);
+		fprintf (stdout, _("Wrote file '%s'."), fout);
+		fprintf (stdout, "\n");
+	}
 }
 
 void
