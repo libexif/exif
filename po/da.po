@@ -9,10 +9,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: exif-0.6.16-pre1\n"
+"Project-Id-Version: exif-0.6.17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-21 14:29-0800\n"
-"PO-Revision-Date: 2008-09-07 00:00+0000\n"
+"POT-Creation-Date: 2008-11-06 01:03-0800\n"
+"PO-Revision-Date: 2008-11-26 00:00+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -20,258 +20,276 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: exif/actions.c:45
+#: exif/actions.c:56
+#, c-format
+msgid "Not enough memory."
+msgstr "Ikke nok hukommelse."
+
+#: exif/actions.c:74
+#, c-format
+msgid "Setting a value for this tag is unsupported!"
+msgstr "Indstilling af en værdi for dette mærke er ikke understøttet!"
+
+#: exif/actions.c:91
+#, c-format
+msgid "Too few components specified!"
+msgstr "For få komponenter specificeret!"
+
+#: exif/actions.c:106
+#, c-format
+msgid "Internal error. Please contact <%s>."
+msgstr "Intern fejl. Kontakt venligst <%s>."
+
+#: exif/actions.c:143
+#, c-format
+msgid "Not yet implemented!"
+msgstr "Ikke implementeret endnu!"
+
+#: exif/actions.c:150
+#, c-format
+msgid "Warning; Too many components specified!"
+msgstr "Advarsel; for mange komponenter specificeret!"
+
+#: exif/actions.c:172
+#, c-format
+msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
+msgstr "For megen EXIF-data (%i byte). Kun %i byte er tilladt."
+
+#: exif/actions.c:183 exif/actions.c:358
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "Skrev fil '%s'."
+
+#: exif/actions.c:203
+#, c-format
+msgid "EXIF entry '%s' "
+msgstr "EXIF-post '%s' "
+
+#: exif/actions.c:205
+#, c-format
+msgid "(0x%x, '%s') "
+msgstr "(0x%x, '%s') "
+
+#: exif/actions.c:208
+#, c-format
+msgid "exists in IFD '%s':\n"
+msgstr "eksisterer i IFD '%s':\n"
+
+#: exif/actions.c:251
+#, c-format
+msgid "IFD '%s' does not contain a tag '%s'!"
+msgstr "IFD '%s' indeholder ikke et mærke '%s'!"
+
+#: exif/actions.c:282
+#, c-format
+msgid "Could not open '%s' (%m)!"
+msgstr "Kunne ikke åbne '%s' (%m)!"
+
+#: exif/actions.c:285
+#, c-format
+msgid "Could not open '%s' (%s)!"
+msgstr "Kunne ikke åbne '%s' (%s)!"
+
+#: exif/actions.c:295
+#, c-format
+msgid "Could not read '%s' (%m)."
+msgstr "Kunne ikke læse '%s' (%m)."
+
+#: exif/actions.c:298
+#, c-format
+msgid "Could not read '%s' (%s)."
+msgstr "Kunne ikke læse '%s' (%s)."
+
+#: exif/actions.c:317
+#, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr "IFD '%s' indeholder ikke mærke '%s'."
+
+#: exif/actions.c:323
+#, c-format
+msgid "'%s' does not contain tag '%s'."
+msgstr "'%s' indeholder ikke mærke '%s'."
+
+#: exif/actions.c:341
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "'%s' indeholder ikke et miniatureportræt!"
+
+#: exif/actions.c:350
+#, c-format
+msgid "Could not open '%s' for writing (%m)!"
+msgstr "Kunne ikke åbne '%s' til skrivning (%m)!"
+
+#: exif/actions.c:353
+#, c-format
+msgid "Could not open '%s' for writing (%s)!"
+msgstr "Ikke ikke åbne '%s' til skrivning (%s)!"
+
+#: exif/actions.c:371
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "EXIF-mærker i '%s':"
 
-#: exif/actions.c:114
+#: exif/actions.c:440
 #, c-format
 msgid "Unknown MakerNote format.\n"
 msgstr "Ukendt MakerNote-format.\n"
 
-#: exif/actions.c:121
+#: exif/actions.c:447
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote indeholder ingen værdier.\n"
 
-#: exif/actions.c:124
+#: exif/actions.c:450
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote indeholder %i værdi:\n"
 msgstr[1] "MakerNote indeholder %i værdier:\n"
 
-#: exif/actions.c:134
+#: exif/actions.c:460
 msgid "Unknown tag"
 msgstr "Ukendt mærke"
 
-#: exif/actions.c:137
+#: exif/actions.c:464
 msgid "Unknown value"
 msgstr "Ukendt værdi"
 
-#: exif/actions.c:162
+#: exif/actions.c:490
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "EXIF-mærke i '%s' ('%s' byte orden):"
 
-#: exif/actions.c:167 exif/actions.c:169
+#: exif/actions.c:495 exif/actions.c:497
 msgid "Tag"
 msgstr "Mærke"
 
-#: exif/actions.c:173 exif/actions.c:175 exif/main.c:361
+#: exif/actions.c:501 exif/actions.c:503 exif/main.c:199
 msgid "Value"
 msgstr "Værdi"
 
-#: exif/actions.c:181
+#: exif/actions.c:509
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF-data indeholder et miniatureportræt (%i byte)."
 
-#: exif/actions.c:217
+#: exif/actions.c:545
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "MiniatureportrætStørrelse\t%i\n"
 
-#: exif/main.c:57
-#, c-format
-msgid "Internal error. Please contact <%s>."
-msgstr "Intern fejl. Kontakt venligst <%s>."
-
-#: exif/main.c:80
-#, c-format
-msgid "EXIF entry '%s' "
-msgstr "EXIF-post '%s' "
-
-#: exif/main.c:82
-#, c-format
-msgid "(0x%x, '%s') "
-msgstr "(0x%x, '%s') "
-
-#: exif/main.c:85
-#, c-format
-msgid "exists in IFD '%s':\n"
-msgstr "eksisterer i IFD '%s':\n"
-
-#: exif/main.c:120
-#, c-format
-msgid "Not enough memory."
-msgstr "Ikke nok hukommelse."
-
-#: exif/main.c:138
-#, c-format
-msgid "Too few components specified!"
-msgstr "For få komponenter specificeret!"
-
-#: exif/main.c:168
-#, c-format
-msgid "Not yet implemented!"
-msgstr "Ikke implementeret endnu!"
-
-#: exif/main.c:241
-#, c-format
-msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
-msgstr "For megen EXIF-data (%i byte). Kun %i byte er tilladt."
-
-#: exif/main.c:255 exif/main.c:513
-#, c-format
-msgid "Wrote file '%s'."
-msgstr "Skrev fil '%s'."
-
-#: exif/main.c:337
+#: exif/main.c:175
 msgid "Display software version"
 msgstr "Vis softwareversion"
 
-#: exif/main.c:339
+#: exif/main.c:177
 msgid "Show IDs instead of tag names"
 msgstr "Vis ID'er i steden for mærkenavne"
 
-#: exif/main.c:341
+#: exif/main.c:179
 msgid "Select tag"
 msgstr "Vælg mærke"
 
-#: exif/main.c:341
+#: exif/main.c:179
 msgid "tag"
 msgstr "mærke"
 
-#: exif/main.c:343
+#: exif/main.c:181
 msgid "Select IFD"
 msgstr "Vælg IFD"
 
-#: exif/main.c:343
+#: exif/main.c:181
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:345
+#: exif/main.c:183
 msgid "List all EXIF tags"
 msgstr "Vis alle EXIF-mærker"
 
-#: exif/main.c:347
+#: exif/main.c:185
 msgid "Show contents of tag MakerNote"
 msgstr "Vis indhold af mærke MakerNote"
 
-#: exif/main.c:349
+#: exif/main.c:187
 msgid "Remove tag or ifd"
 msgstr "Fjern mærke eller ifd"
 
-#: exif/main.c:351
+#: exif/main.c:189
 msgid "Show description of tag"
 msgstr "Vis beskrivelse af mærke"
 
-#: exif/main.c:353
+#: exif/main.c:191
 msgid "Extract thumbnail"
 msgstr "Udtræk miniatureportræt"
 
-#: exif/main.c:355
+#: exif/main.c:193
 msgid "Remove thumbnail"
 msgstr "Fjern miniatureportræt"
 
-#: exif/main.c:357
+#: exif/main.c:195
 msgid "Insert FILE as thumbnail"
 msgstr "Indæst FIl som miniatureportræt"
 
-#: exif/main.c:357 exif/main.c:359
+#: exif/main.c:195 exif/main.c:197
 msgid "FILE"
 msgstr "FIL"
 
-#: exif/main.c:359
+#: exif/main.c:197
 msgid "Write data to FILE"
 msgstr "Skriv data til FIL"
 
-#: exif/main.c:363
+#: exif/main.c:201
+msgid "Create EXIF data if not existing"
+msgstr "Opret EXIF-data hvis de ikke eksisterer"
+
+#: exif/main.c:203
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "Uddata i maskinlæsbart format (faneblad afgrænset)"
 
-#: exif/main.c:366
+#: exif/main.c:206
 msgid "Output in a XML format"
 msgstr "Uddata i XML-format"
 
-#: exif/main.c:369
+#: exif/main.c:209
 msgid "Show debugging messages"
 msgstr "Vis fejlsøgningsbeskeder"
 
-#: exif/main.c:386
+#: exif/main.c:229
 msgid "[OPTION...] file"
 msgstr "[INDSTILLING...] fil"
 
-#: exif/main.c:414
+#: exif/main.c:241
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Ugyldig IFD '%s'. Gyldige IFD'er er '0', '1', 'EXIF', 'GPS', og 'Interoperability'."
 
-#: exif/main.c:422
+#: exif/main.c:250
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Ugyldig mærke '%s'!"
 
-#: exif/main.c:427
-msgid "Please specify a tag!"
-msgstr "Vælg venligst et mærke!"
+#: exif/main.c:258
+msgid "You need to specify a tag!"
+msgstr "Du skal angive et mærke!"
 
-#: exif/main.c:432
+#: exif/main.c:263
+msgid "You need to specify an IFD!"
+msgstr "Du skal angive en IFD!"
+
+#: exif/main.c:286
 #, c-format
 msgid "Tag '%s' "
 msgstr "Mærke '%s' "
 
-#: exif/main.c:434
+#: exif/main.c:288
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, '%s'): "
 
-#: exif/main.c:463
+#: exif/main.c:338
 #, c-format
 msgid "'%s' does not contain EXIF data!"
 msgstr "'%s' indeholder ikke EXIF-data!"
 
-#: exif/main.c:486
-#, c-format
-msgid "IFD '%s' does not contain tag '%s'."
-msgstr "IFD '%s' indeholder ikke mærke '%s'."
-
-#: exif/main.c:495
-#, c-format
-msgid "'%s' does not contain a thumbnail!"
-msgstr "'%s' indeholder ikke et miniatureportræt!"
-
-#: exif/main.c:503
-#, c-format
-msgid "Could not open '%s' for writing (%m)!"
-msgstr "Kunne ikke åbne '%s' til skrivning (%m)!"
-
-#: exif/main.c:507
-#, c-format
-msgid "Could not open '%s' for writing (%s)!"
-msgstr "Ikke ikke åbne '%s' til skrivning (%s)!"
-
-#: exif/main.c:542
-#, c-format
-msgid "Could not open '%s' (%m)!"
-msgstr "Kunne ikke åbne '%s' (%m)!"
-
-#: exif/main.c:545
-#, c-format
-msgid "Could not open '%s' (%s)!"
-msgstr "Kunne ikke åbne '%s' (%s)!"
-
-#: exif/main.c:557
-#, c-format
-msgid "Could not read '%s' (%m)."
-msgstr "Kunne ikke læse '%s' (%m)."
-
-#: exif/main.c:560
-#, c-format
-msgid "Could not read '%s' (%s)."
-msgstr "Kunne ikke læse '%s' (%s)."
-
-#: exif/main.c:571
-msgid "You need to specify a tag!"
-msgstr "Du skal angive et mærke!"
-
-#: exif/main.c:576 exif/main.c:595
-msgid "You need to specify an IFD!"
-msgstr "Du skal angive en IFD!"
-
-#: exif/main.c:607
-#, c-format
-msgid "IFD '%s' does not contain a tag '%s'!"
-msgstr "IFD '%s' indeholder ikke et mærke '%s'!"
+#~ msgid "Please specify a tag!"
+#~ msgstr "Vælg venligst et mærke!"
