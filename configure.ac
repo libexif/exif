@@ -62,6 +62,7 @@ AC_ARG_ENABLE(gettext-iconv,
 	      [  --enable-gettext-iconv  convert character encodings (only needed when gettext doesn't do it itself)],
 	      [ AC_DEFINE(ENABLE_GETTEXT_ICONV,1,[whether to run iconv on gettext output]) ])
 
+AC_CHECK_FUNCS(mblen)
 
 # ---------------------------------------------------------------------------
 # libraries needed

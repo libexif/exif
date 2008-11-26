@@ -1,5 +1,7 @@
 exif-0.6.x:
   * Updated translations: id, nl, pl, sk, sv, zh_CN
+  * Fixed alignment of tables in locales with multibyte character encoding
+    (bug #2034873)
 
 exif-0.6.17 (2008-11-06):
   * Fixed the output of -s and -t when iconv is configured

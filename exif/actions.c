@@ -22,6 +22,7 @@
 #include "actions.h"
 #include "exif-i18n.h"
 #include "libjpeg/jpeg-data.h"
+#include "utils.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,10 +30,11 @@
 
 #include <libexif/exif-ifd.h>
 
-#define ENTRY_FOUND     "   *   "
-#define ENTRY_NOT_FOUND "   -   "
-
 #define CN(s) ((s) ? (s) : "(NULL)")
+
+#define TAG_VALUE_BUF 1024
+
+#define SCREEN_WIDTH 80
 
 static void
 convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, ExifLog *log)
@@ -190,7 +192,7 @@ show_entry (ExifEntry *entry, unsigned int machine_readable)
 	ExifIfd ifd = exif_entry_get_ifd (entry);
 
 	if (machine_readable) {
-		char b[1024];
+		char b[TAG_VALUE_BUF];
 
 		fprintf (stdout, "%s\n", C(exif_entry_get_value (entry, b, sizeof (b))));
 		return;
@@ -364,14 +366,26 @@ action_tag_table (ExifData *ed, ExifParams p)
 {
 	unsigned int tag;
 	const char *name;
-	char txt[1024];
+	char txt[TAG_VALUE_BUF];
 	ExifIfd i;
+	size_t fieldwidth, width, bytes;
 
-	memset (txt, 0, sizeof (txt));
+#define ENTRY_FOUND     "   *   "
+#define ENTRY_NOT_FOUND "   -   "
+
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), p.fin);
-	fprintf (stdout, "%-38.38s", txt);
-	for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++)
-		fprintf (stdout, "%-7.7s", exif_ifd_get_name (i));
+	fieldwidth = width = 38;
+	bytes = exif_mbstrlen(txt, &width);
+	printf ("%.*s%*s", bytes, txt, fieldwidth-width, "");
+
+	for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++) {
+		size_t space;
+		fieldwidth = width = 7;
+		bytes = exif_mbstrlen(exif_ifd_get_name (i), &width);
+		space = fieldwidth-width;
+		printf ("%*s%.*s%*s", space/2, "", bytes, exif_ifd_get_name (i),
+			space - space/2, "");
+	}
 	fputc ('\n', stdout);
 
 	for (tag = 0; tag < 0xffff; tag++) {
@@ -384,7 +398,11 @@ action_tag_table (ExifData *ed, ExifParams p)
 		name = exif_tag_get_title(tag);
 		if (!name)
 			continue;
-		fprintf (stdout, "  0x%04x %-29.29s", tag, C(name));
+
+		fieldwidth = width = SCREEN_WIDTH - 38 - 13;
+		bytes = exif_mbstrlen(C(name), &width);
+		printf ("  0x%04x %.*s%*s",
+			tag, bytes, C(name), fieldwidth-width, "");
 		for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++)
 			if (exif_content_get_entry (ed->ifd[i], tag))
 				printf (ENTRY_FOUND);
@@ -398,20 +416,25 @@ static void
 show_entry_list (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
-	char v[128];
+	char v[TAG_VALUE_BUF];
 	ExifIfd ifd = exif_entry_get_ifd (e);
+	const char *str;
+	size_t fieldwidth, width, bytes;
 
 	if (*ids)
-		fprintf (stdout, "0x%04x", e->tag);
-	else
-		fprintf (stdout, "%-20.20s", C(exif_tag_get_title_in_ifd (e->tag, ifd)));
+		printf("0x%04x", e->tag);
+	else {
+		str = C(exif_tag_get_title_in_ifd (e->tag, ifd));
+		fieldwidth = width = 20;
+		bytes = exif_mbstrlen(str, &width);
+		printf ("%.*s%*s", bytes, str, fieldwidth-width, "");
+	}
 	printf ("|");
-	if (*ids)
-		fprintf (stdout, "%-72.72s",
-			 C(exif_entry_get_value (e, v, 73)));
-	else
-		fprintf (stdout, "%-58.58s",
-			 C(exif_entry_get_value (e, v, 59)));
+
+	fieldwidth = width = *ids ? SCREEN_WIDTH-8 : SCREEN_WIDTH-22;
+	str = C(exif_entry_get_value (e, v, sizeof(v)));
+	bytes = exif_mbstrlen(str, &width);
+	printf("%.*s", bytes, str);
 	fputc ('\n', stdout);
 }
 
@@ -426,21 +449,23 @@ print_hline (unsigned char ids)
 {
         unsigned int i, width;
 
-        width = (ids ? 6 : 20); 
-        for (i = 0; i < width; i++) fputc ('-', stdout);
+        width = ids ? 6 : 20; 
+        for (i = 0; i < width; i++)
+		fputc ('-', stdout);
         fputc ('+', stdout);
-        for (i = 0; i < 78 - width; i++) fputc ('-', stdout);
+        for (i = 0; i < SCREEN_WIDTH - 2 - width; i++)
+		fputc ('-', stdout);
 	fputc ('\n', stdout);
 }
 
 void
 action_mnote_list (ExifData *ed, ExifParams p)
 {
-	unsigned int i, bs = 1024, c, id;
-	char b[1024];
-	char b1[1024], b2[1024];
+	char b[TAG_VALUE_BUF], b1[TAG_VALUE_BUF], b2[TAG_VALUE_BUF];
+	unsigned int i, c, id;
 	ExifMnoteData *n;
 	const char *s;
+	size_t fieldwidth, width, bytes;
 
 	n = exif_data_get_mnote_data (ed);
 	if (!n) {
@@ -464,22 +489,23 @@ action_mnote_list (ExifData *ed, ExifParams p)
 			sprintf(b1,"0x%04x",id);
 		} else {
 			s = C (exif_mnote_data_get_title (n, i));
-			strncpy (b1, s && *s ? s : _("Unknown tag"), bs);
+			strncpy (b1, s && *s ? s : _("Unknown tag"), TAG_VALUE_BUF);
 			b1[sizeof(b1)-1] = 0;
 		}
-		s = C (exif_mnote_data_get_value (n, i, b, bs));
-		strncpy (b2, s ? s : _("Unknown value"), bs);
-		b2[sizeof(b2)-1] = 0;
-		/* printf ("%s|%s\n", b1, b2); */
-        	if (p.use_ids)
-                	fprintf (stdout, "%-6.6s", b1);
-        	else
-                	fprintf (stdout, "%-20.20s", b1);
+		fieldwidth = width = p.use_ids ? 6 : 20;
+		bytes = exif_mbstrlen(b1, &width);
+                printf ("%.*s%*s", bytes, b1, fieldwidth-width, "");
 		fputc ('|', stdout);
+
+		s = C (exif_mnote_data_get_value (n, i, b, TAG_VALUE_BUF));
+		strncpy (b2, s ? s : _("Unknown value"), TAG_VALUE_BUF);
+		b2[sizeof(b2)-1] = 0;
         	if (p.use_ids) {
 			fputs (b2, stdout);
         	} else {
-                	fprintf (stdout, "%-58.58s", b2);
+			fieldwidth = width = SCREEN_WIDTH-22;
+			bytes = exif_mbstrlen(b2, &width);
+			printf ("%.*s", bytes, b2);
 		}
         	fputc ('\n', stdout);
 	}
@@ -489,32 +515,36 @@ void
 action_tag_list (ExifData *ed, ExifParams p)
 {
 	ExifByteOrder order;
+	const char *s;
+	size_t fieldwidth, width, bytes;
 
 	if (!ed)
 		return;
 
 	order = exif_data_get_byte_order (ed);
-	fprintf (stdout, _("EXIF tags in '%s' ('%s' byte order):"), p.fin,
+	printf (_("EXIF tags in '%s' ('%s' byte order):"), p.fin,
 		exif_byte_order_get_name (order));
 	fputc ('\n', stdout);
 	print_hline (p.use_ids);
-        if (p.use_ids) {
-                fprintf (stdout, "%-6.6s", _("Tag"));
-        } else {
-                fprintf (stdout, "%-20.20s", _("Tag"));
-        }
+
+	fieldwidth = width = p.use_ids ? 6 : 20;
+	s = _("Tag");
+	bytes = exif_mbstrlen(s, &width);
+	printf ("%.*s%*s", bytes, s, fieldwidth-width, "");
 	fputc ('|', stdout);
-        if (p.use_ids)
-		fprintf (stdout, "%-72.72s", _("Value"));
-        else
-                fprintf (stdout, "%-58.58s", _("Value"));
+
+	fieldwidth = width = p.use_ids ? SCREEN_WIDTH-8 : SCREEN_WIDTH-22;
+	s = _("Value");
+	bytes = exif_mbstrlen(s, &width);
+	printf ("%.*s", bytes, s);
         fputc ('\n', stdout);
         print_hline (p.use_ids);
+
 	exif_data_foreach_content (ed, show_ifd, &p.use_ids);
         print_hline (p.use_ids);
         if (ed->size) {
-                fprintf (stdout, _("EXIF data contains a thumbnail "
-				   "(%i bytes)."), ed->size);
+                printf (_("EXIF data contains a thumbnail "
+			  "(%i bytes)."), ed->size);
                 fputc ('\n', stdout);
         }
 }
@@ -523,7 +553,7 @@ static void
 show_entry_machine (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
-	char v[1024];
+	char v[TAG_VALUE_BUF];
 	ExifIfd ifd = exif_entry_get_ifd (e);
 
 	if (*ids) {
@@ -552,24 +582,34 @@ action_tag_list_machine (ExifData *ed, ExifParams p)
 		fprintf (stdout, _("ThumbnailSize\t%i\n"), ed->size);
 }
 
+/*!
+ * Replace characters which are invalid in an XML tag with safe characters.
+ */
+static inline void
+remove_bad_chars(char *s)
+{
+	while (*s) {
+		if ((*s == '(') || (*s == ')') || (*s == ' '))
+			*s = '_';
+		++s;
+	}
+}
+
 static void
 show_entry_xml (ExifEntry *e, void *data)
 {
 	unsigned char *ids = data;
-	char v[1024], t[1024];
+	char v[TAG_VALUE_BUF], t[TAG_VALUE_BUF];
 
 	if (*ids) {
 		fprintf (stdout, "<0x%04x>", e->tag);
 		fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));
 		fprintf (stdout, "</0x%04x>", e->tag);
 	} else {
-		int x;
 		strncpy (t, exif_tag_get_title_in_ifd(e->tag, exif_entry_get_ifd(e)), sizeof (t));
 
     /* Remove invalid characters from tag eg. (, ), space */
-		for (x = 0; x < strlen (t); x++)
-			if ((t[x] == '(') || (t[x] == ')') || (t[x] == ' '))
-				t[x] = '_';
+		remove_bad_chars(t);
 
 		fprintf (stdout, "\t<%s>", t);
 		fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));

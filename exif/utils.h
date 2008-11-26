@@ -21,10 +21,12 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+#include <sys/types.h>
 #include <libexif/exif-tag.h>
 #include <libexif/exif-ifd.h>
 
 ExifTag exif_tag_from_string (const char *string);
 ExifIfd exif_ifd_from_string (const char *string);
+size_t exif_mbstrlen(const char *mbs, size_t *len);
 
 #endif /* __UTILS_H__ */

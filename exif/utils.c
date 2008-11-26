@@ -71,3 +71,45 @@ exif_ifd_from_string (const char *string)
 
 	return (-1);
 }
+
+
+/*! Returns the number of bytes of data needed to display n characters of
+ * the given multibyte string in the current locale character encoding.
+ * Any multibyte conversion error is treated as the end of the string.
+ * \param[in] mbs multibyte string
+ * \param[in,out] len number of characters for which a count of bytes is
+ * requested; on exit, returns the number of characters that are represented
+ * by the returned number of bytes (this may be less but never more than the
+ * value on entry)
+ * \return number of bytes starting at mbs make up len characters
+ */
+#ifdef HAVE_MBLEN
+size_t exif_mbstrlen(const char *mbs, size_t *len)
+{
+	int clen;
+	size_t blen = 0, count = 0, maxlen = strlen(mbs);
+
+	/* Iterate through the multibyte string one character at a time */
+	while (*mbs && *len) {
+		clen = mblen(mbs, maxlen);
+		if (clen < 0)
+			break;
+		mbs += clen;
+		blen += clen;	/* total bytes needed for string so far */
+		--*len;
+		++count;	/* number of characters in string so far */
+		maxlen -= clen;
+	}
+	*len = count;
+	return blen;
+}
+#else
+/* Simple version that works only with single-byte-per-character encodings */
+size_t exif_mbstrlen(const char *mbs, size_t *len)
+{
+	size_t clen = strlen(mbs);
+	if (clen < *len)
+		*len = clen;
+	return *len;
+}
+#endif
