@@ -1,4 +1,5 @@
 exif-0.6.x:
+  * Added translation: it
   * Updated translations: da, id, nl, pl, sk, sv, zh_CN
   * Fixed alignment of tables in locales with multibyte character encoding
     (bug #2034873)
