@@ -33,7 +33,7 @@ msgstr "Indstilling af en værdi for dette mærke er ikke understøttet!"
 #: exif/actions.c:91
 #, c-format
 msgid "Too few components specified!"
-msgstr "For få komponenter specificeret!"
+msgstr "For få komponenter angivet!"
 
 #: exif/actions.c:106
 #, c-format
@@ -48,7 +48,7 @@ msgstr "Ikke implementeret endnu!"
 #: exif/actions.c:150
 #, c-format
 msgid "Warning; Too many components specified!"
-msgstr "Advarsel; for mange komponenter specificeret!"
+msgstr "Advarsel; for mange komponenter angivet!"
 
 #: exif/actions.c:172
 #, c-format
