@@ -122,6 +122,7 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		/* We ignore corrupted data event in some cases */
 		if (log_arg->ignore_corrupted)
 			return;
+		/* Fall through to EXIF_LOG_CODE_NO_MEMORY */
 	case EXIF_LOG_CODE_NO_MEMORY:
 		put_colorstring (stderr, COL_RED COL_BOLD COL_UNDERLINE);
 		fprintf (stderr, exif_log_code_get_title (code));
@@ -133,7 +134,17 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		vfprintf (stderr, format, args);
 		put_colorstring (stderr, COL_NORMAL);
 		fprintf (stderr, "\n");
-		if (!log_arg->debug)
+
+		/*
+		 * EXIF_LOG_CODE_NO_MEMORY is always a fatal error, so exit. 
+		 * EXIF_LOG_CODE_CORRUPT_DATA is only fatal if debug mode
+		 * is off.
+		 *
+		 * Exiting the program due to a log message is really a bad
+		 * idea to begin with. This should be removed once the libexif
+		 * API is fixed to properly return error codes everywhere.
+		 */
+		if ((code == EXIF_LOG_CODE_NO_MEMORY) || !log_arg->debug)
 			exit (1);
 		break;
 	default:
