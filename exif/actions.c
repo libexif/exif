@@ -201,7 +201,7 @@ show_entry (ExifEntry *entry, unsigned int machine_readable)
 
 	/*
 	 * The C() macro can point to a static buffer so these printfs
-	 * must be done separately.
+	 * cannot be combined.
 	 */
 	printf (_("EXIF entry '%s' "),
 		C(exif_tag_get_title_in_ifd (entry->tag, ifd)));

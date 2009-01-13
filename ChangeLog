@@ -1,3 +1,7 @@
+2009-01-12  Dan Fandrich <dan@coneharvesters.com>
+
+	* exif/main.c: Allow setting --tag=0 (needed for the GPS IFD)
+
 2008-12-22  Dan Fandrich <dan@coneharvesters.com>
 
 	* po/vi.po: Updated Vietnamese translation by Clytie Siddall

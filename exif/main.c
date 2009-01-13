@@ -172,7 +172,7 @@ static unsigned int remove_tag = 0, create_exif = 0;
 static unsigned int list_mnote = 0;
 static unsigned int show_version = 0;
 static const char *ifd_string = NULL, *tag_string = NULL;
-static ExifParams p = {0, EXIF_IFD_COUNT, 0, 0, NULL, NULL, NULL};
+static ExifParams p = {0xffff, EXIF_IFD_COUNT, 0, 0, NULL, NULL, NULL};
 LogArg log_arg = {0, 0, 0};
 
 int
@@ -274,7 +274,7 @@ main (int argc, const char **argv)
 	}
 
 	/* Check for all necessary parameters */
-	if (!p.tag && (p.set_value || show_description)) {
+	if ((p.tag == 0xffff) && (p.set_value || show_description)) {
 		exif_log (log, -1, "exif", _("You need to specify a tag!"));
 		return 1;
 	}

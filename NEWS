@@ -3,6 +3,7 @@ exif-0.6.x:
   * Updated translations: da, id, nl, pl, sk, sv, vi, zh_CN
   * Fixed alignment of tables in locales with multibyte character encoding
     (bug #2034873)
+  * Allow setting --tag=0 (needed for the GPS IFD)
 
 exif-0.6.17 (2008-11-06):
   * Fixed the output of -s and -t when iconv is configured
