@@ -172,7 +172,7 @@ static unsigned int remove_tag = 0, create_exif = 0;
 static unsigned int list_mnote = 0;
 static unsigned int show_version = 0;
 static const char *ifd_string = NULL, *tag_string = NULL;
-static ExifParams p = {0xffff, EXIF_IFD_COUNT, 0, 0, NULL, NULL, NULL};
+static ExifParams p = {EXIF_INVALID_TAG, EXIF_IFD_COUNT, 0, 0, NULL, NULL,NULL};
 LogArg log_arg = {0, 0, 0};
 
 int
@@ -266,7 +266,7 @@ main (int argc, const char **argv)
 	}
 	if (tag_string) {
 		p.tag = exif_tag_from_string (tag_string);
-		if (p.tag == 0xffff) {
+		if (p.tag == EXIF_INVALID_TAG) {
 			exif_log (log, -1, "exif", _("Invalid tag '%s'!"),
 				tag_string);
 			return 1;
@@ -274,7 +274,7 @@ main (int argc, const char **argv)
 	}
 
 	/* Check for all necessary parameters */
-	if ((p.tag == 0xffff) && (p.set_value || show_description)) {
+	if ((p.tag == EXIF_INVALID_TAG) && (p.set_value || show_description)) {
 		exif_log (log, -1, "exif", _("You need to specify a tag!"));
 		return 1;
 	}
@@ -364,7 +364,8 @@ main (int argc, const char **argv)
 
 		if (list_tags)
 			action_tag_table (ed, p);
-		else if (p.tag && !p.set_value && !remove_tag)
+		else if ((p.tag != EXIF_INVALID_TAG) &&
+			 !p.set_value && !remove_tag)
 			action_show_tag (ed, log, p);
 		else if (extract_thumbnail)
 			action_save_thumb (ed, log, p, fout);

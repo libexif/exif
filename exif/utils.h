@@ -25,6 +25,8 @@
 #include <libexif/exif-tag.h>
 #include <libexif/exif-ifd.h>
 
+enum {EXIF_INVALID_TAG = 0xffff};
+
 ExifTag exif_tag_from_string (const char *string);
 ExifIfd exif_ifd_from_string (const char *string);
 size_t exif_mbstrlen(const char *mbs, size_t *len);
