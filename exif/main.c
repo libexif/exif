@@ -220,6 +220,14 @@ main (int argc, const char **argv)
 		{"debug", 'd', POPT_ARG_NONE, &log_arg.debug, 0,
 		 N_("Show debugging messages"), NULL},
 		POPT_TABLEEND};
+#if 0
+/* This is a hack to allow translation of popt 1.10 messages with gettext.
+ * Supposedly, this won't be necessary starting with popt 1.12
+ */
+		N_("Help options:");
+		N_("Show this help message");
+		N_("Display brief usage message");
+#endif
 	ExifData *ed;
 	ExifLog *log = NULL;
 	char fout[1024] = {0, };
