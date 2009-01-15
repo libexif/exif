@@ -356,8 +356,9 @@ main (int argc, const char **argv)
 				ed = exif_data_new ();
 				exif_data_log (ed, log);
 			} else {
-				exif_log (log, -1, "exif", _("'%s' does not "
-					"contain EXIF data!"), *args);
+				exif_log (log, -1, "exif", _("'%s' is not "
+				  "readable or does not contain EXIF data!"),
+				  *args);
 				return 1;
 			}
 		}
