@@ -530,7 +530,13 @@ action_tag_list (ExifData *ed, ExifParams p)
         fputc ('\n', stdout);
         print_hline (p.use_ids);
 
-	exif_data_foreach_content (ed, show_ifd, &p.use_ids);
+	if (p.ifd < EXIF_IFD_COUNT)
+		/* Show only a single IFD */
+		show_ifd(ed->ifd[p.ifd], &p.use_ids);
+	else
+		/* Show contents of all IFDs */
+		exif_data_foreach_content (ed, show_ifd, &p.use_ids);
+
         print_hline (p.use_ids);
         if (ed->size) {
                 printf (_("EXIF data contains a thumbnail "
@@ -567,7 +573,13 @@ action_tag_list_machine (ExifData *ed, ExifParams p)
 {
 	if (!ed) return;
 
-	exif_data_foreach_content (ed, show_ifd_machine, &p.use_ids);
+	if (p.ifd < EXIF_IFD_COUNT)
+		/* Show only a single IFD */
+		show_ifd_machine(ed->ifd[p.ifd], &p.use_ids);
+	else
+		/* Show contents of all IFDs */
+		exif_data_foreach_content (ed, show_ifd_machine, &p.use_ids);
+
 	if (ed->size)
 		fprintf (stdout, _("ThumbnailSize\t%i\n"), ed->size);
 }
@@ -619,6 +631,11 @@ action_tag_list_xml (ExifData *ed, ExifParams p)
 	if (!ed) return;
 
 	fprintf(stdout, "<exif>\n");
-	exif_data_foreach_content (ed, show_xml, &p.use_ids);
+	if (p.ifd < EXIF_IFD_COUNT)
+		/* Show only a single IFD */
+		show_xml(ed->ifd[p.ifd], &p.use_ids);
+	else
+		/* Show contents of all IFDs */
+		exif_data_foreach_content (ed, show_xml, &p.use_ids);
 	fprintf(stdout, "</exif>\n");
 }

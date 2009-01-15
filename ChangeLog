@@ -1,3 +1,8 @@
+2009-01-14  Dan Fandrich <dan@coneharvesters.com>
+
+	* exif/main.c: Clarify the error when a file can't be read
+	* exif/actions.c: --ifd is now honoured while displaying tag contents
+
 2009-01-12  Dan Fandrich <dan@coneharvesters.com>
 
 	* exif/main.c: Allow setting --tag=0 (needed for the GPS IFD)
