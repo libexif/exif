@@ -30,6 +30,7 @@ exif_tag_from_string (const char *string)
 {
 	ExifTag tag;
 	unsigned int i, number;
+	int t;
 	const char *name;
 
 	if (!string)
@@ -48,7 +49,8 @@ exif_tag_from_string (const char *string)
 		return (tag);
 
 	/* Is the string a tag's title? */
-	for (tag = 0xffff; (int)tag > 0; tag--) {
+	for (t = 0xffff; t >= 0; t--) {
+		tag = (ExifTag) t;
 		name = exif_tag_get_title (tag);
 		if (name && !strcmp (string, name))
 			return (tag);
