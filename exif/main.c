@@ -162,8 +162,9 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 /*
  * Static variables. I had them first in main (), but people
  * compiling exif on IRIX complained about that not being compatible
- * with the "SGI MIPSpro C compiler". I don't understand and still think
- * these variables belong into main ().
+ * with the "SGI MIPSpro C compiler", and elsewhere on Open Watcom C.
+ * This is due to the inability of these compilers to initialize a
+ * struct with the address of a stack-allocated variable.
  */
 static unsigned int list_tags = 0, show_description = 0;
 static unsigned int xml_output = 0;
@@ -171,6 +172,7 @@ static unsigned int extract_thumbnail = 0, remove_thumb = 0;
 static unsigned int remove_tag = 0, create_exif = 0;
 static unsigned int list_mnote = 0;
 static unsigned int show_version = 0;
+static const char *output = NULL;
 static const char *ifd_string = NULL, *tag_string = NULL;
 static ExifParams p = {EXIF_INVALID_TAG, EXIF_IFD_COUNT, 0, 0, NULL, NULL,NULL};
 LogArg log_arg = {0, 0, 0};
@@ -180,7 +182,7 @@ main (int argc, const char **argv)
 {
 	/* POPT_ARG_NONE needs an int, not char! */
 	poptContext ctx;
-	const char **args, *output = NULL;
+	const char **args;
 	const struct poptOption options[] = {
 		POPT_AUTOHELP
 		{"version", 'v', POPT_ARG_NONE, &show_version, 0,
@@ -208,7 +210,7 @@ main (int argc, const char **argv)
 		{"output", 'o', POPT_ARG_STRING, &output, 0,
 		 N_("Write data to FILE"), N_("FILE")},
 		{"set-value", '\0', POPT_ARG_STRING, &p.set_value, 0,
-		 N_("Value"), NULL},
+		 N_("Value of tag"), NULL},
 		{"create-exif", 'c', POPT_ARG_NONE, &create_exif, 0,
 		 N_("Create EXIF data if not existing"), NULL},
 		{"machine-readable", 'm', POPT_ARG_NONE, &p.machine_readable, 0,
