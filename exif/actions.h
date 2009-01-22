@@ -41,6 +41,8 @@ void action_remove_thumb     (ExifData *, ExifLog *, ExifParams);
 void action_show_tag         (ExifData *, ExifLog *, ExifParams);
 void action_set_value        (ExifData *, ExifLog *, ExifParams);
 void action_remove_tag       (ExifData *, ExifLog *, ExifParams);
+ExifEntry *
+action_create_value (ExifData *ed, ExifLog *log, ExifTag tag, ExifIfd ifd);
 
 void action_save             (ExifData *, ExifLog *, ExifParams, const char *);
 void action_save_thumb       (ExifData *, ExifLog *, ExifParams, const char *);

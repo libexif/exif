@@ -214,18 +214,26 @@ show_entry (ExifEntry *entry, unsigned int machine_readable)
 	exif_entry_dump (entry, 0);
 }
 
-void
-action_set_value (ExifData *ed, ExifLog *log, ExifParams p)
+/*! If the entry doesn't exist, create it. */
+ExifEntry *
+action_create_value (ExifData *ed, ExifLog *log, ExifTag tag, ExifIfd ifd)
 {
 	ExifEntry *e;
 
-	/* If the entry doesn't exist, create it. */
-	if (!((e = exif_content_get_entry (ed->ifd[p.ifd], p.tag)))) {
+	if (!((e = exif_content_get_entry (ed->ifd[ifd], tag)))) {
 	    exif_log (log, EXIF_LOG_CODE_DEBUG, "exif", "Adding entry...");
 	    e = exif_entry_new ();
-	    exif_content_add_entry (ed->ifd[p.ifd], e);
-	    exif_entry_initialize (e, p.tag);
+	    exif_content_add_entry (ed->ifd[ifd], e);
+	    exif_entry_initialize (e, tag);
 	}
+	return e;
+}
+
+void
+action_set_value (ExifData *ed, ExifLog *log, ExifParams p)
+{
+	/* If the entry doesn't exist, create it. */
+	ExifEntry *e = action_create_value(ed, log, p.tag, p.ifd);
 
 	/* Now set the value and save the data. */
 	convert_arg_to_entry (p.set_value, e, exif_data_get_byte_order (ed), log);

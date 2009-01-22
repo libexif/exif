@@ -1,3 +1,7 @@
+2009-01-21  Dan Fandrich <dan@coneharvesters.com>
+
+	* exif/main.c: Create mandatory EXIF tags with the --create-exif option
+
 2009-01-14  Dan Fandrich <dan@coneharvesters.com>
 
 	* exif/main.c: Clarify the error when a file can't be read

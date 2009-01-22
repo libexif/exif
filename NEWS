@@ -5,6 +5,7 @@ exif-0.6.x:
     (bug #2034873)
   * Allow setting --tag=0 (needed for the GPS IFD)
   * --ifd is now honoured while displaying tag contents
+  * --create-exif now creates mandatory EXIF tags with default data
 
 exif-0.6.17 (2008-11-06):
   * Fixed the output of -s and -t when iconv is configured

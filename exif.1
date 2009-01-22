@@ -1,4 +1,4 @@
-.\" © 2002 by Thomas Pircher (tehpeh at gmx dot net)
+.\" © 2002-2009 by Thomas Pircher (tehpeh at gmx dot net) et. al.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -12,12 +12,8 @@
 .\" Formatted or processed versions of this manual, if unaccompanied by
 .\" the source, must acknowledge the copyright and authors of this work.
 .\" License.
-.\" Modified 2002-09-08 by thomas
-.\" Modified 2005-03-23 by hun
-.\" Modified 2008-01-24 by dfandrich
-.\" Modified 2008-02-05 by Benno Schulenberg
 .\"
-.TH exif 1 "2008-11-04" "exif 0.6.17" "libexif command line front-end"
+.TH exif 1 "2009-01-21" "exif 0.6.17.1" "libexif command line front-end"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
@@ -37,6 +33,10 @@ library.
 Each input file given on the command line is acted upon in turn, using 
 all the options given. Execution will be aborted immediately if one
 file is not readable or does not contain EXIF tags.
+.PP
+As EXIF tags are read, any unknown ones are discarded and known ones are
+automatically converted into the correct format, if they aren't already.
+Corrupted MakerNote tags are also removed, but no format changes are made.
 .SH "OPTIONS"
 .TP
 .BI "\-v, \-\-version"
@@ -55,7 +55,7 @@ with \-\-ifd.  The tag title is dependent on the current locale, whereas
 name and number are locale-independent.
 .TP
 .BI "\-\-ifd=" "IFD"
-Select a tag from this
+Select a tag or tags from this
 .IR "IFD" .
 Valid IFDs are "0", "1", "EXIF", "GPS", and "Interoperability".
 Defaults to "0".
@@ -115,7 +115,9 @@ Produce output in an XML format (when possible).
 The \-\-xml-output and \-\-machine\-readable options are mutually exclusive.
 .TP
 .BI "\-d, \-\-debug"
-Show debugging messages.
+Show debugging messages. Also, when processing a file that contains corrupted
+data, this option cases exif to attempt to continue processing. Normally,
+corrupted data causes an abort.
 .SS "Help options"
 .TP
 .BI "\-?, \-\-help"
