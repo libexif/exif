@@ -165,6 +165,13 @@ Add an Orientation tag with value "bottom - left" to an existing image:
 exif --output=new.jpg --ifd=0 --tag=0x0112 --set-value=4 image.jpg
 .RE
 .LP
+Add a YCbCr Sub-Sampling tag with value 2,1 (a.k.a YCbCr 4:2:2) to an
+existing image:
+.LP
+.RS
+exif --output=new.jpg --tag=YCbCrSubSampling --ifd=0 --set-value='2 1' image.jpg
+.RE
+.LP
 .SH "AUTHOR"
 Written by Lutz Mueller <lutz@users.sourceforge.net>.
 .SH "SEE ALSO"
