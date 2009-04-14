@@ -139,6 +139,8 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 			break;
 		case EXIF_FORMAT_BYTE:
 		case EXIF_FORMAT_SBYTE:
+			e->data[s * i] = atoi ((char *) buf);
+			break;
 		case EXIF_FORMAT_FLOAT:
 		case EXIF_FORMAT_DOUBLE:
 		case EXIF_FORMAT_UNDEFINED:

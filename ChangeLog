@@ -2,6 +2,7 @@
 
 	* po/lv.po: Added Latvian translation by Rihards Prieditis
 	* po/da.po: Updated Danish translation by Joe Hansen 
+	* exif/actions.c: Allow setting signed & unsigned byte data
 
 2009-01-21  Dan Fandrich <dan@coneharvesters.com>
 
