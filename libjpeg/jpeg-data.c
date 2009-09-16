@@ -86,7 +86,7 @@ jpeg_data_append_section (JPEGData *data)
 	data->count++;
 }
 
-/* jpeg_data_save_file returns 1 on succes, 0 on failure */
+/*! jpeg_data_save_file returns 1 on success, 0 on failure */
 int
 jpeg_data_save_file (JPEGData *data, const char *path)
 {
