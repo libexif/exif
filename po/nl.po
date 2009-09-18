@@ -1,14 +1,14 @@
 # translation of nl.po to Dutch
-# Copyright (C) 2008 Lutz Müller and others
+# Copyright (C) 2009 Lutz Müller and others
 # This file is distributed under the same license as the exif package.
 #
 # Erwin Poeze <erwin.poeze@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif-0.6.17\n"
+"Project-Id-Version: exif-0.6.18-pre1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 01:03-0800\n"
-"PO-Revision-Date: 2008-11-18 16:45+0100\n"
+"POT-Creation-Date: 2009-09-16 22:23-0700\n"
+"PO-Revision-Date: 2009-09-17 08:49+0100\n"
 "Last-Translator: Erwin Poeze <erwin.poeze@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,276 +16,289 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: exif/actions.c:56
+#: exif/actions.c:59
 #, c-format
 msgid "Not enough memory."
 msgstr "Onvoldoende geheugen."
 
-#: exif/actions.c:74
+#: exif/actions.c:77
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
 msgstr "Een waarde kiezen voor dit label wordt niet ondersteund!"
 
-#: exif/actions.c:91
+#: exif/actions.c:94
 #, c-format
 msgid "Too few components specified!"
 msgstr "Te weinig componenten opgegeven!"
 
-#: exif/actions.c:106
+#: exif/actions.c:109
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "Interne fout. Neem contact op met <%s>."
 
-#: exif/actions.c:143
+#: exif/actions.c:148
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Nog niet geïmplementeerd!"
 
-#: exif/actions.c:150
+#: exif/actions.c:155
 #, c-format
 msgid "Warning; Too many components specified!"
 msgstr "Waarschuwing; te weinig componenten opgegeven!"
 
-#: exif/actions.c:172
+#: exif/actions.c:177
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Te veel EXIF-gegevens (%i bytes). Slechts %i bytes toegestaan."
 
-#: exif/actions.c:183 exif/actions.c:358
+#: exif/actions.c:188 exif/actions.c:359
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Bestand '%s' is aangemaakt."
 
-#: exif/actions.c:203
+#: exif/actions.c:208
 #, c-format
 msgid "EXIF entry '%s' "
 msgstr "EXIF-invoer '%s' "
 
-#: exif/actions.c:205
+#: exif/actions.c:210
 #, c-format
 msgid "(0x%x, '%s') "
 msgstr "(0x%x, '%s') "
 
-#: exif/actions.c:208
+#: exif/actions.c:213
 #, c-format
 msgid "exists in IFD '%s':\n"
 msgstr "bestaat in IFD '%s':\n"
 
-#: exif/actions.c:251
+#: exif/actions.c:264
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD '%s' bevat geen label '%s'!"
 
-#: exif/actions.c:282
-#, c-format
-msgid "Could not open '%s' (%m)!"
-msgstr "Kon '%s' niet openen (%m)!"
-
-#: exif/actions.c:285
+#: exif/actions.c:294
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Kon '%s' niet openen (%s)!"
 
-#: exif/actions.c:295
-#, c-format
-msgid "Could not read '%s' (%m)."
-msgstr "Kon '%s' niet lezen (%m)!"
-
-#: exif/actions.c:298
+#: exif/actions.c:303
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Kon '%s' niet lezen (%s)."
 
-#: exif/actions.c:317
+#: exif/actions.c:322
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD '%s' bevat geen label '%s'."
 
-#: exif/actions.c:323
+#: exif/actions.c:328
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "'%s' bevat geen label '%s'."
 
-#: exif/actions.c:341
+#: exif/actions.c:346
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "'%s' bevat geen miniatuur!"
 
-#: exif/actions.c:350
-#, c-format
-msgid "Could not open '%s' for writing (%m)!"
-msgstr "Kon '%s' niet openen om naar te schrijven (%m)!"
-
-#: exif/actions.c:353
+#: exif/actions.c:354
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Kon '%s' niet openen om naar te schrijven (%s)!"
 
-#: exif/actions.c:371
+#: exif/actions.c:376
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "EXIF-labels in '%s':"
 
-#: exif/actions.c:440
+#: exif/actions.c:472
 #, c-format
-msgid "Unknown MakerNote format.\n"
-msgstr "Onbekend formaat van MakerNote.\n"
+msgid "Unknown format or nonexistent MakerNote.\n"
+msgstr "MakerNote bestaat niet of is ongeldig.\n"
 
-#: exif/actions.c:447
+#: exif/actions.c:479
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote bevat geen waarde.\n"
 
-#: exif/actions.c:450
+#: exif/actions.c:482
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote bevat één waarde:\n"
 msgstr[1] "MakerNote bevat %i waarden:\n"
 
-#: exif/actions.c:460
+#: exif/actions.c:492
 msgid "Unknown tag"
 msgstr "Onbekend label"
 
-#: exif/actions.c:464
+#: exif/actions.c:501
 msgid "Unknown value"
 msgstr "Onbekende waarde"
 
-#: exif/actions.c:490
+#: exif/actions.c:525
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "EXIF-labels in '%s' ('%s' byte-volgorde):"
 
-#: exif/actions.c:495 exif/actions.c:497
+#: exif/actions.c:531
 msgid "Tag"
 msgstr "Label"
 
-#: exif/actions.c:501 exif/actions.c:503 exif/main.c:199
+#: exif/actions.c:537
 msgid "Value"
 msgstr "waarde"
 
-#: exif/actions.c:509
+#: exif/actions.c:552
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF-gegevens bevatten een miniatuur (%i bytes)."
 
-#: exif/actions.c:545
+#: exif/actions.c:594
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "Miniatuurgrootte\t%i\n"
 
-#: exif/main.c:175
+#: exif/main.c:189
 msgid "Display software version"
 msgstr "programmaversie tonen"
 
-#: exif/main.c:177
+#: exif/main.c:191
 msgid "Show IDs instead of tag names"
 msgstr "ID's in plaats van labelnamen tonen"
 
-#: exif/main.c:179
+#: exif/main.c:193
 msgid "Select tag"
 msgstr "dit label selecteren"
 
-#: exif/main.c:179
+#: exif/main.c:193
 msgid "tag"
 msgstr "label"
 
-#: exif/main.c:181
+#: exif/main.c:195
 msgid "Select IFD"
 msgstr "deze IFD selecteren"
 
-#: exif/main.c:181
+#: exif/main.c:195
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:183
+#: exif/main.c:197
 msgid "List all EXIF tags"
 msgstr "Alle EXIF-labels tonen"
 
-#: exif/main.c:185
+#: exif/main.c:199
 msgid "Show contents of tag MakerNote"
 msgstr "inhoud van het label MakerNote tonen"
 
-#: exif/main.c:187
+#: exif/main.c:201
 msgid "Remove tag or ifd"
 msgstr "label of IFD verwijderen"
 
-#: exif/main.c:189
+#: exif/main.c:203
 msgid "Show description of tag"
 msgstr "beschrijving van label tonen"
 
-#: exif/main.c:191
+#: exif/main.c:205
 msgid "Extract thumbnail"
 msgstr "miniatuur uitlezen"
 
-#: exif/main.c:193
+#: exif/main.c:207
 msgid "Remove thumbnail"
 msgstr "miniatuur verwijderen"
 
-#: exif/main.c:195
+#: exif/main.c:209
 msgid "Insert FILE as thumbnail"
 msgstr "BESTAND als miniatuur toevoegen"
 
-#: exif/main.c:195 exif/main.c:197
+#: exif/main.c:209 exif/main.c:211
 msgid "FILE"
 msgstr "BESTAND"
 
-#: exif/main.c:197
+#: exif/main.c:211
 msgid "Write data to FILE"
 msgstr "gegevens naar BESTAND schrijven"
 
-#: exif/main.c:201
+#: exif/main.c:213
+msgid "Value of tag"
+msgstr "Labelwaarde"
+
+#: exif/main.c:215
 msgid "Create EXIF data if not existing"
 msgstr "EXIF-gegevens aanmaken als ze ontbreken"
 
-#: exif/main.c:203
+#: exif/main.c:217
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "machineleesbare uitvoer produceren (tabgescheiden)"
 
-#: exif/main.c:206
+#: exif/main.c:220
 msgid "Output in a XML format"
 msgstr "XML-uitvoer produceren"
 
-#: exif/main.c:209
+#: exif/main.c:223
 msgid "Show debugging messages"
 msgstr "debugmeldingen tonen"
 
 #: exif/main.c:229
+msgid "Help options:"
+msgstr "Hulpopties:"
+
+#: exif/main.c:230
+msgid "Show this help message"
+msgstr "Deze hulptekst tonen"
+
+#: exif/main.c:231
+msgid "Display brief usage message"
+msgstr "Korte gebruikstekst tonen"
+
+#: exif/main.c:251
 msgid "[OPTION...] file"
 msgstr "[OPTIE...] bestand"
 
-#: exif/main.c:241
+#: exif/main.c:263
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Ongeldige IFD '%s'. Geldige IFD's zijn '0', '1', 'EXIF', 'GPS' en 'Interoperability'."
 
-#: exif/main.c:250
+#: exif/main.c:272
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Ongeldig label '%s'!"
 
-#: exif/main.c:258
+#: exif/main.c:280
 msgid "You need to specify a tag!"
 msgstr "Het is nodig een label op te geven."
 
-#: exif/main.c:263
+#: exif/main.c:285
 msgid "You need to specify an IFD!"
 msgstr "Het is nodig een IFD op te geven."
 
-#: exif/main.c:286
+#: exif/main.c:308
 #, c-format
 msgid "Tag '%s' "
 msgstr "Label '%s' "
 
-#: exif/main.c:288
+#: exif/main.c:310
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, '%s'): "
 
-#: exif/main.c:338
+#: exif/main.c:368
 #, c-format
-msgid "'%s' does not contain EXIF data!"
-msgstr "'%s' bevat geen EXIF-gegevens."
+msgid "'%s' is not readable or does not contain EXIF data!"
+msgstr "'%s' is niet leesbaar of bevat geen EXIF-gegevens!"
+
+#~ msgid "Could not open '%s' (%m)!"
+#~ msgstr "Kon '%s' niet openen (%m)!"
+
+#~ msgid "Could not read '%s' (%m)."
+#~ msgstr "Kon '%s' niet lezen (%m)!"
+
+#~ msgid "Could not open '%s' for writing (%m)!"
+#~ msgstr "Kon '%s' niet openen om naar te schrijven (%m)!"
+
+#~ msgid "Unknown MakerNote format.\n"
+#~ msgstr "Onbekend formaat van MakerNote.\n"
 
 #~ msgid "Please specify a tag!"
 #~ msgstr "Geef alstublieft een tag op."
