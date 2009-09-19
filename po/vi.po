@@ -1,14 +1,14 @@
 # Vietnamese translation for EXIF.
-# Copyright © 2008 Free Software Foundation, Inc.
+# Copyright © 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the exif package.
-# Clytie Siddall <clytie@riverland.net.au>, 2008
+# Clytie Siddall <clytie@riverland.net.au>, 2008-2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.17\n"
+"Project-Id-Version: exif 0.6.18-pre1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 01:03-0800\n"
-"PO-Revision-Date: 2008-12-22 22:49+0930\n"
+"POT-Creation-Date: 2009-09-16 22:23-0700\n"
+"PO-Revision-Date: 2009-09-18 21:22+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,244 +17,245 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: LocFactoryEditor 1.8\n"
 
-#: exif/actions.c:56
+#: exif/actions.c:59
 #, c-format
 msgid "Not enough memory."
 msgstr "Không đủ bộ nhớ."
 
-#: exif/actions.c:74
+#: exif/actions.c:77
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
 msgstr "Không hỗ trợ chức năng tạo một giá trị cho thẻ này !"
 
-#: exif/actions.c:91
+#: exif/actions.c:94
 #, c-format
 msgid "Too few components specified!"
 msgstr "Ghi rõ quá ít thành phần."
 
-#: exif/actions.c:106
+#: exif/actions.c:109
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "Lỗi nội bộ. Hãy liên lạc với <%s>."
 
-#: exif/actions.c:143
+#: exif/actions.c:148
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Chưa thực hiện."
 
-#: exif/actions.c:150
+#: exif/actions.c:155
 #, c-format
 msgid "Warning; Too many components specified!"
 msgstr "Cảnh báo : ghi rõ quá ít thành phần."
 
-#: exif/actions.c:172
+#: exif/actions.c:177
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Quá nhiều dữ liệu EXIF (%i byte). Chỉ cho phép %i byte."
 
-#: exif/actions.c:183 exif/actions.c:358
+#: exif/actions.c:188 exif/actions.c:359
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Đã ghi tập tin « %s »."
 
-#: exif/actions.c:203
+#: exif/actions.c:208
 #, c-format
 msgid "EXIF entry '%s' "
 msgstr "Mục nhập EXIF « %s »"
 
-#: exif/actions.c:205
+#: exif/actions.c:210
 #, c-format
 msgid "(0x%x, '%s') "
 msgstr "(0x%x, '%s') "
 
-#: exif/actions.c:208
+#: exif/actions.c:213
 #, c-format
 msgid "exists in IFD '%s':\n"
 msgstr "đã tồn tại trong IFD « %s »:\n"
 
-#: exif/actions.c:251
+#: exif/actions.c:264
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD « %s » không chứa một thẻ « %s »."
 
-#: exif/actions.c:282
-#, c-format
-msgid "Could not open '%s' (%m)!"
-msgstr "Không thể mở « %s » (%m)."
-
-#: exif/actions.c:285
+#: exif/actions.c:294
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Không thể mở « %s » (%s)."
 
-#: exif/actions.c:295
-#, c-format
-msgid "Could not read '%s' (%m)."
-msgstr "Không thể đọc « %s » (%m)."
-
-#: exif/actions.c:298
+#: exif/actions.c:303
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Không thể đọc « %s » (%s)."
 
-#: exif/actions.c:317
+#: exif/actions.c:322
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD « %s » không chứa thẻ « %s »."
 
-#: exif/actions.c:323
+#: exif/actions.c:328
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "« %s » không chứa thẻ « %s »."
 
-#: exif/actions.c:341
+#: exif/actions.c:346
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "IFD « %s » không chứa ảnh mẫu."
 
-#: exif/actions.c:350
-#, c-format
-msgid "Could not open '%s' for writing (%m)!"
-msgstr "Không thể mở « %s » để ghi (%m)."
-
-#: exif/actions.c:353
+#: exif/actions.c:354
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Không thể mở « %s » để ghi (%s)."
 
-#: exif/actions.c:371
+#: exif/actions.c:376
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "Thể EXIF trong « %s »:"
 
-#: exif/actions.c:440
+#: exif/actions.c:472
 #, c-format
-msgid "Unknown MakerNote format.\n"
-msgstr "Định dạng MakerNote không rõ.\n"
+msgid "Unknown format or nonexistent MakerNote.\n"
+msgstr "Không rõ định dạng hoặc không có MakerNote.\n"
 
-#: exif/actions.c:447
+#: exif/actions.c:479
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote không chứa giá trị.\n"
 
-#: exif/actions.c:450
+#: exif/actions.c:482
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote chứa %i giá trị:\n"
 
-#: exif/actions.c:460
+#: exif/actions.c:492
 msgid "Unknown tag"
 msgstr "Thẻ lạ"
 
-#: exif/actions.c:464
+#: exif/actions.c:501
 msgid "Unknown value"
 msgstr "Giá trị lạ"
 
-#: exif/actions.c:490
+#: exif/actions.c:525
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "Thẻ EXIF trong « %s » (thứ tự byte « %s »):"
 
-#: exif/actions.c:495 exif/actions.c:497
+#: exif/actions.c:531
 msgid "Tag"
 msgstr "Thẻ"
 
-#: exif/actions.c:501 exif/actions.c:503 exif/main.c:199
+#: exif/actions.c:537
 msgid "Value"
 msgstr "Giá trị"
 
-#: exif/actions.c:509
+#: exif/actions.c:552
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "Dữ liệu EXIF chứa một ảnh mẫu (%i byte)."
 
-#: exif/actions.c:545
+#: exif/actions.c:594
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "Kích cỡ ảnh mẫu\t%i\n"
 
-#: exif/main.c:175
+#: exif/main.c:189
 msgid "Display software version"
 msgstr "Hiển thị phiên bản phần mềm"
 
-#: exif/main.c:177
+#: exif/main.c:191
 msgid "Show IDs instead of tag names"
 msgstr "Hiển thị mã số thay cho tên thẻ"
 
-#: exif/main.c:179
+#: exif/main.c:193
 msgid "Select tag"
 msgstr "Chọn thẻ"
 
-#: exif/main.c:179
+#: exif/main.c:193
 msgid "tag"
 msgstr "thẻ"
 
-#: exif/main.c:181
+#: exif/main.c:195
 msgid "Select IFD"
 msgstr "Chọn IFD"
 
-#: exif/main.c:181
+#: exif/main.c:195
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:183
+#: exif/main.c:197
 msgid "List all EXIF tags"
 msgstr "Liệt kê mọi thể EXIF"
 
-#: exif/main.c:185
+#: exif/main.c:199
 msgid "Show contents of tag MakerNote"
 msgstr "Hiện nội dung của thẻ MakerNote"
 
-#: exif/main.c:187
+#: exif/main.c:201
 msgid "Remove tag or ifd"
 msgstr "Bỏ thẻ hoặc IFD"
 
-#: exif/main.c:189
+#: exif/main.c:203
 msgid "Show description of tag"
 msgstr "Hiện mô tả của thẻ"
 
-#: exif/main.c:191
+#: exif/main.c:205
 msgid "Extract thumbnail"
 msgstr "Trích ảnh mẫu"
 
-#: exif/main.c:193
+#: exif/main.c:207
 msgid "Remove thumbnail"
 msgstr "Bỏ ảnh mẫu"
 
-#: exif/main.c:195
+#: exif/main.c:209
 msgid "Insert FILE as thumbnail"
 msgstr "Chèn TẬP TIN dạng ảnh mẫu"
 
-#: exif/main.c:195 exif/main.c:197
+#: exif/main.c:209 exif/main.c:211
 msgid "FILE"
 msgstr "TẬP TIN"
 
-#: exif/main.c:197
+#: exif/main.c:211
 msgid "Write data to FILE"
 msgstr "Ghi dữ liệu vào TẬP TIN"
 
-#: exif/main.c:201
+#: exif/main.c:213
+msgid "Value of tag"
+msgstr "Giá trị của thẻ"
+
+#: exif/main.c:215
 msgid "Create EXIF data if not existing"
 msgstr "Táo dữ liệu EXIF nếu không có"
 
-#: exif/main.c:203
+#: exif/main.c:217
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "Xuất ra một định dạng cho máy đọc được (định giới bằng khoảng tab)"
 
-#: exif/main.c:206
+#: exif/main.c:220
 msgid "Output in a XML format"
 msgstr "Xuất ra định dạng XML"
 
-#: exif/main.c:209
+#: exif/main.c:223
 msgid "Show debugging messages"
 msgstr "Hiện thông điệp gỡ lỗi"
 
 #: exif/main.c:229
+msgid "Help options:"
+msgstr "Tuỳ chọn trợ giúp:"
+
+#: exif/main.c:230
+msgid "Show this help message"
+msgstr "Hiển thị trợ giúp này"
+
+#: exif/main.c:231
+msgid "Display brief usage message"
+msgstr "Hiển thị trợ giúp ngắn"
+
+#: exif/main.c:251
 msgid "[OPTION...] file"
 msgstr "[TÙY_CHỌN...] tập_tin"
 
-#: exif/main.c:241
+#: exif/main.c:263
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr ""
@@ -263,32 +264,32 @@ msgstr ""
 " • 1\n"
 " • EXIF\n"
 " • GPS\n"
-" • Interoperability\t\tkhả năng thao tác với nhau."
+" • Interoperability\t\tTương hành"
 
-#: exif/main.c:250
+#: exif/main.c:272
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Thẻ không hợp lệ « %s »."
 
-#: exif/main.c:258
+#: exif/main.c:280
 msgid "You need to specify a tag!"
 msgstr "Bạn cần phải ghi rõ một thẻ."
 
-#: exif/main.c:263
+#: exif/main.c:285
 msgid "You need to specify an IFD!"
 msgstr "Bạn cần phải ghi rõ một IFD."
 
-#: exif/main.c:286
+#: exif/main.c:308
 #, c-format
 msgid "Tag '%s' "
 msgstr "Thẻ « %s »"
 
-#: exif/main.c:288
+#: exif/main.c:310
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, '%s'): "
 
-#: exif/main.c:338
+#: exif/main.c:368
 #, c-format
-msgid "'%s' does not contain EXIF data!"
-msgstr "« %s » không chứa dữ liệu EXIF."
+msgid "'%s' is not readable or does not contain EXIF data!"
+msgstr "« %s » không đọc được hoặc không chứa dữ liệu EXIF."

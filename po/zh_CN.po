@@ -2,14 +2,14 @@
 # exif 软件包的简体中文翻译.
 # Copyright (C) 2008 Lutz Müller and others
 # This file is distributed under the same license as the exif package.
-# Ji ZhengYu <zhengyuji@gmail.com>, 2008.
+# Ji ZhengYu <zhengyuji@gmail.com>, 2008, 2009
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.17\n"
+"Project-Id-Version: exif 0.6.18-pre1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 01:03-0800\n"
-"PO-Revision-Date: 2008-11-21 19:09中国标准时间\n"
+"POT-Creation-Date: 2009-09-16 22:23-0700\n"
+"PO-Revision-Date: 2009-09-18 14:17中国标准时间\n"
 "Last-Translator: Ji ZhengYu <zhengyuji@gmail.com>\n"
 "Language-Team: Chinese (simplified) <translation-team-zh-cn@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -17,275 +17,288 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: exif/actions.c:56
+#: exif/actions.c:59
 #, c-format
 msgid "Not enough memory."
 msgstr "没有足够的内存。"
 
-#: exif/actions.c:74
+#: exif/actions.c:77
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
 msgstr "不支持设定此标识的值！"
 
-#: exif/actions.c:91
+#: exif/actions.c:94
 #, c-format
 msgid "Too few components specified!"
 msgstr "参数太少！"
 
-#: exif/actions.c:106
+#: exif/actions.c:109
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "内部错误。请联系 <%s>。"
 
-#: exif/actions.c:143
+#: exif/actions.c:148
 #, c-format
 msgid "Not yet implemented!"
 msgstr "不支持的功能！"
 
-#: exif/actions.c:150
+#: exif/actions.c:155
 #, c-format
 msgid "Warning; Too many components specified!"
 msgstr "警告：指定了太多参数！"
 
-#: exif/actions.c:172
+#: exif/actions.c:177
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "EXIF 数据太多(%i 个字节)。只允许 %i 个字节。"
 
-#: exif/actions.c:183 exif/actions.c:358
+#: exif/actions.c:188 exif/actions.c:359
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "写入文件‘%s’。"
 
-#: exif/actions.c:203
+#: exif/actions.c:208
 #, c-format
 msgid "EXIF entry '%s' "
 msgstr "EXIF 记录‘%s’"
 
-#: exif/actions.c:205
+#: exif/actions.c:210
 #, c-format
 msgid "(0x%x, '%s') "
 msgstr "(0x%x，‘%s’) "
 
-#: exif/actions.c:208
+#: exif/actions.c:213
 #, c-format
 msgid "exists in IFD '%s':\n"
 msgstr "存在于 IFD‘%s’中:\n"
 
-#: exif/actions.c:251
+#: exif/actions.c:264
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD‘%s’中没有 EXIF 信息标识‘%s’！"
 
-#: exif/actions.c:282
-#, c-format
-msgid "Could not open '%s' (%m)!"
-msgstr "无法打开‘%s’(%m)！"
-
-#: exif/actions.c:285
+#: exif/actions.c:294
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "无法打开‘%s’(%s)！"
 
-#: exif/actions.c:295
-#, c-format
-msgid "Could not read '%s' (%m)."
-msgstr "无法读取‘%s’(%m)。"
-
-#: exif/actions.c:298
+#: exif/actions.c:303
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "无法读取‘%s’(%s)。"
 
-#: exif/actions.c:317
+#: exif/actions.c:322
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD ‘%s’中不含 EXIF 信息标识‘%s’。"
 
-#: exif/actions.c:323
+#: exif/actions.c:328
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "‘%s’中不含标识‘%s’。"
 
-#: exif/actions.c:341
+#: exif/actions.c:346
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "‘%s’中不含缩略图！"
 
-#: exif/actions.c:350
-#, c-format
-msgid "Could not open '%s' for writing (%m)!"
-msgstr "无法以写方式打开‘%s’(%m)！"
-
-#: exif/actions.c:353
+#: exif/actions.c:354
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "无法以写方式打开‘%s’(%s)！"
 
-#: exif/actions.c:371
+#: exif/actions.c:376
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "‘%s’中的 EXIF 信息标识为:"
 
-#: exif/actions.c:440
+#: exif/actions.c:472
 #, c-format
-msgid "Unknown MakerNote format.\n"
-msgstr "未知的 MakerNote 格式。\n"
+msgid "Unknown format or nonexistent MakerNote.\n"
+msgstr "未知格式或者 MakerNote 不存在。\n"
 
-#: exif/actions.c:447
+#: exif/actions.c:479
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote 没有任何内容。\n"
 
-#: exif/actions.c:450
+#: exif/actions.c:482
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote 含有 %i 个值:\n"
 
-#: exif/actions.c:460
+#: exif/actions.c:492
 msgid "Unknown tag"
 msgstr "未知的信息标识"
 
-#: exif/actions.c:464
+#: exif/actions.c:501
 msgid "Unknown value"
 msgstr "未知值"
 
-#: exif/actions.c:490
+#: exif/actions.c:525
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "‘%s’中的EXIF 信息标识(‘%s’字节顺序):"
 
-#: exif/actions.c:495 exif/actions.c:497
+#: exif/actions.c:531
 msgid "Tag"
 msgstr "信息标识"
 
-#: exif/actions.c:501 exif/actions.c:503 exif/main.c:199
+#: exif/actions.c:537
 msgid "Value"
 msgstr "值"
 
-#: exif/actions.c:509
+#: exif/actions.c:552
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF 数据中含有缩略图(%i 个字节)。"
 
-#: exif/actions.c:545
+#: exif/actions.c:594
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "缩略图尺寸\t%i\n"
 
-#: exif/main.c:175
+#: exif/main.c:189
 msgid "Display software version"
 msgstr "显示软件版本"
 
-#: exif/main.c:177
+#: exif/main.c:191
 msgid "Show IDs instead of tag names"
 msgstr "显示 IDs，以代替信息标识名称"
 
-#: exif/main.c:179
+#: exif/main.c:193
 msgid "Select tag"
 msgstr "选择信息标识"
 
-#: exif/main.c:179
+#: exif/main.c:193
 msgid "tag"
 msgstr "信息标识"
 
-#: exif/main.c:181
+#: exif/main.c:195
 msgid "Select IFD"
 msgstr "选择 IFD"
 
-#: exif/main.c:181
+#: exif/main.c:195
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:183
+#: exif/main.c:197
 msgid "List all EXIF tags"
 msgstr "列出所有 EXIF 信息标识"
 
-#: exif/main.c:185
+#: exif/main.c:199
 msgid "Show contents of tag MakerNote"
 msgstr "显示 MakerNote 的内容"
 
-#: exif/main.c:187
+#: exif/main.c:201
 msgid "Remove tag or ifd"
 msgstr "删除信息标识或是 ifd"
 
-#: exif/main.c:189
+#: exif/main.c:203
 msgid "Show description of tag"
 msgstr "显示信息标识说明"
 
-#: exif/main.c:191
+#: exif/main.c:205
 msgid "Extract thumbnail"
 msgstr "解出缩略图"
 
-#: exif/main.c:193
+#: exif/main.c:207
 msgid "Remove thumbnail"
 msgstr "删除缩略图"
 
-#: exif/main.c:195
+#: exif/main.c:209
 msgid "Insert FILE as thumbnail"
 msgstr "将 FILE 作为缩略图插入"
 
-#: exif/main.c:195 exif/main.c:197
+#: exif/main.c:209 exif/main.c:211
 msgid "FILE"
 msgstr "FILE"
 
-#: exif/main.c:197
+#: exif/main.c:211
 msgid "Write data to FILE"
 msgstr "将数据写入 FILE"
 
-#: exif/main.c:201
+#: exif/main.c:213
+msgid "Value of tag"
+msgstr "tag 值"
+
+#: exif/main.c:215
 msgid "Create EXIF data if not existing"
 msgstr "如果 EXIF 数据不存在就创建它"
 
-#: exif/main.c:203
+#: exif/main.c:217
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "以机器可读的格式(tab 分隔)输出"
 
-#: exif/main.c:206
+#: exif/main.c:220
 msgid "Output in a XML format"
 msgstr "以 XML 格式输出"
 
-#: exif/main.c:209
+#: exif/main.c:223
 msgid "Show debugging messages"
 msgstr "显示调示信息"
 
 #: exif/main.c:229
+msgid "Help options:"
+msgstr "帮助选项："
+
+#: exif/main.c:230
+msgid "Show this help message"
+msgstr "显示此帮助信息"
+
+#: exif/main.c:231
+msgid "Display brief usage message"
+msgstr "显示简短的使用信息"
+
+#: exif/main.c:251
 msgid "[OPTION...] file"
 msgstr "[选项...] 文件"
 
-#: exif/main.c:241
+#: exif/main.c:263
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "无效的 IFD‘%s’。有效的 IFDs 是‘0’,‘1’,‘EXIF’，‘GPS’，以及‘Interoperability’。"
 
-#: exif/main.c:250
+#: exif/main.c:272
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "无效的 EXIF 信息标识‘%s’！"
 
-#: exif/main.c:258
+#: exif/main.c:280
 msgid "You need to specify a tag!"
 msgstr "您需要指定一个 EXIF 信息标识！"
 
-#: exif/main.c:263
+#: exif/main.c:285
 msgid "You need to specify an IFD!"
 msgstr "您需要指定一个IFD！"
 
-#: exif/main.c:286
+#: exif/main.c:308
 #, c-format
 msgid "Tag '%s' "
 msgstr "信息标识‘%s’"
 
-#: exif/main.c:288
+#: exif/main.c:310
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x，‘%s’): "
 
-#: exif/main.c:338
+#: exif/main.c:368
 #, c-format
-msgid "'%s' does not contain EXIF data!"
-msgstr "‘%s’中没有 EXIF 数据！"
+msgid "'%s' is not readable or does not contain EXIF data!"
+msgstr "‘%s’不可读或者是没有 EXIF 数据！"
+
+#~ msgid "Could not open '%s' (%m)!"
+#~ msgstr "无法打开‘%s’(%m)！"
+
+#~ msgid "Could not read '%s' (%m)."
+#~ msgstr "无法读取‘%s’(%m)。"
+
+#~ msgid "Could not open '%s' for writing (%m)!"
+#~ msgstr "无法以写方式打开‘%s’(%m)！"
+
+#~ msgid "Unknown MakerNote format.\n"
+#~ msgstr "未知的 MakerNote 格式。\n"
 
 #~ msgid "Please specify a tag!"
 #~ msgstr "请指定一个 EXIF 信息标识！"
