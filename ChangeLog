@@ -1,3 +1,10 @@
+2009-09-28  Dan Fandrich <dan@coneharvesters.com>
+
+	* Added the text of the LGPL V2.1 in COPYING so there isn't any
+	  confusion as to the licensing terms of the project. GNU
+	  autotools adds a GPL COPYING file by default if this doesn't
+	  exist, which is wrong.
+
 2009-09-18  Dan Fandrich <dan@coneharvesters.com>
 
 	* po/de.po: Updated German translation by Marcus Meissner
