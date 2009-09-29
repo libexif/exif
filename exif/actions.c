@@ -35,6 +35,7 @@
 
 #define TAG_VALUE_BUF 1024
 
+/* TODO: make this a member of ExifParams */
 #define SCREEN_WIDTH 80
 
 static void

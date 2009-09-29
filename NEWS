@@ -1,6 +1,6 @@
 exif-0.6.x:
-  * Added translations: is, it, lv
-  * Updated translations: da, id, nl, pl, sk, sv, vi, zh_CN
+  * New translations: is, it, lv
+  * Updated translations: da, de, id, nl, pl, sk, sv, vi, zh_CN
   * Fixed alignment of tables in locales with multibyte character encoding
     (bug #2034873)
   * Allow setting --tag=0 (needed for the GPS IFD)
