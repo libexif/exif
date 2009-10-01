@@ -24,11 +24,13 @@
 #include <sys/types.h>
 #include <libexif/exif-tag.h>
 #include <libexif/exif-ifd.h>
+#include <libexif/exif-loader.h>
 
 enum {EXIF_INVALID_TAG = 0xffff};
 
 ExifTag exif_tag_from_string (const char *string);
 ExifIfd exif_ifd_from_string (const char *string);
+ExifData *exif_get_data_opts(ExifLoader *loader, ExifLog *log, int options, ExifDataType dt);
 size_t exif_mbstrlen(const char *mbs, size_t *len);
 
 #endif /* __UTILS_H__ */

@@ -1,3 +1,10 @@
+2009-09-30  Dan Fandrich <dan@coneharvesters.com>
+
+	* Added --no-fixup to disable attempts to fix tags in existing files.
+	  This involved creating a version of exif_loader_get_data
+          (exif_get_data_opts) that allows ExifOption values to be set
+          in the ExifData before it's used to store tags.
+
 2009-09-28  Dan Fandrich <dan@coneharvesters.com>
 
 	* Added the text of the LGPL V2.1 in COPYING so there isn't any

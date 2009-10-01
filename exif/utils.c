@@ -74,6 +74,39 @@ exif_ifd_from_string (const char *string)
 	return (-1);
 }
 
+/*! An alternative to exif_loader_get_data() that allows the options and
+ * data type to be set.
+ *
+ * \param[in] loader the loader
+ * \param[in] options one or more bitwise ORred options from ExifDataOption
+ * \param[in] dt image data type
+ * \return allocated ExifData
+ */
+ExifData *
+exif_get_data_opts(ExifLoader *loader, ExifLog *log,
+		   int options, ExifDataType dt)
+{
+	ExifData *ed;
+	const unsigned char *buf;
+	size_t buf_size;
+
+	if (!loader || !log)
+		return NULL;
+
+	exif_loader_get_buf (loader, &buf, &buf_size);
+	if (buf_size == 0)
+		return NULL;
+	ed = exif_data_new();
+	exif_data_log (ed, log);
+
+	/* Clear the slate before setting the requested options */
+	exif_data_unset_option (ed, ~0);
+	exif_data_set_option (ed, options);
+	exif_data_set_data_type (ed, dt);
+	exif_data_load_data (ed, buf, buf_size);
+
+	return ed;
+}
 
 /*! Returns the number of bytes of data needed to display n characters of
  * the given multibyte string in the current locale character encoding.
@@ -84,6 +117,7 @@ exif_ifd_from_string (const char *string)
  * by the returned number of bytes (this may be less but never more than the
  * value on entry)
  * \return number of bytes starting at mbs make up len characters
+ * \note This can probably be rewritten using mbsrtowcs()
  */
 #ifdef HAVE_MBLEN
 size_t exif_mbstrlen(const char *mbs, size_t *len)

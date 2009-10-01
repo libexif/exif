@@ -169,7 +169,7 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 static unsigned int list_tags = 0, show_description = 0;
 static unsigned int xml_output = 0;
 static unsigned int extract_thumbnail = 0, remove_thumb = 0;
-static unsigned int remove_tag = 0, create_exif = 0;
+static unsigned int remove_tag = 0, create_exif = 0, no_fixup = 0;
 static unsigned int list_mnote = 0;
 static unsigned int show_version = 0;
 static const char *output = NULL;
@@ -207,6 +207,8 @@ main (int argc, const char **argv)
 		 N_("Remove thumbnail"), NULL},
 		{"insert-thumbnail", 'n', POPT_ARG_STRING, &p.set_thumb, 0,
 		 N_("Insert FILE as thumbnail"), N_("FILE")},
+		{"no-fixup", '\0', POPT_ARG_NONE, &no_fixup, 0,
+		 N_("Do not fix existing tags in files"), NULL},
 		{"output", 'o', POPT_ARG_STRING, &output, 0,
 		 N_("Write data to FILE"), N_("FILE")},
 		{"set-value", '\0', POPT_ARG_STRING, &p.set_value, 0,
@@ -351,7 +353,13 @@ main (int argc, const char **argv)
 		log_arg.ignore_corrupted = 0;
 		if (!log_arg.corrupted)
 			create_exif = 0;
-		ed = exif_loader_get_data (l);
+
+		if (no_fixup)
+			/* Override the default conversion options */
+			ed = exif_get_data_opts(l, log, 0, EXIF_DATA_TYPE_UNKNOWN);
+		else
+			ed = exif_loader_get_data(l);
+
 		exif_loader_unref (l);
 		if (!ed) {
 			if (create_exif) {

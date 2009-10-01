@@ -13,7 +13,7 @@
 .\" the source, must acknowledge the copyright and authors of this work.
 .\" License.
 .\"
-.TH exif 1 "2009-01-21" "exif 0.6.17.1" "libexif command line front-end"
+.TH exif 1 "2009-09-30" "exif 0.6.17.1" "libexif command line front-end"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
@@ -40,7 +40,9 @@ Corrupted MakerNote tags are also removed, but no format changes are made.
 .SH "OPTIONS"
 .TP
 .BI "\-v, \-\-version"
-Display the exif version number.
+Display the
+.B exif
+version number.
 .TP
 .BI "\-i, \-\-ids"
 Show ID numbers instead of tag names.
@@ -91,6 +93,13 @@ as thumbnail.  No attempt is made to ensure that the contents of
 .I "FILE"
 are in a valid thumbnail format.
 .TP
+.BI "\-\-no-fixup"
+Do not attempt to fix EXIF specification violations when reading tags.
+.B exif
+will remove illegal or unknown tags, add some mandatory tags using default
+values, and change the data type of tags to match that required by the
+specification.
+.TP
 .BI "\-o, \-\-output=" "FILE"
 Write output image to
 .IR "FILE" .
@@ -116,7 +125,9 @@ The \-\-xml-output and \-\-machine\-readable options are mutually exclusive.
 .TP
 .BI "\-d, \-\-debug"
 Show debugging messages. Also, when processing a file that contains corrupted
-data, this option cases exif to attempt to continue processing. Normally,
+data, this option causes
+.B exif
+to attempt to continue processing. Normally,
 corrupted data causes an abort.
 .SS "Help options"
 .TP
@@ -126,7 +137,8 @@ Show help message.
 .BI "\-\-usage"
 Display brief usage message.
 .SH "EXAMPLES"
-Display all recognized EXIF tags in an image and the tag contents:
+Display all recognized EXIF tags in an image and the tag contents, with bad
+tags fixed:
 .LP
 .RS
 exif image.jpg
@@ -136,7 +148,7 @@ Display a table listing all known EXIF tags and whether each one exists in the
 given image:
 .LP
 .RS
-exif --list-tags image.jpg
+exif --list-tags --no-fixup image.jpg
 .RE
 .LP
 Extract the thumbnail into the file thumbnail.jpg:
@@ -145,11 +157,11 @@ Extract the thumbnail into the file thumbnail.jpg:
 exif --extract-thumbnail --output=thumbnail.jpg image.jpg
 .RE
 .LP
-Display a list of the numeric values of all recognized EXIF tags and the
-tag contents:
+Display a list of the numeric values of only the EXIF tags in the thumbnail IFD
+(IFD 1) and the tag values:
 .LP
 .RS
-exif --ids image.jpg
+exif --ids --ifd=1 --no-fixup image.jpg
 .RE
 .LP
 Display the meaning of tag 0x9209 in the "EXIF" IFD according to the EXIF
@@ -162,18 +174,21 @@ exif --show-description --ifd=EXIF --tag=0x9209
 Add an Orientation tag with value "bottom - left" to an existing image:
 .LP
 .RS
-exif --output=new.jpg --ifd=0 --tag=0x0112 --set-value=4 image.jpg
+exif --output=new.jpg --ifd=0 --tag=0x0112 --set-value=4 --no-fixup image.jpg
 .RE
 .LP
 Add a YCbCr Sub-Sampling tag with value 2,1 (a.k.a YCbCr 4:2:2) to an
-existing image:
+existing image and fix the existing tags, if necessary:
 .LP
 .RS
 exif --output=new.jpg --tag=YCbCrSubSampling --ifd=0 --set-value='2 1' image.jpg
 .RE
 .LP
 .SH "AUTHOR"
-Written by Lutz Mueller <lutz@users.sourceforge.net>.
+.B exif
+was written by Lutz Mueller <lutz@users.sourceforge.net>
+and numerous contributors.
+This man page is Copyright \(co 2002-2009 Thomas Pircher and others.
 .SH "SEE ALSO"
 .UR "http://www.sourceforge.net/projects/libexif"
 .BR "http://www.sourceforge.net/projects/libexif"
