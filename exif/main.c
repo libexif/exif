@@ -48,6 +48,12 @@
 #include <mcheck.h>
 #endif
 
+/*! The minimum width of output that we can support */
+#define MIN_WIDTH 52
+
+/*! A sane limit on output width */
+#define MAX_WIDTH 9999
+
 /* Old versions of popt.h don't define POPT_TABLEEND */
 #ifndef POPT_TABLEEND
 #  define POPT_TABLEEND { NULL, '\0', 0, 0, 0, NULL, NULL }
@@ -174,7 +180,8 @@ static unsigned int list_mnote = 0;
 static unsigned int show_version = 0;
 static const char *output = NULL;
 static const char *ifd_string = NULL, *tag_string = NULL;
-static ExifParams p = {EXIF_INVALID_TAG, EXIF_IFD_COUNT, 0, 0, NULL, NULL,NULL};
+static ExifParams p = {EXIF_INVALID_TAG, EXIF_IFD_COUNT, 0, 0, 80,
+		      		   NULL, NULL,NULL};
 LogArg log_arg = {0, 0, 0};
 
 int
@@ -218,6 +225,8 @@ main (int argc, const char **argv)
 		{"machine-readable", 'm', POPT_ARG_NONE, &p.machine_readable, 0,
 		 N_("Output in a machine-readable (tab delimited) format"),
 		 NULL},
+		{"width", 'w', POPT_ARG_INT, &p.width, 0,
+		 N_("Width of output"), N_("WIDTH")},
 		{"xml-output", 'x', POPT_ARG_NONE, &xml_output, 0,
 		 N_("Output in a XML format"),
 		 NULL},
@@ -251,7 +260,10 @@ main (int argc, const char **argv)
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
-	while (poptGetNextOpt (ctx) > 0);
+	while (poptGetNextOpt (ctx) > 0)
+		;
+
+	p.width = MIN(MAX_WIDTH, MAX(MIN_WIDTH, p.width));
 
 	log = exif_log_new ();
 	exif_log_set_func (log, log_func, &log_arg);

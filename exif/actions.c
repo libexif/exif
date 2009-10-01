@@ -35,9 +35,6 @@
 
 #define TAG_VALUE_BUF 1024
 
-/* TODO: make this a member of ExifParams */
-#define SCREEN_WIDTH 80
-
 static void
 convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, ExifLog *log)
 {
@@ -400,7 +397,7 @@ action_tag_table (ExifData *ed, ExifParams p)
 		if (!name)
 			continue;
 
-		fieldwidth = width = SCREEN_WIDTH - 38 - 13;
+		fieldwidth = width = p.width - 38 - 13;
 		bytes = exif_mbstrlen(C(name), &width);
 		printf ("  0x%04x %.*s%*s",
 			tag, bytes, C(name), fieldwidth-width, "");
@@ -416,13 +413,13 @@ action_tag_table (ExifData *ed, ExifParams p)
 static void
 show_entry_list (ExifEntry *e, void *data)
 {
-	unsigned char *ids = data;
+	const ExifParams *p = data;
 	char v[TAG_VALUE_BUF];
 	ExifIfd ifd = exif_entry_get_ifd (e);
 	const char *str;
 	size_t fieldwidth, width, bytes;
 
-	if (*ids)
+	if (p->use_ids)
 		printf("0x%04x", e->tag);
 	else {
 		str = C(exif_tag_get_title_in_ifd (e->tag, ifd));
@@ -432,7 +429,7 @@ show_entry_list (ExifEntry *e, void *data)
 	}
 	printf ("|");
 
-	fieldwidth = width = *ids ? SCREEN_WIDTH-8 : SCREEN_WIDTH-22;
+	fieldwidth = width = p->use_ids ? p->width-8 : p->width-22;
 	str = C(exif_entry_get_value (e, v, sizeof(v)));
 	bytes = exif_mbstrlen(str, &width);
 	printf("%.*s", bytes, str);
@@ -446,7 +443,7 @@ show_ifd (ExifContent *content, void *data)
 }
 
 static void
-print_hline (unsigned char ids)
+print_hline (unsigned char ids, unsigned int screenwidth)
 {
         unsigned int i, width;
 
@@ -454,7 +451,7 @@ print_hline (unsigned char ids)
         for (i = 0; i < width; i++)
 		fputc ('-', stdout);
         fputc ('+', stdout);
-        for (i = 0; i < SCREEN_WIDTH - 2 - width; i++)
+        for (i = 0; i < screenwidth - 2 - width; i++)
 		fputc ('-', stdout);
 	fputc ('\n', stdout);
 }
@@ -504,7 +501,7 @@ action_mnote_list (ExifData *ed, ExifParams p)
         	if (p.use_ids) {
 			fputs (b2, stdout);
         	} else {
-			fieldwidth = width = SCREEN_WIDTH-22;
+			fieldwidth = width = p.width-22;
 			bytes = exif_mbstrlen(b2, &width);
 			printf ("%.*s", bytes, b2);
 		}
@@ -526,7 +523,7 @@ action_tag_list (ExifData *ed, ExifParams p)
 	printf (_("EXIF tags in '%s' ('%s' byte order):"), p.fin,
 		exif_byte_order_get_name (order));
 	fputc ('\n', stdout);
-	print_hline (p.use_ids);
+	print_hline (p.use_ids, p.width);
 
 	fieldwidth = width = p.use_ids ? 6 : 20;
 	s = _("Tag");
@@ -534,21 +531,21 @@ action_tag_list (ExifData *ed, ExifParams p)
 	printf ("%.*s%*s", bytes, s, fieldwidth-width, "");
 	fputc ('|', stdout);
 
-	fieldwidth = width = p.use_ids ? SCREEN_WIDTH-8 : SCREEN_WIDTH-22;
+	fieldwidth = width = p.use_ids ? p.width-8 : p.width-22;
 	s = _("Value");
 	bytes = exif_mbstrlen(s, &width);
 	printf ("%.*s", bytes, s);
         fputc ('\n', stdout);
-        print_hline (p.use_ids);
+        print_hline (p.use_ids, p.width);
 
 	if (p.ifd < EXIF_IFD_COUNT)
 		/* Show only a single IFD */
-		show_ifd(ed->ifd[p.ifd], &p.use_ids);
+		show_ifd(ed->ifd[p.ifd], &p);
 	else
 		/* Show contents of all IFDs */
-		exif_data_foreach_content (ed, show_ifd, &p.use_ids);
+		exif_data_foreach_content (ed, show_ifd, &p);
 
-        print_hline (p.use_ids);
+        print_hline (p.use_ids, p.width);
         if (ed->size) {
                 printf (_("EXIF data contains a thumbnail "
 			  "(%i bytes)."), ed->size);

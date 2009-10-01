@@ -4,6 +4,7 @@
 	  This involved creating a version of exif_loader_get_data
           (exif_get_data_opts) that allows ExifOption values to be set
           in the ExifData before it's used to store tags.
+	* Added --width option to allow setting width of output
 
 2009-09-28  Dan Fandrich <dan@coneharvesters.com>
 

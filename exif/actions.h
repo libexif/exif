@@ -29,6 +29,7 @@ typedef struct {
 
 	unsigned int machine_readable;
 	unsigned int use_ids;
+	unsigned int width;
 
 	const char *fin;
 

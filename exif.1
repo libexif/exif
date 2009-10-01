@@ -1,4 +1,4 @@
-.\" © 2002-2009 by Thomas Pircher (tehpeh at gmx dot net) et. al.
+.\" Copyright © 2002-2009 by Thomas Pircher (tehpeh at gmx dot net) et. al.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -13,7 +13,7 @@
 .\" the source, must acknowledge the copyright and authors of this work.
 .\" License.
 .\"
-.TH exif 1 "2009-09-30" "exif 0.6.17.1" "libexif command line front-end"
+.TH exif 1 "2009-09-30" "exif 0.6.18" "command line front-end to libexif"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
@@ -118,6 +118,10 @@ Create EXIF data if it does not exist
 .BI "\-m, \-\-machine\-readable"
 Produce output in a machine-readable (tab-delimited) format.
 The \-\-xml-output and \-\-machine\-readable options are mutually exclusive.
+.TP
+.BI "\-w, \-\-width=" "N"
+Set the maximum width of the output to N characters (default 80). This does
+not apply to some output formats (e.g. XML).
 .TP
 .BI "\-x, \-\-xml-output"
 Produce output in an XML format (when possible).
