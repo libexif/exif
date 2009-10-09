@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT([libexif command line interface], [0.6.18], [libexif-devel@lists.sourceforge.net], [exif])
+AC_INIT([libexif command line interface], [0.6.18.1], [libexif-devel@lists.sourceforge.net], [exif])
 AC_CONFIG_SRCDIR([exif/main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([auto-m4])
