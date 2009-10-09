@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT([libexif command line interface], [0.6.17.1], [libexif-devel@lists.sourceforge.net], [exif])
+AC_INIT([libexif command line interface], [0.6.18], [libexif-devel@lists.sourceforge.net], [exif])
 AC_CONFIG_SRCDIR([exif/main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([auto-m4])
@@ -67,7 +67,7 @@ AC_CHECK_FUNCS(mblen)
 # ---------------------------------------------------------------------------
 # libraries needed
 # ---------------------------------------------------------------------------
-GP_CHECK_LIBRARY([LIBEXIF],[libexif],[>= 0.6.17])
+GP_CHECK_LIBRARY([LIBEXIF],[libexif],[>= 0.6.18])
 
 
 # ---------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-exif-0.6.x:
+exif-0.6.18 (2009-10-08):
   * New translations: is, it, lv
   * Updated translations: da, de, id, nl, pl, sk, sv, vi, zh_CN
   * Fixed alignment of tables in locales with multibyte character encoding
@@ -8,6 +8,7 @@ exif-0.6.x:
   * --create-exif now creates mandatory EXIF tags with default data
   * --no-fixup disables attempts to fix tags in existing files
   * --width option sets width of output lines
+
 
 exif-0.6.17 (2008-11-06):
   * Fixed the output of -s and -t when iconv is configured
