@@ -219,7 +219,7 @@ main (int argc, const char **argv)
 		{"output", 'o', POPT_ARG_STRING, &output, 0,
 		 N_("Write data to FILE"), N_("FILE")},
 		{"set-value", '\0', POPT_ARG_STRING, &p.set_value, 0,
-		 N_("Value of tag"), NULL},
+		 N_("Value of tag"), N_("STRING")},
 		{"create-exif", 'c', POPT_ARG_NONE, &create_exif, 0,
 		 N_("Create EXIF data if not existing"), NULL},
 		{"machine-readable", 'm', POPT_ARG_NONE, &p.machine_readable, 0,

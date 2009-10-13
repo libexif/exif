@@ -1,3 +1,8 @@
+2009-10-12  Dan Fandrich <dan@coneharvesters.com>
+
+	* Added argument description for --set-value and a missing translation
+	  (pointed out by Jorma Karvonen)
+
 2009-10-08  Dan Fandrich <dan@coneharvesters.com>
 
 	* Released 0.6.18
