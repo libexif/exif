@@ -1,3 +1,10 @@
+2009-10-13  Dan Fandrich <dan@coneharvesters.com>
+
+	* po/fi.po: Added new Finnish translation by Jorma Karvonen
+	* po/sv.po: Updated Swedish translation by Daniel Nylander
+	* po/vi.po: Updated Vietnamese translation by Clytie Siddall
+	* po/zh_CN.po: Updated Chinese (simplified) translation by Ji ZhengYu
+
 2009-10-12  Dan Fandrich <dan@coneharvesters.com>
 
 	* Added argument description for --set-value and a missing translation

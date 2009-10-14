@@ -1,183 +1,185 @@
-# Vietnamese translation for EXIF.
+# Finnish messages for exif.
 # Copyright © 2009 Free Software Foundation, Inc.
+# Copyright © 2009 Lutz Müller and others
 # This file is distributed under the same license as the exif package.
-# Clytie Siddall <clytie@riverland.net.au>, 2008-2009.
+# Jorma Karvonen <karvonen.jorma@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: exif 0.6.18\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-08 18:05-0700\n"
-"PO-Revision-Date: 2009-10-11 17:33+1030\n"
-"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
+"PO-Revision-Date: 2009-10-12 12:19+0200\n"
+"Last-Translator: Jorma Karvonen <karvonen.jorma@gmail.com>\n"
+"Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: LocFactoryEditor 1.8\n"
+"Plural-Forms: nplurals=2; plural=n  != 1;\n"
 
 #: exif/actions.c:57
 #, c-format
 msgid "Not enough memory."
-msgstr "Không đủ bộ nhớ."
+msgstr "Ei kylliksi muistia."
 
 #: exif/actions.c:75
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
-msgstr "Không hỗ trợ chức năng tạo một giá trị cho thẻ này !"
+msgstr "Arvon asettamista tähän tunnisteeseen ei tueta!"
 
 #: exif/actions.c:92
 #, c-format
 msgid "Too few components specified!"
-msgstr "Ghi rõ quá ít thành phần."
+msgstr "Liian harvoja komponentteja määritelty!"
 
 #: exif/actions.c:107
 #, c-format
 msgid "Internal error. Please contact <%s>."
-msgstr "Lỗi nội bộ. Hãy liên lạc với <%s>."
+msgstr "Sisäinen virhe: Ota yhteys osoitteeseen <%s>."
 
 #: exif/actions.c:146
 #, c-format
 msgid "Not yet implemented!"
-msgstr "Chưa thực hiện."
+msgstr "Ei vielä toteutettu!"
 
 #: exif/actions.c:153
 #, c-format
 msgid "Warning; Too many components specified!"
-msgstr "Cảnh báo : ghi rõ quá ít thành phần."
+msgstr "Varoitus: Liian monia komponentteja määritelty!"
 
 #: exif/actions.c:175
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
-msgstr "Quá nhiều dữ liệu EXIF (%i byte). Chỉ cho phép %i byte."
+msgstr "Liian paljon EXIF-dataa (%i tavua). Vain %i tavua sallitaan."
 
 #: exif/actions.c:186 exif/actions.c:357
 #, c-format
 msgid "Wrote file '%s'."
-msgstr "Đã ghi tập tin « %s »."
+msgstr "Kirjoitettiin tiedosto ”%s”."
 
+#  Kolme seuraavaa muodostaa yhden lauseen
 #: exif/actions.c:206
 #, c-format
 msgid "EXIF entry '%s' "
-msgstr "Mục nhập EXIF « %s »"
+msgstr "EXIF-tulokohta '%s' "
 
 #: exif/actions.c:208
 #, c-format
 msgid "(0x%x, '%s') "
-msgstr "(0x%x, '%s') "
+msgstr "(0x%x, ”%s”) "
 
 #: exif/actions.c:211
 #, c-format
 msgid "exists in IFD '%s':\n"
-msgstr "đã tồn tại trong IFD « %s »:\n"
+msgstr "on olemassa IFD:ssä ”%s”:\n"
 
 #: exif/actions.c:262
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
-msgstr "IFD « %s » không chứa một thẻ « %s »."
+msgstr "IFD ”%s” ei sisällä tunnistetta ”%s”!"
 
 #: exif/actions.c:292
 #, c-format
 msgid "Could not open '%s' (%s)!"
-msgstr "Không thể mở « %s » (%s)."
+msgstr "Ei voitu avata pienoiskuvaa ”%s” (%s)!"
 
 #: exif/actions.c:301
 #, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "Không thể đọc « %s » (%s)."
+msgstr "Ei voitu lukea pienoiskuvaa ”%s” (%s)."
 
 #: exif/actions.c:320
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
-msgstr "IFD « %s » không chứa thẻ « %s »."
+msgstr "IFD ”%s” ei sisällä tunnistetta ”%s”."
 
 #: exif/actions.c:326
 #, c-format
 msgid "'%s' does not contain tag '%s'."
-msgstr "« %s » không chứa thẻ « %s »."
+msgstr "”%s”-parametri ei sisällä tunnistetta ”%s”."
 
 #: exif/actions.c:344
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
-msgstr "IFD « %s » không chứa ảnh mẫu."
+msgstr "”%s”-parametri ei sisällä pienoiskuvaa!"
 
 #: exif/actions.c:352
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
-msgstr "Không thể mở « %s » để ghi (%s)."
+msgstr "Ei voitu avata tiedostoa ”%s” virheilmoituksen (%s) kirjoittamista varten!"
 
 #: exif/actions.c:374
 #, c-format
 msgid "EXIF tags in '%s':"
-msgstr "Thể EXIF trong « %s »:"
+msgstr "EXIF-tunnisteet parametrissä ”%s”:"
 
 #: exif/actions.c:470
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
-msgstr "Không rõ định dạng hoặc không có MakerNote.\n"
+msgstr "Tuntematon muoto tai ei-olemassaoleva MakerNote.\n"
 
 #: exif/actions.c:477
 #, c-format
 msgid "MakerNote does not contain any value.\n"
-msgstr "MakerNote không chứa giá trị.\n"
+msgstr "MakerNote ei sisällä mitään arvoa.\n"
 
 #: exif/actions.c:480
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
-msgstr[0] "MakerNote chứa %i giá trị:\n"
+msgstr[0] "MakerNote sisältää %i arvon:\n"
+msgstr[1] "MakerNote sisältää %i arvoa:\n"
 
 #: exif/actions.c:490
 msgid "Unknown tag"
-msgstr "Thẻ lạ"
+msgstr "Tuntematon tunniste"
 
 #: exif/actions.c:499
 msgid "Unknown value"
-msgstr "Giá trị lạ"
+msgstr "Tuntematon arvo"
 
 #: exif/actions.c:523
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
-msgstr "Thẻ EXIF trong « %s » (thứ tự byte « %s »):"
+msgstr "EXIF-tunnisteet parametrissä ”%s” (”%s” tavujärjestys):"
 
 #: exif/actions.c:529
 msgid "Tag"
-msgstr "Thẻ"
+msgstr "Tunniste"
 
 #: exif/actions.c:535
 msgid "Value"
-msgstr "Giá trị"
+msgstr "Arvo"
 
 #: exif/actions.c:550
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
-msgstr "Dữ liệu EXIF chứa một ảnh mẫu (%i byte)."
+msgstr "EXIF-data sisältää pienoiskuvan (%i tavua)."
 
 #: exif/actions.c:592
 #, c-format
 msgid "ThumbnailSize\t%i\n"
-msgstr "Kích cỡ ảnh mẫu\t%i\n"
+msgstr "PienoiskuvaKoko\t%i\n"
 
 #: exif/main.c:196
 msgid "Display software version"
-msgstr "Hiển thị phiên bản phần mềm"
+msgstr "Näytä ohjelmiston versio"
 
 #: exif/main.c:198
 msgid "Show IDs instead of tag names"
-msgstr "Hiển thị mã số thay cho tên thẻ"
+msgstr "Näytä ID:t tunnistenimien sijasta"
 
 #: exif/main.c:200
 msgid "Select tag"
-msgstr "Chọn thẻ"
+msgstr "Valitse tunniste"
 
 #: exif/main.c:200
 msgid "tag"
-msgstr "thẻ"
+msgstr "tunniste"
 
 #: exif/main.c:202
 msgid "Select IFD"
-msgstr "Chọn IFD"
+msgstr "Valitse IFD"
 
 #: exif/main.c:202
 msgid "IFD"
@@ -185,123 +187,121 @@ msgstr "IFD"
 
 #: exif/main.c:204
 msgid "List all EXIF tags"
-msgstr "Liệt kê mọi thể EXIF"
+msgstr "Luettele kaikki EXIF-tunnisteet"
 
 #: exif/main.c:206
 msgid "Show contents of tag MakerNote"
-msgstr "Hiện nội dung của thẻ MakerNote"
+msgstr "Näytä MakerNote-tunnisteen sisältö"
 
 #: exif/main.c:208
 msgid "Remove tag or ifd"
-msgstr "Bỏ thẻ hoặc IFD"
+msgstr "Poista tunniste tai ifd"
 
 #: exif/main.c:210
 msgid "Show description of tag"
-msgstr "Hiện mô tả của thẻ"
+msgstr "Näytä tunnisteen kuvaus"
 
 #: exif/main.c:212
 msgid "Extract thumbnail"
-msgstr "Trích ảnh mẫu"
+msgstr "Poimi pienoiskuva"
 
 #: exif/main.c:214
 msgid "Remove thumbnail"
-msgstr "Bỏ ảnh mẫu"
+msgstr "Poista pienoiskuva"
 
 #: exif/main.c:216
 msgid "Insert FILE as thumbnail"
-msgstr "Chèn TẬP TIN dạng ảnh mẫu"
+msgstr "Lisää TIEDOSTO pienoiskuvana"
 
 #: exif/main.c:216 exif/main.c:220
 msgid "FILE"
-msgstr "TẬP TIN"
+msgstr "TIEDOSTO"
 
 #: exif/main.c:218
 msgid "Do not fix existing tags in files"
-msgstr "Đừng sửa chữa thẻ đã có trong tập tin"
+msgstr "Älä korjaa olemassa olevia tunnisteita tiedostoissa"
 
 #: exif/main.c:220
 msgid "Write data to FILE"
-msgstr "Ghi dữ liệu vào TẬP TIN"
+msgstr "Kirjoita data TIEDOSTOon"
 
 #: exif/main.c:222
 msgid "Value of tag"
-msgstr "Giá trị của thẻ"
+msgstr "Tunnisteen arvo"
 
 #: exif/main.c:224
 msgid "Create EXIF data if not existing"
-msgstr "Táo dữ liệu EXIF nếu không có"
+msgstr "Luo EXIF-dataa, jos sitä ei ole olemassa"
 
 #: exif/main.c:226
 msgid "Output in a machine-readable (tab delimited) format"
-msgstr "Xuất ra một định dạng cho máy đọc được (định giới bằng khoảng tab)"
+msgstr "Tulosta koneluettavassa (sarkaimella rajoitetussa) muodossa"
 
 #: exif/main.c:229
 msgid "Width of output"
-msgstr "Chiều rộng kết xuất"
+msgstr "Tulosteen leveys"
 
 #: exif/main.c:229
 msgid "WIDTH"
-msgstr "RỘNG"
+msgstr "LEVEYS"
 
 #: exif/main.c:231
 msgid "Output in a XML format"
-msgstr "Xuất ra định dạng XML"
+msgstr "Tulosta XML-muodossa"
 
 #: exif/main.c:234
 msgid "Show debugging messages"
-msgstr "Hiện thông điệp gỡ lỗi"
+msgstr "Näytä virheenjäljitystiedot"
 
 #: exif/main.c:240
 msgid "Help options:"
-msgstr "Tuỳ chọn trợ giúp:"
+msgstr "Opastevalitsimet:"
 
 #: exif/main.c:241
 msgid "Show this help message"
-msgstr "Hiển thị trợ giúp này"
+msgstr "Näytä tämä opastesanoma"
 
 #: exif/main.c:242
 msgid "Display brief usage message"
-msgstr "Hiển thị trợ giúp ngắn"
+msgstr "Näytä lyhyt käyttösanoma"
 
 #: exif/main.c:262
 msgid "[OPTION...] file"
-msgstr "[TÙY_CHỌN...] tập_tin"
+msgstr "[VALITSIN...] tiedosto"
 
 #: exif/main.c:277
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
-msgstr ""
-"IFD không hợp lệ « %s ». Các IFD hợp lệ là:\n"
-" • 0\n"
-" • 1\n"
-" • EXIF\n"
-" • GPS\n"
-" • Interoperability\t\tTương hành"
+msgstr "Virheellinen IFD ”%s”. Lailliset IFD-arvot ovat ”0”, ”1”, ”EXIF”, ”GPS”, ja ”Interoperability”."
 
 #: exif/main.c:286
 #, c-format
 msgid "Invalid tag '%s'!"
-msgstr "Thẻ không hợp lệ « %s »."
+msgstr "Virheellinen tunniste ”%s”!"
 
 #: exif/main.c:294
 msgid "You need to specify a tag!"
-msgstr "Bạn cần phải ghi rõ một thẻ."
+msgstr "Sinun tarvitsee määritellä tunniste!"
 
 #: exif/main.c:299
 msgid "You need to specify an IFD!"
-msgstr "Bạn cần phải ghi rõ một IFD."
+msgstr "Sinun tarvitsee määritellä IFD!"
 
+#  Kolme seuraavaa kuuluvat samaan lauseeseen
 #: exif/main.c:322
 #, c-format
 msgid "Tag '%s' "
-msgstr "Thẻ « %s »"
+msgstr "Tunniste ”%s” "
 
 #: exif/main.c:324
 #, c-format
 msgid "(0x%04x, '%s'): "
-msgstr "(0x%04x, '%s'): "
+msgstr "(0x%04x, ”%s”): "
 
 #: exif/main.c:388
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
-msgstr "« %s » không đọc được hoặc không chứa dữ liệu EXIF."
+msgstr "”%s” ei ole luettava tai ei sisällä EXIF-dataa!"
+
+#~ msgid "Adding entry..."
+#~ msgstr "Lisätään tulokohta..."
