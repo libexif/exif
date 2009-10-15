@@ -1,4 +1,6 @@
 exif-0.6.x:
+  * New translation: fi
+  * Updated translations: sv, vi, zh_CN
 
 exif-0.6.18 (2009-10-08):
   * New translations: is, it, lv
