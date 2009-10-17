@@ -1,0 +1,300 @@
+# Japanese translation for exif.
+# Copyright (C) 2009 Lutz Mueller and others
+# This file is distributed under the same license as the exif package.
+# Tadashi Jokagi <elf2000@users.sourceforge.net>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: exif 0.6.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-08 18:05-0700\n"
+"PO-Revision-Date: 2009-10-13 03:59+0900\n"
+"Last-Translator: Tadashi Jokagi <elf2000@users.sourceforge.net>\n"
+"Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: exif/actions.c:57
+#, c-format
+msgid "Not enough memory."
+msgstr "メモリーが足りません。"
+
+#: exif/actions.c:75
+#, c-format
+msgid "Setting a value for this tag is unsupported!"
+msgstr "このタグへの値の設定はサポートしていません!"
+
+#: exif/actions.c:92
+#, c-format
+msgid "Too few components specified!"
+msgstr "コンポーネントのしていが足りません!"
+
+#: exif/actions.c:107
+#, c-format
+msgid "Internal error. Please contact <%s>."
+msgstr "内部エラー。<%s> に連絡してください。"
+
+#: exif/actions.c:146
+#, c-format
+msgid "Not yet implemented!"
+msgstr "まだ実装していません!"
+
+#: exif/actions.c:153
+#, c-format
+msgid "Warning; Too many components specified!"
+msgstr "警告: コンポーネントの指定が多すぎます!"
+
+#: exif/actions.c:175
+#, c-format
+msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
+msgstr "あまりにたくさんの EXIF データです(%i バイト)。 %i バイトのみ確保しました。"
+
+#: exif/actions.c:186 exif/actions.c:357
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "ファイル「%s」へ書き込みました。"
+
+#: exif/actions.c:206
+#, c-format
+msgid "EXIF entry '%s' "
+msgstr "EXIF エントリー「%s」"
+
+#: exif/actions.c:208
+#, c-format
+msgid "(0x%x, '%s') "
+msgstr "(0x%x、'%s') "
+
+#: exif/actions.c:211
+#, c-format
+msgid "exists in IFD '%s':\n"
+msgstr "は IFD 「%s」に存在します:\n"
+
+#: exif/actions.c:262
+#, c-format
+msgid "IFD '%s' does not contain a tag '%s'!"
+msgstr "IFD「%s」はタグ「%s」に含まれません!"
+
+#: exif/actions.c:292
+#, c-format
+msgid "Could not open '%s' (%s)!"
+msgstr "「%s」を開けません (%s)!"
+
+#: exif/actions.c:301
+#, c-format
+msgid "Could not read '%s' (%s)."
+msgstr "「%s」を読み込めません (%s)。"
+
+#: exif/actions.c:320
+#, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr "IFD「%s」はタグ「%s」に含まれません。"
+
+#: exif/actions.c:326
+#, c-format
+msgid "'%s' does not contain tag '%s'."
+msgstr "「%s」はタグ「%s」に含まれません。"
+
+#: exif/actions.c:344
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "「%s」はサムネイルに含まれません!"
+
+#: exif/actions.c:352
+#, c-format
+msgid "Could not open '%s' for writing (%s)!"
+msgstr "書き込むために「%s」を開けません (%s)!"
+
+#: exif/actions.c:374
+#, c-format
+msgid "EXIF tags in '%s':"
+msgstr "「%s」内の EXIF タグ:"
+
+#: exif/actions.c:470
+#, c-format
+msgid "Unknown format or nonexistent MakerNote.\n"
+msgstr "不明な形式か、MakerNote が存在しません。\n"
+
+#: exif/actions.c:477
+#, c-format
+msgid "MakerNote does not contain any value.\n"
+msgstr "MakerNote はいくつかの値を含んでいません。\n"
+
+#: exif/actions.c:480
+#, c-format
+msgid "MakerNote contains %i value:\n"
+msgid_plural "MakerNote contains %i values:\n"
+msgstr[0] "MakerNote は %i の値を含みます:\n"
+
+#: exif/actions.c:490
+msgid "Unknown tag"
+msgstr "不明なタグ"
+
+#: exif/actions.c:499
+msgid "Unknown value"
+msgstr "不明な値"
+
+#: exif/actions.c:523
+#, c-format
+msgid "EXIF tags in '%s' ('%s' byte order):"
+msgstr "%s の EXIF タグ (%s バイトオーダー):"
+
+#: exif/actions.c:529
+msgid "Tag"
+msgstr "タグ"
+
+#: exif/actions.c:535
+msgid "Value"
+msgstr "値"
+
+#: exif/actions.c:550
+#, c-format
+msgid "EXIF data contains a thumbnail (%i bytes)."
+msgstr "EXIF データはサムネイルを含みます (%i バイト)。"
+
+#: exif/actions.c:592
+#, c-format
+msgid "ThumbnailSize\t%i\n"
+msgstr "サムネイルの大きさ\t%i\n"
+
+#: exif/main.c:196
+msgid "Display software version"
+msgstr "ソフトウェア バージョンの表示"
+
+#: exif/main.c:198
+msgid "Show IDs instead of tag names"
+msgstr "タグ名の代わりに ID の表示"
+
+#: exif/main.c:200
+msgid "Select tag"
+msgstr "タグの選択"
+
+#: exif/main.c:200
+msgid "tag"
+msgstr "タグ"
+
+#: exif/main.c:202
+msgid "Select IFD"
+msgstr "IFD の選択"
+
+#: exif/main.c:202
+msgid "IFD"
+msgstr "IFD"
+
+#: exif/main.c:204
+msgid "List all EXIF tags"
+msgstr "すべての EXIF タグの表示"
+
+#: exif/main.c:206
+msgid "Show contents of tag MakerNote"
+msgstr "タグ MakerNote の内容の表示"
+
+#: exif/main.c:208
+msgid "Remove tag or ifd"
+msgstr "ifd のタグの削除"
+
+#: exif/main.c:210
+msgid "Show description of tag"
+msgstr "タグの説明の表示"
+
+#: exif/main.c:212
+msgid "Extract thumbnail"
+msgstr "サムネイルの展開"
+
+#: exif/main.c:214
+msgid "Remove thumbnail"
+msgstr "サムネイルの削除"
+
+#: exif/main.c:216
+msgid "Insert FILE as thumbnail"
+msgstr "サムネイルとして FILE を挿入する"
+
+#: exif/main.c:216 exif/main.c:220
+msgid "FILE"
+msgstr "FILE"
+
+#: exif/main.c:218
+msgid "Do not fix existing tags in files"
+msgstr "ファイル内の依存タグを修正しない"
+
+#: exif/main.c:220
+msgid "Write data to FILE"
+msgstr "FILE へのデータ書き込み"
+
+#: exif/main.c:222
+msgid "Value of tag"
+msgstr "タグの値"
+
+#: exif/main.c:224
+msgid "Create EXIF data if not existing"
+msgstr "EXIF データが存在しない場合、作成する"
+
+#: exif/main.c:226
+msgid "Output in a machine-readable (tab delimited) format"
+msgstr "可読性のある形式(タブ区切り)の出力"
+
+#: exif/main.c:229
+msgid "Width of output"
+msgstr "出力の幅"
+
+#: exif/main.c:229
+msgid "WIDTH"
+msgstr "WIDTH"
+
+#: exif/main.c:231
+msgid "Output in a XML format"
+msgstr "XML 形式の出力"
+
+#: exif/main.c:234
+msgid "Show debugging messages"
+msgstr "デバッグメッセージの表示"
+
+#: exif/main.c:240
+msgid "Help options:"
+msgstr "ヘルプ オプション:"
+
+#: exif/main.c:241
+msgid "Show this help message"
+msgstr "このヘルプメッセージの表示"
+
+#: exif/main.c:242
+msgid "Display brief usage message"
+msgstr "短い使い方のメッセージの表示"
+
+#: exif/main.c:262
+msgid "[OPTION...] file"
+msgstr "[OPTION...] ファイル"
+
+#: exif/main.c:277
+#, c-format
+msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
+msgstr "IFD「%s」が正しくありません。有効な IFD は「0」、「1」、「EXIF」、「GPS」、「Interoperability」です。"
+
+#: exif/main.c:286
+#, c-format
+msgid "Invalid tag '%s'!"
+msgstr "タグ「%s」が正しくありません!"
+
+#: exif/main.c:294
+msgid "You need to specify a tag!"
+msgstr "タグを指定する必要があります!"
+
+#: exif/main.c:299
+msgid "You need to specify an IFD!"
+msgstr "IFD を指定する必要があります!"
+
+#: exif/main.c:322
+#, c-format
+msgid "Tag '%s' "
+msgstr "タグ「%s」"
+
+#: exif/main.c:324
+#, c-format
+msgid "(0x%04x, '%s'): "
+msgstr "(0x%04x、'%s'): "
+
+#: exif/main.c:388
+#, c-format
+msgid "'%s' is not readable or does not contain EXIF data!"
+msgstr "「%s」は読み込めないか、EXIF データを含みません!"
