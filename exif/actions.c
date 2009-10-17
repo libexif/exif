@@ -372,7 +372,7 @@ action_tag_table (ExifData *ed, ExifParams p)
 #define ENTRY_NOT_FOUND "   -   "
 
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), p.fin);
-	fieldwidth = width = 38;
+	fieldwidth = width = p.width - 42;
 	bytes = exif_mbstrlen(txt, &width);
 	printf ("%.*s%*s", bytes, txt, fieldwidth-width, "");
 

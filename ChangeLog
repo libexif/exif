@@ -1,3 +1,7 @@
+2009-10-17  Dan Fandrich <dan@coneharvesters.com>
+
+	* Fixed alignment of --list-tags header with --width
+
 2009-10-16  Dan Fandrich <dan@coneharvesters.com>
 
 	* po/ja.po: Added new Japanese translation by Tadashi Jokagi
