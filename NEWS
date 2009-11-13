@@ -1,6 +1,7 @@
-exif-0.6.x:
+exif-0.6.19 (2009-11-12):
   * New translations: fi, ja
   * Updated translations: sv, vi, zh_CN
+  * Fixed alignment of --list-tags header with --width
 
 exif-0.6.18 (2009-10-08):
   * New translations: is, it, lv

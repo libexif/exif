@@ -1,3 +1,7 @@
+2009-11-12  Dan Fandrich <dan@coneharvesters.com>
+
+	* Released 0.6.19
+
 2009-10-17  Dan Fandrich <dan@coneharvesters.com>
 
 	* Fixed alignment of --list-tags header with --width
