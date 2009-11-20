@@ -379,11 +379,13 @@ main (int argc, const char **argv)
 				ed = exif_data_new ();
 				exif_data_log (ed, log);
 				exif_data_set_data_type(ed, EXIF_DATA_TYPE_COMPRESSED);
-				/* Add all the mandatory fields */
-				exif_data_fix(ed);
+				if (!no_fixup) {
+					/* Add all the mandatory fields */
+					exif_data_fix(ed);
 
-				/* Create a new date tag */
-				action_create_value (ed, log, EXIF_TAG_DATE_TIME, EXIF_IFD_0);
+					/* Create a new date tag */
+					action_create_value (ed, log, EXIF_TAG_DATE_TIME, EXIF_IFD_0);
+				}
 			} else {
 				exif_log (log, -1, "exif", _("'%s' is not "
 				  "readable or does not contain EXIF data!"),

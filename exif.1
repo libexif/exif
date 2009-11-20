@@ -13,7 +13,7 @@
 .\" the source, must acknowledge the copyright and authors of this work.
 .\" License.
 .\"
-.TH exif 1 "2009-11-12" "exif 0.6.19" "command line front-end to libexif"
+.TH exif 1 "2009-11-19" "exif 0.6.19.1" "command line front-end to libexif"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
@@ -113,7 +113,8 @@ Compound values consisting of multiple components are separated with
 spaces.
 .TP
 .BI "\-c, \-\-create-exif"
-Create EXIF data if it does not exist
+Create EXIF data if it does not exist. Mandatory tags are created with
+default values unless the \-\-no-fixup option is given.
 .TP
 .BI "\-m, \-\-machine\-readable"
 Produce output in a machine-readable (tab-delimited) format.
