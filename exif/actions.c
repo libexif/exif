@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <errno.h>
 
 #include <libexif/exif-ifd.h>
@@ -35,11 +36,13 @@
 
 #define TAG_VALUE_BUF 1024
 
+#define SEP " "
+
 static void
 convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, ExifLog *log)
 {
 	unsigned int i, numcomponents;
-	char *value_p;
+	char *value_p, *buf;
 
         /*
 	 * ASCII strings are handled separately,
@@ -61,10 +64,10 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 		if (e->tag == EXIF_TAG_USER_COMMENT) {
 			/* assume ASCII charset */
 			memcpy ((char *) e->data, "ASCII\0\0\0", 8);
-			memcpy ((char *) e->data + 8, (char *) set_value, 
+			memcpy ((char *) e->data + 8, set_value, 
 				strlen (set_value));
 		} else
-			strcpy ((char *) e->data, (char *) set_value);
+			strcpy ((char *) e->data, set_value);
                 return;
 	}
 
@@ -78,28 +81,23 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 		exit (1);
 	}
 
-        value_p = (char*) set_value;
+	/* Copy the string so we can modify it */
+	buf = strdup(set_value);
+	if (!buf) exit(1);
+	value_p = strtok(buf, SEP);
 	numcomponents = e->components;
 	for (i = 0; i < numcomponents; ++i) {
-                const char *begin, *end;
-                unsigned char *buf, s;
-		static const char comp_separ = ' ';
+		unsigned char s;
 
-                begin = value_p;
-		value_p = strchr (begin, comp_separ);
 		if (!value_p) {
-                        if (i != numcomponents - 1) {
-                                fprintf (stderr, _("Too few components "
-						   "specified!"));
-				fputc ('\n', stderr);
+				fprintf (stderr, _("Too few components specified "
+					  "(need %d, found %d)\n"), numcomponents, i);
 				exit (1);
-                        }
-                        end = begin + strlen (begin);
-                } else end = value_p++;
-
-                buf = malloc ((end - begin + 1) * sizeof (char));
-                strncpy ((char *) buf, (char *) begin, end - begin);
-                buf[end - begin] = '\0';
+		}
+		if (!isdigit(*value_p)) {
+				fprintf (stderr, _("Numeric value expected\n"));
+				exit (1);
+		}
 
 		s = exif_format_get_size (e->format);
 		switch (e->format) {
@@ -108,10 +106,10 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 				"Please contact <%s>."), PACKAGE_BUGREPORT);
 			break;
 		case EXIF_FORMAT_SHORT:
-			exif_set_short (e->data + (s * i), o, atoi ((char *) buf));
+			exif_set_short (e->data + (s * i), o, atoi (value_p));
 			break;
 		case EXIF_FORMAT_SSHORT:
-			exif_set_sshort (e->data + (s * i), o, atoi ((char *) buf));
+			exif_set_sshort (e->data + (s * i), o, atoi (value_p));
 			break;
 		case EXIF_FORMAT_RATIONAL:
 			/*
@@ -122,7 +120,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 			s /= 2;
 			/* Fall through to LONG handler */
 		case EXIF_FORMAT_LONG:
-			exif_set_long (e->data + (s * i), o, atol ((char *) buf));
+			exif_set_long (e->data + (s * i), o, atol (value_p));
 			break;
 		case EXIF_FORMAT_SRATIONAL:
 			/*
@@ -133,11 +131,11 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 			s /= 2;
 			/* Fall through to SLONG handler */
 		case EXIF_FORMAT_SLONG:
-			exif_set_slong (e->data + (s * i), o, atol ((char *) buf));
+			exif_set_slong (e->data + (s * i), o, atol (value_p));
 			break;
 		case EXIF_FORMAT_BYTE:
 		case EXIF_FORMAT_SBYTE:
-			e->data[s * i] = atoi ((char *) buf);
+			e->data[s * i] = atoi (value_p);
 			break;
 		case EXIF_FORMAT_FLOAT:
 		case EXIF_FORMAT_DOUBLE:
@@ -147,9 +145,10 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 			fputc ('\n', stderr);
 			exit (1);
 		}
-		free (buf);
+		value_p = strtok(NULL, SEP);
 	}
-	if (value_p && *value_p) {
+	free(buf);
+	if (value_p) {
 		fprintf (stderr, _("Warning; Too many components specified!"));
 		fputc ('\n', stderr);
 	}

@@ -1,3 +1,10 @@
+2009-11-20  Dan Fandrich <dan@coneharvesters.com>
+
+	* Rewrote the --set-value parser to use strtok to stop a NULL pointer
+	  dereference when too few components were given, and to make it
+	  more forgiving of whitespace.
+	* po/it.po: Updated Italian translation by Vincenzo Campanella
+
 2009-11-19  Dan Fandrich <dan@coneharvesters.com>
 
 	* --no-fixup now honoured during --create-exif to not create default
