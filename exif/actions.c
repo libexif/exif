@@ -371,7 +371,7 @@ action_tag_table (ExifData *ed, ExifParams p)
 #define ENTRY_NOT_FOUND "   -   "
 
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), p.fin);
-	fieldwidth = width = p.width - 42;
+	fieldwidth = width = p.width - 36;
 	bytes = exif_mbstrlen(txt, &width);
 	printf ("%.*s%*s", bytes, txt, fieldwidth-width, "");
 
@@ -396,9 +396,9 @@ action_tag_table (ExifData *ed, ExifParams p)
 		if (!name)
 			continue;
 
-		fieldwidth = width = p.width - 38 - 13;
+		fieldwidth = width = p.width - 43;
 		bytes = exif_mbstrlen(C(name), &width);
-		printf ("  0x%04x %.*s%*s",
+		printf ("0x%04x %.*s%*s",
 			tag, bytes, C(name), fieldwidth-width, "");
 		for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++)
 			if (exif_content_get_entry (ed->ifd[i], tag))
