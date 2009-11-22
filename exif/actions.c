@@ -94,7 +94,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 					  "(need %d, found %d)\n"), numcomponents, i);
 				exit (1);
 		}
-		if (!isdigit(*value_p)) {
+		if (!isdigit(*value_p) && (*value_p != '+') && (*value_p != '-')) {
 				fprintf (stderr, _("Numeric value expected\n"));
 				exit (1);
 		}
