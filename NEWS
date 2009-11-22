@@ -3,6 +3,7 @@ exif-0.6.x:
   * --no-fixup now honoured during --create-exif to not create default tags
   * Fixed crash when not enough components were given to --set-value
   * Made --set-value more forgiving of whitespace
+  * Allow --set-value on UNDEFINED tags (treated as a byte array)
 
 
 exif-0.6.19 (2009-11-12):

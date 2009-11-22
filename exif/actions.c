@@ -44,7 +44,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 	unsigned int i, numcomponents;
 	char *value_p, *buf;
 
-        /*
+	 /*
 	 * ASCII strings are handled separately,
 	 * since they don't require any conversion.
 	 */
@@ -63,6 +63,7 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
                 }
 		if (e->tag == EXIF_TAG_USER_COMMENT) {
 			/* assume ASCII charset */
+			/* TODO: get this from the current locale */
 			memcpy ((char *) e->data, "ASCII\0\0\0", 8);
 			memcpy ((char *) e->data + 8, set_value, 
 				strlen (set_value));
@@ -135,11 +136,11 @@ convert_arg_to_entry (const char *set_value, ExifEntry *e, ExifByteOrder o, Exif
 			break;
 		case EXIF_FORMAT_BYTE:
 		case EXIF_FORMAT_SBYTE:
+		case EXIF_FORMAT_UNDEFINED: /* treat as byte array */
 			e->data[s * i] = atoi (value_p);
 			break;
 		case EXIF_FORMAT_FLOAT:
 		case EXIF_FORMAT_DOUBLE:
-		case EXIF_FORMAT_UNDEFINED:
 		default:
 			fprintf (stderr, _("Not yet implemented!"));
 			fputc ('\n', stderr);

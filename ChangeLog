@@ -1,6 +1,7 @@
 2009-11-21  Dan Fandrich <dan@coneharvesters.com>
 
 	* Increased the description width for the --list-tags command
+	* Allow --set-value on UNDEFINED tags (treated as a byte array)
 
 2009-11-20  Dan Fandrich <dan@coneharvesters.com>
 
