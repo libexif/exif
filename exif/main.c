@@ -409,12 +409,17 @@ main (int argc, const char **argv)
 			action_set_value (ed, log, p);
 		else if (remove_tag)
 			action_remove_tag (ed, log, p);
-		else if (p.machine_readable)
+		else if (list_mnote) {
+			if (xml_output) {
+				exif_log (log, -1, "exif", _("XML format is "
+				  "not available for Maker Notes"));
+				return 1;
+			}
+			action_mnote_list (ed, p);
+		} else if (p.machine_readable)
 			action_tag_list_machine (ed, p);
 		else if (xml_output)
 			action_tag_list_xml (ed, p);
-		else if (list_mnote)
-			action_mnote_list (ed, p);
 		else if (create_exif)
 			/* Nothing here. Data will be saved later. */
 			;

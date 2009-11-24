@@ -4,6 +4,7 @@ exif-0.6.x:
   * Fixed crash when not enough components were given to --set-value
   * Made --set-value more forgiving of whitespace
   * Allow --set-value on UNDEFINED tags (treated as a byte array)
+  * Honour --machine-readable with --show-mnote
 
 
 exif-0.6.19 (2009-11-12):

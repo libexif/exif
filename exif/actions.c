@@ -472,14 +472,16 @@ action_mnote_list (ExifData *ed, ExifParams p)
 	}
 
 	c = exif_mnote_data_count (n);
-	switch (c) {
-	case 0:
-		printf (_("MakerNote does not contain any value.\n"));
-		break;
-	default:
-		printf (ngettext("MakerNote contains %i value:\n",
-			         "MakerNote contains %i values:\n",
-			 	 c), c);
+	if (!p.machine_readable) {
+		switch (c) {
+		case 0:
+			printf (_("MakerNote does not contain any value.\n"));
+			break;
+		default:
+			printf (ngettext("MakerNote contains %i value:\n",
+					 "MakerNote contains %i values:\n",
+					 c), c);
+		}
 	}
 	for (i = 0; i < c; i++) {
 	        if (p.use_ids) {
@@ -490,10 +492,13 @@ action_mnote_list (ExifData *ed, ExifParams p)
 			strncpy (b1, s && *s ? s : _("Unknown tag"), TAG_VALUE_BUF);
 			b1[sizeof(b1)-1] = 0;
 		}
-		fieldwidth = width = p.use_ids ? 6 : 20;
-		bytes = exif_mbstrlen(b1, &width);
-                printf ("%.*s%*s", bytes, b1, fieldwidth-width, "");
-		fputc ('|', stdout);
+		if (p.machine_readable) {
+			printf ("%s\t", b1);
+		} else {
+			fieldwidth = width = p.use_ids ? 6 : 20;
+			bytes = exif_mbstrlen(b1, &width);
+			printf ("%.*s%*s|", bytes, b1, fieldwidth-width, "");
+		}
 
 		s = C (exif_mnote_data_get_value (n, i, b, TAG_VALUE_BUF));
 		strncpy (b2, s ? s : _("Unknown value"), TAG_VALUE_BUF);

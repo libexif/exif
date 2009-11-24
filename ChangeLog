@@ -1,3 +1,7 @@
+2009-11-23  Dan Fandrich <dan@coneharvesters.com>
+
+	* Honour --machine-readable with --show-mnote
+
 2009-11-21  Dan Fandrich <dan@coneharvesters.com>
 
 	* Increased the description width for the --list-tags command
