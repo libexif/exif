@@ -1,3 +1,7 @@
+2009-12-11  Dan Fandrich <dan@coneharvesters.com>
+
+	* Fixed a couple of memory leaks
+
 2009-11-23  Dan Fandrich <dan@coneharvesters.com>
 
 	* Honour --machine-readable with --show-mnote

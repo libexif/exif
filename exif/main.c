@@ -178,8 +178,8 @@ static unsigned int extract_thumbnail = 0, remove_thumb = 0;
 static unsigned int remove_tag = 0, create_exif = 0, no_fixup = 0;
 static unsigned int list_mnote = 0;
 static unsigned int show_version = 0;
-static const char *output = NULL;
-static const char *ifd_string = NULL, *tag_string = NULL;
+static char *output = NULL;
+static char *ifd_string = NULL, *tag_string = NULL;
 static ExifParams p = {EXIF_INVALID_TAG, EXIF_IFD_COUNT, 0, 0, 80,
 		      		   NULL, NULL,NULL};
 LogArg log_arg = {0, 0, 0};
@@ -433,6 +433,13 @@ main (int argc, const char **argv)
 		exif_data_unref (ed);
 		args++;
 	}
+
+	/* Free all libpopt string arguments */
+	free(tag_string);
+	free(ifd_string);
+	free(p.set_thumb);
+	free(output);
+	free(p.set_value);
 
 	exif_log_free (log);
 	poptFreeContext (ctx);

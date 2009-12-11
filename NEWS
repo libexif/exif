@@ -3,7 +3,7 @@ exif-0.6.x:
   * --no-fixup now honoured during --create-exif to not create default tags
   * Fixed crash when not enough components were given to --set-value
   * Made --set-value more forgiving of whitespace
-  * Allow --set-value on UNDEFINED tags (treated as a byte array)
+  * Allow --set-value on UNDEFINED tags (treating them as byte arrays)
   * Honour --machine-readable with --show-mnote
 
 
@@ -11,6 +11,7 @@ exif-0.6.19 (2009-11-12):
   * New translations: fi, ja
   * Updated translations: sv, vi, zh_CN
   * Fixed alignment of --list-tags header with --width
+
 
 exif-0.6.18 (2009-10-08):
   * New translations: is, it, lv

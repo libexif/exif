@@ -33,8 +33,8 @@ typedef struct {
 
 	const char *fin;
 
-	const char *set_value;
-	const char *set_thumb;
+	char *set_value;
+	char *set_thumb;
 } ExifParams;
 
 void action_insert_thumb     (ExifData *, ExifLog *, ExifParams);

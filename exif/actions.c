@@ -225,6 +225,8 @@ action_create_value (ExifData *ed, ExifLog *log, ExifTag tag, ExifIfd ifd)
 	    e = exif_entry_new ();
 	    exif_content_add_entry (ed->ifd[ifd], e);
 	    exif_entry_initialize (e, tag);
+	    /* The entry has been added to the IFD, so we can unref it */
+	    exif_entry_unref(e);
 	}
 	return e;
 }
