@@ -315,20 +315,35 @@ main (int argc, const char **argv)
 		return 0;
 	}
 	if (show_description) {
-		/*
-		 * The C() macro can point to a static buffer so these printfs
-		 * must be done separately.
-		 */
-		printf (_("Tag '%s' "),
-			C(exif_tag_get_title_in_ifd (p.tag, p.ifd)));
-		printf (_("(0x%04x, '%s'): "), p.tag,
-			C(exif_tag_get_name_in_ifd (p.tag, p.ifd)));
-		printf ("%s\n",
-			C(exif_tag_get_description_in_ifd (p.tag, p.ifd)));
+		int rc = 0;
+		const char *name = exif_tag_get_name_in_ifd (p.tag, p.ifd);
+		if (!name) {
+			exif_log (log, -1, "exif", _("Unknown tag"));
+			rc = 1;
+
+		} else if (p.machine_readable) {
+			/*
+			 * The C() macro can point to a static buffer so these printfs
+			 * must be done separately.
+			 */
+			printf ("0x%04x\t%s\t", p.tag,
+				C(exif_tag_get_name_in_ifd (p.tag, p.ifd)));
+			printf ("%s\t", C(exif_tag_get_title_in_ifd (p.tag, p.ifd)));
+			printf ("%s\n",
+				C(exif_tag_get_description_in_ifd (p.tag, p.ifd)));
+
+		} else {
+			printf (_("Tag '%s' "),
+				C(exif_tag_get_title_in_ifd (p.tag, p.ifd)));
+			printf (_("(0x%04x, '%s'): "), p.tag,
+				C(exif_tag_get_name_in_ifd (p.tag, p.ifd)));
+			printf ("%s\n",
+				C(exif_tag_get_description_in_ifd (p.tag, p.ifd)));
+		}
 
 		exif_log_free (log);
 		poptFreeContext (ctx);
-		return 0;
+		return rc;
 	}
 
 	/* Commands related to files */

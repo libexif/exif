@@ -21,6 +21,7 @@ exif_i18n_convert_utf8_to_locale (const char *in)
 	 * no way for the app to know the encoding of the translated text).
 	 * In this case, assume the translated text is in UTF-8 (which could
 	 * be wrong) and use iconv to convert to the proper encoding.
+	 * This is only an issue with really old gettext versions.
 	 */
 	static iconv_t tr = 0;
 	size_t t = (in ? strlen (in) : 0);
