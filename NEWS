@@ -1,5 +1,5 @@
 exif-0.6.x:
-  * Updated translations: it
+  * Updated translations: it, sk
   * --no-fixup now honoured during --create-exif to not create default tags
   * Fixed crash when not enough components were given to --set-value
   * Made --set-value more forgiving of whitespace
