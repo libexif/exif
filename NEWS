@@ -1,10 +1,12 @@
 exif-0.6.x:
+  * New translation: ro
   * Updated translations: it, sk
   * --no-fixup now honoured during --create-exif to not create default tags
   * Fixed crash when not enough components were given to --set-value
   * Made --set-value more forgiving of whitespace
   * Allow --set-value on UNDEFINED tags (treating them as byte arrays)
   * Honour --machine-readable with --show-mnote and --show-description
+  * Turned on the --enable-silent-rules configure option
 
 
 exif-0.6.19 (2009-11-12):

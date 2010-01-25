@@ -1,0 +1,303 @@
+# Romanian translation for exif.
+# Copyright (C) 2010 Lutz Mueller and others
+# This file is distributed under the same license as the exif package.
+#
+# Sergiu Bivol <sergiu@ase.md>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: exif 0.6.18\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-08 18:05-0700\n"
+"PO-Revision-Date: 2010-01-24 18:05+0200\n"
+"Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
+"Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: exif/actions.c:57
+#, c-format
+msgid "Not enough memory."
+msgstr "Nu există memorie suficientă."
+
+#: exif/actions.c:75
+#, c-format
+msgid "Setting a value for this tag is unsupported!"
+msgstr "Stabilirea unei valori pentru acest marcaj nu este susținută!"
+
+#: exif/actions.c:92
+#, c-format
+msgid "Too few components specified!"
+msgstr "Prea puține componente specificate!"
+
+#: exif/actions.c:107
+#, c-format
+msgid "Internal error. Please contact <%s>."
+msgstr "Eroare internă. Contactați <%s>."
+
+#: exif/actions.c:146
+#, c-format
+msgid "Not yet implemented!"
+msgstr "Nu este implementat încă!"
+
+#: exif/actions.c:153
+#, c-format
+msgid "Warning; Too many components specified!"
+msgstr "Atenție: Prea multe componente specificate!"
+
+#: exif/actions.c:175
+#, c-format
+msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
+msgstr "Prea multe date EXIF (%i octeți). Sînt permiși numai %i octeți."
+
+#: exif/actions.c:186 exif/actions.c:357
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "S-a scris fișierul „%s”."
+
+#: exif/actions.c:206
+#, c-format
+msgid "EXIF entry '%s' "
+msgstr "Înregistrare EXIF „%s” "
+
+#: exif/actions.c:208
+#, c-format
+msgid "(0x%x, '%s') "
+msgstr "(0x%x, „%s”) "
+
+#: exif/actions.c:211
+#, c-format
+msgid "exists in IFD '%s':\n"
+msgstr ""
+
+#: exif/actions.c:262
+#, c-format
+msgid "IFD '%s' does not contain a tag '%s'!"
+msgstr ""
+
+#: exif/actions.c:292
+#, c-format
+msgid "Could not open '%s' (%s)!"
+msgstr "Nu s-a putut deschide „%s” (%s)!"
+
+#: exif/actions.c:301
+#, c-format
+msgid "Could not read '%s' (%s)."
+msgstr "Nu s-a putut citi „%s” (%s)."
+
+#: exif/actions.c:320
+#, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr ""
+
+#: exif/actions.c:326
+#, c-format
+msgid "'%s' does not contain tag '%s'."
+msgstr "„%s” nu conține marcajul „%s”."
+
+#: exif/actions.c:344
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "„%s” nu conține o miniatură!"
+
+#: exif/actions.c:352
+#, c-format
+msgid "Could not open '%s' for writing (%s)!"
+msgstr "Nu s-a putut deschide „%s” pentru citire (%s)!"
+
+#: exif/actions.c:374
+#, c-format
+msgid "EXIF tags in '%s':"
+msgstr "Marcaje EXIF în „%s”:"
+
+#: exif/actions.c:470
+#, c-format
+msgid "Unknown format or nonexistent MakerNote.\n"
+msgstr ""
+
+#: exif/actions.c:477
+#, c-format
+msgid "MakerNote does not contain any value.\n"
+msgstr ""
+
+#: exif/actions.c:480
+#, c-format
+msgid "MakerNote contains %i value:\n"
+msgid_plural "MakerNote contains %i values:\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: exif/actions.c:490
+msgid "Unknown tag"
+msgstr "Marcaj necunoscut"
+
+#: exif/actions.c:499
+msgid "Unknown value"
+msgstr "Valoare necunoscută"
+
+#: exif/actions.c:523
+#, c-format
+msgid "EXIF tags in '%s' ('%s' byte order):"
+msgstr ""
+
+#: exif/actions.c:529
+msgid "Tag"
+msgstr "Marcaj"
+
+#: exif/actions.c:535
+msgid "Value"
+msgstr "Valoare"
+
+#: exif/actions.c:550
+#, c-format
+msgid "EXIF data contains a thumbnail (%i bytes)."
+msgstr "Datele EXIF conțin o miniatură (%i octeți)."
+
+#: exif/actions.c:592
+#, c-format
+msgid "ThumbnailSize\t%i\n"
+msgstr "DimensiuneMiniatură\t%i\n"
+
+#: exif/main.c:196
+msgid "Display software version"
+msgstr "Afișează versiunea programului"
+
+#: exif/main.c:198
+msgid "Show IDs instead of tag names"
+msgstr "Arată ID-uri în locul denumirii marcajelor"
+
+#: exif/main.c:200
+msgid "Select tag"
+msgstr "Alege marcajul"
+
+#: exif/main.c:200
+msgid "tag"
+msgstr "marcaj"
+
+#: exif/main.c:202
+msgid "Select IFD"
+msgstr ""
+
+#: exif/main.c:202
+msgid "IFD"
+msgstr ""
+
+#: exif/main.c:204
+msgid "List all EXIF tags"
+msgstr "Enumeră toate marcajele EXIF"
+
+#: exif/main.c:206
+msgid "Show contents of tag MakerNote"
+msgstr ""
+
+#: exif/main.c:208
+msgid "Remove tag or ifd"
+msgstr ""
+
+#: exif/main.c:210
+msgid "Show description of tag"
+msgstr "Arată descrierea marcajului"
+
+#: exif/main.c:212
+msgid "Extract thumbnail"
+msgstr "Extrage miniatura"
+
+#: exif/main.c:214
+msgid "Remove thumbnail"
+msgstr "Elimină miniatura"
+
+#: exif/main.c:216
+msgid "Insert FILE as thumbnail"
+msgstr "Inserează FIȘIER ca miniatură"
+
+#: exif/main.c:216 exif/main.c:220
+msgid "FILE"
+msgstr "FIȘIER"
+
+#: exif/main.c:218
+msgid "Do not fix existing tags in files"
+msgstr "Nu repara marcajele existente în fișiere"
+
+#: exif/main.c:220
+msgid "Write data to FILE"
+msgstr "Scrie date în FIȘIER"
+
+#: exif/main.c:222
+msgid "Value of tag"
+msgstr "Valoarea marcajului"
+
+#: exif/main.c:224
+msgid "Create EXIF data if not existing"
+msgstr "Creează date EXIF dacă nu există"
+
+#: exif/main.c:226
+msgid "Output in a machine-readable (tab delimited) format"
+msgstr "Scoate în format optimizat pentru mașină (delimitat de tabulatori)"
+
+#: exif/main.c:229
+msgid "Width of output"
+msgstr "Lățimea rezultatului"
+
+#: exif/main.c:229
+msgid "WIDTH"
+msgstr "LĂȚIME"
+
+#: exif/main.c:231
+msgid "Output in a XML format"
+msgstr "Scoate în format XML"
+
+#: exif/main.c:234
+msgid "Show debugging messages"
+msgstr "Arată mesaje de depanare"
+
+#: exif/main.c:240
+msgid "Help options:"
+msgstr "Opțiuni de ajutor:"
+
+#: exif/main.c:241
+msgid "Show this help message"
+msgstr "Arată acest mesaj de ajutor"
+
+#: exif/main.c:242
+msgid "Display brief usage message"
+msgstr "Afișează mesaj de utilizare succint"
+
+#: exif/main.c:262
+msgid "[OPTION...] file"
+msgstr "[OPȚIUNE...] fișier"
+
+#: exif/main.c:277
+#, c-format
+msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
+msgstr ""
+
+#: exif/main.c:286
+#, c-format
+msgid "Invalid tag '%s'!"
+msgstr "Marcaj nevalid „%s”!"
+
+#: exif/main.c:294
+msgid "You need to specify a tag!"
+msgstr "Trebuie să specificați un marcaj!"
+
+#: exif/main.c:299
+msgid "You need to specify an IFD!"
+msgstr "You need to specify an IFD!"
+
+#: exif/main.c:322
+#, c-format
+msgid "Tag '%s' "
+msgstr "Marcaj „%s” "
+
+#: exif/main.c:324
+#, c-format
+msgid "(0x%04x, '%s'): "
+msgstr "(0x%04x, „%s”): "
+
+#: exif/main.c:388
+#, c-format
+msgid "'%s' is not readable or does not contain EXIF data!"
+msgstr "„%s” nu poate fi citit sau nu conține date EXIF!"
