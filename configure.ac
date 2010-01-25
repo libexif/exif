@@ -5,6 +5,10 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([auto-m4])
 AM_INIT_AUTOMAKE([-Wall gnu 1.9 dist-bzip2 check-news])
 
+# Use the silent-rules feature when possible.
+m4_ifndef([AM_SILENT_RULES], [m4_define([AM_SILENT_RULES],[])])
+AM_SILENT_RULES([no])
+
 if test ! -d "$srcdir/m4m"; then
 AC_MSG_ERROR([
 You are missing the m4m/ directory in your top
@@ -39,7 +43,7 @@ GP_PKG_CONFIG
 # i18n support
 # ---------------------------------------------------------------------------
 GP_GETTEXT_HACK([${PACKAGE}],[Lutz Mueller and others])
-ALL_LINGUAS="da de es fi fr id is it lv nl pl po sk sv vi zh_CN"
+ALL_LINGUAS="da de es fi fr id is it lv nl pl ro sk sv vi zh_CN"
 AM_GNU_GETTEXT_VERSION([0.14.1])
 AM_GNU_GETTEXT([external])
 AM_PO_SUBDIRS()

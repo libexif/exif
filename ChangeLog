@@ -1,6 +1,7 @@
 2010-01-25  Dan Fandrich <dan@coneharvesters.com>
 
 	* po/ro.po: Added new Romanian translation by Sergiu Bivol
+	* configure.ac: Turned on the --enable-silent-rules configure option
 
 2009-12-30  Dan Fandrich <dan@coneharvesters.com>
 
