@@ -3,141 +3,127 @@
 # This file is distributed under the same license as the exif package.
 #
 # Rihards Prieditis <RPrieditis@inbox.lv>, 2009.
+# Rihards Prieditis <rprieditis@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif-0.6.17\n"
+"Project-Id-Version: exif-0.6.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-06 01:03-0800\n"
-"PO-Revision-Date: 2009-04-12 19:39+0300\n"
-"Last-Translator: Rihards Prieditis <RPrieditis@inbox.lv>\n"
+"POT-Creation-Date: 2009-10-08 18:05-0700\n"
+"PO-Revision-Date: 2010-02-11 12:39+0000\n"
+"Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
 "Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
-#: exif/actions.c:56
+#: exif/actions.c:57
 #, c-format
 msgid "Not enough memory."
 msgstr "Nepietiek atmiņas."
 
-#: exif/actions.c:74
+#: exif/actions.c:75
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
 msgstr "Vērtības uzstādīšanai šai atzīmei netiek atbalstīta!"
 
-#: exif/actions.c:91
+#: exif/actions.c:92
 #, c-format
 msgid "Too few components specified!"
 msgstr "Pārāk maz komponenti norādīti!"
 
-#: exif/actions.c:106
+#: exif/actions.c:107
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "Iekšējā kļūda. Lūdzu sazinieties ar <%s>."
 
-#: exif/actions.c:143
+#: exif/actions.c:146
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Vēl nav ieviests!"
 
-#: exif/actions.c:150
+#: exif/actions.c:153
 #, c-format
 msgid "Warning; Too many components specified!"
 msgstr "Brīdinājums: Pārak daudz komponenti norādīti!"
 
-#: exif/actions.c:172
+#: exif/actions.c:175
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Pārāk daudz EXIF datu (%i baitu). Atļauti tikai %i baiti."
 
-#: exif/actions.c:183 exif/actions.c:358
+#: exif/actions.c:186 exif/actions.c:357
 #, c-format
 msgid "Wrote file '%s'."
-msgstr "Uzrakstīju failu \"%s\"."
+msgstr "Rakstīts failā \"%s\"."
 
-#: exif/actions.c:203
+#: exif/actions.c:206
 #, c-format
 msgid "EXIF entry '%s' "
-msgstr "EXIF ieeja \"%s\""
+msgstr "EXIF ieraksts \"%s\""
 
-#: exif/actions.c:205
+#: exif/actions.c:208
 #, c-format
 msgid "(0x%x, '%s') "
 msgstr "(0x%x, \"%s\") "
 
-#: exif/actions.c:208
+#: exif/actions.c:211
 #, c-format
 msgid "exists in IFD '%s':\n"
 msgstr "eksistē iekš IFD \"%s\":\n"
 
-#: exif/actions.c:251
+#: exif/actions.c:262
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD \"%s\" nesatur iezīmi \"%s\"!"
 
-#: exif/actions.c:282
-#, c-format
-msgid "Could not open '%s' (%m)!"
-msgstr "Nevarēja atvērt \"%s\" (%m)!"
-
-#: exif/actions.c:285
+#: exif/actions.c:292
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Nevarēja atvērt \"%s\" (%s)!"
 
-#: exif/actions.c:295
-#, c-format
-msgid "Could not read '%s' (%m)."
-msgstr "Nevarēja nolasīt \"%s\" (%m)!"
-
-#: exif/actions.c:298
+#: exif/actions.c:301
 #, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "Nevarēja atvērt \"%s\" (%s)!"
+msgstr "Nevarēja lasīt \"%s\" (%s)!"
 
-#: exif/actions.c:317
+#: exif/actions.c:320
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD \"%s\" nesatur iezīmi \"%s\"."
 
-#: exif/actions.c:323
+#: exif/actions.c:326
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "\"%s\" nesatur iezīmi \"%s\"."
 
-#: exif/actions.c:341
+#: exif/actions.c:344
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "\"%s\" nesatur sīktēlu!"
 
-#: exif/actions.c:350
-#, c-format
-msgid "Could not open '%s' for writing (%m)!"
-msgstr "Nevar atvērt \"%s\" rakstīšanai (%m)!"
-
-#: exif/actions.c:353
+#: exif/actions.c:352
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Nevar atvērt \"%s\" rakstīšanai (%s)!"
 
-#: exif/actions.c:371
+#: exif/actions.c:374
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "EXIF iezīmes iekš \"%s\":"
 
-#: exif/actions.c:440
+#: exif/actions.c:470
 #, c-format
-msgid "Unknown MakerNote format.\n"
-msgstr "Nezināms MakerNote formāts.\n"
+msgid "Unknown format or nonexistent MakerNote.\n"
+msgstr "Nezināms formāts vai neeksistējoša MakerNote.\n"
 
-#: exif/actions.c:447
+#: exif/actions.c:477
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote nesatur nevienu vērtību.\n"
 
-#: exif/actions.c:450
+#: exif/actions.c:480
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
@@ -145,146 +131,186 @@ msgstr[0] "MakerNote satur %i vērtību:\n"
 msgstr[1] "MakerNote satur %i vērtības:\n"
 msgstr[2] "MakerNote satur %i vērtības:\n"
 
-#: exif/actions.c:460
+#: exif/actions.c:490
 msgid "Unknown tag"
 msgstr "Nezināma iezīme"
 
-#: exif/actions.c:464
+#: exif/actions.c:499
 msgid "Unknown value"
 msgstr "Nezināma vērtība"
 
-#: exif/actions.c:490
+#: exif/actions.c:523
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "EXIF iezīmes iekš \"%s\" (\"%s\" baitu secība):"
 
-#: exif/actions.c:495 exif/actions.c:497
+#: exif/actions.c:529
 msgid "Tag"
 msgstr "Iezīme"
 
-#: exif/actions.c:501 exif/actions.c:503 exif/main.c:199
+#: exif/actions.c:535
 msgid "Value"
 msgstr "Vērtība"
 
-#: exif/actions.c:509
+#: exif/actions.c:550
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF dati satur sīktēlu (%i baitus)."
 
-#: exif/actions.c:545
+#: exif/actions.c:592
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "Sīktēla izmērs\t%i\n"
 
-#: exif/main.c:175
+#: exif/main.c:196
 msgid "Display software version"
 msgstr "Attēlo programmatūras versiju"
 
-#: exif/main.c:177
+#: exif/main.c:198
 msgid "Show IDs instead of tag names"
 msgstr "Rāda identifikātorus,  nevis iezīmes nosaukumus"
 
-#: exif/main.c:179
+#: exif/main.c:200
 msgid "Select tag"
 msgstr "Atlasiet iezīmi"
 
-#: exif/main.c:179
+#: exif/main.c:200
 msgid "tag"
 msgstr "iezīme"
 
-#: exif/main.c:181
+#: exif/main.c:202
 msgid "Select IFD"
 msgstr "Atlasiet IFD"
 
-#: exif/main.c:181
+#: exif/main.c:202
 msgid "IFD"
 msgstr "IFD"
 
-#: exif/main.c:183
+#: exif/main.c:204
 msgid "List all EXIF tags"
 msgstr "Visu EXIF iezīmju saraksts"
 
-#: exif/main.c:185
+#: exif/main.c:206
 msgid "Show contents of tag MakerNote"
 msgstr "Rādīt MakerNote iezīmes saturu"
 
-#: exif/main.c:187
+#: exif/main.c:208
 msgid "Remove tag or ifd"
 msgstr "Noņemt iezīmi vai ifd"
 
-#: exif/main.c:189
+#: exif/main.c:210
 msgid "Show description of tag"
 msgstr "Rādīt apraksta iezīmi"
 
-#: exif/main.c:191
+#: exif/main.c:212
 msgid "Extract thumbnail"
 msgstr "Izvilkt sīktēlu"
 
-#: exif/main.c:193
+#: exif/main.c:214
 msgid "Remove thumbnail"
 msgstr "Noņemt sīktēlu"
 
-#: exif/main.c:195
+#: exif/main.c:216
 msgid "Insert FILE as thumbnail"
 msgstr "Ievietot FAILU, kā sīktēlu"
 
-#: exif/main.c:195 exif/main.c:197
+#: exif/main.c:216 exif/main.c:220
 msgid "FILE"
 msgstr "FAILS"
 
-#: exif/main.c:197
+#: exif/main.c:218
+msgid "Do not fix existing tags in files"
+msgstr "Nelabot esošās iezīmes failā"
+
+#: exif/main.c:220
 msgid "Write data to FILE"
 msgstr "Rakstīt datus uz FAILU"
 
-#: exif/main.c:201
+#: exif/main.c:222
+msgid "Value of tag"
+msgstr "Iezīmes vērtība"
+
+#: exif/main.c:224
 msgid "Create EXIF data if not existing"
 msgstr "Izveidot EXIF, ja dati neeksistē"
 
-#: exif/main.c:203
+#: exif/main.c:226
 msgid "Output in a machine-readable (tab delimited) format"
 msgstr "Izvadīt māšīnu-lasāma (tab atdalītā) formāta"
 
-#: exif/main.c:206
+#: exif/main.c:229
+msgid "Width of output"
+msgstr "Izvada platums"
+
+#: exif/main.c:229
+msgid "WIDTH"
+msgstr "PLATUMS"
+
+#: exif/main.c:231
 msgid "Output in a XML format"
 msgstr "Izvadīt XML formātā"
 
-#: exif/main.c:209
+#: exif/main.c:234
 msgid "Show debugging messages"
 msgstr "Rādīt atkļūdošanas ziņojumus"
 
-#: exif/main.c:229
-msgid "[OPTION...] file"
-msgstr "[IESPĒJAS...] fails"
+#: exif/main.c:240
+msgid "Help options:"
+msgstr "Palīdzības izvēles:"
 
 #: exif/main.c:241
+msgid "Show this help message"
+msgstr "Rādīt šo palīdzības ziņu"
+
+#: exif/main.c:242
+msgid "Display brief usage message"
+msgstr "Attēlot īsu lietošanas ziņu"
+
+#: exif/main.c:262
+msgid "[OPTION...] file"
+msgstr "[IZVĒLES...] fails"
+
+#: exif/main.c:277
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Nederīgs IFD \"%s\". Derīgi IFD ir \"0\", \"1\", \"EXIF\", \"GPS\" un \"'Interoperability'\"."
 
-#: exif/main.c:250
+#: exif/main.c:286
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Nederīga iezīme \"%s\"!"
 
-#: exif/main.c:258
+#: exif/main.c:294
 msgid "You need to specify a tag!"
 msgstr "Jums jānorāda iezīme!"
 
-#: exif/main.c:263
+#: exif/main.c:299
 msgid "You need to specify an IFD!"
 msgstr "Jums jānorāda IFD!"
 
-#: exif/main.c:286
+#: exif/main.c:322
 #, c-format
 msgid "Tag '%s' "
 msgstr "Iezīme \"%s\""
 
-#: exif/main.c:288
+#: exif/main.c:324
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, \"%s\"): "
 
-#: exif/main.c:338
+#: exif/main.c:388
 #, c-format
-msgid "'%s' does not contain EXIF data!"
-msgstr "\"%s\" nesatur EXIF datus!"
+msgid "'%s' is not readable or does not contain EXIF data!"
+msgstr "\"%s\" nav lasāms vai nesatur EXIF datus!"
+
+#~ msgid "Could not open '%s' (%m)!"
+#~ msgstr "Nevarēja atvērt \"%s\" (%m)!"
+
+#~ msgid "Could not read '%s' (%m)."
+#~ msgstr "Nevarēja nolasīt \"%s\" (%m)!"
+
+#~ msgid "Could not open '%s' for writing (%m)!"
+#~ msgstr "Nevar atvērt \"%s\" rakstīšanai (%m)!"
+
+#~ msgid "Unknown MakerNote format.\n"
+#~ msgstr "Nezināms MakerNote formāts.\n"
