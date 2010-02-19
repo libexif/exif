@@ -491,7 +491,7 @@ action_mnote_list (ExifData *ed, ExifParams p)
 			sprintf(b1,"0x%04x",id);
 		} else {
 			s = C (exif_mnote_data_get_title (n, i));
-			strncpy (b1, s && *s ? s : _("Unknown tag"), TAG_VALUE_BUF);
+			strncpy (b1, s && *s ? s : _("Unknown Tag"), TAG_VALUE_BUF);
 			b1[sizeof(b1)-1] = 0;
 		}
 		if (p.machine_readable) {

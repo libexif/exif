@@ -1,6 +1,8 @@
 2010-02-18  Dan Fandrich <dan@coneharvesters.com>
 
 	* po/lv.po: Updated Latvian translation by Rihards Prieditis
+	* Changed capitalization of Unknown Tag message to be consistent
+	  with regular tag names
 
 2010-01-25  Dan Fandrich <dan@coneharvesters.com>
 

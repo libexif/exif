@@ -318,7 +318,7 @@ main (int argc, const char **argv)
 		int rc = 0;
 		const char *name = exif_tag_get_name_in_ifd (p.tag, p.ifd);
 		if (!name) {
-			exif_log (log, -1, "exif", _("Unknown tag"));
+			exif_log (log, -1, "exif", _("Unknown Tag"));
 			rc = 1;
 
 		} else if (p.machine_readable) {
