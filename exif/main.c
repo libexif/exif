@@ -409,6 +409,13 @@ main (int argc, const char **argv)
 			}
 		}
 
+		/* These options can be used in conjunction with others */
+		if (remove_thumb)
+			action_remove_thumb (ed, log, p);
+		if (p.set_thumb)
+			action_insert_thumb (ed, log, p);
+
+		/* These options are mutually exclusive */
 		if (list_tags)
 			action_tag_table (ed, p);
 		else if ((p.tag != EXIF_INVALID_TAG) &&
@@ -416,10 +423,6 @@ main (int argc, const char **argv)
 			action_show_tag (ed, log, p);
 		else if (extract_thumbnail)
 			action_save_thumb (ed, log, p, fout);
-		else if (remove_thumb)
-			action_remove_thumb (ed, log, p);
-		else if (p.set_thumb)
-			action_insert_thumb (ed, log, p);
 		else if (p.set_value)
 			action_set_value (ed, log, p);
 		else if (remove_tag)

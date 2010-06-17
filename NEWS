@@ -7,6 +7,7 @@ exif-0.6.x:
   * Allow --set-value on UNDEFINED tags (treating them as byte arrays)
   * Honour --machine-readable with --show-mnote and --show-description
   * Turned on the --enable-silent-rules configure option
+  * Adding or removing a thumbnail can be done simultaneously with other options
 
 
 exif-0.6.19 (2009-11-12):

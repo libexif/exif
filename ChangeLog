@@ -1,3 +1,8 @@
+2010-06-16  Dan Fandrich <dan@coneharvesters.com>
+
+	* Adding and removing a thumbnail can now be done at the same time
+	  as other options. This closes Debian bug #552102
+
 2010-02-18  Dan Fandrich <dan@coneharvesters.com>
 
 	* po/lv.po: Updated Latvian translation by Rihards Prieditis
