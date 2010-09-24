@@ -1,18 +1,20 @@
 #!/bin/sh
+# Test handling of some basic command-line parameters
 
-exif="@exif@"
+. check-vars.sh
+
 failed="0"
 
-echo -n "Running \`${exif} --help'..."
-if ${exif} --help > /dev/null; then
+echo -n "Running \`${EXIFEXE} --help'..."
+if ${EXIFEXE} --help > /dev/null; then
     echo " good (return code 0)"
 else
     echo " bad (return code != 0)"
     failed="$(expr "$failed" + 1)"
 fi
 
-echo -n "Running \`${exif} --thisparameterdoesnotexist'..."
-if ${exif} --thisparameterdoesnotexist > /dev/null; then
+echo -n "Running \`${EXIFEXE} --thisparameterdoesnotexist'..."
+if ${EXIFEXE} --thisparameterdoesnotexist > /dev/null; then
     echo " bad (return code 0)"
     failed="$(expr "$failed" + 1)"
 else

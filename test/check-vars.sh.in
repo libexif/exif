@@ -1,0 +1,9 @@
+# Specifies autoconf variables for use by the test scripts
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+BINDIR=@bindir@
+SRCDIR=@srcdir@
+TOPSRCDIR=@top_srcdir@
+TOPBLDDIR=@top_builddir@
+EXIFEXE=@top_builddir@/exif/exif@EXEEXT@

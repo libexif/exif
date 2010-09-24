@@ -110,6 +110,7 @@ AC_CONFIG_FILES([
   libjpeg/Makefile
   exif/Makefile
   test/Makefile
+  test/check-vars.sh
 ])
 AC_OUTPUT
 
