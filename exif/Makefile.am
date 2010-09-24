@@ -18,16 +18,3 @@ exif_LDADD = \
 	$(POPT_LIBS)				\
 	$(INTLLIBS)
 
-# And a few very simple tests
-
-check_SCRIPTS = check-param-validity.sh
-
-EXTRA_DIST = check-param-validity.in
-
-TESTS = $(check_SCRIPTS)
-
-.in.sh:
-	sed 's|@exif\@|./exif$(EXEEXT)|g' < $< > $@
-	chmod +x $@
-
-CLEANFILES = $(check_SCRIPTS)

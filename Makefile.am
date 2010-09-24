@@ -1,4 +1,4 @@
-SUBDIRS = m4m po libjpeg exif
+SUBDIRS = m4m po libjpeg exif test
 
 man_MANS = exif.1
 

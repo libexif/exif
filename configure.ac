@@ -109,6 +109,7 @@ AC_CONFIG_FILES([
   exif.spec
   libjpeg/Makefile
   exif/Makefile
+  test/Makefile
 ])
 AC_OUTPUT
 
