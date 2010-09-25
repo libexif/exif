@@ -7,3 +7,4 @@ SRCDIR=@srcdir@
 TOPSRCDIR=@top_srcdir@
 TOPBLDDIR=@top_builddir@
 EXIFEXE=@top_builddir@/exif/exif@EXEEXT@
+DIFFEXE=diff

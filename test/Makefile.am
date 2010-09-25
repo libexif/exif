@@ -3,8 +3,16 @@
 # More complicated tests should be put into the libexif-testsuite module.
 
 # check-vars.sh.in is automatically included
-EXTRA_DIST = check-param-validity.sh
+EXTRA_DIST = \
+	check-help.sh \
+	check-param-validity.sh \
+	check-show-description.sh \
+	check-version.sh
 
-check_SCRIPTS = check-param-validity.sh
+check_SCRIPTS = \
+	check-help.sh \
+	check-param-validity.sh \
+	check-show-description.sh \
+	check-version.sh
 
 TESTS = $(check_SCRIPTS)
