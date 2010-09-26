@@ -8,6 +8,7 @@ exif-0.6.x:
   * Honour --machine-readable with --show-mnote and --show-description
   * Turned on the --enable-silent-rules configure option
   * Adding or removing a thumbnail can be done simultaneously with other options
+  * Allow --create-exif to be used in place of an input file
 
 
 exif-0.6.19 (2009-11-12):

@@ -189,7 +189,7 @@ main (int argc, const char **argv)
 {
 	/* POPT_ARG_NONE needs an int, not char! */
 	poptContext ctx;
-	const char **args;
+	const char * const *args;
 	const struct poptOption options[] = {
 		POPT_AUTOHELP
 		{"version", 'v', POPT_ARG_NONE, &show_version, 0,
@@ -244,6 +244,7 @@ main (int argc, const char **argv)
 	ExifData *ed;
 	ExifLog *log = NULL;
 	char fout[1024] = {0, };
+	int continue_without_file = 0;
 
 #ifdef ENABLE_GLIBC_MEMDEBUG
 	mcheck (NULL);
@@ -348,46 +349,59 @@ main (int argc, const char **argv)
 
 	/* Commands related to files */
 	if (!((args = poptGetArgs (ctx)))) {
-		poptPrintHelp (ctx, stdout, 0);
-		exif_log_free (log);
-		poptFreeContext (ctx);
-		return 1;
+		if (!create_exif) {
+			exif_log (log, -1, "exif", _("Specify input file or --create-exif"));
+			poptPrintHelp (ctx, stdout, 0);
+			exif_log_free (log);
+			poptFreeContext (ctx);
+			return 1;
+		} else {
+			/* Give a name to the synthesized EXIF tag set */
+			static const char * const created_exif_name[] =
+				{"(EXIF)", NULL};
+			args = created_exif_name;
+			continue_without_file = 1;
+		}
 	}
+
 	while (*args) {
 		ExifLoader *l;
 
-		/* Identify the parameters */
-		if (output)
-			strncpy (fout, output, sizeof (fout) - 1);
-		else {
-			strncpy (fout, *args, sizeof (fout) - 1);
-			strncat (fout, ".modified.jpeg",
-				sizeof (fout) - strlen(fout) - 1);
-			/* Should really abort if this file name is too long */
-		}
+		ed = NULL;
 		p.fin = *args;
+		if (!continue_without_file) {
+			/* Identify the parameters */
+			if (output)
+				strncpy (fout, output, sizeof (fout) - 1);
+			else {
+				strncpy (fout, *args, sizeof (fout) - 1);
+				strncat (fout, ".modified.jpeg",
+					sizeof (fout) - strlen(fout) - 1);
+				/* Should really abort if this file name is too long */
+			}
 
-		/*
-		 * Try to read EXIF data from the file. 
-		 * If there is no EXIF data, create it if the user 
-		 * told us to do so.
-		 */
-		l = exif_loader_new ();
-		exif_loader_log (l, log);
-		if (create_exif)
-			log_arg.ignore_corrupted = 1;
-		exif_loader_write_file (l, *args);
-		log_arg.ignore_corrupted = 0;
-		if (!log_arg.corrupted)
-			create_exif = 0;
+			/*
+			 * Try to read EXIF data from the file. 
+			 * If there is no EXIF data, create it if the user 
+			 * told us to do so.
+			 */
+			l = exif_loader_new ();
+			exif_loader_log (l, log);
+			if (create_exif)
+				log_arg.ignore_corrupted = 1;
+			exif_loader_write_file (l, *args);
+			log_arg.ignore_corrupted = 0;
+			if (!log_arg.corrupted)
+				create_exif = 0;
 
-		if (no_fixup)
-			/* Override the default conversion options */
-			ed = exif_get_data_opts(l, log, 0, EXIF_DATA_TYPE_UNKNOWN);
-		else
-			ed = exif_loader_get_data(l);
+			if (no_fixup)
+				/* Override the default conversion options */
+				ed = exif_get_data_opts(l, log, 0, EXIF_DATA_TYPE_UNKNOWN);
+			else
+				ed = exif_loader_get_data(l);
 
-		exif_loader_unref (l);
+			exif_loader_unref (l);
+		}
 		if (!ed) {
 			if (create_exif) {
 				/* Create a new EXIF data set */
@@ -438,17 +452,19 @@ main (int argc, const char **argv)
 			action_tag_list_machine (ed, p);
 		else if (xml_output)
 			action_tag_list_xml (ed, p);
-		else if (create_exif)
+		else if (create_exif && !continue_without_file)
 			/* Nothing here. Data will be saved later. */
 			;
 		else
 			action_tag_list (ed, p);
 
-		if (create_exif || p.set_thumb || remove_tag || remove_thumb ||
-		    p.set_value)
+		if (!continue_without_file && 
+			(create_exif || p.set_thumb || remove_tag || remove_thumb ||
+		     p.set_value))
 			action_save (ed, log, p, fout);
 
 		exif_data_unref (ed);
+
 		args++;
 	}
 

@@ -1,4 +1,4 @@
-.\" Copyright © 2002-2009 by Thomas Pircher (tehpeh at gmx dot net) et. al.
+.\" Copyright © 2002-2010 by Thomas Pircher (tehpeh at gmx dot net) et. al.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -95,6 +95,8 @@ are in a valid thumbnail format.
 .TP
 .BI "\-\-no-fixup"
 Do not attempt to fix EXIF specification violations when reading tags.
+When used in conjunction with \-\-create-exif, this option inhibits the
+creation of the mandatory tags.
 .B exif
 will otherwise remove illegal or unknown tags, add some mandatory tags using
 default values, and change the data type of tags to match that required by the
@@ -115,6 +117,9 @@ spaces.
 .BI "\-c, \-\-create-exif"
 Create EXIF data if it does not exist. Mandatory tags are created with
 default values unless the \-\-no-fixup option is given.
+This option can be used instead of specifying an input file name in most
+cases, to operate on the default values of the mandatory set of EXIF tags.
+In this case, the \-\-output option has no effect and no file is written.
 .TP
 .BI "\-m, \-\-machine\-readable"
 Produce output in a machine-readable (tab-delimited) format.
