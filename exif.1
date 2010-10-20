@@ -199,6 +199,12 @@ existing image and fix the existing tags, if necessary:
 exif --output=new.jpg --tag=YCbCrSubSampling --ifd=0 --set-value='2 1' image.jpg
 .RE
 .LP
+List table with all known EXIF tags, highlighting mandatory ones:
+.LP
+.RS
+exif -cl
+.RE
+.LP
 .SH "AUTHOR"
 .B exif
 was written by Lutz Mueller <lutz@users.sourceforge.net>

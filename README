@@ -29,6 +29,10 @@ path, like this:
 
   ./configure PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 
+When building from CVS, run this before configuring:
+
+  autoreconf -i
+
 
 INTERNATIONALIZATION
 --------------------
