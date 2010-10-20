@@ -7,6 +7,10 @@
 export LANG=C
 export LANGUAGE=C
 
-# If this random help string is found, the rest are probably also there
+# If these random help strings are found, the rest are probably also there
 $EXIFEXE --help | grep '^  -c, --create-exif               Create EXIF data if not existing$' >/dev/null
+test $? -eq 0 || exit 1
+
+$EXIFEXE -\? | grep '^  -r, --remove-thumbnail          Remove thumbnail$' >/dev/null
+test $? -eq 0 || exit 1
 
