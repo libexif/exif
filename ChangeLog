@@ -1,3 +1,8 @@
+2010-10-19  Dan Fandrich <dan@coneharvesters.com>
+
+	* po/gl.po: Added new Galician translation by Fran Diéguez
+	* po/is.po: Updated Icelandic translation by Sveinn í Felli
+
 2010-06-16  Dan Fandrich <dan@coneharvesters.com>
 
 	* Adding and removing a thumbnail can now be done at the same time
