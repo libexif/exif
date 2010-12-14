@@ -1,7 +1,7 @@
 #!/bin/sh
 # Test output of --show-description
 
-. check-vars.sh
+. ./check-vars.sh
 
 tmpfile="./output.tmp"
 

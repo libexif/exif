@@ -1,7 +1,7 @@
 #!/bin/sh
 # Test handling of some basic command-line parameters
 
-. check-vars.sh
+. ./check-vars.sh
 
 failed="0"
 

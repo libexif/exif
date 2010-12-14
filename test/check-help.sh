@@ -1,7 +1,7 @@
 #!/bin/sh
 # Test that --help output is sane
 
-. check-vars.sh
+. ./check-vars.sh
 
 # Run this in the C locale so the messages are known
 export LANG=C
