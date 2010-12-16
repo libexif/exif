@@ -1,4 +1,4 @@
-exif-0.6.x:
+exif-0.6.20 (2010-12-15):
   * New translation: ro
   * Updated translations: it, lv, sk
   * --no-fixup now honoured during --create-exif to not create default tags
