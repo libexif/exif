@@ -88,7 +88,7 @@ exif_get_data_opts(ExifLoader *loader, ExifLog *log,
 {
 	ExifData *ed;
 	const unsigned char *buf;
-	size_t buf_size;
+	unsigned int buf_size;
 
 	if (!loader || !log)
 		return NULL;

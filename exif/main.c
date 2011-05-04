@@ -131,11 +131,9 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		/* Fall through to EXIF_LOG_CODE_NO_MEMORY */
 	case EXIF_LOG_CODE_NO_MEMORY:
 		put_colorstring (stderr, COL_RED COL_BOLD COL_UNDERLINE);
-		fprintf (stderr, exif_log_code_get_title (code));
-		fprintf (stderr, "\n");
+		fprintf (stderr, "%s\n", exif_log_code_get_title (code));
 		put_colorstring (stderr, COL_NORMAL COL_RED);
-		fprintf (stderr, exif_log_code_get_message (code));
-		fprintf (stderr, "\n");
+		fprintf (stderr, "%s\n", exif_log_code_get_message (code));
 		fprintf (stderr, "%s: ", domain);
 		vfprintf (stderr, format, args);
 		put_colorstring (stderr, COL_NORMAL);
