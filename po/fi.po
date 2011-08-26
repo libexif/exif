@@ -2,14 +2,14 @@
 # Copyright © 2009 Free Software Foundation, Inc.
 # Copyright © 2009 Lutz Müller and others
 # This file is distributed under the same license as the exif package.
-# Jorma Karvonen <karvonen.jorma@gmail.com>, 2009.
+# Jorma Karvonen <karvonen.jorma@gmail.com>, 2009-2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.18\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-08 18:05-0700\n"
-"PO-Revision-Date: 2009-10-12 12:19+0200\n"
+"Project-Id-Version: exif 0.6.20\n"
+"Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2010-10-14 20:41-0700\n"
+"PO-Revision-Date: 2010-12-16 21:20+0200\n"
 "Last-Translator: Jorma Karvonen <karvonen.jorma@gmail.com>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -17,27 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n  != 1;\n"
 
-#: exif/actions.c:57
+#: exif/actions.c:60
 #, c-format
 msgid "Not enough memory."
 msgstr "Ei kylliksi muistia."
 
-#: exif/actions.c:75
+#: exif/actions.c:79
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
 msgstr "Arvon asettamista tähän tunnisteeseen ei tueta!"
 
-#: exif/actions.c:92
+#: exif/actions.c:94
 #, c-format
-msgid "Too few components specified!"
-msgstr "Liian harvoja komponentteja määritelty!"
+msgid "Too few components specified (need %d, found %d)\n"
+msgstr "Liian harvoja komponentteja määritelty (tarvitsee %d, löytyi %d)\n"
 
-#: exif/actions.c:107
+#: exif/actions.c:99
+#, c-format
+msgid "Numeric value expected\n"
+msgstr "Numeerista arvoa odotettiin\n"
+
+#: exif/actions.c:106
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "Sisäinen virhe: Ota yhteys osoitteeseen <%s>."
 
-#: exif/actions.c:146
+#: exif/actions.c:145
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Ei vielä toteutettu!"
@@ -52,10 +57,10 @@ msgstr "Varoitus: Liian monia komponentteja määritelty!"
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Liian paljon EXIF-dataa (%i tavua). Vain %i tavua sallitaan."
 
-#: exif/actions.c:186 exif/actions.c:357
+#: exif/actions.c:186 exif/actions.c:359
 #, c-format
 msgid "Wrote file '%s'."
-msgstr "Kirjoitettiin tiedosto ”%s”."
+msgstr "Kirjoitettiin tiedosto ’%s’."
 
 #  Kolme seuraavaa muodostaa yhden lauseen
 #: exif/actions.c:206
@@ -66,97 +71,101 @@ msgstr "EXIF-tulokohta '%s' "
 #: exif/actions.c:208
 #, c-format
 msgid "(0x%x, '%s') "
-msgstr "(0x%x, ”%s”) "
+msgstr "(0x%x, ’%s’) "
 
 #: exif/actions.c:211
 #, c-format
 msgid "exists in IFD '%s':\n"
-msgstr "on olemassa IFD:ssä ”%s”:\n"
+msgstr "on olemassa IFD:ssä ’%s’:\n"
 
-#: exif/actions.c:262
+#: exif/actions.c:224
+msgid "Adding entry..."
+msgstr "Lisätään tulokohta..."
+
+#: exif/actions.c:264
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
-msgstr "IFD ”%s” ei sisällä tunnistetta ”%s”!"
+msgstr "IFD ’%s’ ei sisällä tunnistetta ’%s’!"
 
-#: exif/actions.c:292
+#: exif/actions.c:294
 #, c-format
 msgid "Could not open '%s' (%s)!"
-msgstr "Ei voitu avata pienoiskuvaa ”%s” (%s)!"
+msgstr "Ei voitu avata pienoiskuvaa ’%s’ (%s)!"
 
-#: exif/actions.c:301
+#: exif/actions.c:303
 #, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "Ei voitu lukea pienoiskuvaa ”%s” (%s)."
+msgstr "Ei voitu lukea pienoiskuvaa ’%s’ (%s)."
 
-#: exif/actions.c:320
+#: exif/actions.c:322
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
-msgstr "IFD ”%s” ei sisällä tunnistetta ”%s”."
+msgstr "IFD ’%s’ ei sisällä tunnistetta ’%s’."
 
-#: exif/actions.c:326
+#: exif/actions.c:328
 #, c-format
 msgid "'%s' does not contain tag '%s'."
-msgstr "”%s”-parametri ei sisällä tunnistetta ”%s”."
+msgstr "’%s’-parametri ei sisällä tunnistetta ’%s’."
 
-#: exif/actions.c:344
+#: exif/actions.c:346
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
-msgstr "”%s”-parametri ei sisällä pienoiskuvaa!"
+msgstr "’%s’-parametri ei sisällä pienoiskuvaa!"
 
-#: exif/actions.c:352
+#: exif/actions.c:354
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
-msgstr "Ei voitu avata tiedostoa ”%s” virheilmoituksen (%s) kirjoittamista varten!"
+msgstr "Ei voitu avata tiedostoa ’%s’ virheilmoituksen (%s) kirjoittamista varten!"
 
-#: exif/actions.c:374
+#: exif/actions.c:376
 #, c-format
 msgid "EXIF tags in '%s':"
-msgstr "EXIF-tunnisteet parametrissä ”%s”:"
+msgstr "EXIF-tunnisteet parametrissa ’%s’:"
 
-#: exif/actions.c:470
+#: exif/actions.c:472
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
 msgstr "Tuntematon muoto tai ei-olemassaoleva MakerNote.\n"
 
-#: exif/actions.c:477
+#: exif/actions.c:480
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote ei sisällä mitään arvoa.\n"
 
-#: exif/actions.c:480
+#: exif/actions.c:483
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote sisältää %i arvon:\n"
 msgstr[1] "MakerNote sisältää %i arvoa:\n"
 
-#: exif/actions.c:490
-msgid "Unknown tag"
+#: exif/actions.c:494 exif/main.c:322
+msgid "Unknown Tag"
 msgstr "Tuntematon tunniste"
 
-#: exif/actions.c:499
+#: exif/actions.c:506
 msgid "Unknown value"
 msgstr "Tuntematon arvo"
 
-#: exif/actions.c:523
+#: exif/actions.c:530
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
-msgstr "EXIF-tunnisteet parametrissä ”%s” (”%s” tavujärjestys):"
+msgstr "EXIF-tunnisteet parametrissa ’%s’ (’%s’ tavujärjestys):"
 
-#: exif/actions.c:529
+#: exif/actions.c:536
 msgid "Tag"
 msgstr "Tunniste"
 
-#: exif/actions.c:535
+#: exif/actions.c:542
 msgid "Value"
 msgstr "Arvo"
 
-#: exif/actions.c:550
+#: exif/actions.c:557
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF-data sisältää pienoiskuvan (%i tavua)."
 
-#: exif/actions.c:592
+#: exif/actions.c:599
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "PienoiskuvaKoko\t%i\n"
@@ -167,7 +176,7 @@ msgstr "Näytä ohjelmiston versio"
 
 #: exif/main.c:198
 msgid "Show IDs instead of tag names"
-msgstr "Näytä ID:t tunnistenimien sijasta"
+msgstr "Näytä tunnisteet tunnistenimien sijasta"
 
 #: exif/main.c:200
 msgid "Select tag"
@@ -229,6 +238,10 @@ msgstr "Kirjoita data TIEDOSTOon"
 msgid "Value of tag"
 msgstr "Tunnisteen arvo"
 
+#: exif/main.c:222
+msgid "STRING"
+msgstr "MERKKIJONO"
+
 #: exif/main.c:224
 msgid "Create EXIF data if not existing"
 msgstr "Luo EXIF-dataa, jos sitä ei ole olemassa"
@@ -251,7 +264,7 @@ msgstr "Tulosta XML-muodossa"
 
 #: exif/main.c:234
 msgid "Show debugging messages"
-msgstr "Näytä virheenjäljitystiedot"
+msgstr "Näytä vianjäljitystiedot"
 
 #: exif/main.c:240
 msgid "Help options:"
@@ -265,43 +278,49 @@ msgstr "Näytä tämä opastesanoma"
 msgid "Display brief usage message"
 msgstr "Näytä lyhyt käyttösanoma"
 
-#: exif/main.c:262
+#: exif/main.c:263
 msgid "[OPTION...] file"
 msgstr "[VALITSIN...] tiedosto"
 
-#: exif/main.c:277
+#: exif/main.c:278
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
-msgstr "Virheellinen IFD ”%s”. Lailliset IFD-arvot ovat ”0”, ”1”, ”EXIF”, ”GPS”, ja ”Interoperability”."
+msgstr "Virheellinen IFD ’%s’. Lailliset IFD-arvot ovat ’0’, ’1’, ’EXIF’, ’GPS’, ja ’Interoperability’."
 
-#: exif/main.c:286
+#: exif/main.c:287
 #, c-format
 msgid "Invalid tag '%s'!"
-msgstr "Virheellinen tunniste ”%s”!"
+msgstr "Virheellinen tunniste ’%s’!"
 
-#: exif/main.c:294
+#: exif/main.c:295
 msgid "You need to specify a tag!"
 msgstr "Sinun tarvitsee määritellä tunniste!"
 
-#: exif/main.c:299
+#: exif/main.c:300
 msgid "You need to specify an IFD!"
 msgstr "Sinun tarvitsee määritellä IFD!"
 
 #  Kolme seuraavaa kuuluvat samaan lauseeseen
-#: exif/main.c:322
+#: exif/main.c:337
 #, c-format
 msgid "Tag '%s' "
-msgstr "Tunniste ”%s” "
+msgstr "Tunniste ’%s’ "
 
-#: exif/main.c:324
+#: exif/main.c:339
 #, c-format
 msgid "(0x%04x, '%s'): "
-msgstr "(0x%04x, ”%s”): "
+msgstr "(0x%04x, ’%s’): "
 
-#: exif/main.c:388
+#: exif/main.c:353
+msgid "Specify input file or --create-exif"
+msgstr "Määritä syötetiedosto tai valitsin --create-exif"
+
+#: exif/main.c:419
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
-msgstr "”%s” ei ole luettava tai ei sisällä EXIF-dataa!"
+msgstr "’%s’ ei ole luettava tai ei sisällä EXIF-dataa!"
 
-#~ msgid "Adding entry..."
-#~ msgstr "Lisätään tulokohta..."
+#  Tässä oli ilmeisesti aiemmin mainittujenMakerNote-tunnisteiden monikko.
+#: exif/main.c:446
+msgid "XML format is not available for Maker Notes"
+msgstr "XML-muoto ei ole saatavissa MakerNote-tunnisteille"

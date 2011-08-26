@@ -1,3 +1,17 @@
+2011-08-26  Dan Fandrich <dan@coneharvesters.com>
+
+	* po/eo.po: Added new Esperanto translation by Felipe Castro
+	* po/uk.po: Added new Ukrainian translation by Yuri Chornoivan 
+	* po/da.po: Updated Danish translation by Joe Hansen 
+	* po/fi.po: Updated Finnish translation by Jorma Karvonen
+	* po/is.po: Updated Icelandic translation by Sveinn í Felli
+	* po/it.po: Updated Italian translation by Vincenzo Campanella
+	* po/nl.po: Updated Dutch translation by Erwin Poeze
+	* po/pl.po: Updated Polish translation by Jakub Bogusz
+	* po/sk.po: Updated Slovak translation by Ivan Masár
+	* po/sv.po: Updated Swedish translation by Daniel Nylander
+	* po/zh_CN.po: Updated Chinese (simplified) translation by Ji ZhengYu
+
 2010-12-15  Dan Fandrich <dan@coneharvesters.com>
 
 	* Released 0.6.20

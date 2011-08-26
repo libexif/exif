@@ -1,42 +1,48 @@
 # Slovak translation of exif
 # Copyright (C) 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the exif package.
-# Ivan Masár <helix84@centrum.sk>, 2008, 2009.
+# Ivan Masár <helix84@centrum.sk>, 2008, 2009, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.18\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-08 18:05-0700\n"
-"PO-Revision-Date: 2009-12-31 03:19+0100\n"
+"Project-Id-Version: exif 0.6.20\n"
+"Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2010-10-14 20:41-0700\n"
+"PO-Revision-Date: 2011-03-25 02:06+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
 
-#: exif/actions.c:57
+#: exif/actions.c:60
 #, c-format
 msgid "Not enough memory."
 msgstr "Nedostatok pamäte."
 
-#: exif/actions.c:75
+#: exif/actions.c:79
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
 msgstr "Nastavenie hodnoty tejto značky nie je podporované!"
 
-#: exif/actions.c:92
+#: exif/actions.c:94
 #, c-format
-msgid "Too few components specified!"
-msgstr "Bolo uvedených príliš málo zložiek."
+msgid "Too few components specified (need %d, found %d)\n"
+msgstr "Bolo uvedených príliš málo zložiek (treba %d, nájdených %d)\n"
 
-#: exif/actions.c:107
+#: exif/actions.c:99
+#, c-format
+msgid "Numeric value expected\n"
+msgstr "Očakáva sa číselná hodnota\n"
+
+#: exif/actions.c:106
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "Vnútorná chyba. Prosím, kontaktujte <%s>."
 
-#: exif/actions.c:146
+#: exif/actions.c:145
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Funkcia zatiaľ nie je implementovaná!"
@@ -51,7 +57,7 @@ msgstr "Upozornenie - bolo uvedených príliš veľa zložiek."
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Príliš mnoho EXIF údajov (%i bajtov). Je povolených iba %i bajtov."
 
-#: exif/actions.c:186 exif/actions.c:357
+#: exif/actions.c:186 exif/actions.c:359
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Zapísaný súbor „%s“."
@@ -71,57 +77,61 @@ msgstr "(0x%x, „%s“) "
 msgid "exists in IFD '%s':\n"
 msgstr "existuje v IFD „%s“:\n"
 
-#: exif/actions.c:262
+#: exif/actions.c:224
+msgid "Adding entry..."
+msgstr "Pridáva sa záznam..."
+
+#: exif/actions.c:264
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD „%s“ neobsahuje značku „%s“!"
 
-#: exif/actions.c:292
+#: exif/actions.c:294
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Nebolo možné otvoriť „%s“ (%s)!"
 
-#: exif/actions.c:301
+#: exif/actions.c:303
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Nebolo možné prečítať „%s“ (%s)."
 
-#: exif/actions.c:320
+#: exif/actions.c:322
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD „%s“ neobsahuje značku „%s“."
 
-#: exif/actions.c:326
+#: exif/actions.c:328
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "IFD „%s“ neobsahuje značku „%s“."
 
-#: exif/actions.c:344
+#: exif/actions.c:346
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "„%s“ neobsahuje náhľad!"
 
-#: exif/actions.c:352
+#: exif/actions.c:354
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Nebolo možné otvoriť „%s“ na zápis (%s)!"
 
-#: exif/actions.c:374
+#: exif/actions.c:376
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "EXIF značky v „%s“:"
 
-#: exif/actions.c:470
+#: exif/actions.c:472
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
 msgstr "Neznámy formát alebo neexistujúca MakerNote.\n"
 
-#: exif/actions.c:477
+#: exif/actions.c:480
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "Poznámka výrobcu neobsahuje žiadnu hodnotu.\n"
 
-#: exif/actions.c:480
+#: exif/actions.c:483
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
@@ -129,33 +139,33 @@ msgstr[0] "Poznámka výrobcu obsahuje %i hodnotu.\n"
 msgstr[1] "Poznámka výrobcu obsahuje %i hodnoty.\n"
 msgstr[2] "Poznámka výrobcu obsahuje %i hodnôt.\n"
 
-#: exif/actions.c:490
-msgid "Unknown tag"
+#: exif/actions.c:494 exif/main.c:322
+msgid "Unknown Tag"
 msgstr "Neznáma značka"
 
-#: exif/actions.c:499
+#: exif/actions.c:506
 msgid "Unknown value"
 msgstr "Neznáma hodnota"
 
-#: exif/actions.c:523
+#: exif/actions.c:530
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "EXIF značky v „%s“ (poradie bajtov „%s“):"
 
-#: exif/actions.c:529
+#: exif/actions.c:536
 msgid "Tag"
 msgstr "Značka"
 
-#: exif/actions.c:535
+#: exif/actions.c:542
 msgid "Value"
 msgstr "Hodnota"
 
-#: exif/actions.c:550
+#: exif/actions.c:557
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF údaje obsahujú náhľad (%i bajtov)."
 
-#: exif/actions.c:592
+#: exif/actions.c:599
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "Veľkosť náhľadu\t%i\n"
@@ -228,6 +238,10 @@ msgstr "Zapísať údaje do SÚBORu"
 msgid "Value of tag"
 msgstr "Hodnota značky"
 
+#: exif/main.c:222
+msgid "STRING"
+msgstr "REŤAZEC"
+
 #: exif/main.c:224
 msgid "Create EXIF data if not existing"
 msgstr "Vytvoriť EXIF údaje ak neexistujú"
@@ -264,42 +278,50 @@ msgstr "Zobraziť túto správu Pomocníka"
 msgid "Display brief usage message"
 msgstr "Zobraziť stručnú správu o použití"
 
-#: exif/main.c:262
+#: exif/main.c:263
 msgid "[OPTION...] file"
 msgstr "[VOĽBA...] súbor"
 
-#: exif/main.c:277
+#: exif/main.c:278
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Neplatný IFD „%s“. Platné IFD sú „0“, „1“, „EXIF“, „GPS“ a „Interoperability“."
 
-#: exif/main.c:286
+#: exif/main.c:287
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Neplatná značka „%s“!"
 
-#: exif/main.c:294
+#: exif/main.c:295
 msgid "You need to specify a tag!"
 msgstr "Musíte zadať značku!"
 
-#: exif/main.c:299
+#: exif/main.c:300
 msgid "You need to specify an IFD!"
 msgstr "Musíte zadať IFD!"
 
-#: exif/main.c:322
+#: exif/main.c:337
 #, c-format
 msgid "Tag '%s' "
 msgstr "Značka „%s“"
 
-#: exif/main.c:324
+#: exif/main.c:339
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, „%s“): "
 
-#: exif/main.c:388
+#: exif/main.c:353
+msgid "Specify input file or --create-exif"
+msgstr "Zadajte vstupný súbor alebo --create-exif"
+
+#: exif/main.c:419
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
 msgstr "„%s“ nie je čitateľný alebo neobsahuje EXIF údaje!"
+
+#: exif/main.c:446
+msgid "XML format is not available for Maker Notes"
+msgstr "Formát XML nie je dostupný pre Poznámky tvorcu"
 
 #~ msgid "Could not open '%s' (%m)!"
 #~ msgstr "Nebolo možné otvoriť „%s“ (%m)!"

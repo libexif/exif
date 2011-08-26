@@ -1,43 +1,49 @@
-# translation of exif-0.6.18.is.po to Icelandic
+# translation of exif-0.6.20.po to Icelandic
 # Copyright (C) 2009 Lutz Mueller and others
 # This file is distributed under the same license as the exif package.
 #
-# Sveinn í Felli <sveinki@nett.is>, 2009, 2010.
+# Sveinn í Felli <sveinki@nett.is>, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif-0.6.18\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-08 18:05-0700\n"
-"PO-Revision-Date: 2010-10-10 19:13+0000\n"
+"Project-Id-Version: exif-0.6.20\n"
+"Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2010-10-14 20:41-0700\n"
+"PO-Revision-Date: 2011-05-11 22:59+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
-"Language-Team: Icelandic <(nothing)>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: exif/actions.c:57
+#: exif/actions.c:60
 #, c-format
 msgid "Not enough memory."
 msgstr "Ekki nægt minni!"
 
-#: exif/actions.c:75
+#: exif/actions.c:79
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
 msgstr "Ekki er stutt að setja gildi fyrir þetta merki!"
 
-#: exif/actions.c:92
+#: exif/actions.c:94
 #, c-format
-msgid "Too few components specified!"
-msgstr "Of fáar einingar tilgreindar!"
+msgid "Too few components specified (need %d, found %d)\n"
+msgstr "Of fáar einingar tilgreindar (þarf %d, fann %d)\n"
 
-#: exif/actions.c:107
+#: exif/actions.c:99
+#, c-format
+msgid "Numeric value expected\n"
+msgstr "Bjóst við tölugildi\n"
+
+#: exif/actions.c:106
 #, c-format
 msgid "Internal error. Please contact <%s>."
 msgstr "Innri villa. Hafðu samband við <%s>."
 
-#: exif/actions.c:146
+#: exif/actions.c:145
 #, c-format
 msgid "Not yet implemented!"
 msgstr "Ekki útfært ennþá!"
@@ -52,7 +58,7 @@ msgstr "Aðvörun; of margar einingar tilgreindar!"
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Of mikið af EXIF gögnum (%i bæti). Aðeins %i bæti eru leyfileg."
 
-#: exif/actions.c:186 exif/actions.c:357
+#: exif/actions.c:186 exif/actions.c:359
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Skrifaði skrá '%s'."
@@ -72,90 +78,94 @@ msgstr "(0x%x, '%s') "
 msgid "exists in IFD '%s':\n"
 msgstr "er til í IFD '%s':\n"
 
-#: exif/actions.c:262
+#: exif/actions.c:224
+msgid "Adding entry..."
+msgstr "Bæti við færslu..."
+
+#: exif/actions.c:264
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "IFD '%s' inniheldur ekki merkið '%s'!"
 
-#: exif/actions.c:292
+#: exif/actions.c:294
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Gat ekki opnað '%s' (%s)!"
 
-#: exif/actions.c:301
+#: exif/actions.c:303
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Gat ekki lesið '%s' (%s)."
 
-#: exif/actions.c:320
+#: exif/actions.c:322
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "IFD '%s' inniheldur ekki merkið '%s'."
 
-#: exif/actions.c:326
+#: exif/actions.c:328
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "'%s' inniheldur ekki merkið '%s'."
 
-#: exif/actions.c:344
+#: exif/actions.c:346
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "'%s' inniheldur ekki smámynd!"
 
-#: exif/actions.c:352
+#: exif/actions.c:354
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Gat ekki opnað '%s' til skrifunar (%s)!"
 
-#: exif/actions.c:374
+#: exif/actions.c:376
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "EXIF merki í '%s':"
 
-#: exif/actions.c:470
+#: exif/actions.c:472
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
 msgstr "Óþekkt snið MakerNote merkja eða að þau eru ekki fyrir hendi.\n"
 
-#: exif/actions.c:477
+#: exif/actions.c:480
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "MakerNote inniheldur engin gildi.\n"
 
-#: exif/actions.c:480
+#: exif/actions.c:483
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote inniheldur %i gildi:\n"
 msgstr[1] "MakerNote inniheldur %i gildi:\n"
 
-#: exif/actions.c:490
-msgid "Unknown tag"
+#: exif/actions.c:494 exif/main.c:322
+msgid "Unknown Tag"
 msgstr "Óþekkt merki"
 
-#: exif/actions.c:499
+#: exif/actions.c:506
 msgid "Unknown value"
 msgstr "Óþekkt gildi"
 
-#: exif/actions.c:523
+#: exif/actions.c:530
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "EXIF merki í '%s' ('%s' í bætaröð):"
 
-#: exif/actions.c:529
+#: exif/actions.c:536
 msgid "Tag"
 msgstr "Merki"
 
-#: exif/actions.c:535
+#: exif/actions.c:542
 msgid "Value"
 msgstr "Gildi"
 
-#: exif/actions.c:550
+#: exif/actions.c:557
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "EXIF-gögnin innihalda smámynd (%i bæti)."
 
-#: exif/actions.c:592
+#: exif/actions.c:599
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "SmámyndarStærð\t%i\n"
@@ -228,6 +238,10 @@ msgstr "Skrifa gögn í SKRÁ"
 msgid "Value of tag"
 msgstr "Gildi merkis"
 
+#: exif/main.c:222
+msgid "STRING"
+msgstr "STRENGUR"
+
 #: exif/main.c:224
 msgid "Create EXIF data if not existing"
 msgstr "Búa til EXIF gögn ef þau eru ekki til"
@@ -264,39 +278,47 @@ msgstr "Sýna þessi hjálparskilaboð"
 msgid "Display brief usage message"
 msgstr "Sýna stuttar notkunarleiðbeiningar"
 
-#: exif/main.c:262
+#: exif/main.c:263
 msgid "[OPTION...] file"
 msgstr "[ROFI...] skrá"
 
-#: exif/main.c:277
+#: exif/main.c:278
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Ógilt IFD '%s'. VGild IFD eru '0', '1', 'EXIF', 'GPS', og 'Interoperability'."
 
-#: exif/main.c:286
+#: exif/main.c:287
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Ógilt merki '%s'!"
 
-#: exif/main.c:294
+#: exif/main.c:295
 msgid "You need to specify a tag!"
 msgstr "Þú þarft að tilgreina merki!"
 
-#: exif/main.c:299
+#: exif/main.c:300
 msgid "You need to specify an IFD!"
 msgstr "Þú þarft að tilgreina IFD!"
 
-#: exif/main.c:322
+#: exif/main.c:337
 #, c-format
 msgid "Tag '%s' "
 msgstr "Merki '%s' "
 
-#: exif/main.c:324
+#: exif/main.c:339
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, '%s'): "
 
-#: exif/main.c:388
+#: exif/main.c:353
+msgid "Specify input file or --create-exif"
+msgstr "Tilgreindu inntaksskrá eða --create-exif"
+
+#: exif/main.c:419
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
 msgstr "'%s' er ekki lesanlegt eða inniheldur ekki EXIF gögn!"
+
+#: exif/main.c:446
+msgid "XML format is not available for Maker Notes"
+msgstr "XML snið er ekki tiltækt fyrir MakerNotes"
