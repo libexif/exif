@@ -1,0 +1,323 @@
+# Esperanto translation
+# Copyright (C) 2011 Lutz Mueller and others
+# This file is distributed under the same license as the exif package.
+# Felipe Castro <fefcas@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: exif 0.6.20\n"
+"Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2010-10-14 20:41-0700\n"
+"PO-Revision-Date: 2011-03-02 20:15-0300\n"
+"Last-Translator: Felipe Castro <fefcas@gmail.com>\n"
+"Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
+"Language: eo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: exif/actions.c:60
+#, c-format
+msgid "Not enough memory."
+msgstr "Ne sufiĉe da memoro."
+
+#: exif/actions.c:79
+#, c-format
+msgid "Setting a value for this tag is unsupported!"
+msgstr "Agordo de valoro por tiu ĉi etikedo ne estas subtenata!"
+
+#: exif/actions.c:94
+#, c-format
+msgid "Too few components specified (need %d, found %d)\n"
+msgstr "Tro malmultaj elementoj indikitaj (bezonate %d, trovite %d)\n"
+
+#: exif/actions.c:99
+#, c-format
+msgid "Numeric value expected\n"
+msgstr "Cifera valoro atendate\n"
+
+#: exif/actions.c:106
+#, c-format
+msgid "Internal error. Please contact <%s>."
+msgstr "Interna eraro. Bonvolu kontakti <%s>."
+
+#: exif/actions.c:145
+#, c-format
+msgid "Not yet implemented!"
+msgstr "Ankoraŭ ne realigita!"
+
+#: exif/actions.c:153
+#, c-format
+msgid "Warning; Too many components specified!"
+msgstr "Averto; Tro multaj elementoj indikitaj!"
+
+#: exif/actions.c:175
+#, c-format
+msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
+msgstr "Tro multe da datumaro EXIF (%i bajtoj). Nur %i bajtoj estas permesate."
+
+#: exif/actions.c:186 exif/actions.c:359
+#, c-format
+msgid "Wrote file '%s'."
+msgstr "Ni skribis dosieron '%s'."
+
+#: exif/actions.c:206
+#, c-format
+msgid "EXIF entry '%s' "
+msgstr "Enigaĵo EXIF '%s'"
+
+#: exif/actions.c:208
+#, c-format
+msgid "(0x%x, '%s') "
+msgstr "(0x%x, '%s') "
+
+#: exif/actions.c:211
+#, c-format
+msgid "exists in IFD '%s':\n"
+msgstr "ekzistas en IFD '%s':\n"
+
+#: exif/actions.c:224
+msgid "Adding entry..."
+msgstr "Aldonado de enigaĵo..."
+
+#: exif/actions.c:264
+#, c-format
+msgid "IFD '%s' does not contain a tag '%s'!"
+msgstr "IFD '%s' ne enhavas etikedon '%s'!"
+
+#: exif/actions.c:294
+#, c-format
+msgid "Could not open '%s' (%s)!"
+msgstr "Ni ne povis malfermi '%s' (%s)!"
+
+#: exif/actions.c:303
+#, c-format
+msgid "Could not read '%s' (%s)."
+msgstr "Ni ne povis legi '%s' (%s)."
+
+#: exif/actions.c:322
+#, c-format
+msgid "IFD '%s' does not contain tag '%s'."
+msgstr "IFD '%s' ne enhavas la etikedon '%s'."
+
+#: exif/actions.c:328
+#, c-format
+msgid "'%s' does not contain tag '%s'."
+msgstr "'%s' ne enhavas la etikedon '%s'."
+
+#: exif/actions.c:346
+#, c-format
+msgid "'%s' does not contain a thumbnail!"
+msgstr "'%s' ne enhavas miniaturon!"
+
+#: exif/actions.c:354
+#, c-format
+msgid "Could not open '%s' for writing (%s)!"
+msgstr "Ni ne povis malfermi '%s' por skribi (%s)!"
+
+#: exif/actions.c:376
+#, c-format
+msgid "EXIF tags in '%s':"
+msgstr "Etikedoj EXIF en '%s':"
+
+#: exif/actions.c:472
+#, c-format
+msgid "Unknown format or nonexistent MakerNote.\n"
+msgstr "Nekonata formo aŭ neekzistanta MakerNote.\n"
+
+#: exif/actions.c:480
+#, c-format
+msgid "MakerNote does not contain any value.\n"
+msgstr "MakerNote enhavas neniun valoron.\n"
+
+#: exif/actions.c:483
+#, c-format
+msgid "MakerNote contains %i value:\n"
+msgid_plural "MakerNote contains %i values:\n"
+msgstr[0] "MakerNote enhavas %i valoron:\n"
+msgstr[1] "MakerNote enhavas %i valorojn:\n"
+
+#: exif/actions.c:494 exif/main.c:322
+msgid "Unknown Tag"
+msgstr "Nekonata Etikedo"
+
+#: exif/actions.c:506
+msgid "Unknown value"
+msgstr "Nekonata valoro"
+
+#: exif/actions.c:530
+#, c-format
+msgid "EXIF tags in '%s' ('%s' byte order):"
+msgstr "Etikedoj EXIF en '%s' ('%s' bajt-ordo):"
+
+#: exif/actions.c:536
+msgid "Tag"
+msgstr "Etikedo"
+
+#: exif/actions.c:542
+msgid "Value"
+msgstr "Valoro"
+
+#: exif/actions.c:557
+#, c-format
+msgid "EXIF data contains a thumbnail (%i bytes)."
+msgstr "Datumaro EXIF enhavas miniaturon (%i bajtoj)."
+
+#: exif/actions.c:599
+#, c-format
+msgid "ThumbnailSize\t%i\n"
+msgstr "MiniaturGrando\t%i\n"
+
+#: exif/main.c:196
+msgid "Display software version"
+msgstr "Montrigi program-version"
+
+#: exif/main.c:198
+msgid "Show IDs instead of tag names"
+msgstr "Montri ID anstataŭ etiked-nomojn"
+
+#: exif/main.c:200
+msgid "Select tag"
+msgstr "Elekti etikedon"
+
+#: exif/main.c:200
+msgid "tag"
+msgstr "etikedo"
+
+#: exif/main.c:202
+msgid "Select IFD"
+msgstr "Elekti IFD"
+
+#: exif/main.c:202
+msgid "IFD"
+msgstr "IFD"
+
+#: exif/main.c:204
+msgid "List all EXIF tags"
+msgstr "Listigi ĉiujn etikedojn EXIF"
+
+#: exif/main.c:206
+msgid "Show contents of tag MakerNote"
+msgstr "Montri enhavon de etikedo MakerNote"
+
+#: exif/main.c:208
+msgid "Remove tag or ifd"
+msgstr "Forigi etikedon aŭ ifd"
+
+#: exif/main.c:210
+msgid "Show description of tag"
+msgstr "Montri priskribo de etikedo"
+
+#: exif/main.c:212
+msgid "Extract thumbnail"
+msgstr "Elpreni miniaturon "
+
+#: exif/main.c:214
+msgid "Remove thumbnail"
+msgstr "Forigi miniaturon"
+
+#: exif/main.c:216
+msgid "Insert FILE as thumbnail"
+msgstr "Enmeti DOSIERON kiel miniaturon"
+
+#: exif/main.c:216 exif/main.c:220
+msgid "FILE"
+msgstr "DOSIERON"
+
+#: exif/main.c:218
+msgid "Do not fix existing tags in files"
+msgstr "Ne ripari ekzistantajn etikedojn en dosieroj"
+
+#: exif/main.c:220
+msgid "Write data to FILE"
+msgstr "Skribi datumaron al DOSIERO"
+
+#: exif/main.c:222
+msgid "Value of tag"
+msgstr "Valoro de etikedo"
+
+#: exif/main.c:222
+msgid "STRING"
+msgstr "ĈENO"
+
+#: exif/main.c:224
+msgid "Create EXIF data if not existing"
+msgstr "Krei datumaron EXIF se ne ekzistanta"
+
+#: exif/main.c:226
+msgid "Output in a machine-readable (tab delimited) format"
+msgstr "Eligi laŭ maŝin-legebla (tab-apartita) formo"
+
+#: exif/main.c:229
+msgid "Width of output"
+msgstr "Larĝo de eligo"
+
+#: exif/main.c:229
+msgid "WIDTH"
+msgstr "LARĜO"
+
+#: exif/main.c:231
+msgid "Output in a XML format"
+msgstr "Eligo laŭ formo XML"
+
+#: exif/main.c:234
+msgid "Show debugging messages"
+msgstr "Montri rafinigajn mesaĝojn"
+
+#: exif/main.c:240
+msgid "Help options:"
+msgstr "Help-elektebloj:"
+
+#: exif/main.c:241
+msgid "Show this help message"
+msgstr "Montri tiun ĉi help-mesaĝon"
+
+#: exif/main.c:242
+msgid "Display brief usage message"
+msgstr "Montrigi resuman uzad-mesaĝon"
+
+#: exif/main.c:263
+msgid "[OPTION...] file"
+msgstr "[ELEKTEBLO...] dosiero"
+
+#: exif/main.c:278
+#, c-format
+msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
+msgstr "Malvalida IFD '%s'. Validaj IFD estas '0', '1', 'EXIF', 'GPS' kaj 'Interoperability'."
+
+#: exif/main.c:287
+#, c-format
+msgid "Invalid tag '%s'!"
+msgstr "Malvalida etikedo '%s'!"
+
+#: exif/main.c:295
+msgid "You need to specify a tag!"
+msgstr "Vi devas indiki etikedon!"
+
+#: exif/main.c:300
+msgid "You need to specify an IFD!"
+msgstr "Vi devas indiki IFD!"
+
+#: exif/main.c:337
+#, c-format
+msgid "Tag '%s' "
+msgstr "Etikedo '%s' "
+
+#: exif/main.c:339
+#, c-format
+msgid "(0x%04x, '%s'): "
+msgstr "(0x%04x, '%s'): "
+
+#: exif/main.c:353
+msgid "Specify input file or --create-exif"
+msgstr "Indiku enig-dosieron aŭ --create-exif"
+
+#: exif/main.c:419
+#, c-format
+msgid "'%s' is not readable or does not contain EXIF data!"
+msgstr "'%s' ne estas legebla aŭ ne enhavas datumaron EXIF!"
+
+#: exif/main.c:446
+msgid "XML format is not available for Maker Notes"
+msgstr "Formo XML ne estas disponebla por MakerNote"
