@@ -37,9 +37,9 @@ When building from CVS, run this before configuring:
 INTERNATIONALIZATION
 --------------------
 
-All translations for exif, except cs, ru and en_CA, are coordinated by
-the Translation Project at http://translationproject.org/.  This means
-that ALL changes to the .po files (except those few exceptions) MUST be
+All translations for exif (except en_CA) are coordinated by the
+Translation Project at http://translationproject.org/.  This means
+that ALL changes to the .po files (except that exception) MUST be
 made through the TP web site, or they will be eventually overwritten
 and lost.  If you are interested in translating exif into a new
 language, simply join TP and start!  A translation disclaimer is NOT
