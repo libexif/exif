@@ -1,6 +1,11 @@
+2011-12-08  Dan Fandrich <dan@coneharvesters.com>
+
+	* po/cs.po: Added new Czech translation by Marek ÄŒernockÃ½
+	* Converted ChangeLog into UTF-8
+
 2011-11-07  Dan Fandrich <dan@coneharvesters.com>
 
-	* po/de.po: Updated German translation by Mario Blättermann
+	* po/de.po: Updated German translation by Mario BlÃ¤ttermann
 
 2011-09-14  Dan Fandrich <dan@coneharvesters.com>
 
@@ -12,11 +17,11 @@
 	* po/uk.po: Added new Ukrainian translation by Yuri Chornoivan 
 	* po/da.po: Updated Danish translation by Joe Hansen 
 	* po/fi.po: Updated Finnish translation by Jorma Karvonen
-	* po/is.po: Updated Icelandic translation by Sveinn í Felli
+	* po/is.po: Updated Icelandic translation by Sveinn Ã­ Felli
 	* po/it.po: Updated Italian translation by Vincenzo Campanella
 	* po/nl.po: Updated Dutch translation by Erwin Poeze
 	* po/pl.po: Updated Polish translation by Jakub Bogusz
-	* po/sk.po: Updated Slovak translation by Ivan Masár
+	* po/sk.po: Updated Slovak translation by Ivan MasÃ¡r
 	* po/sv.po: Updated Swedish translation by Daniel Nylander
 	* po/zh_CN.po: Updated Chinese (simplified) translation by Ji ZhengYu
 
@@ -26,8 +31,8 @@
 
 2010-10-19  Dan Fandrich <dan@coneharvesters.com>
 
-	* po/gl.po: Added new Galician translation by Fran Diéguez
-	* po/is.po: Updated Icelandic translation by Sveinn í Felli
+	* po/gl.po: Added new Galician translation by Fran DiÃ©guez
+	* po/is.po: Updated Icelandic translation by Sveinn Ã­ Felli
 
 2010-06-16  Dan Fandrich <dan@coneharvesters.com>
 
@@ -47,7 +52,7 @@
 
 2009-12-30  Dan Fandrich <dan@coneharvesters.com>
 
-	* po/sk.po: Updated Slovak translation by Ivan Masár
+	* po/sk.po: Updated Slovak translation by Ivan MasÃ¡r
 
 2009-12-16  Dan Fandrich <dan@coneharvesters.com>
 
@@ -142,7 +147,7 @@
 
 2009-09-03  Dan Fandrich <dan@coneharvesters.com>
 
-	* po/is.po: Added Icelandic translation by Sveinn í Felli
+	* po/is.po: Added Icelandic translation by Sveinn Ã­ Felli
 
 2009-04-13  Dan Fandrich <dan@coneharvesters.com>
 
@@ -177,7 +182,7 @@
 
 2008-11-25  Dan Fandrich <dan@coneharvesters.com>
 
-	* po/sk.po: Updated Slovak translation by Ivan Masár
+	* po/sk.po: Updated Slovak translation by Ivan MasÃ¡r
 
 2008-11-21  Dan Fandrich <dan@coneharvesters.com>
 
@@ -223,7 +228,7 @@
 
 2008-04-10  Dan Fandrich <dan@coneharvesters.com>
 
-	Added Slovak translation by Ivan Masár
+	Added Slovak translation by Ivan MasÃ¡r
 
 2008-03-27  Dan Fandrich <dan@coneharvesters.com>
 
@@ -468,92 +473,92 @@
 
 	* exif/main.c: Fixed set_value for EXIF_FORMAT_ASCII.
 	
-2002-11-15  Lutz Müller <lutz@users.sourceforge.net>
+2002-11-15  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in: Ok, I got the message. Let exif _optionally_ use
 	  libmnote if available.
 
-2002-11-15  Lutz Müller <lutz@users.sourceforge.net>
+2002-11-15  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in: Make exif depend on libmnote. This library isn't used
 	  yet, but that's subject to change.
 
-2002-10-23  Lutz Müller <lutz@users.sourceforge.net>
+2002-10-23  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif/main.c: s/poptPrintUsage/poptPrintHelp
 
-2002-10-22  Lutz Müller <lutz@users.sourceforge.net>
+2002-10-22  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Fix segfault.
 
-2002-10-22  Lutz Müller <lutz@users.sourceforge.net>
+2002-10-22  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Print usage if no arguments are given. Save modified
 	  files on --remove-ifd and --remove. Try to avoid a segfault.
 
-2002-10-21  Lutz Müller <lutz@users.sourceforge.net>
+2002-10-21  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif/main.c: --remove-thumbnail and --remove [tag,ifd] as
-	  requested by Marko Mäkelä <Marko.Makela@HUT.FI>.
+	  requested by Marko MÃ¤kelÃ¤ <Marko.Makela@HUT.FI>.
 
-2002-09-16  Lutz Müller <lutz@users.sourceforge.net>
+2002-09-16  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif.1: Donated by Thomas Pircher <thomas.pircher@gmx.net>
 
-2002-09-15  Lutz Müller <lutz@users.sourceforge.net>
+2002-09-15  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in:
 	* exif/main.c:
 	* exif/actions.c: IRIS fixes by Andrea Suatoni
 	  <a.suatoni@telefonica.net>
 
-2002-09-15  Lutz Müller <lutz@users.sourceforge.net>
+2002-09-15  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in:
 	* po/es.po: Spanish translation by Fabian Mandelbaum
 	  <fabman@2vias.com.ar>
 
-2002-08-30  Lutz Müller <lutz@users.sourceforge.net>
+2002-08-30  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Make sure people don't try too save too much EXIF data.
 
-2002-08-06  Lutz Müller <lutz@users.sourceforge.net>
+2002-08-06  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in: Check for locale.h
 	* exif/main.c: Only use setlocale if locale.h is availabe.
 
-2002-07-25  Lutz Müller <lutz@users.sourceforge.net>
+2002-07-25  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in: Version 0.5. Require at least libexif-0.5.4.
 	* exif: Adapt to new API. Prepare --set-value.
 
-2002-06-10  Lutz Müller <lutz@users.sourceforge.net>
+2002-06-10  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in: Version 0.4
 
-2002-06-10  Lutz Müller <lutz@users.sourceforge.net>
+2002-06-10  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
         * configure.in: We need autoconf > 2.50.
 
-2002-06-09  Lutz Müller <lutz@users.sourceforge.net>
+2002-06-09  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	Internationalization.
 
-2002-06-08  Lutz Müller <lutz@users.sourceforge.net>
+2002-06-08  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif: --insert-thumbnail option.
 
-2002-06-03  Lutz Müller <lutz@users.sourceforge.net>
+2002-06-03  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in: Version 0.3
 
-2002-06-03  Lutz Müller <lutz@users.sourceforge.net>
+2002-06-03  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	Patch by Guido Ostkamp <Guido.Ostkamp@t-online.de>:
 
 	* exif/main.c: Fix pointer error.
 
-2002-04-15  Lutz Müller <lutz@users.sourceforge.net>
+2002-04-15  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Print a warning if no EXIF data can be found.
 	* exif/actions.c: Don't segfault.
@@ -562,10 +567,10 @@
 
 	* Makefile.am: dded .tar.bz2 packaging to "make dist"
 
-2002-04-04  Lutz Müller <lutz@users.sourceforge.net>
+2002-04-04  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* exif/main.c: Old versions of popt.h don't define POPT_TABLEEND.
 
-2002-02-12  Lutz Müller <lutz@users.sourceforge.net>
+2002-02-12  Lutz MÃ¼ller <lutz@users.sourceforge.net>
 
 	* configure.in: Version 0.2
