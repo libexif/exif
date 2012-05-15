@@ -1,197 +1,194 @@
-# Vietnamese translation for EXIF.
-# Copyright © 2012 Free Software Foundation, Inc.
+# Translation of exif to Croatian.
+# Copyright (C) 2012 Lutz Mueller and others
 # This file is distributed under the same license as the exif package.
-# Clytie Siddall <clytie@riverland.net.au>, 2008-2009.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2012.
+# Tomislav Krznar <tomislav.krznar@gmail.com>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: exif 0.6.20\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-10-14 20:41-0700\n"
-"PO-Revision-Date: 2012-03-21 07:41+0700\n"
-"Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
-"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
-"Language: vi\n"
+"PO-Revision-Date: 2012-04-16 01:56+0200\n"
+"Last-Translator: Tomislav Krznar <tomislav.krznar@gmail.com>\n"
+"Language-Team: Croatian <lokalizacija@linux.hr>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: LocFactoryEditor 1.8\n"
-"X-Poedit-Language: Vietnamese\n"
-"X-Poedit-Country: VIET NAM\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: exif/actions.c:60
 #, c-format
 msgid "Not enough memory."
-msgstr "Không đủ bộ nhớ."
+msgstr "Nema dovoljno memorije."
 
 #: exif/actions.c:79
 #, c-format
 msgid "Setting a value for this tag is unsupported!"
-msgstr "Không hỗ trợ chức năng tạo một giá trị cho thẻ này!"
+msgstr "Postavljanje vrijednosti ove oznake nije podržano!"
 
 #: exif/actions.c:94
 #, c-format
 msgid "Too few components specified (need %d, found %d)\n"
-msgstr "Chỉ định quá ít thành phần (cần %d, tìm thấy %d)\n"
+msgstr "Navedeno premalo komponenata (potrebno %d, nađeno %d)\n"
 
 #: exif/actions.c:99
 #, c-format
 msgid "Numeric value expected\n"
-msgstr "Mong đợi một giá trị bằng số\n"
+msgstr "Očekujem numeričku vrijednost\n"
 
 #: exif/actions.c:106
 #, c-format
 msgid "Internal error. Please contact <%s>."
-msgstr "Lỗi nội bộ. Hãy liên lạc với <%s>."
+msgstr "Interna greška. Molim kontaktirajte <%s>."
 
 #: exif/actions.c:145
 #, c-format
 msgid "Not yet implemented!"
-msgstr "Vẫn chưa được thực hiện!"
+msgstr "Nije još implementirano!"
 
 #: exif/actions.c:153
 #, c-format
 msgid "Warning; Too many components specified!"
-msgstr "Cảnh báo: ghi rõ quá ít thành phần!"
+msgstr "Upozorenje: Navedeno previše komponenata!"
 
 #: exif/actions.c:175
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
-msgstr "Quá nhiều dữ liệu EXIF (%i byte). Chỉ cho phép %i byte."
+msgstr "Previše EXIF podataka (%i bajtova). Dozvoljeno je samo %i bajtova."
 
 #: exif/actions.c:186 exif/actions.c:359
 #, c-format
 msgid "Wrote file '%s'."
-msgstr "Đã ghi tập tin « %s »."
+msgstr "Zapisao datoteku „%s”."
 
 #: exif/actions.c:206
 #, c-format
 msgid "EXIF entry '%s' "
-msgstr "Mục nhập EXIF « %s »"
+msgstr "EXIF stavka „%s” "
 
 #: exif/actions.c:208
 #, c-format
 msgid "(0x%x, '%s') "
-msgstr "(0x%x, '%s') "
+msgstr "(0x%x, „%s”) "
 
 #: exif/actions.c:211
 #, c-format
 msgid "exists in IFD '%s':\n"
-msgstr "đã tồn tại trong IFD « %s »:\n"
+msgstr "postoji u IFD-u „%s”:\n"
 
 #: exif/actions.c:224
 msgid "Adding entry..."
-msgstr "Thêm mục..."
+msgstr "Dodajem stavku..."
 
 #: exif/actions.c:264
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
-msgstr "IFD « %s » không chứa một thẻ « %s »!"
+msgstr "IFD „%s” ne sadrži oznaku „%s”!"
 
 #: exif/actions.c:294
 #, c-format
 msgid "Could not open '%s' (%s)!"
-msgstr "Không thể mở « %s » (%s)!"
+msgstr "Ne mogu otvoriti „%s” (%s)!"
 
 #: exif/actions.c:303
 #, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "Không thể đọc « %s » (%s)."
+msgstr "Ne mogu čitati „%s” (%s)."
 
 #: exif/actions.c:322
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
-msgstr "IFD « %s » không chứa thẻ « %s »."
+msgstr "IFD „%s” ne sadrži oznaku „%s”."
 
 #: exif/actions.c:328
 #, c-format
 msgid "'%s' does not contain tag '%s'."
-msgstr "« %s » không chứa thẻ « %s »."
+msgstr "„%s” ne sadrži oznaku „%s”."
 
 #: exif/actions.c:346
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
-msgstr "IFD « %s » không chứa ảnh mẫu."
+msgstr "„%s” ne sadrži sličicu!"
 
 #: exif/actions.c:354
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
-msgstr "Không thể mở « %s » để ghi (%s)."
+msgstr "Ne mogu otvoriti „%s” za pisanje (%s)!"
 
 #: exif/actions.c:376
 #, c-format
 msgid "EXIF tags in '%s':"
-msgstr "Thể EXIF trong « %s »:"
+msgstr "EXIF oznake u „%s”:"
 
 #: exif/actions.c:472
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
-msgstr "Không rõ định dạng hoặc không có MakerNote.\n"
+msgstr "Nepoznat oblik ili nepostojeći MakerNote.\n"
 
 #: exif/actions.c:480
 #, c-format
 msgid "MakerNote does not contain any value.\n"
-msgstr "MakerNote không chứa giá trị.\n"
+msgstr "MakerNote ne sadrži nikakvu vrijednost.\n"
 
 #: exif/actions.c:483
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
-msgstr[0] "MakerNote chứa %i giá trị:\n"
+msgstr[0] "MakerNote sadrži %i vrijednost:\n"
+msgstr[1] "MakerNote sadrži %i vrijednosti:\n"
+msgstr[2] "MakerNote sadrži %i vrijednosti:\n"
 
 #: exif/actions.c:494 exif/main.c:322
 msgid "Unknown Tag"
-msgstr "Không rõ Thẻ"
+msgstr "Nepoznata oznaka"
 
 #: exif/actions.c:506
 msgid "Unknown value"
-msgstr "Giá trị lạ"
+msgstr "Nepoznata vrijednost"
 
 #: exif/actions.c:530
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
-msgstr "Thẻ EXIF trong « %s » (thứ tự byte « %s »):"
+msgstr "EXIF oznake u „%s” („%s” redoslijed bajtova):"
 
 #: exif/actions.c:536
 msgid "Tag"
-msgstr "Thẻ"
+msgstr "Oznaka"
 
 #: exif/actions.c:542
 msgid "Value"
-msgstr "Giá trị"
+msgstr "Vrijednost"
 
 #: exif/actions.c:557
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
-msgstr "Dữ liệu EXIF chứa một ảnh mẫu (%i byte)."
+msgstr "EXIF podaci sadrže sličicu (%i bajtova)."
 
 #: exif/actions.c:599
 #, c-format
 msgid "ThumbnailSize\t%i\n"
-msgstr "Kích cỡ ảnh mẫu\t%i\n"
+msgstr "VeličinaSličice\t%i\n"
 
 #: exif/main.c:196
 msgid "Display software version"
-msgstr "Hiển thị phiên bản phần mềm"
+msgstr "Prikaži inačicu softvera"
 
 #: exif/main.c:198
 msgid "Show IDs instead of tag names"
-msgstr "Hiển thị mã số thay cho tên thẻ"
+msgstr "Prikaži ID umjesto imena oznaka"
 
 #: exif/main.c:200
 msgid "Select tag"
-msgstr "Chọn thẻ"
+msgstr "Odaberi oznaku"
 
 #: exif/main.c:200
 msgid "tag"
-msgstr "thẻ"
+msgstr "oznaka"
 
 #: exif/main.c:202
 msgid "Select IFD"
-msgstr "Chọn IFD"
+msgstr "Odaberi IFD"
 
 #: exif/main.c:202
 msgid "IFD"
@@ -199,135 +196,129 @@ msgstr "IFD"
 
 #: exif/main.c:204
 msgid "List all EXIF tags"
-msgstr "Liệt kê mọi thể EXIF"
+msgstr "Ispiši sve EXIF oznake"
 
 #: exif/main.c:206
 msgid "Show contents of tag MakerNote"
-msgstr "Hiện nội dung của thẻ MakerNote"
+msgstr "Prikaži sadržaj oznake MakerNote"
 
 #: exif/main.c:208
 msgid "Remove tag or ifd"
-msgstr "Bỏ thẻ hoặc IFD"
+msgstr "Ukloni oznaku ili ifd"
 
 #: exif/main.c:210
 msgid "Show description of tag"
-msgstr "Hiện mô tả của thẻ"
+msgstr "Prikaži opis oznake"
 
 #: exif/main.c:212
 msgid "Extract thumbnail"
-msgstr "Trích ảnh thu nhỏ"
+msgstr "Izdvoji sličicu"
 
 #: exif/main.c:214
 msgid "Remove thumbnail"
-msgstr "Bỏ ảnh thu nhỏ"
+msgstr "Ukloni sličicu"
 
 #: exif/main.c:216
 msgid "Insert FILE as thumbnail"
-msgstr "Chèn TẬP TIN dạng ảnh mẫu"
+msgstr "Ubaci DATOTEKU kao sličicu"
 
 #: exif/main.c:216 exif/main.c:220
 msgid "FILE"
-msgstr "TẬP TIN"
+msgstr "DATOTEKA"
 
 #: exif/main.c:218
 msgid "Do not fix existing tags in files"
-msgstr "Đừng sửa chữa thẻ đã có trong tập tin"
+msgstr "Ne popravljaj postojeće oznake u datotekama"
 
 #: exif/main.c:220
 msgid "Write data to FILE"
-msgstr "Ghi dữ liệu vào TẬP TIN"
+msgstr "Spremi podatke u DATOTEKU"
 
 #: exif/main.c:222
 msgid "Value of tag"
-msgstr "Giá trị của thẻ"
+msgstr "Vrijednost oznake"
 
 #: exif/main.c:222
 msgid "STRING"
-msgstr "CHUỖI"
+msgstr "NIZ"
 
 #: exif/main.c:224
 msgid "Create EXIF data if not existing"
-msgstr "Táo dữ liệu EXIF nếu không có"
+msgstr "Napravi EXIF podatke ako ne postoje"
 
 #: exif/main.c:226
 msgid "Output in a machine-readable (tab delimited) format"
-msgstr "Xuất ra một định dạng cho máy đọc được (định giới bằng khoảng tab)"
+msgstr "Stvori izlaz u strojno čitljivom obliku (odvojenom tabulatorima)"
 
 #: exif/main.c:229
 msgid "Width of output"
-msgstr "Chiều rộng kết xuất"
+msgstr "Širina izlaza"
 
 #: exif/main.c:229
 msgid "WIDTH"
-msgstr "RỘNG"
+msgstr "ŠIRINA"
 
 #: exif/main.c:231
 msgid "Output in a XML format"
-msgstr "Xuất ra định dạng XML"
+msgstr "Stvori izlaz u XML obliku"
 
 #: exif/main.c:234
 msgid "Show debugging messages"
-msgstr "Hiện thông điệp gỡ lỗi"
+msgstr "Prikaži poruke za debugiranje"
 
 #: exif/main.c:240
 msgid "Help options:"
-msgstr "Tuỳ chọn trợ giúp:"
+msgstr "Opcije pomoći:"
 
 #: exif/main.c:241
 msgid "Show this help message"
-msgstr "Hiển thị trợ giúp này"
+msgstr "Prikaži ovu poruku pomoći"
 
 #: exif/main.c:242
 msgid "Display brief usage message"
-msgstr "Hiển thị trợ giúp ngắn"
+msgstr "Prikaži kratke upute za uporabu"
 
 #: exif/main.c:263
 msgid "[OPTION...] file"
-msgstr "[TÙY_CHỌN...] tập_tin"
+msgstr "[OPCIJA...] datoteka"
 
 #: exif/main.c:278
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
-msgstr ""
-"IFD không hợp lệ « %s ». Các IFD hợp lệ là:\n"
-" • 0\n"
-" • 1\n"
-" • EXIF\n"
-" • GPS\n"
-" • Interoperability\t\tTương hành"
+msgstr "Neispravan IFD „%s”. Ispravni IFD-ovi su „0”, „1”, „EXIF”, „GPS” i „Interoperability”."
 
 #: exif/main.c:287
 #, c-format
 msgid "Invalid tag '%s'!"
-msgstr "Thẻ không hợp lệ « %s »!"
+msgstr "Neispravna oznaka „%s”!"
 
 #: exif/main.c:295
 msgid "You need to specify a tag!"
-msgstr "Bạn cần phải ghi rõ một thẻ!"
+msgstr "Morate navesti oznaku!"
 
 #: exif/main.c:300
 msgid "You need to specify an IFD!"
-msgstr "Bạn cần phải ghi rõ một IFD!"
+msgstr "Morate navesti IFD!"
 
 #: exif/main.c:337
 #, c-format
 msgid "Tag '%s' "
-msgstr "Thẻ « %s »"
+msgstr "Oznaka „%s” "
 
 #: exif/main.c:339
 #, c-format
 msgid "(0x%04x, '%s'): "
-msgstr "(0x%04x, '%s'): "
+msgstr "(0x%04x, „%s”): "
 
 #: exif/main.c:353
 msgid "Specify input file or --create-exif"
-msgstr "Chỉ định tệp tin đầu vào hay --create-exif"
+msgstr "Navedite ulaznu datoteku ili --create-exif"
 
 #: exif/main.c:419
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
-msgstr "« %s » không đọc được hoặc không chứa dữ liệu EXIF!"
+msgstr "„%s” nije čitljiv ili ne sadrži EXIF podatke!"
 
 #: exif/main.c:446
 msgid "XML format is not available for Maker Notes"
-msgstr "Định dạng XML không sẵn dùng cho Maker Notes"
+msgstr "XML oblik nije dostupan za Maker Notes"
