@@ -1,4 +1,4 @@
-.\" Copyright © 2002-2010 by Thomas Pircher (tehpeh at gmx dot net),
+.\" Copyright Â© 2002-2012 by Thomas Pircher (tehpeh at gmx dot net),
 .\" Dan Fandrich et. al.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
@@ -14,7 +14,7 @@
 .\" the source, must acknowledge the copyright and authors of this work.
 .\" License.
 .\"
-.TH exif 1 "2010-12-14" "exif 0.6.20" "command line front-end to libexif"
+.TH exif 1 "2012-06-27" "exif 0.6.21" "command line front-end to libexif"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
@@ -100,8 +100,8 @@ When used in conjunction with \-\-create-exif, this option inhibits the
 creation of the mandatory tags.
 .B exif
 will otherwise remove illegal or unknown tags, add some mandatory tags using
-default values, and change the data type of tags to match that required by the
-specification.
+default values, and change the data type of some tags to match that required
+by the specification.
 .TP
 .BI "\-o, \-\-output=" "FILE"
 Write output image to
@@ -133,6 +133,8 @@ not apply to some output formats (e.g. XML).
 .BI "\-x, \-\-xml-output"
 Produce output in an XML format (when possible).
 The \-\-xml-output and \-\-machine\-readable options are mutually exclusive.
+Note that the XML schema changes with the locale, and it sometimes produces
+invalid XML. This option is not recommended.
 .TP
 .BI "\-d, \-\-debug"
 Show debugging messages. Also, when processing a file that contains corrupted
@@ -161,10 +163,18 @@ given image:
 .RS
 exif --list-tags --no-fixup image.jpg
 .RE
+.LP
 Display details on all XResolution tags found in the given image:
 .LP
 .RS
 exif --tag=XResolution --no-fixup image.jpg
+.RE
+.LP
+Display the raw contents of the "Model" tag in the given image (with a newline
+character appended):
+.LP
+.RS
+exif --ifd=0 --tag=Model --machine-readable image.jpg
 .RE
 .LP
 Extract the thumbnail into the file thumbnail.jpg:
@@ -187,7 +197,8 @@ specification:
 exif --show-description --ifd=EXIF --tag=0x9209 
 .RE
 .LP
-Add an Orientation tag with value "bottom - left" to an existing image:
+Add an Orientation tag with value "bottom - left" to an existing image, leaving
+the existing tags untouched:
 .LP
 .RS
 exif --output=new.jpg --ifd=0 --tag=0x0112 --set-value=4 --no-fixup image.jpg
@@ -200,7 +211,7 @@ existing image and fix the existing tags, if necessary:
 exif --output=new.jpg --tag=YCbCrSubSampling --ifd=0 --set-value='2 1' image.jpg
 .RE
 .LP
-List table with all known EXIF tags, highlighting mandatory ones:
+Display a table with all known EXIF tags, highlighting mandatory ones:
 .LP
 .RS
 exif -cl
@@ -210,7 +221,7 @@ exif -cl
 .B exif
 was written by Lutz Mueller <lutz@users.sourceforge.net>
 and numerous contributors.
-This man page is Copyright \(co 2002-2010 Thomas Pircher,
+This man page is Copyright \(co 2002-2012 Thomas Pircher,
 Dan Fandrich and others.
 .SH "SEE ALSO"
 .UR "http://www.sourceforge.net/projects/libexif"
