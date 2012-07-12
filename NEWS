@@ -1,6 +1,9 @@
 exif-0.6.x:
   * New translations: cs, eo, hr, sr, uk
   * Updated translations: da, de, fi, id, is, it, nl, pl, sk, sv, vi, zh_CN
+  * Improved the man page
+  * Prevent NULL pointer dereference on out of memory situation
+  * Fixed bug that caused read past the end of a buffer (CVE-2012-2845)
 
 
 exif-0.6.20 (2010-12-15):

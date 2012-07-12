@@ -1,3 +1,16 @@
+2012-07-12  Dan Fandrich <dan@coneharvesters.com>
+
+	* Prevent NULL pointer dereference on out of memory situation.
+	  Such a situation could be created when processing an extremely
+	  large JPEG file.
+	* libjpeg/jpeg-data.c: Fixed bug that caused exif to read past the end
+	  of a buffer. At worst, data->size would underflow which would cause
+	  a gigantic read past the end of the heap buffer and likely
+	  subsequent crash, which would only happen with a corrupted
+	  input file. It might be possible to copy sensitive information
+	  from process memory.
+	  This fixes CVE-2012-2845
+
 2012-06-27  Dan Fandrich <dan@coneharvesters.com>
 
 	* exif.1: Added warning about XML, switched to UTF-8,
