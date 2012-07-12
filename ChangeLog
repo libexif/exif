@@ -10,6 +10,7 @@
 	  input file. It might be possible to copy sensitive information
 	  from process memory.
 	  This fixes CVE-2012-2845
+	* Released 0.6.21
 
 2012-06-27  Dan Fandrich <dan@coneharvesters.com>
 
