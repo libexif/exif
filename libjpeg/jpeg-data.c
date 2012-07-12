@@ -239,7 +239,10 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 			default:
 				s->content.generic.data =
 						malloc (sizeof (char) * len);
-				if (!s->content.generic.data) return;
+				if (!s->content.generic.data) {
+					EXIF_LOG_NO_MEMORY (data->priv->log, "jpeg-data", sizeof (char) * len);
+					return;
+				}
 				s->content.generic.size = len;
 				memcpy (s->content.generic.data, &d[o], len);
 
@@ -256,7 +259,11 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 					}
 					data->data = malloc (
 						sizeof (char) * data->size);
-					if (!data->data) return;
+					if (!data->data) {
+						EXIF_LOG_NO_MEMORY (data->priv->log, "jpeg-data", sizeof (char) * data->size);
+						data->size = 0;
+						return;
+					}
 					memcpy (data->data, d + o + len,
 						data->size);
 					o += data->size;

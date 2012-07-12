@@ -297,7 +297,10 @@ action_insert_thumb (ExifData *ed, ExifLog *log, ExifParams p)
 		fseek (f, 0, SEEK_END);
 		ed->size = ftell (f);
 		ed->data = malloc (sizeof (char) * ed->size);
-		if (ed->size && !ed->data) EXIF_LOG_NO_MEMORY (log, "exif", ed->size);
+		if (ed->size && !ed->data) {
+			EXIF_LOG_NO_MEMORY (log, "exif", sizeof (char) * ed->size);
+			exit (1);
+		}
 		fseek (f, 0, SEEK_SET);
 		if (fread (ed->data, sizeof (char), ed->size, f) != ed->size)
 			exif_log (log, -1, "exif", _("Could not read "
