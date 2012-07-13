@@ -14,18 +14,21 @@
 .\" the source, must acknowledge the copyright and authors of this work.
 .\" License.
 .\"
-.TH exif 1 "2012-06-27" "exif 0.6.21" "command line front-end to libexif"
+.TH exif 1 "2012-07-13" "exif 0.6.21.1" "command line front-end to libexif"
 .SH "NAME"
 exif \- shows EXIF information in JPEG files
 .SH "SYNOPSIS"
 .BI "exif [ " "OPTION" " ] [ " "file..." " ]"
 .SH DESCRIPTION
 .B "exif"
-is a small command-line utility to show and change EXIF information in JPEG files.
+is a small command-line utility to show and change EXIF information in JPEG
+files.
 .PP
-Most digital cameras produce EXIF files, which are JPEG files with extra tags that contain information about the image. The
+Most digital cameras produce EXIF files, which are JPEG files with extra tags
+that contain information about the image. The
 .B "exif"
-command-line utility allows you to read EXIF information from and write EXIF information to those files.
+command-line utility allows you to read EXIF information from and write EXIF
+information to those files.
 .B "exif"
 internally uses the
 .B "libexif"
@@ -197,8 +200,8 @@ specification:
 exif --show-description --ifd=EXIF --tag=0x9209 
 .RE
 .LP
-Add an Orientation tag with value "bottom - left" to an existing image, leaving
-the existing tags untouched:
+Add an Orientation tag with value "Bottom-left" (4) to an existing image,
+leaving the existing tags untouched:
 .LP
 .RS
 exif --output=new.jpg --ifd=0 --tag=0x0112 --set-value=4 --no-fixup image.jpg
@@ -209,6 +212,12 @@ existing image and fix the existing tags, if necessary:
 .LP
 .RS
 exif --output=new.jpg --tag=YCbCrSubSampling --ifd=0 --set-value='2 1' image.jpg
+.RE
+.LP
+Remove the "User Comment" tag from an image:
+.LP
+.RS
+exif --output=new.jpg --remove --tag="User Comment" --ifd=EXIF image.jpg
 .RE
 .LP
 Display a table with all known EXIF tags, highlighting mandatory ones:
