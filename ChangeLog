@@ -1,3 +1,8 @@
+2013-03-13  Dan Fandrich <dan@coneharvesters.com>
+
+	* po/pt_BR.po: Added new Brazilian Portuguese translation
+	  by Rafael Ferreira
+
 2012-07-12  Dan Fandrich <dan@coneharvesters.com>
 
 	* Prevent NULL pointer dereference on out of memory situation.
