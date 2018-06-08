@@ -2,8 +2,8 @@ Name: @PACKAGE@
 Summary: A utility to display EXIF headers from JPEG files
 Version: @VERSION@
 Release: 1
-Source: http://downloads.sourceforge.net/project/libexif/exif/%{version}/exif-%{version}.tar.bz2
-Url: http://libexif.sourceforge.net/
+Source: https://downloads.sourceforge.net/project/libexif/exif/%{version}/exif-%{version}.tar.bz2
+Url: https://libexif.github.io/
 Group: Applications/Multimedia
 License: LGPL
 BuildRoot: %{_tmppath}/%{name}-%{version}-root

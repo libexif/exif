@@ -5,7 +5,7 @@
 in JPEG files. I wrote it to demonstrate the power of libexif.
 
 It depends on 
- * libexif (http://www.sourceforge.net/projects/libexif)
+ * libexif (https://libexif.github.io/)
  * popt
 
 Have fun!
@@ -29,7 +29,7 @@ path, like this:
 
   ./configure PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 
-When building from CVS, run this before configuring:
+When building from git, run this before configuring:
 
   autoreconf -i
 
@@ -38,7 +38,7 @@ INTERNATIONALIZATION
 --------------------
 
 All translations for exif (except en_CA) are coordinated by the
-Translation Project at http://translationproject.org/.  This means
+Translation Project at https://translationproject.org/.  This means
 that ALL changes to the .po files (except that exception) MUST be
 made through the TP web site, or they will be eventually overwritten
 and lost.  If you are interested in translating exif into a new
