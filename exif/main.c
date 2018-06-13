@@ -100,6 +100,7 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 	  const char *format, va_list args, void *data)
 {
 	LogArg *log_arg = data;
+	(void) log;  /* unused */
 
 	log_arg->corrupted = 0;
 

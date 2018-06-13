@@ -271,6 +271,8 @@ action_remove_tag (ExifData *ed, ExifLog *log, ExifParams p)
 void
 action_remove_thumb (ExifData *ed, ExifLog *log, ExifParams p)
 {
+	(void) log;  /* unused */
+	(void) p;  /* unused */
 	if (ed->data) {
 		free (ed->data);
 		ed->data = NULL;
@@ -371,7 +373,8 @@ action_tag_table (ExifData *ed, ExifParams p)
 	const char *name;
 	char txt[TAG_VALUE_BUF];
 	ExifIfd i;
-	size_t fieldwidth, width, bytes;
+	int fieldwidth, bytes;
+	size_t width;
 
 #define ENTRY_FOUND     "   *   "
 #define ENTRY_NOT_FOUND "   -   "
@@ -379,10 +382,10 @@ action_tag_table (ExifData *ed, ExifParams p)
 	snprintf (txt, sizeof (txt) - 1, _("EXIF tags in '%s':"), p.fin);
 	fieldwidth = width = p.width - 36;
 	bytes = exif_mbstrlen(txt, &width);
-	printf ("%.*s%*s", bytes, txt, fieldwidth-width, "");
+	printf ("%.*s%*s", bytes, txt, fieldwidth-(int)width, "");
 
 	for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++) {
-		size_t space;
+		int space;
 		fieldwidth = width = 7;
 		bytes = exif_mbstrlen(exif_ifd_get_name (i), &width);
 		space = fieldwidth-width;
@@ -405,7 +408,7 @@ action_tag_table (ExifData *ed, ExifParams p)
 		fieldwidth = width = p.width - 43;
 		bytes = exif_mbstrlen(C(name), &width);
 		printf ("0x%04x %.*s%*s",
-			tag, bytes, C(name), fieldwidth-width, "");
+			tag, bytes, C(name), fieldwidth-(int)width, "");
 		for (i = (ExifIfd)0; i < EXIF_IFD_COUNT; i++)
 			if (exif_content_get_entry (ed->ifd[i], tag))
 				printf (ENTRY_FOUND);
@@ -422,7 +425,8 @@ show_entry_list (ExifEntry *e, void *data)
 	char v[TAG_VALUE_BUF];
 	ExifIfd ifd = exif_entry_get_ifd (e);
 	const char *str;
-	size_t fieldwidth, width, bytes;
+	int fieldwidth, bytes;
+	size_t width;
 
 	if (p->use_ids)
 		printf("0x%04x", e->tag);
@@ -430,7 +434,7 @@ show_entry_list (ExifEntry *e, void *data)
 		str = C(exif_tag_get_title_in_ifd (e->tag, ifd));
 		fieldwidth = width = 20;
 		bytes = exif_mbstrlen(str, &width);
-		printf ("%.*s%*s", bytes, str, fieldwidth-width, "");
+		printf ("%.*s%*s", bytes, str, fieldwidth-(int)width, "");
 	}
 	printf ("|");
 
@@ -468,7 +472,8 @@ action_mnote_list (ExifData *ed, ExifParams p)
 	unsigned int i, c, id;
 	ExifMnoteData *n;
 	const char *s;
-	size_t fieldwidth, width, bytes;
+	int fieldwidth, bytes;
+	size_t width;
 
 	n = exif_data_get_mnote_data (ed);
 	if (!n) {
@@ -502,7 +507,7 @@ action_mnote_list (ExifData *ed, ExifParams p)
 		} else {
 			fieldwidth = width = p.use_ids ? 6 : 20;
 			bytes = exif_mbstrlen(b1, &width);
-			printf ("%.*s%*s|", bytes, b1, fieldwidth-width, "");
+			printf ("%.*s%*s|", bytes, b1, fieldwidth-(int)width, "");
 		}
 
 		s = C (exif_mnote_data_get_value (n, i, b, TAG_VALUE_BUF));
@@ -524,7 +529,8 @@ action_tag_list (ExifData *ed, ExifParams p)
 {
 	ExifByteOrder order;
 	const char *s;
-	size_t fieldwidth, width, bytes;
+	int fieldwidth, bytes;
+	size_t width;
 
 	if (!ed)
 		return;
@@ -538,7 +544,7 @@ action_tag_list (ExifData *ed, ExifParams p)
 	fieldwidth = width = p.use_ids ? 6 : 20;
 	s = _("Tag");
 	bytes = exif_mbstrlen(s, &width);
-	printf ("%.*s%*s", bytes, s, fieldwidth-width, "");
+	printf ("%.*s%*s", bytes, s, fieldwidth-(int)width, "");
 	fputc ('|', stdout);
 
 	fieldwidth = width = p.use_ids ? p.width-8 : p.width-22;
