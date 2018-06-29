@@ -248,12 +248,12 @@ action_remove_tag (ExifData *ed, ExifLog *log, ExifParams p)
 	ExifEntry *e;
 
 	/* We do have 2 optional parameters: ifd and tag */
-	if (!p.tag && (p.ifd < EXIF_IFD_0 || p.ifd >= EXIF_IFD_COUNT))
+	if (p.tag == EXIF_INVALID_TAG && (p.ifd < EXIF_IFD_0 || p.ifd >= EXIF_IFD_COUNT))
 		for (ifd = EXIF_IFD_0; ifd < EXIF_IFD_COUNT; ifd++)
 			while (ed->ifd[ifd] && ed->ifd[ifd]->count)
 				exif_content_remove_entry (ed->ifd[ifd],
 					ed->ifd[ifd]->entries[0]);
-	else if (!p.tag)
+	else if (p.tag == EXIF_INVALID_TAG)
 		while (ed->ifd[p.ifd] && ed->ifd[p.ifd]->count)
 			exif_content_remove_entry (ed->ifd[p.ifd],
 				ed->ifd[p.ifd]->entries[0]);
