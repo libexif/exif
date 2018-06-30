@@ -609,7 +609,8 @@ action_tag_list_machine (ExifData *ed, ExifParams p)
 }
 
 /*!
- * Replace characters which are invalid in an XML tag with safe characters.
+ * Replace characters which are invalid in an XML tag with safe characters
+ * in place.
  */
 static inline void
 remove_bad_chars(char *s)
@@ -621,6 +622,59 @@ remove_bad_chars(char *s)
 	}
 }
 
+/*!
+ * Escape any special XML characters in the text and return a new static string
+ * buffer.
+ */
+static const char *
+escape_xml(const char *text)
+{
+	static char *escaped;
+	static size_t escaped_size;
+	char *out;
+	size_t len;
+
+	for (out=escaped, len=0; *text; ++len, ++out, ++text) {
+		/* Make sure there's plenty of room for a quoted character */
+		if ((len + 8) > escaped_size) {
+			char *bigger_escaped;
+			escaped_size += 128;
+			bigger_escaped = realloc(escaped, escaped_size);
+			if (!bigger_escaped) {
+				free(escaped);	/* avoid leaking memory */
+				escaped = NULL;
+				escaped_size = 0;
+				/* Error string is cleverly chosen to fail XML validation */
+				return ">>> out of memory <<<";
+			}
+			out = bigger_escaped + len;
+			escaped = bigger_escaped;
+		}
+		switch (*text) {
+			case '&':
+				strcpy(out, "&amp;");
+				len += strlen(out) - 1;
+				out = escaped + len;
+				break;
+			case '<':
+				strcpy(out, "&lt;");
+				len += strlen(out) - 1;
+				out = escaped + len;
+				break;
+			case '>':
+				strcpy(out, "&gt;");
+				len += strlen(out) - 1;
+				out = escaped + len;
+				break;
+			default:
+				*out = *text;
+				break;
+		}
+	}
+	*out = '\x0';  /* NUL terminate the string */
+	return escaped;
+}
+
 static void
 show_entry_xml (ExifEntry *e, void *data)
 {
@@ -629,16 +683,16 @@ show_entry_xml (ExifEntry *e, void *data)
 
 	if (*ids) {
 		fprintf (stdout, "<0x%04x>", e->tag);
-		fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));
+		fprintf (stdout, "%s", escape_xml(exif_entry_get_value (e, v, sizeof (v))));
 		fprintf (stdout, "</0x%04x>", e->tag);
 	} else {
 		strncpy (t, exif_tag_get_title_in_ifd(e->tag, exif_entry_get_ifd(e)), sizeof (t));
 
-    /* Remove invalid characters from tag eg. (, ), space */
+		/* Remove invalid characters from tag eg. (, ), space */
 		remove_bad_chars(t);
 
 		fprintf (stdout, "\t<%s>", t);
-		fprintf (stdout, "%s", exif_entry_get_value (e, v, sizeof (v)));
+		fprintf (stdout, "%s", escape_xml(exif_entry_get_value (e, v, sizeof (v))));
 		fprintf (stdout, "</%s>\n", t);
 	}
 }
