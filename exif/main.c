@@ -260,7 +260,7 @@ main (int argc, const char **argv)
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
-	while (poptGetNextOpt (ctx) > 0)
+	while (poptGetNextOpt (ctx) != -1)
 		;
 
 	p.width = MIN(MAX_WIDTH, MAX(MIN_WIDTH, p.width));
@@ -279,6 +279,8 @@ main (int argc, const char **argv)
 				"'Interoperability'."), ifd_string);
 			return 1;
 		}
+		free(ifd_string);
+		ifd_string = NULL;
 	}
 	if (tag_string) {
 		p.tag = exif_tag_from_string (tag_string);
@@ -287,6 +289,8 @@ main (int argc, const char **argv)
 				tag_string);
 			return 1;
 		}
+		free(tag_string);
+		tag_string = NULL;
 	}
 
 	/* Check for all necessary parameters */
@@ -467,9 +471,7 @@ main (int argc, const char **argv)
 		args++;
 	}
 
-	/* Free all libpopt string arguments */
-	free(tag_string);
-	free(ifd_string);
+	/* Free all remaining libpopt string arguments */
 	free(p.set_thumb);
 	free(output);
 	free(p.set_value);
