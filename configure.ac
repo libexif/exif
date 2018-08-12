@@ -29,7 +29,7 @@ GP_PKG_CONFIG
 # i18n support
 # ---------------------------------------------------------------------------
 GP_GETTEXT_HACK([${PACKAGE}],[Lutz Mueller and others])
-ALL_LINGUAS="cs da de es fi fr gl hr id is it lv nl pl pt_BR ro sk sr sv tr vi zh_CN"
+ALL_LINGUAS="cs da de es fi fr fur gl hr id is it ko lv ms nl pl pt_BR ro ru sk sr sv tr vi zh_CN"
 AM_GNU_GETTEXT_VERSION([0.14.1])
 AM_GNU_GETTEXT([external])
 AM_PO_SUBDIRS()
