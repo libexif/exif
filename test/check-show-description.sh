@@ -6,8 +6,10 @@
 tmpfile="./output.tmp"
 
 # Run this in the C locale so the messages are known
-export LANG=C
-export LANGUAGE=C
+LANG=C
+export LANG
+LANGUAGE=C
+export LANGUAGE
 
 failed="0"
 

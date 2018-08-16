@@ -4,8 +4,10 @@
 . ./check-vars.sh
 
 # Run this in the C locale so the messages are known
-export LANG=C
-export LANGUAGE=C
+LANG=C
+export LANG
+LANGUAGE=C
+export LANGUAGE
 
 # If these random help strings are found, the rest are probably also there
 $EXIFEXE --help | grep '^  -c, --create-exif               Create EXIF data if not existing$' >/dev/null
