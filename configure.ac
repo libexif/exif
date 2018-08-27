@@ -15,6 +15,7 @@ GP_CONFIG_MSG([Source code location],[${srcdir}])
 
 AC_PROG_CC
 AC_C_CONST
+AC_C_INLINE
 AM_PROG_AR
 AM_PROG_LIBTOOL
 AM_CPPFLAGS="$CPPFLAGS -I\$(top_srcdir) -I\$(top_builddir)"
