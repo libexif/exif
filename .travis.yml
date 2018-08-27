@@ -4,12 +4,23 @@ sudo: false
 
 language: c
 
+git:
+  depth: 1
+
 # Install needed packages on Ubuntu (OS X is done with brew below)
 addons:
   apt:
     packages:
     - autopoint
     - libpopt-dev
+
+env:
+  matrix:
+    - CONFIG=normal
+    - CONFIG=c90
+    - CONFIG=stackprotect
+  global:
+    - MAKEFLAGS='-j 2'
 
 install:
 # Install and build the latest libexif
@@ -21,7 +32,10 @@ install:
 script:
   # Ensure brew gettext is in the PATH so autopoint is found on OS X
   - PATH="$PATH:/usr/local/opt/gettext/bin" autoreconf -sivf
-  - ./configure --prefix="${HOME}" PKG_CONFIG_PATH="${HOME}/lib/pkgconfig"
+  - if [ "$CONFIG" = "normal" ] ; then CFLAGS='-Wall -Wextra -O3'; fi
+  - if [ "$CONFIG" = "c90" ] ; then CFLAGS='-std=iso9899:1990 -D_XOPEN_SOURCE=500 -Wall -Wextra -O3'; fi
+  - if [ "$CONFIG" = "stackprotect" ] ; then CFLAGS='-g -O0 -fstack-protector-all'; fi
+  - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="${HOME}/lib/pkgconfig" || { tail -300 config.log; false; }
   - make
   - make check
   - make install
