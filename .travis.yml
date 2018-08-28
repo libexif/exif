@@ -29,14 +29,15 @@ matrix:
     addons:
       apt:
         sources:
-          - llvm-toolchain-trusty-5.0
+          - llvm-toolchain-trusty-6.0
+          - ubuntu-toolchain-r-test
         packages:
           - autopoint
-          - clang-5.0
+          - clang-6.0
           - libpopt-dev
     compiler: clang
     env:
-      - CONFIG=clang5
+      - CONFIG=clang6
   - os: linux
     addons:
       apt:
@@ -44,11 +45,28 @@ matrix:
           - ubuntu-toolchain-r-test
         packages:
           - autopoint
-          - g++-7
+          - g++-8
           - libpopt-dev
     compiler: gcc
     env:
-      - CONFIG=gcc7
+      - CONFIG=gcc8
+  - os: linux
+    addons:
+      apt:
+        sources:
+          - llvm-toolchain-trusty-6.0
+          - ubuntu-toolchain-r-test
+        packages:
+          - autopoint
+          - clang-6.0
+          - libpopt-dev
+          - libtool
+    compiler: clang
+    # Required for -fsanitize=undefined
+    # see https://github.com/travis-ci/travis-ci/issues/9033
+    sudo: required
+    env:
+      - CONFIG=sanitize
 
 install:
 # Install and build the latest libexif
@@ -56,6 +74,9 @@ install:
   - (cd libexif && PATH="$PATH:/usr/local/opt/gettext/bin" autoreconf -sivf && ./configure --prefix="${HOME}" && make install)
 # Install libpopt on OS X
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install popt; fi
+# libpopt0:1.16-8ubuntu1 has a memory leak that causes UBSAN to fail. Build
+# a fixed version to use when running those tests.
+  - if [ "$CONFIG" = "sanitize" ] ; then ( curl --fail -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.debian.tar.xz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16.orig.tar.gz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.dsc && dpkg-source -x popt_1.16-11.dsc && cd popt-1.16 && sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac && autoreconf -sivf && ./configure --prefix="${HOME}" --disable-nls --disable-shared && make && make install ); fi
 
 script:
   # Ensure brew gettext is in the PATH so autopoint is found on OS X
@@ -63,11 +84,12 @@ script:
   - if [ "$CONFIG" = "normal" ] ; then CFLAGS='-Wall -Wextra -O3'; fi
   - if [ "$CONFIG" = "c90" ] ; then CFLAGS='-std=iso9899:1990 -D_XOPEN_SOURCE=500 -Wall -Wextra -O3'; fi
   - if [ "$CONFIG" = "stackprotect" ] ; then CFLAGS='-g -O0 -fstack-protector-all'; fi
-  - if [ "$CONFIG" = "clang5" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=clang-5.0; fi
-  - if [ "$CONFIG" = "gcc7" ] ; then CFLAGS='-Wall -Wextra -O3'; export export CC=gcc-7; fi
-  - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="${HOME}/lib/pkgconfig" || { tail -300 config.log; false; }
+  - if [ "$CONFIG" = "clang6" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=clang-6.0; fi
+  - if [ "$CONFIG" = "gcc8" ] ; then CFLAGS='-Wall -Wextra -O3'; export export CC=gcc-8; fi
+  - if [ "$CONFIG" = "sanitize" ] ; then CFLAGS='-g -Wall -Wextra -fsanitize=address -fsanitize=undefined'; export CC=clang-6.0; CONFIGURE_OPTS="POPT_CFLAGS=-I${HOME}/include POPT_LIBS=-L${HOME}/lib LDFLAGS=-lpopt"; fi
+  - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="${HOME}/lib/pkgconfig" $CONFIGURE_OPTS || { tail -300 config.log; false; }
   - make
-  - make check
+  - make check || { tail -300 test/test-suite.log; false; }
   - make install
 
 compiler:
