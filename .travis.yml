@@ -15,12 +15,40 @@ addons:
     - libpopt-dev
 
 env:
+  # More configurations are configured in the matrix section
   matrix:
     - CONFIG=normal
     - CONFIG=c90
     - CONFIG=stackprotect
   global:
     - MAKEFLAGS='-j 2'
+
+matrix:
+  include:
+  - os: linux
+    addons:
+      apt:
+        sources:
+          - llvm-toolchain-trusty-5.0
+        packages:
+          - autopoint
+          - clang-5.0
+          - libpopt-dev
+    compiler: clang
+    env:
+      - CONFIG=clang5
+  - os: linux
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - autopoint
+          - g++-7
+          - libpopt-dev
+    compiler: gcc
+    env:
+      - CONFIG=gcc7
 
 install:
 # Install and build the latest libexif
@@ -35,6 +63,8 @@ script:
   - if [ "$CONFIG" = "normal" ] ; then CFLAGS='-Wall -Wextra -O3'; fi
   - if [ "$CONFIG" = "c90" ] ; then CFLAGS='-std=iso9899:1990 -D_XOPEN_SOURCE=500 -Wall -Wextra -O3'; fi
   - if [ "$CONFIG" = "stackprotect" ] ; then CFLAGS='-g -O0 -fstack-protector-all'; fi
+  - if [ "$CONFIG" = "clang5" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=clang-5.0; fi
+  - if [ "$CONFIG" = "gcc7" ] ; then CFLAGS='-Wall -Wextra -O3'; export export CC=gcc-7; fi
   - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="${HOME}/lib/pkgconfig" || { tail -300 config.log; false; }
   - make
   - make check
