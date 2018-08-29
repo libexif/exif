@@ -6,12 +6,8 @@
 tmpfile="./output.tmp"
 
 # Run this in the C locale so the messages are known
-LANG=C
-export LANG
-LANGUAGE=C
-export LANGUAGE
-
-failed="0"
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
 
 # Test tag 1 using text name
 $EXIFEXE --ifd=Interoperability --tag=InteroperabilityIndex --show-description > "$tmpfile"
