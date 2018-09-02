@@ -99,10 +99,10 @@ static void
 log_func (ExifLog *log, ExifLogCode code, const char *domain,
 	  const char *format, va_list args, void *data)
 {
-	LogArg *log_arg = data;
+	LogArg *arg = data;
 	(void) log;  /* unused */
 
-	log_arg->corrupted = 0;
+	arg->corrupted = 0;
 
 	/*
 	 * When debugging, continue as far as possible. If not, make all errors
@@ -116,7 +116,7 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		put_colorstring (stderr, COL_NORMAL);
 		exit (1);
 	case EXIF_LOG_CODE_DEBUG:
-		if (log_arg->debug) {
+		if (arg->debug) {
 			put_colorstring (stdout, COL_GREEN);
 			fprintf (stdout, "%s: ", domain);
 			vfprintf (stdout, format, args);
@@ -125,9 +125,9 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		}
 		break;
 	case EXIF_LOG_CODE_CORRUPT_DATA:
-		log_arg->corrupted = 1;
+		arg->corrupted = 1;
 		/* We ignore corrupted data event in some cases */
-		if (log_arg->ignore_corrupted)
+		if (arg->ignore_corrupted)
 			return;
 		/* Fall through to EXIF_LOG_CODE_NO_MEMORY */
 	case EXIF_LOG_CODE_NO_MEMORY:
@@ -149,11 +149,11 @@ log_func (ExifLog *log, ExifLogCode code, const char *domain,
 		 * idea to begin with. This should be removed once the libexif
 		 * API is fixed to properly return error codes everywhere.
 		 */
-		if ((code == EXIF_LOG_CODE_NO_MEMORY) || !log_arg->debug)
+		if ((code == EXIF_LOG_CODE_NO_MEMORY) || !arg->debug)
 			exit (1);
 		break;
 	default:
-		if (log_arg->debug) {
+		if (arg->debug) {
 			put_colorstring (stdout, COL_BLUE);
 			printf ("%s: ", domain);
 			vprintf (format, args);
