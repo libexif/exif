@@ -164,66 +164,66 @@ Display a table listing all known EXIF tags and whether each one exists in the
 given image:
 .LP
 .RS
-exif --list-tags --no-fixup image.jpg
+exif \-\-list-tags \-\-no-fixup image.jpg
 .RE
 .LP
 Display details on all XResolution tags found in the given image:
 .LP
 .RS
-exif --tag=XResolution --no-fixup image.jpg
+exif \-\-tag=XResolution \-\-no-fixup image.jpg
 .RE
 .LP
 Display the raw contents of the "Model" tag in the given image (with a newline
 character appended):
 .LP
 .RS
-exif --ifd=0 --tag=Model --machine-readable image.jpg
+exif \-\-ifd=0 \-\-tag=Model \-\-machine-readable image.jpg
 .RE
 .LP
 Extract the thumbnail into the file thumbnail.jpg:
 .LP
 .RS
-exif --extract-thumbnail --output=thumbnail.jpg image.jpg
+exif \-\-extract-thumbnail \-\-output=thumbnail.jpg image.jpg
 .RE
 .LP
 Display a list of the numeric values of only the EXIF tags in the thumbnail IFD
 (IFD 1) and the tag values:
 .LP
 .RS
-exif --ids --ifd=1 --no-fixup image.jpg
+exif \-\-ids \-\-ifd=1 \-\-no-fixup image.jpg
 .RE
 .LP
 Display the meaning of tag 0x9209 in the "EXIF" IFD according to the EXIF
 specification:
 .LP
 .RS
-exif --show-description --ifd=EXIF --tag=0x9209 
+exif \-\-show-description \-\-ifd=EXIF \-\-tag=0x9209
 .RE
 .LP
 Add an Orientation tag with value "Bottom-left" (4) to an existing image,
 leaving the existing tags untouched:
 .LP
 .RS
-exif --output=new.jpg --ifd=0 --tag=0x0112 --set-value=4 --no-fixup image.jpg
+exif \-\-output=new.jpg \-\-ifd=0 \-\-tag=0x0112 \-\-set-value=4 \-\-no-fixup image.jpg
 .RE
 .LP
 Add a YCbCr Sub-Sampling tag with value 2,1 (a.k.a YCbCr 4:2:2) to an
 existing image and fix the existing tags, if necessary:
 .LP
 .RS
-exif --output=new.jpg --tag=YCbCrSubSampling --ifd=0 --set-value='2 1' image.jpg
+exif \-\-output=new.jpg \-\-tag=YCbCrSubSampling \-\-ifd=0 \-\-set-value='2 1' image.jpg
 .RE
 .LP
 Remove the "User Comment" tag from an image:
 .LP
 .RS
-exif --output=new.jpg --remove --tag="User Comment" --ifd=EXIF image.jpg
+exif \-\-output=new.jpg \-\-remove \-\-tag="User Comment" \-\-ifd=EXIF image.jpg
 .RE
 .LP
 Display a table with all known EXIF tags, highlighting mandatory ones:
 .LP
 .RS
-exif -cl
+exif \-cl
 .RE
 .LP
 .SH "AUTHOR"
