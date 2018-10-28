@@ -14,10 +14,6 @@ addons:
     - autopoint
     - libpopt-dev
 
-cache:
-  directories:
-    - $HOME/popt
-
 env:
   # More configurations are configured in the matrix section
   matrix:
@@ -65,6 +61,9 @@ matrix:
           - clang-6.0
           - libtool
     compiler: clang
+    cache:
+      directories:
+        - $HOME/popt
     # Required for -fsanitize=undefined
     # see https://github.com/travis-ci/travis-ci/issues/9033
     sudo: required
@@ -73,13 +72,42 @@ matrix:
 
 install:
 # Install and build the latest libexif
-  - git clone --depth=1 https://github.com/libexif/libexif.git
-  - (cd libexif && PATH="$PATH:/usr/local/opt/gettext/bin" autoreconf -sivf && ./configure --prefix="${HOME}" && make install)
+  - |
+    if [ "$CONFIG" != "coverage" ] ; then
+      cd "$HOME"
+      # OS X has a weird alias that causes cd to abort with set -e so leave it
+      # off when it's run.
+      set -e
+      git clone --depth=1 https://github.com/libexif/libexif.git
+      set +e
+      cd libexif
+      set -e
+      PATH="$PATH:/usr/local/opt/gettext/bin" autoreconf -sivf
+      ./configure --prefix="${HOME}"
+      make
+      make install
+      set +e
+      cd "$TRAVIS_BUILD_DIR"
+    fi
 # Install libpopt on OS X
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install popt; fi
 # libpopt0:1.16-8ubuntu1 has a memory leak that causes UBSAN to fail. Build
 # a fixed version to use when running those tests.
-  - if [ "$CONFIG" = "sanitize" -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then ( curl --fail -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.debian.tar.xz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16.orig.tar.gz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.dsc && dpkg-source -x popt_1.16-11.dsc && cd popt-1.16 && sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac && autoreconf -sivf && ./configure --prefix="${HOME}/popt" --disable-nls --disable-shared && make && make install ); fi
+  - |
+    if [ "$CONFIG" = "sanitize" -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then
+      set -e
+      cd "$HOME"
+      curl --fail -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.debian.tar.xz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16.orig.tar.gz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.dsc
+      dpkg-source -x popt_1.16-11.dsc
+      cd popt-1.16
+      sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac
+      autoreconf -sivf
+      ./configure --prefix="${HOME}/popt" --disable-nls --disable-shared
+      make
+      make install
+      cd "$TRAVIS_BUILD_DIR"
+      set +e
+    fi
 
 script:
   # Ensure brew gettext is in the PATH so autopoint is found on OS X
