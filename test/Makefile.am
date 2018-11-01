@@ -7,12 +7,15 @@ EXTRA_DIST = \
 	check-help.sh \
 	check-param-validity.sh \
 	check-show-description.sh \
-	check-version.sh
+	check-show-tag.sh \
+	check-version.sh \
+	testdata/no-exif.jpg
 
 check_SCRIPTS = \
 	check-help.sh \
 	check-param-validity.sh \
 	check-show-description.sh \
+	check-show-tag.sh \
 	check-version.sh
 
 TESTS = $(check_SCRIPTS)
