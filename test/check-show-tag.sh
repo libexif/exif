@@ -79,8 +79,7 @@ test $? -eq 0 || exit 1
 
 echo Create an image file with one tag in two IFDs for further tests
 cp "$SRCDIR"/testdata/no-exif.jpg "$tmpimg"
-# Strip off the file path
-$EXIFEXE --create-exif --ifd=1 --tag=XResolution --set-value="99 2" --output="$tmpimg" "$tmpimg" 2>&1 | sed -e "s@[^']*/@@" > "$tmpfile"
+$EXIFEXE --create-exif --ifd=1 --tag=XResolution --set-value="99 2" --output="$tmpimg" "$tmpimg" 2>&1 > "$tmpfile"
 test $? -eq 0 || { echo Incorrect return code; exit 1; }
 $DIFFEXE - "$tmpfile" <<EOF
 Wrote file 'check-show-tag-image.tmp'.
