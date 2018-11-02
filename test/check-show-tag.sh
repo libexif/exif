@@ -3,8 +3,9 @@
 
 . ./check-vars.sh
 
-tmpfile="check-show-tag-out.tmp"
-tmpimg="check-show-tag-image.tmp"
+readonly tmpfile="check-show-tag-out.tmp"
+readonly tmpimg="check-show-tag-image.jpg"
+readonly srcimg="$SRCDIR/testdata/no-exif.jpg"
 
 # Run this in the C locale so the messages are known
 LANG=C; export LANG
@@ -78,11 +79,11 @@ EOF
 test $? -eq 0 || exit 1
 
 echo Create an image file with one tag in two IFDs for further tests
-cp "$SRCDIR"/testdata/no-exif.jpg "$tmpimg"
+cp "$srcimg" "$tmpimg"
 $EXIFEXE --create-exif --ifd=1 --tag=XResolution --set-value="99 2" --output="$tmpimg" "$tmpimg" 2>&1 > "$tmpfile"
 test $? -eq 0 || { echo Incorrect return code; exit 1; }
 $DIFFEXE - "$tmpfile" <<EOF
-Wrote file 'check-show-tag-image.tmp'.
+Wrote file 'check-show-tag-image.jpg'.
 EOF
 test $? -eq 0 || exit 1
 
@@ -115,4 +116,5 @@ EOF
 test $? -eq 0 || exit 1
 
 # Cleanup
+echo PASSED
 rm -f "$tmpfile" "$tmpimg"

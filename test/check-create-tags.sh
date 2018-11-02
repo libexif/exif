@@ -5,7 +5,7 @@
 
 . ./check-vars.sh
 
-dstimg="./create-tags.out.jpg"
+readonly dstimg="create-tags.out.jpg"
 
 # Abort on any command failure
 set -e
@@ -30,6 +30,6 @@ numtags=`$EXIFEXE --no-fixup -m -i "$dstimg" | wc -l`
 echo Must be 11 tags: $numtags
 test $numtags = 11
 
+# Cleanup
+echo PASSED
 rm -f "$dstimg"
-
-

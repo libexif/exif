@@ -5,8 +5,10 @@
 
 . ./check-vars.sh
 
-dstimg="init.out.jpg"
-srcimg="$SRCDIR/testdata/no-exif.jpg"
+readonly dstimg="init-mandatory.out.jpg"
+readonly srcimg="$SRCDIR/testdata/no-exif.jpg"
+
+error=0
 
 check_result () {
 	s="$?"
@@ -66,10 +68,11 @@ check_result
 
 rm -f "$dstimg"
 
-exit 0
+echo Test complete: status $error
+exit "$error"
 
 
-Here are the default values created by exif for the mandatory tags which
+Here are the default values created by exif for the mandatory tags
 for which it is able to create default values.
 
 EXIF tags in '(EXIF)' ('Motorola' byte order):

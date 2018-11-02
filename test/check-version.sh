@@ -3,4 +3,7 @@
 
 . ./check-vars.sh
 
-$EXIFEXE --version | grep '^[0-9]\+\.[0-9]\+[0-9.]*$'
+echo Check version number
+$EXIFEXE --version | grep '^[0-9]\+\.[0-9]\+[0-9.]*$' || { echo Invalid version; exit 1; }
+
+echo PASSED

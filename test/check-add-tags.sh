@@ -6,9 +6,13 @@
 
 . ./check-vars.sh
 
-srcimg="add-tag-src.out.jpg"
-dstimg="add-tag.out.jpg"
-tmpfile="add-tag.tmp"
+readonly srcimg="add-tag-src.out.jpg"
+readonly dstimg="add-tag.out.jpg"
+readonly tmpfile="add-tag.tmp"
+
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
 
 error=0
 
@@ -139,8 +143,8 @@ check_result
 append_image
 
 # Check the resulting EXIF file
-env LANG=C LANGUAGE=C $EXIFEXE -m -i "$srcimg" >"$tmpfile"
-"$DIFFEXE" "$tmpfile" - <<EOF
+$EXIFEXE -m -i "$srcimg" >"$tmpfile"
+"$DIFFEXE" - "$tmpfile" <<EOF
 0x010e	The image description
 0x011a	6.0
 0x013e	4.5, 6.3
