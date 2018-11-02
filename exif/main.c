@@ -427,10 +427,18 @@ main (int argc, const char **argv)
 		}
 
 		/* These options can be used in conjunction with others */
-		if (remove_thumb)
+		if (remove_thumb) {
 			action_remove_thumb (ed, log, p);
-		if (p.set_thumb)
+			if (!no_fixup)
+				/* Remove all thumbnail tags */
+				exif_data_fix(ed);
+		}
+		if (p.set_thumb) {
 			action_insert_thumb (ed, log, p);
+			if (!no_fixup)
+				/* Add the mandatory thumbnail tags */
+				exif_data_fix(ed);
+		}
 
 		/* These options are mutually exclusive */
 		if (list_tags)
