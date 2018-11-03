@@ -307,6 +307,7 @@ main (int argc, const char **argv)
 	/* No command: Show help */
 	if (argc <= 1) {
 		poptPrintHelp (ctx, stdout, 0);
+		exif_log_free (log);
 		poptFreeContext(ctx);
 		return (1);
 	}
