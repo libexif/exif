@@ -15,4 +15,7 @@ test $? -eq 0 || exit 1
 $EXIFEXE -\? | grep '^  -r, --remove-thumbnail          Remove thumbnail$' >/dev/null
 test $? -eq 0 || exit 1
 
+$EXIFEXE | grep '^  -r, --remove-thumbnail          Remove thumbnail$' >/dev/null
+test $? -eq 0 || exit 1
+
 echo PASSED

@@ -9,6 +9,7 @@ EXTRA_DIST = \
 	check-help.sh \
 	check-init-mandatory-tags.sh \
 	check-param-validity.sh \
+	check-required-file.sh \
 	check-show-description.sh \
 	check-show-tag.sh \
 	check-tag-description.sh \
@@ -22,6 +23,7 @@ check_SCRIPTS = \
 	check-help.sh \
 	check-init-mandatory-tags.sh \
 	check-param-validity.sh \
+	check-required-file.sh \
 	check-show-description.sh \
 	check-show-tag.sh \
 	check-tag-description.sh \

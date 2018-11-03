@@ -170,7 +170,7 @@ test $? -eq 0 || exit 1
 echo Create tag on thumbnail IFD with no thumbnail
 cp "$srcimg" "$tmpimg"
 # First, create a file with an extra tag on IFD 1 and verify that it's there.
-$EXIFEXE --create-exif --tag=XResolution --ifd=1 --tag=XResolution --set-value="99 1" --output="$tmpimg" "$tmpimg" > "$tmpfile" 2>&1
+$EXIFEXE --create-exif --ifd=1 --tag=XResolution --set-value="99 1" --output="$tmpimg" "$tmpimg" > "$tmpfile" 2>&1
 test $? -eq 0 || { echo Incorrect return code; exit 1; }
 $EXIFEXE --no-fixup "$tmpimg" 2>&1 | sed -e "/Date and Time/s/|.*$/|/" > "$tmpfile"
 $DIFFEXE - "$tmpfile" <<EOF
