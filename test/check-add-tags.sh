@@ -142,6 +142,12 @@ $EXIFEXE --no-fixup --ifd=0 --tag=XResolution --set-value='12 2 3' -o "$dstimg" 
 check_result
 append_image
 
+echo Create invalid ASCII--too large
+$EXIFEXE --no-fixup --ifd=0 --tag=ImageDescription --set-value="`printf '%66000s' foo`" -o "$dstimg" "$srcimg" >/dev/null
+test "$?" -eq 1
+check_result
+append_image
+
 # Check the resulting EXIF file
 $EXIFEXE -m -i "$srcimg" >"$tmpfile"
 "$DIFFEXE" - "$tmpfile" <<EOF

@@ -135,6 +135,14 @@ Pixel Y Dimension   |0
 EOF
 test $? -eq 0 || exit 1
 
+echo Extract thumbnail from file without thumbnail
+$EXIFEXE --extract-thumbnail --output="$tmpimg" "$tmpimg2" > "$tmpfile" 2>&1
+test $? -eq 1 || { echo Incorrect return code; exit 1; }
+$DIFFEXE - "$tmpfile" <<EOF
+'check-thumbnail-image2.jpg' does not contain a thumbnail!
+EOF
+test $? -eq 0 || exit 1
+
 echo Remove thumbnail on file without thumbnail
 $EXIFEXE --remove-thumbnail --output="$tmpimg" "$tmpimg2" 2>&1 | sed -e "/Date and Time/s/|.*$/|/" > "$tmpfile"
 test $? -eq 0 || { echo Incorrect return code; exit 1; }
