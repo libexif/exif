@@ -167,6 +167,57 @@ Could not open 'does-not-exist' (No such file or directory)!
 EOF
 test $? -eq 0 || exit 1
 
+echo Create tag on thumbnail IFD with no thumbnail
+cp "$srcimg" "$tmpimg"
+# First, create a file with an extra tag on IFD 1 and verify that it's there.
+$EXIFEXE --create-exif --tag=XResolution --ifd=1 --tag=XResolution --set-value="99 1" --output="$tmpimg" "$tmpimg" > "$tmpfile" 2>&1
+test $? -eq 0 || { echo Incorrect return code; exit 1; }
+$EXIFEXE --no-fixup "$tmpimg" 2>&1 | sed -e "/Date and Time/s/|.*$/|/" > "$tmpfile"
+$DIFFEXE - "$tmpfile" <<EOF
+EXIF tags in 'check-thumbnail-image.jpg' ('Motorola' byte order):
+--------------------+----------------------------------------------------------
+Tag                 |Value
+--------------------+----------------------------------------------------------
+X-Resolution        |72
+Y-Resolution        |72
+Resolution Unit     |Inch
+Date and Time       |
+YCbCr Positioning   |Centered
+X-Resolution        |99
+Exif Version        |Exif Version 2.1
+Components Configura|Y Cb Cr -
+FlashPixVersion     |FlashPix Version 1.0
+Color Space         |Uncalibrated
+Pixel X Dimension   |0
+Pixel Y Dimension   |0
+--------------------+----------------------------------------------------------
+EOF
+test $? -eq 0 || exit 1
+
+echo Check that thumbnail tags are removed with no thumbnail
+# The tag on IFD 1 is removed because the file has no thumbnail.
+$EXIFEXE --output="$tmpimg" "$tmpimg" | sed -e "/Date and Time/s/|.*$/|/" 2>&1 > "$tmpfile"
+test $? -eq 0 || { echo Incorrect return code; exit 1; }
+$DIFFEXE - "$tmpfile" <<EOF
+EXIF tags in 'check-thumbnail-image.jpg' ('Motorola' byte order):
+--------------------+----------------------------------------------------------
+Tag                 |Value
+--------------------+----------------------------------------------------------
+X-Resolution        |72
+Y-Resolution        |72
+Resolution Unit     |Inch
+Date and Time       |
+YCbCr Positioning   |Centered
+Exif Version        |Exif Version 2.1
+Components Configura|Y Cb Cr -
+FlashPixVersion     |FlashPix Version 1.0
+Color Space         |Uncalibrated
+Pixel X Dimension   |0
+Pixel Y Dimension   |0
+--------------------+----------------------------------------------------------
+EOF
+test $? -eq 0 || exit 1
+
 # Cleanup
 echo PASSED
 rm -f "$tmpfile" "$tmpimg" "$tmpimg2"
