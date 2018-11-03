@@ -682,9 +682,9 @@ show_entry_xml (ExifEntry *e, void *data)
 	char v[TAG_VALUE_BUF], t[TAG_VALUE_BUF];
 
 	if (*ids) {
-		fprintf (stdout, "<0x%04x>", e->tag);
+		fprintf (stdout, "<x%04x>", e->tag);
 		fprintf (stdout, "%s", escape_xml(exif_entry_get_value (e, v, sizeof (v))));
-		fprintf (stdout, "</0x%04x>", e->tag);
+		fprintf (stdout, "</x%04x>", e->tag);
 	} else {
 		strncpy (t, exif_tag_get_title_in_ifd(e->tag, exif_entry_get_ifd(e)), sizeof (t));
 
