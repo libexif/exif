@@ -73,6 +73,22 @@ Invalid IFD 'XYZZY'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperabili
 EOF
 test $? -eq 0 || exit 1
 
+echo Test missing tag name
+$EXIFEXE --ifd=0 --show-description > "$tmpfile" 2>&1
+test $? -eq 1 || { echo Incorrect return code; exit 1; }
+$DIFFEXE - "$tmpfile" <<EOF
+You need to specify a tag!
+EOF
+test $? -eq 0 || exit 1
+
+echo Test missing IFD
+$EXIFEXE --tag=1 --show-description > "$tmpfile" 2>&1
+test $? -eq 1 || { echo Incorrect return code; exit 1; }
+$DIFFEXE - "$tmpfile" <<EOF
+You need to specify an IFD!
+EOF
+test $? -eq 0 || exit 1
+
 # Cleanup
 echo PASSED
 rm -f "$tmpfile"
