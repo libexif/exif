@@ -49,7 +49,7 @@ Unknown Tag
 EOF
 test $? -eq 0 || exit 1
 
-echo Test tag with number > 65535
+echo "Test tag with number > 65535"
 $EXIFEXE --ifd=GPS --tag=65537 --show-description > "$tmpfile" 2>&1
 test $? -eq 1 || { echo Incorrect return code; exit 1; }
 $DIFFEXE - "$tmpfile" <<EOF
