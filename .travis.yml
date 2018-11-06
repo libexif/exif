@@ -102,8 +102,8 @@ install:
       set -e
       PATH="$PATH:/usr/local/opt/gettext/bin" autoreconf -sivf
       ./configure --prefix="${HOME}"
-      make
-      make install
+      make V=1
+      make V=1 install
       set +e
       cd "$TRAVIS_BUILD_DIR"
     fi
@@ -121,8 +121,8 @@ install:
       sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac
       autoreconf -sivf
       ./configure --prefix="${HOME}/popt" --disable-nls --disable-shared
-      make
-      make install
+      make V=1
+      make V=1 install
       cd "$TRAVIS_BUILD_DIR"
       set +e
     fi
@@ -153,9 +153,9 @@ script:
   - if [ "$CONFIG" = "sanitize" ] ; then CFLAGS='-g -Wall -Wextra -fsanitize=address -fsanitize=undefined'; export CC=clang-6.0; CONFIGURE_OPTS="POPT_CFLAGS=-I${HOME}/popt/include POPT_LIBS=-lpopt LDFLAGS=-L${HOME}/popt/lib"; fi
   - if [ "$CONFIG" = "coverage" ] ; then cd "$HOME"/libexif-testsuite; CFLAGS=--coverage; CONFIGURE_OPTS='LDFLAGS=--coverage'; fi
   - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="${HOME}/lib/pkgconfig" $CONFIGURE_OPTS || { tail -300 config.log; false; }
-  - make
-  - make check || { tail -300 test*/test-suite.log; false; }
-  - make install
+  - make V=1
+  - make V=1 check || { tail -300 test*/test-suite.log; false; }
+  - make V=1 install
   - if [ "$CONFIG" = "coverage" ] ; then cd "$TRAVIS_BUILD_DIR"; fi
 
 after_success:
