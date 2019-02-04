@@ -56,6 +56,18 @@ matrix:
           - autopoint
           - g++-8
           - libpopt-dev
+  - env: CONFIG=arm-cross
+    os: linux
+    compiler: gcc
+    addons:
+      apt:
+        packages:
+          - autopoint
+          - gcc-4.8-arm-linux-gnueabihf
+          - libc6-dev-armhf-cross
+    cache:
+      directories:
+        - $HOME/popt
   - env: CONFIG=sanitize
     os: linux
     compiler: clang
@@ -85,44 +97,24 @@ matrix:
           - subversion
 
 install:
-# Install and build the latest libexif
+  # Install the latest libexif
   - |
     if [ "$CONFIG" != "coverage" ] ; then
-      cd "$HOME"
       # OS X has a weird alias that causes cd to abort with set -e so leave it
-      # off when it's run.
+      # off over a cd.
+      cd "$HOME"
       set -e
       git clone --depth=1 https://github.com/libexif/libexif.git
       set +e
       cd libexif
       set -e
       PATH="$PATH:/usr/local/opt/gettext/bin" autoreconf -sivf
-      ./configure --prefix="${HOME}"
-      make V=1
-      make V=1 install
       set +e
       cd "$TRAVIS_BUILD_DIR"
     fi
-# Install libpopt on OS X
+  # Install libpopt on OS X
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install popt; fi
-# libpopt0:1.16-8ubuntu1 has a memory leak that causes UBSAN to fail. Build
-# a fixed version to use when running those tests.
-  - |
-    if [ "$CONFIG" = "sanitize" -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then
-      set -e
-      cd "$HOME"
-      POPT_BASE_URL="http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16"
-      curl --fail --retry 8 --retry-connrefused -OL "${POPT_BASE_URL}"-11.debian.tar.xz -OL "${POPT_BASE_URL}".orig.tar.gz -OL "${POPT_BASE_URL}"-11.dsc
-      dpkg-source -x popt_1.16-11.dsc
-      cd popt-1.16
-      sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac
-      autoreconf -sivf
-      ./configure --prefix="${HOME}/popt" --disable-nls --disable-shared
-      make V=1
-      make V=1 install
-      cd "$TRAVIS_BUILD_DIR"
-      set +e
-    fi
+  # Install the exif test suite on coverage builds
   - |
     if [ "$CONFIG" = "coverage" ] ; then
       set -e
@@ -136,6 +128,21 @@ install:
       autoreconf -sivf
       set +e
     fi
+  # Install a fixed libpopt in coverage builds
+  - |
+    if [ '(' "$CONFIG" = "sanitize" -o "$CONFIG" = "arm-cross" ')' -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then
+      set -e
+      cd "$HOME"
+      POPT_BASE_URL="http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16"
+      curl --fail --retry 8 -OL "${POPT_BASE_URL}"-11.debian.tar.xz -OL "${POPT_BASE_URL}".orig.tar.gz -OL "${POPT_BASE_URL}"-11.dsc
+      dpkg-source -x popt_1.16-11.dsc
+      cd popt-1.16
+      # Drop the message catalogs so they aren't built, installed or cached
+      sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac
+      autoreconf -sivf
+      cd "$TRAVIS_BUILD_DIR"
+      set +e
+    fi
 
 script:
   # Ensure brew gettext is in the PATH so autopoint is found on OS X
@@ -147,11 +154,45 @@ script:
   - if [ "$CONFIG" = "stackprotect" ] ; then CFLAGS='-g -O0 -fstack-protector-all'; fi
   - if [ "$CONFIG" = "clang6" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=clang-6.0; fi
   - if [ "$CONFIG" = "gcc8" ] ; then CFLAGS='-Wall -Wextra -O3'; export export CC=gcc-8; fi
-  - if [ "$CONFIG" = "sanitize" ] ; then CFLAGS='-g -Wall -Wextra -fsanitize=address -fsanitize=undefined'; export CC=clang-6.0; CONFIGURE_OPTS="POPT_CFLAGS=-I${HOME}/popt/include POPT_LIBS=-lpopt LDFLAGS=-L${HOME}/popt/lib"; fi
-  - if [ "$CONFIG" = "coverage" ] ; then cd "$HOME"/libexif-testsuite; CFLAGS=--coverage; CONFIGURE_OPTS='LDFLAGS=--coverage'; fi
+  - if [ "$CONFIG" = "arm-cross" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=arm-linux-gnueabihf-gcc-4.8; CONFIGURE_OPTS="--host=arm-linux-gnueabihf POPT_CFLAGS=-I${HOME}/popt/include POPT_LIBS=-lpopt LDFLAGS=-L${HOME}/popt/lib"; fi
+  - if [ "$CONFIG" = "sanitize" ] ; then CFLAGS='-g -Wall -Wextra -fsanitize=address -fsanitize=undefined -fsanitize-address-use-after-scope'; export CC=clang-6.0; CONFIGURE_OPTS="POPT_CFLAGS=-I${HOME}/popt/include POPT_LIBS=-lpopt LDFLAGS=-L${HOME}/popt/lib"; export ASAN_OPTIONS=strict_string_checks=0:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1; fi
+  - if [ "$CONFIG" = "coverage" ] ; then CFLAGS=--coverage; CONFIGURE_OPTS='LDFLAGS=--coverage'; fi
+
+  # libpopt0:1.16-8ubuntu1 has a memory leak that causes UBSAN to fail. Build
+  # a fixed version to use when running those tests. popt is also needed on ARM
+  # since the ARM packages aren't available to install. This can't be built in the
+  # install section because it needs the compiler name and flags to be specified.
+  - |
+    if [ -e "$HOME"/popt-1.16 ] ; then
+      set -e
+      cd "$HOME"/popt-1.16
+      # Use the CONFIGURE_OPTS above to get a --host option, if present
+      ./configure --prefix="${HOME}/popt" --disable-nls --disable-shared $CONFIGURE_OPTS
+      make V=1
+      make V=1 install
+      cd "$TRAVIS_BUILD_DIR"
+      set +e
+    fi
+  - |
+    if [ "$CONFIG" != "coverage" ] ; then
+      cd "$HOME"/libexif
+      set -e
+      # Use the CONFIGURE_OPTS above to get a --host option, if present
+      # Use CFLAGS to get the -g and -fsanitize options
+      ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" $CONFIGURE_OPTS
+      make V=1
+      make V=1 install
+      set +e
+      cd "$TRAVIS_BUILD_DIR"
+    fi
+
+  # Finally, configure and build exif
+  - if [ "$CONFIG" = "coverage" ] ; then cd "$HOME"/libexif-testsuite; fi
   - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="${HOME}/lib/pkgconfig" $CONFIGURE_OPTS || { tail -300 config.log; false; }
   - make V=1
-  - make V=1 check || { tail -300 test*/test-suite.log; false; }
+
+  # Skip tests when cross compiling.
+  - if [ "$CONFIG" != "arm-cross" ] ; then make V=1 check || { tail -300 test*/test-suite.log; false; }; fi
   - make V=1 install
   - if [ "$CONFIG" = "coverage" ] ; then cd "$TRAVIS_BUILD_DIR"; fi
 
