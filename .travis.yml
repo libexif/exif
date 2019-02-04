@@ -1,8 +1,8 @@
 # Travis CI configuration file
 
-sudo: false
-
 language: c
+
+sudo: false
 
 git:
   depth: 1
@@ -33,7 +33,9 @@ os:
 
 matrix:
   include:
-  - os: linux
+  - env: CONFIG=clang6
+    os: linux
+    compiler: clang
     addons:
       apt:
         sources:
@@ -43,10 +45,9 @@ matrix:
           - autopoint
           - clang-6.0
           - libpopt-dev
-    compiler: clang
-    env:
-      - CONFIG=clang6
-  - os: linux
+  - env: CONFIG=gcc8
+    os: linux
+    compiler: gcc
     addons:
       apt:
         sources:
@@ -55,10 +56,9 @@ matrix:
           - autopoint
           - g++-8
           - libpopt-dev
-    compiler: gcc
-    env:
-      - CONFIG=gcc8
-  - os: linux
+  - env: CONFIG=sanitize
+    os: linux
+    compiler: clang
     addons:
       apt:
         sources:
@@ -68,25 +68,21 @@ matrix:
           - autopoint
           - clang-6.0
           - libtool
-    compiler: clang
     cache:
       directories:
         - $HOME/popt
     # Required for -fsanitize=undefined
     # see https://github.com/travis-ci/travis-ci/issues/9033
     sudo: required
-    env:
-      - CONFIG=sanitize
-  - os: linux
+  - env: CONFIG=coverage
+    os: linux
+    compiler: gcc
     addons:
       apt:
         packages:
           - autopoint
           - libpopt-dev
           - subversion
-    compiler: gcc
-    env:
-      - CONFIG=coverage
 
 install:
 # Install and build the latest libexif
@@ -115,7 +111,8 @@ install:
     if [ "$CONFIG" = "sanitize" -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then
       set -e
       cd "$HOME"
-      curl --fail -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.debian.tar.xz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16.orig.tar.gz -OL http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16-11.dsc
+      POPT_BASE_URL="http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16"
+      curl --fail --retry 8 --retry-connrefused -OL "${POPT_BASE_URL}"-11.debian.tar.xz -OL "${POPT_BASE_URL}".orig.tar.gz -OL "${POPT_BASE_URL}"-11.dsc
       dpkg-source -x popt_1.16-11.dsc
       cd popt-1.16
       sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac
