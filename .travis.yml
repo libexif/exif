@@ -134,8 +134,8 @@ install:
       set -e
       cd "$HOME"
       POPT_BASE_URL="http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16"
-      curl --fail --retry 8 -OL "${POPT_BASE_URL}"-11.debian.tar.xz -OL "${POPT_BASE_URL}".orig.tar.gz -OL "${POPT_BASE_URL}"-11.dsc
-      dpkg-source -x popt_1.16-11.dsc
+      curl --fail --retry 8 -OL "${POPT_BASE_URL}"-12.debian.tar.xz -OL "${POPT_BASE_URL}".orig.tar.gz -OL "${POPT_BASE_URL}"-12.dsc
+      dpkg-source -x popt_1.16-12.dsc
       cd popt-1.16
       # Drop the message catalogs so they aren't built, installed or cached
       sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac
