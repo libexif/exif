@@ -7,12 +7,15 @@ sudo: false
 git:
   depth: 1
 
-# Install needed packages on Ubuntu (OS X is done with brew below)
+# Install needed packages on Ubuntu  & OS X
 addons:
   apt:
     packages:
-    - autopoint
-    - libpopt-dev
+      - autopoint
+      - libpopt-dev
+  homebrew:
+    packages:
+      - popt
 
 env:
   # More configurations are configured in the matrix section
@@ -112,8 +115,6 @@ install:
       set +e
       cd "$TRAVIS_BUILD_DIR"
     fi
-  # Install libpopt on OS X
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install popt; fi
   # Install the exif test suite on coverage builds
   - |
     if [ "$CONFIG" = "coverage" ] ; then
