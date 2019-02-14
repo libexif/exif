@@ -71,6 +71,17 @@ matrix:
     cache:
       directories:
         - $HOME/popt
+  - env: CONFIG=musl
+    os: linux
+    compiler: gcc
+    addons:
+      apt:
+        packages:
+          - autopoint
+          - musl-tools
+    cache:
+      directories:
+        - $HOME/popt
   - env: CONFIG=sanitize
     os: linux
     compiler: clang
@@ -131,7 +142,7 @@ install:
     fi
   # Install a fixed libpopt in coverage builds
   - |
-    if [ '(' "$CONFIG" = "sanitize" -o "$CONFIG" = "arm-cross" ')' -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then
+    if [ '(' "$CONFIG" = "musl" -o "$CONFIG" = "arm-cross" -o "$CONFIG" = "sanitize" ')' -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then
       set -e
       cd "$HOME"
       POPT_BASE_URL="http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16"
@@ -156,13 +167,15 @@ script:
   - if [ "$CONFIG" = "clang6" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=clang-6.0; fi
   - if [ "$CONFIG" = "gcc8" ] ; then CFLAGS='-Wall -Wextra -O3'; export export CC=gcc-8; fi
   - if [ "$CONFIG" = "arm-cross" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=arm-linux-gnueabihf-gcc-4.8; CONFIGURE_OPTS="--host=arm-linux-gnueabihf POPT_CFLAGS=-I${HOME}/popt/include POPT_LIBS=-lpopt LDFLAGS=-L${HOME}/popt/lib"; fi
+  - if [ "$CONFIG" = "musl" ] ; then CFLAGS='-Wall -Wextra -O3'; export CC=musl-gcc; CONFIGURE_OPTS="POPT_CFLAGS=-I${HOME}/popt/include POPT_LIBS=-lpopt LDFLAGS=-L${HOME}/popt/lib"; fi
   - if [ "$CONFIG" = "sanitize" ] ; then CFLAGS='-g -Wall -Wextra -fsanitize=address -fsanitize=undefined -fsanitize-address-use-after-scope'; export CC=clang-6.0; CONFIGURE_OPTS="POPT_CFLAGS=-I${HOME}/popt/include POPT_LIBS=-lpopt LDFLAGS=-L${HOME}/popt/lib"; export ASAN_OPTIONS=strict_string_checks=0:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1; fi
   - if [ "$CONFIG" = "coverage" ] ; then CFLAGS=--coverage; CONFIGURE_OPTS='LDFLAGS=--coverage'; fi
 
-  # libpopt0:1.16-8ubuntu1 has a memory leak that causes UBSAN to fail. Build
-  # a fixed version to use when running those tests. popt is also needed on ARM
-  # since the ARM packages aren't available to install. This can't be built in the
-  # install section because it needs the compiler name and flags to be specified.
+  # libpopt0:1.16-8ubuntu1 has a memory leak that causes UBSAN to fail. Build a
+  # fixed version to use when running those tests. popt is also needed on ARM
+  # and MUSL since those types of packages aren't available to install with
+  # apt. This can't be built in the install section because it needs the
+  # compiler name and flags to be specified.
   - |
     if [ -e "$HOME"/popt-1.16 ] ; then
       set -e
