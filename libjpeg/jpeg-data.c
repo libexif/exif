@@ -99,7 +99,6 @@ jpeg_data_save_file (JPEGData *data, const char *path)
 	if (!d)
 		return 0;
 
-	remove (path);
 	f = fopen (path, "wb");
 	if (!f) {
 		free (d);
@@ -112,7 +111,6 @@ jpeg_data_save_file (JPEGData *data, const char *path)
 	if (written == size)  {
 		return 1;
 	}
-	remove(path);
 	return 0;
 }
 
