@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
 /* This refers to the exif-i18n.h file from the "exif" package and is
  * NOT to be confused with the libexif/i18n.h file.
@@ -105,8 +106,9 @@ jpeg_data_save_file (JPEGData *data, const char *path)
 		return 0;
 	}
 	written = fwrite (d, 1, size, f);
-	fclose (f);
 	free (d);
+	if (fclose (f) == EOF)
+		return 0;
 	if (written == size)  {
 		return 1;
 	}
@@ -296,7 +298,7 @@ jpeg_data_load_file (JPEGData *data, const char *path)
 {
 	FILE *f;
 	unsigned char *d;
-	unsigned int size;
+	long size;
 
 	if (!data) return;
 	if (!path) return;
@@ -304,28 +306,47 @@ jpeg_data_load_file (JPEGData *data, const char *path)
 	f = fopen (path, "rb");
 	if (!f) {
 		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
-				_("Path '%s' invalid."), path);
+				_("Could not open '%s' (%s)!"), path, strerror (errno));
 		return;
 	}
 
 	/* For now, we read the data into memory. Patches welcome... */
-	fseek (f, 0, SEEK_END);
+	if (fseek (f, 0, SEEK_END) < 0) {
+		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
+				_("Could not determine size of '%s' (%s)."), path, strerror (errno));
+		fclose (f);
+		return;
+	}
 	size = ftell (f);
-	fseek (f, 0, SEEK_SET);
+	if (size < 0) {
+		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
+				_("Could not determine size of '%s' (%s)."), path, strerror (errno));
+		fclose (f);
+		return;
+	}
+	if (fseek (f, 0, SEEK_SET) < 0) {
+		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
+				_("Could not determine size of '%s' (%s)."), path, strerror (errno));
+		fclose (f);
+		return;
+	}
+
 	d = malloc (size);
 	if (!d) {
 		EXIF_LOG_NO_MEMORY (data->priv->log, "jpeg-data", size);
 		fclose (f);
 		return;
 	}
-	if (fread (d, 1, size, f) != size) {
+	if (fread (d, 1, size, f) != (size_t) size) {
 		free (d);
 		fclose (f);
 		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
-				_("Could not read '%s'."), path);
+				_("Could not read '%s' (%s)."), path, strerror (errno));
 		return;
 	}
-	fclose (f);
+	if (fclose (f) == EOF)
+		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
+				_("Could not read '%s' (%s)."), path, strerror (errno));
 
 	jpeg_data_load_data (data, d, size);
 	free (d);
