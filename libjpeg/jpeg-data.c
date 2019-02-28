@@ -310,29 +310,29 @@ jpeg_data_load_file (JPEGData *data, const char *path)
 
 	/* For now, we read the data into memory. Patches welcome... */
 	if (fseek (f, 0, SEEK_END) < 0) {
+		fclose (f);
 		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
 				_("Could not determine size of '%s' (%s)."), path, strerror (errno));
-		fclose (f);
 		return;
 	}
 	size = ftell (f);
 	if (size < 0) {
+		fclose (f);
 		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
 				_("Could not determine size of '%s' (%s)."), path, strerror (errno));
-		fclose (f);
 		return;
 	}
 	if (fseek (f, 0, SEEK_SET) < 0) {
+		fclose (f);
 		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
 				_("Could not determine size of '%s' (%s)."), path, strerror (errno));
-		fclose (f);
 		return;
 	}
 
 	d = malloc (size);
 	if (!d) {
-		EXIF_LOG_NO_MEMORY (data->priv->log, "jpeg-data", size);
 		fclose (f);
+		EXIF_LOG_NO_MEMORY (data->priv->log, "jpeg-data", size);
 		return;
 	}
 	if (fread (d, 1, size, f) != (size_t) size) {

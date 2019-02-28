@@ -300,16 +300,16 @@ action_insert_thumb (ExifData *ed, ExifLog *log, ExifParams p)
 	} else {
 		long fsize;
 		if (fseek (f, 0, SEEK_END) < 0) {
+			fclose(f);
 			exif_log (log, -1, "exif", _("Could not determine size of "
 				"'%s' (%s)."), p.set_thumb, strerror (errno));
-			fclose(f);
 			return;
 		}
 		fsize = ftell (f);
 		if (fsize < 0) {
+			fclose(f);
 			exif_log (log, -1, "exif", _("Could not determine size of "
 				"'%s' (%s)."), p.set_thumb, strerror (errno));
-			fclose(f);
 			return;
 		}
 		ed->size = fsize;
@@ -319,9 +319,9 @@ action_insert_thumb (ExifData *ed, ExifLog *log, ExifParams p)
 			exit (1);
 		}
 		if (fseek (f, 0, SEEK_SET) < 0) {
+			fclose(f);
 			exif_log (log, -1, "exif", _("Could not determine size of "
 				"'%s' (%s)."), p.set_thumb, strerror (errno));
-			fclose(f);
 			return;
 		}
 		if (fread (ed->data, sizeof (char), ed->size, f) != ed->size)
