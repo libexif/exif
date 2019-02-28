@@ -21,6 +21,7 @@
 #include "config.h"
 
 #include <errno.h>
+#include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -244,6 +245,7 @@ main (int argc, const char **argv)
 	ExifLog *log = NULL;
 	char fout[1024] = {0, };
 	int continue_without_file = 0;
+	struct sigaction sa = {};
 
 #ifdef ENABLE_GLIBC_MEMDEBUG
 	mcheck (NULL);
@@ -257,6 +259,12 @@ main (int argc, const char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 #endif
+
+	/* Return EPIPE errno instead of a SIGPIPE signal on a bad pipe read/write */
+	sa.sa_handler = SIG_IGN;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGPIPE, &sa, NULL);
 
 	ctx = poptGetContext (PACKAGE, argc, argv, options, 0);
 	poptSetOtherOptionHelp (ctx, _("[OPTION...] file"));
