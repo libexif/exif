@@ -3,8 +3,9 @@
 
 . ./check-vars.sh
 
-readonly tmpfifo="check-no-seek.tmp"
+readonly tmpfifo="check-no-seek-fifo.tmp"
 readonly srcimg="$SRCDIR/testdata/no-exif.jpg"
+readonly tmpfile="check-no-seek.tmp"
 
 rm -f "${tmpfifo}"
 mkfifo "${tmpfifo}" || { echo "Could not create FIFO; skipping test"; exit 0; }
@@ -13,12 +14,27 @@ echo Check that write to FIFO succeeds
 # Throw away any data written to the FIFO
 cat ${tmpfifo} > /dev/null &
 $EXIFEXE --create-exif -o "${tmpfifo}" >/dev/null
-test $? -eq 0 || { echo Incorrect return code $? not 0; exit 1; }
+test $? -eq 0 || { echo Incorrect return code, expected 0; exit 1; }
 # Kill the cat and wait for it to exit
 kill $!
-wait $!
+wait $! 2>/dev/null
 
-echo Check that read of image from FIFO fails cleanly
+echo Check that write to FIFO with early close fails cleanly
+# Throw away the first byte of data written to the FIFO then close the FIFO,
+# triggering a write error in exif. A FIFO in all tested OSes buffers up to
+# 128KiB of data, so the write needs to be larger than that to invoke a write
+# failure. This is done by writing a large image, created by appending some
+# dummy JPEG APP15 sections to a small JPEG file.
+$EXIFEXE --create-exif "${srcimg}" -o "${tmpfile}"
+printf '\xff\xef\xff\xff%65531s\xff\xef\xff\xff%65531s' filler >>"${tmpfile}"
+dd if="${tmpfifo}" of=/dev/null bs=1 count=1 2>/dev/null &
+$EXIFEXE -r -o "${tmpfifo}" "${tmpfile}" >/dev/null
+test $? -eq 1 || { echo Incorrect return code, expected 1; exit 1; }
+# Make sure dd is killed and wait for it to exit
+kill $!
+wait $! 2>/dev/null
+
+echo Check that read of image from unseekable FIFO fails cleanly
 # Reading from an image requires its size which can't be determined from a
 # FIFO. exif should detect this and cleanly exit. It should really be
 # fixed so it doesn't need the size in advance.
@@ -27,18 +43,19 @@ echo Check that read of image from FIFO fails cleanly
 # the second time.
 (cat "${srcimg}" >"${tmpfifo}"; sleep 1; cat "${srcimg}" >"${tmpfifo}") &
 $EXIFEXE --create-exif -o /dev/null "${tmpfifo}" >/dev/null
-test $? -eq 1 || { echo Incorrect return code $? not 1; exit 1; }
+test $? -eq 1 || { echo Incorrect return code, expected 1; exit 1; }
 # Kill cat and wait for it to exit
 kill $!
-wait $! >/dev/null 2>&1
+wait $! 2>/dev/null
 
-echo Check that read of thumbnail from FIFO fails cleanly
+echo Check that read of thumbnail from unseekable FIFO fails cleanly
+# Same situation as the previous test, but on the thumbnail read path.
 (cat "${srcimg}" >"${tmpfifo}"; sleep 1; cat "${srcimg}" >"${tmpfifo}") &
-$EXIFEXE --create-exif --insert-thumbnail="${tmpfifo}" -o /dev/null
-test $? -eq 1 || { echo Incorrect return code $? not 1; exit 1; }
+$EXIFEXE --create-exif --insert-thumbnail="${tmpfifo}" -o /dev/null "${srcimg}"
+test $? -eq 1 || { echo Incorrect return code, expected 1; exit 1; }
 # Kill the cat and wait for it to exit
 kill $!
-wait $!
+wait $! 2>/dev/null
 
 echo PASSED
-rm -f "${tmpfifo}"
+rm -f "${tmpfifo}" "${tmpfile}"
