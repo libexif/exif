@@ -1,2 +1,3 @@
 exif/actions.c
 exif/main.c
+libjpeg/jpeg-data.c
