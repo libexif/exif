@@ -17,6 +17,8 @@ addons:
   homebrew:
     packages:
       - popt
+    # The default OS X image is now (July 2019) too old to work without this
+    update: true
 
 env:
   # More configurations are configured in the matrix section
@@ -139,6 +141,14 @@ matrix:
           - autopoint
           - libpopt-dev
           - subversion
+  - env: CONFIG=normal
+    os: osx
+    osx_image: xcode11
+    compiler: clang
+    addons:
+      homebrew:
+        packages:
+          - popt
 
 before_install:
   # The apt addons section is ignored on bionic for some reason
