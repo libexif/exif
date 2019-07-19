@@ -10,9 +10,10 @@ readonly srcimg="add-tag-src.out.jpg"
 readonly dstimg="add-tag.out.jpg"
 readonly tmpfile="add-tag.tmp"
 
-# Run this in the C locale so the messages are known
+# Run this in the C locale so the messages and decimals are known
 LANG=C; export LANG
 LANGUAGE=C; export LANGUAGE
+LC_NUMERIC=C; export LC_NUMERIC
 
 error=0
 

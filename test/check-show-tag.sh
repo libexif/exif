@@ -7,9 +7,10 @@ readonly tmpfile="check-show-tag-out.tmp"
 readonly tmpimg="check-show-tag-image.jpg"
 readonly srcimg="$SRCDIR/testdata/no-exif.jpg"
 
-# Run this in the C locale so the messages are known
+# Run this in the C locale so the messages and decimals are known
 LANG=C; export LANG
 LANGUAGE=C; export LANGUAGE
+LC_NUMERIC=C; export LC_NUMERIC
 
 echo Test default XResolution in IFD 0
 $EXIFEXE --create-exif --ifd=0 --tag=XResolution > "$tmpfile" 2>&1
