@@ -1,14 +1,14 @@
 # exif Bahasa Melayu (Malay) (ms)
-# Copyright (C) 2015, 2018 Lutz Mueller and others
+# Copyright (C) 2015, 2018, 2019 Lutz Mueller and others
 # This file is distributed under the same license as the exif package.
-# Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>, 2015, 2018.
+# Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>, 2015, 2018, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: exif 0.6.21\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-07-12 20:42+0200\n"
-"PO-Revision-Date: 2018-05-20 07:15+1000\n"
+"PO-Revision-Date: 2020-01-03 10:57+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "Language: ms\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: exif/actions.c:60
-#, fuzzy, c-format
+#, c-format
 msgid "Not enough memory."
-msgstr "Tidak cukup memori"
+msgstr "Tidak cukup memori."
 
 #: exif/actions.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "Setting a value for this tag is unsupported!"
-msgstr "Nilai tag"
+msgstr "Penetapan nilai untuk tag ini tidak disokong!"
 
 #: exif/actions.c:94
 #, c-format
@@ -35,9 +35,9 @@ msgid "Too few components specified (need %d, found %d)\n"
 msgstr ""
 
 #: exif/actions.c:99
-#, fuzzy, c-format
+#, c-format
 msgid "Numeric value expected\n"
-msgstr "Arkib mengandungi %.*s dimana nilai %s numerik dijangka"
+msgstr "Nilai numerik dijangka\n"
 
 #: exif/actions.c:106
 #, c-format
@@ -45,9 +45,9 @@ msgid "Internal error. Please contact <%s>."
 msgstr ""
 
 #: exif/actions.c:145
-#, fuzzy, c-format
+#, c-format
 msgid "Not yet implemented!"
-msgstr "%s belum lagi disokong"
+msgstr "Belum lagi dilaksanakan!"
 
 #: exif/actions.c:153
 #, c-format
@@ -60,9 +60,9 @@ msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr ""
 
 #: exif/actions.c:186 exif/actions.c:362
-#, fuzzy, c-format
+#, c-format
 msgid "Wrote file '%s'."
-msgstr "%s: fail input adalah fail output"
+msgstr "Menulis fail '%s'."
 
 #: exif/actions.c:206
 #, fuzzy, c-format
@@ -70,14 +70,14 @@ msgid "EXIF entry '%s' "
 msgstr "kemasukan `%s' usang.  Diabaikan"
 
 #: exif/actions.c:208
-#, fuzzy, c-format
+#, c-format
 msgid "(0x%x, '%s') "
-msgstr "(0x%04x, '%s'): "
+msgstr "(0x%x, '%s') "
 
 #: exif/actions.c:211
 #, fuzzy, c-format
 msgid "exists in IFD '%s':\n"
-msgstr "IFD"
+msgstr "%s wujud tapi ianya bukan direktori"
 
 #: exif/actions.c:224
 #, fuzzy
@@ -97,7 +97,7 @@ msgstr "Tidak dapat membuka %s: %s\n"
 #: exif/actions.c:306
 #, fuzzy, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "Amaran: tidak dapat membaca blok 0: %s\n"
+msgstr "Tidak dapat membuka %s untuk salinan: %s"
 
 #: exif/actions.c:325
 #, c-format
@@ -107,7 +107,7 @@ msgstr ""
 #: exif/actions.c:331
 #, fuzzy, c-format
 msgid "'%s' does not contain tag '%s'."
-msgstr "Volum %s tidak sepadan %s"
+msgstr "Tag '%s' tidak sah!"
 
 #: exif/actions.c:349
 #, fuzzy, c-format
@@ -117,7 +117,7 @@ msgstr "Volum %s tidak sepadan %s"
 #: exif/actions.c:357
 #, fuzzy, c-format
 msgid "Could not open '%s' for writing (%s)!"
-msgstr "%s: tidak dapat membuka %s.\n"
+msgstr "Tidak dapat membuka %s untuk menulis: %s"
 
 #: exif/actions.c:379
 #, fuzzy, c-format
@@ -143,12 +143,11 @@ msgstr[0] ""
 #: exif/actions.c:497 exif/main.c:320
 #, fuzzy
 msgid "Unknown Tag"
-msgstr "tidak diketahui"
+msgstr "Tag"
 
 #: exif/actions.c:509
-#, fuzzy
 msgid "Unknown value"
-msgstr "<tidak diketahui>"
+msgstr "Nilai tidak diketahui"
 
 #: exif/actions.c:533
 #, c-format
@@ -160,9 +159,8 @@ msgid "Tag"
 msgstr "Tag"
 
 #: exif/actions.c:545
-#, fuzzy
 msgid "Value"
-msgstr "Nilai boolean tidak sah"
+msgstr "Nilai"
 
 #: exif/actions.c:560
 #, c-format
@@ -170,9 +168,9 @@ msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr ""
 
 #: exif/actions.c:602
-#, fuzzy, c-format
+#, c-format
 msgid "ThumbnailSize\t%i\n"
-msgstr "<i>(tiada cadangan)</i>"
+msgstr "Saiz Thumbnail\t%i\n"
 
 #: exif/main.c:194
 #, fuzzy
@@ -184,18 +182,16 @@ msgid "Show IDs instead of tag names"
 msgstr ""
 
 #: exif/main.c:198
-#, fuzzy
 msgid "Select tag"
-msgstr "Pilih fail imej"
+msgstr "Pilih tag"
 
 #: exif/main.c:198
 msgid "tag"
 msgstr "tag"
 
 #: exif/main.c:200
-#, fuzzy
 msgid "Select IFD"
-msgstr "IFD"
+msgstr "Pilih IFD"
 
 #: exif/main.c:200
 msgid "IFD"
@@ -207,31 +203,27 @@ msgstr ""
 
 #: exif/main.c:204
 msgid "Show contents of tag MakerNote"
-msgstr ""
+msgstr "Papar kandungan bagi tag MakerNote"
 
 #: exif/main.c:206
-#, fuzzy
 msgid "Remove tag or ifd"
-msgstr "Tag"
+msgstr "Buang tag atau ifd"
 
 #: exif/main.c:208
-#, fuzzy
 msgid "Show description of tag"
-msgstr "Nilai tag"
+msgstr "Papar huraian bagi tag"
 
 #: exif/main.c:210
 msgid "Extract thumbnail"
-msgstr ""
+msgstr "Dapatkan gambar kecil"
 
 #: exif/main.c:212
-#, fuzzy
 msgid "Remove thumbnail"
-msgstr "tak dapat membuang %s"
+msgstr "Buang gambar kecil"
 
 #: exif/main.c:214
-#, fuzzy
 msgid "Insert FILE as thumbnail"
-msgstr "Masukkan fail lain ke file semasa"
+msgstr "Masukkan FAIL sebagai gambar kecil"
 
 #: exif/main.c:214 exif/main.c:218
 msgid "FILE"
@@ -242,9 +234,8 @@ msgid "Do not fix existing tags in files"
 msgstr ""
 
 #: exif/main.c:218
-#, fuzzy
 msgid "Write data to FILE"
-msgstr "Nama Fail untuk di Tulis"
+msgstr "Tulis data ke FAIL"
 
 #: exif/main.c:220
 msgid "Value of tag"
@@ -263,9 +254,8 @@ msgid "Output in a machine-readable (tab delimited) format"
 msgstr ""
 
 #: exif/main.c:227
-#, fuzzy
 msgid "Width of output"
-msgstr "Keluaran:\n"
+msgstr "Lebar keluaran"
 
 #: exif/main.c:227
 msgid "WIDTH"
@@ -307,11 +297,11 @@ msgstr "Tag '%s' tidak sah!"
 
 #: exif/main.c:293
 msgid "You need to specify a tag!"
-msgstr ""
+msgstr "Anda mesti nyatakan satu tag!"
 
 #: exif/main.c:298
 msgid "You need to specify an IFD!"
-msgstr ""
+msgstr "Anda mesti nyatakan sebuah IFD!"
 
 #: exif/main.c:335
 #, c-format
