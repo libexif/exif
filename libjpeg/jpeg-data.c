@@ -196,7 +196,13 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 
 	if (!data) return;
 	if (!d) return;
+	if (!size) return;
 
+	if (d[0] != 0xff) {
+		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data", _("Data does not start with 0xFF, does not follow JPEG specification."));
+		return;
+	}
+			return;
 	for (o = 0; o < size;) {
 
 		/*
