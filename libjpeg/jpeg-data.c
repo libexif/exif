@@ -198,11 +198,6 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 	if (!d) return;
 	if (!size) return;
 
-	if (d[0] != 0xff) {
-		exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data", _("Data does not start with 0xFF, does not follow JPEG specification."));
-		return;
-	}
-			return;
 	for (o = 0; o < size;) {
 
 		/*
@@ -212,6 +207,8 @@ jpeg_data_load_data (JPEGData *data, const unsigned char *d,
 		for (i = 0; i < MIN(7, size - o); i++)
 			if (d[o + i] != 0xff)
 				break;
+		if (o+i == 0) /* ignore if its the first byte, otherwise 0xff is at -1 */
+			continue;
 		if ((i >= size - o) || !JPEG_IS_MARKER (d[o + i])) {
 			exif_log (data->priv->log, EXIF_LOG_CODE_CORRUPT_DATA, "jpeg-data",
 					_("Data does not follow JPEG specification."));
