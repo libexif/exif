@@ -142,6 +142,7 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 		case JPEG_MARKER_EOI:
 			break;
 		case JPEG_MARKER_APP1:
+			ed = NULL;
 			exif_data_save_data (s.content.app1, &ed, &eds);
 			if (!ed) break;
 			CLEANUP_REALLOC (*d, sizeof (char) * (*ds + 2));
