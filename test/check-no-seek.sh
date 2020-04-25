@@ -22,11 +22,11 @@ wait $! 2>/dev/null
 echo Check that write to FIFO with early close fails cleanly
 # Throw away the first byte of data written to the FIFO then close the FIFO,
 # triggering a write error in exif. A FIFO in all tested OSes buffers up to
-# 128KiB of data, so the write needs to be larger than that to invoke a write
-# failure. This is done by writing a large image, created by appending some
-# dummy JPEG APP15 sections to a small JPEG file.
+# 1MiB of data, so the write needs to be larger than that to invoke a write
+# failure everywhere. This is done by writing a large image, created by
+# appending some dummy JPEG APP15 sections to a small JPEG file.
 $EXIFEXE --create-exif "${srcimg}" -o "${tmpfile}"
-printf '\xff\xef\xff\xff%65531s\xff\xef\xff\xff%65531s' filler >>"${tmpfile}"
+for n in $(seq 16); do printf '\xff\xef\xff\xff%65531s' filler >>"${tmpfile}"; done
 dd if="${tmpfifo}" of=/dev/null bs=1 count=1 2>/dev/null &
 $EXIFEXE -r -o "${tmpfifo}" "${tmpfile}" >/dev/null
 test $? -eq 1 || { echo Incorrect return code, expected 1; exit 1; }
