@@ -1,14 +1,14 @@
 # exif Bahasa Melayu (Malay) (ms)
-# Copyright (C) 2015, 2018, 2019 Lutz Mueller and others
+# Copyright (C) 2015, 2018, 2019, 2020 Lutz Mueller and others
 # This file is distributed under the same license as the exif package.
-# Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>, 2015, 2018, 2019.
+# Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>, 2015, 2018, 2019, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: exif 0.6.21\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-07-12 20:42+0200\n"
-"PO-Revision-Date: 2020-01-03 10:57+0800\n"
+"PO-Revision-Date: 2020-04-25 07:53+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "Language: ms\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 
 #: exif/actions.c:60
 #, c-format
@@ -90,14 +90,14 @@ msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr ""
 
 #: exif/actions.c:294
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open '%s' (%s)!"
-msgstr "Tidak dapat membuka %s: %s\n"
+msgstr "Tidak dapat membuka '%s' (%s)!"
 
 #: exif/actions.c:306
-#, fuzzy, c-format
+#, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "Tidak dapat membuka %s untuk salinan: %s"
+msgstr "Tidak dapat membaca '%s' (%s)."
 
 #: exif/actions.c:325
 #, c-format
@@ -105,29 +105,29 @@ msgid "IFD '%s' does not contain tag '%s'."
 msgstr ""
 
 #: exif/actions.c:331
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' does not contain tag '%s'."
-msgstr "Tag '%s' tidak sah!"
+msgstr "'%s' tidak mengandungi tag '%s'."
 
 #: exif/actions.c:349
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' does not contain a thumbnail!"
-msgstr "Volum %s tidak sepadan %s"
+msgstr "'%s' tidak mengandungi lakaran kenit!"
 
 #: exif/actions.c:357
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open '%s' for writing (%s)!"
-msgstr "Tidak dapat membuka %s untuk menulis: %s"
+msgstr "Tidak dapat membuka '%s' untuk menulis (%s)!"
 
 #: exif/actions.c:379
-#, fuzzy, c-format
+#, c-format
 msgid "EXIF tags in '%s':"
-msgstr "< %s ... %s > ? "
+msgstr "Tag EXIF dalam '%s':"
 
 #: exif/actions.c:475
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
-msgstr "Mengganti %s bagi format tarikh tak diketahui %s"
+msgstr "Format tidak diketahui atau MakerNote tidak wujud.\n"
 
 #: exif/actions.c:483
 #, c-format
@@ -141,9 +141,8 @@ msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] ""
 
 #: exif/actions.c:497 exif/main.c:320
-#, fuzzy
 msgid "Unknown Tag"
-msgstr "Tag"
+msgstr "Tag Tidak Diketahui"
 
 #: exif/actions.c:509
 msgid "Unknown value"
@@ -173,9 +172,8 @@ msgid "ThumbnailSize\t%i\n"
 msgstr "Saiz Thumbnail\t%i\n"
 
 #: exif/main.c:194
-#, fuzzy
 msgid "Display software version"
-msgstr "versi"
+msgstr "Papar versi perisian"
 
 #: exif/main.c:196
 msgid "Show IDs instead of tag names"
@@ -199,7 +197,7 @@ msgstr "IFD"
 
 #: exif/main.c:202
 msgid "List all EXIF tags"
-msgstr ""
+msgstr "Senaraikan semua tag EXIF"
 
 #: exif/main.c:204
 msgid "Show contents of tag MakerNote"
