@@ -5,7 +5,8 @@ language: c
 sudo: false
 
 git:
-  depth: 1
+  # Set to 10 instead of 1 to avoid problems when the most recent commits have [skip ci]
+  depth: 10
 
 # Install needed packages on Ubuntu & OS X
 addons:
