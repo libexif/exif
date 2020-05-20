@@ -1,4 +1,4 @@
-exif-0.6.x:
+exif-0.6.22 (2020-05-19):
   * New translations: ast, fur, ko, ms, pt_BR, ru, tr
   * Updated translations: many!
   * Fix a number of compiler and automake warnings
