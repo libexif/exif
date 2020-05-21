@@ -2,22 +2,22 @@
 # Copyright (C) 2010 Lutz Mueller and others
 # This file is distributed under the same license as the exif package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2010.
+# Yuri Chornoivan <yurchor@ukr.net>, 2010, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.20\n"
+"Project-Id-Version: exif 0.6.22\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-10-14 20:41-0700\n"
-"PO-Revision-Date: 2010-12-16 18:58+0200\n"
+"POT-Creation-Date: 2020-05-20 09:44+0200\n"
+"PO-Revision-Date: 2020-05-20 17:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
-"X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Lokalize 20.07.70\n"
 
 #: exif/actions.c:60
 #, c-format
@@ -59,81 +59,93 @@ msgstr "Попередження: вказано забагато компоне
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Забагато даних EXIF (%i байтів). Можна додавати дані, що не перевищують з об’ємом %i байтів."
 
-#: exif/actions.c:186 exif/actions.c:359
+#: exif/actions.c:184 exif/actions.c:385 exif/actions.c:389
+#, c-format
+msgid "Could not write '%s' (%s)."
+msgstr "Не вдалося записати «%s» (%s)."
+
+#: exif/actions.c:188 exif/actions.c:391
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Записано файл «%s»."
 
-#: exif/actions.c:206
+#: exif/actions.c:208
 #, c-format
 msgid "EXIF entry '%s' "
 msgstr "Запис EXIF «%s» "
 
-#: exif/actions.c:208
+#: exif/actions.c:210
 #, c-format
 msgid "(0x%x, '%s') "
 msgstr "(0x%x, «%s») "
 
-#: exif/actions.c:211
+#: exif/actions.c:213
 #, c-format
 msgid "exists in IFD '%s':\n"
 msgstr "існує у IFD «%s»:\n"
 
-#: exif/actions.c:224
+#: exif/actions.c:226
 msgid "Adding entry..."
 msgstr "Додавання запису…"
 
-#: exif/actions.c:264
+#: exif/actions.c:266
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "У IFD «%s» не міститься мітки «%s»."
 
-#: exif/actions.c:294
+#: exif/actions.c:298 libjpeg/jpeg-data.c:311
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Не вдалося відкрити «%s» (%s)!"
 
-#: exif/actions.c:303
+#: exif/actions.c:304 exif/actions.c:311 exif/actions.c:323
+#: libjpeg/jpeg-data.c:319 libjpeg/jpeg-data.c:326 libjpeg/jpeg-data.c:332
+#, c-format
+msgid "Could not determine size of '%s' (%s)."
+msgstr "Не вдалося визначити розмір «%s» (%s)."
+
+#: exif/actions.c:328 exif/actions.c:331 libjpeg/jpeg-data.c:346
+#: libjpeg/jpeg-data.c:351
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Не вдалося виконати читання «%s» (%s)."
 
-#: exif/actions.c:322
+#: exif/actions.c:349
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "У IFD «%s» не міститься мітки «%s»."
 
-#: exif/actions.c:328
+#: exif/actions.c:355
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "«%s» не міститься мітки «%s»."
 
-#: exif/actions.c:346
+#: exif/actions.c:373
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "У «%s» не міститься мініатюри."
 
-#: exif/actions.c:354
+#: exif/actions.c:381
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Не вдалося відкрити «%s» для запису (%s)."
 
-#: exif/actions.c:376
+#: exif/actions.c:409
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "Мітки EXIF у «%s»:"
 
-#: exif/actions.c:472
+#: exif/actions.c:507
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
 msgstr "Невідомий формат або немає MakerNote.\n"
 
-#: exif/actions.c:480
+#: exif/actions.c:515
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "У MakerNote не міститься жодного значення.\n"
 
-#: exif/actions.c:483
+#: exif/actions.c:518
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
@@ -142,33 +154,33 @@ msgstr[1] "У MakerNote міститься %i значення:\n"
 msgstr[2] "У MakerNote міститься %i значень:\n"
 msgstr[3] "У MakerNote міститься одне значення:\n"
 
-#: exif/actions.c:494 exif/main.c:322
+#: exif/actions.c:529 exif/main.c:334
 msgid "Unknown Tag"
 msgstr "Невідома мітка"
 
-#: exif/actions.c:506
+#: exif/actions.c:541
 msgid "Unknown value"
 msgstr "Невідоме значення"
 
-#: exif/actions.c:530
+#: exif/actions.c:566
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "Мітки EXIF у «%s» (порядок байтів «%s»):"
 
-#: exif/actions.c:536
+#: exif/actions.c:572
 msgid "Tag"
 msgstr "Мітка"
 
-#: exif/actions.c:542
+#: exif/actions.c:578
 msgid "Value"
 msgstr "Значення"
 
-#: exif/actions.c:557
+#: exif/actions.c:593
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "У даних EXIF міститься мініатюра (%i байтів)."
 
-#: exif/actions.c:599
+#: exif/actions.c:635
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "Розмір мініатюри\t%i\n"
@@ -281,47 +293,51 @@ msgstr "Показати цю довідку"
 msgid "Display brief usage message"
 msgstr "Показати коротке повідомлення про користування"
 
-#: exif/main.c:263
+#: exif/main.c:270
 msgid "[OPTION...] file"
 msgstr "[ПАРАМЕТР...] файл"
 
-#: exif/main.c:278
+#: exif/main.c:285
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Некоректне значення IFD «%s». Коректними значеннями IFD є «0», «1», «EXIF», «GPS» і «Interoperability»."
 
-#: exif/main.c:287
+#: exif/main.c:296
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Некоректна мітка «%s»."
 
-#: exif/main.c:295
+#: exif/main.c:306
 msgid "You need to specify a tag!"
 msgstr "Вам слід вказати мітку."
 
-#: exif/main.c:300
+#: exif/main.c:311
 msgid "You need to specify an IFD!"
 msgstr "Вам слід вказати IFD!"
 
-#: exif/main.c:337
+#: exif/main.c:349
 #, c-format
 msgid "Tag '%s' "
 msgstr "Мітка «%s» "
 
-#: exif/main.c:339
+#: exif/main.c:351
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, «%s»): "
 
-#: exif/main.c:353
+#: exif/main.c:365
 msgid "Specify input file or --create-exif"
 msgstr "Вкажіть файл вхідних даних або параметр --create-exif"
 
-#: exif/main.c:419
+#: exif/main.c:431
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
 msgstr "«%s» непридатний до читання або не містить даних EXIF."
 
-#: exif/main.c:446
+#: exif/main.c:466
 msgid "XML format is not available for Maker Notes"
 msgstr "Формат XML не можна використовувати для MakerNotes (приміток виробника)"
+
+#: libjpeg/jpeg-data.c:214
+msgid "Data does not follow JPEG specification."
+msgstr "Дані не відповідають специфікації JPEG."
