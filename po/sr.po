@@ -1,15 +1,15 @@
 # Serbian translation of exif.
-# Copyright (C) 2011 Free Software Foundation, Inc.
+# Copyright © 2020 Free Software Foundation, Inc.
 # This file is distributed under the same license as the exif package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011—2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif-0.6.20\n"
+"Project-Id-Version: exif-0.6.22\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-10-14 20:41-0700\n"
-"PO-Revision-Date: 2011-12-24 22:38+0200\n"
+"POT-Creation-Date: 2020-05-20 09:44+0200\n"
+"PO-Revision-Date: 2020-05-21 18:58+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian <gnu@prevod.org>\n"
+"Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr "Очекивана је бројна вредност\n"
 #: exif/actions.c:106
 #, c-format
 msgid "Internal error. Please contact <%s>."
-msgstr "Унутрашња грешка. Ступите у везу са <%s>. "
+msgstr "Унутрашња грешка. Ступите у везу са <%s>."
 
 #: exif/actions.c:145
 #, c-format
@@ -57,81 +57,93 @@ msgstr "Упозорење; Наведено је превише компоне�
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Превише ЕХИФ подтака (%i бајтова). Само %i бајтова је допуштено."
 
-#: exif/actions.c:186 exif/actions.c:359
+#: exif/actions.c:184 exif/actions.c:385 exif/actions.c:389
+#, c-format
+msgid "Could not write '%s' (%s)."
+msgstr "Не могу да пишем „%s“ (%s)."
+
+#: exif/actions.c:188 exif/actions.c:391
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Записујем датотеку „%s“."
 
-#: exif/actions.c:206
+#: exif/actions.c:208
 #, c-format
 msgid "EXIF entry '%s' "
 msgstr "ЕХИФ ставка „%s“ "
 
-#: exif/actions.c:208
+#: exif/actions.c:210
 #, c-format
 msgid "(0x%x, '%s') "
 msgstr "(0x%x, „%s“) "
 
-#: exif/actions.c:211
+#: exif/actions.c:213
 #, c-format
 msgid "exists in IFD '%s':\n"
 msgstr "постоје у ИФД „%s“:\n"
 
-#: exif/actions.c:224
+#: exif/actions.c:226
 msgid "Adding entry..."
 msgstr "Додајем ставку..."
 
-#: exif/actions.c:264
+#: exif/actions.c:266
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "ИФД „%s“ не садржи ознаку „%s“!"
 
-#: exif/actions.c:294
+#: exif/actions.c:298 libjpeg/jpeg-data.c:311
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Не могу да отворим „%s“ (%s)!"
 
-#: exif/actions.c:303
+#: exif/actions.c:304 exif/actions.c:311 exif/actions.c:323
+#: libjpeg/jpeg-data.c:319 libjpeg/jpeg-data.c:326 libjpeg/jpeg-data.c:332
+#, c-format
+msgid "Could not determine size of '%s' (%s)."
+msgstr "Не могу да одредим величину за „%s“ (%s)."
+
+#: exif/actions.c:328 exif/actions.c:331 libjpeg/jpeg-data.c:346
+#: libjpeg/jpeg-data.c:351
 #, c-format
 msgid "Could not read '%s' (%s)."
-msgstr "Не могу да прочитам „%s“ (%s)!"
+msgstr "Не могу да прочитам „%s“ (%s)."
 
-#: exif/actions.c:322
+#: exif/actions.c:349
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "ИФД „%s“ не садржи ознаку „%s“."
 
-#: exif/actions.c:328
+#: exif/actions.c:355
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "„%s“ не садржи ознаку „%s“."
 
-#: exif/actions.c:346
+#: exif/actions.c:373
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "„%s“ не садржи минијатуру!"
 
-#: exif/actions.c:354
+#: exif/actions.c:381
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Не могу да отворим „%s“ ради уписа (%s)!"
 
-#: exif/actions.c:376
+#: exif/actions.c:409
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "ЕХИФ ознаке у „%s“:"
 
-#: exif/actions.c:472
+#: exif/actions.c:507
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
 msgstr "Непознат формат или непостојећи Творац белешке.\n"
 
-#: exif/actions.c:480
+#: exif/actions.c:515
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "Творац белешке не садржи никакву вредност.\n"
 
-#: exif/actions.c:483
+#: exif/actions.c:518
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
@@ -139,33 +151,33 @@ msgstr[0] "Творац белешке садржи %i вредност:\n"
 msgstr[1] "Творац белешке садржи %i вредности:\n"
 msgstr[2] "Творац белешке садржи %i вредности:\n"
 
-#: exif/actions.c:494 exif/main.c:322
+#: exif/actions.c:529 exif/main.c:334
 msgid "Unknown Tag"
 msgstr "Непозната ознака"
 
-#: exif/actions.c:506
+#: exif/actions.c:541
 msgid "Unknown value"
 msgstr "Непозната вредност"
 
-#: exif/actions.c:530
+#: exif/actions.c:566
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "ЕХИФ ознаке у „%s“ („%s“ ред бајта):"
 
-#: exif/actions.c:536
+#: exif/actions.c:572
 msgid "Tag"
 msgstr "Ознака"
 
-#: exif/actions.c:542
+#: exif/actions.c:578
 msgid "Value"
 msgstr "Вредност"
 
-#: exif/actions.c:557
+#: exif/actions.c:593
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "Подаци ЕХИФ-а садрже минијатуру (%i бајтова)."
 
-#: exif/actions.c:599
+#: exif/actions.c:635
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "Величина минијатуре\t%i\n"
@@ -278,47 +290,51 @@ msgstr "Приказује ову поруку помоћи"
 msgid "Display brief usage message"
 msgstr "Приказује кратку поруку о коришћењу"
 
-#: exif/main.c:263
+#: exif/main.c:270
 msgid "[OPTION...] file"
 msgstr "[ОПЦИЈА...] датотека"
 
-#: exif/main.c:278
+#: exif/main.c:285
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "Неисправан ИФД „%s“. Важећи ИФД-ови су „0“, „1“, „EXIF“, „GPS“, и „Interoperability“."
 
-#: exif/main.c:287
+#: exif/main.c:296
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Неисправна ознака „%s“!"
 
-#: exif/main.c:295
+#: exif/main.c:306
 msgid "You need to specify a tag!"
 msgstr "Морате да наведете ознаку!"
 
-#: exif/main.c:300
+#: exif/main.c:311
 msgid "You need to specify an IFD!"
 msgstr "Морате да наведете ИФД!"
 
-#: exif/main.c:337
+#: exif/main.c:349
 #, c-format
 msgid "Tag '%s' "
-msgstr "Ознака „%s“"
+msgstr "Ознака „%s“ "
 
-#: exif/main.c:339
+#: exif/main.c:351
 #, c-format
 msgid "(0x%04x, '%s'): "
-msgstr "(0x%x, „%s“): "
+msgstr "(0×%04x, „%s“): "
 
-#: exif/main.c:353
+#: exif/main.c:365
 msgid "Specify input file or --create-exif"
 msgstr "Наведите улазну датотеку или „--create-exif“"
 
-#: exif/main.c:419
+#: exif/main.c:431
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
 msgstr "„%s“ није читљиво или не садржи ЕХИФ податке!"
 
-#: exif/main.c:446
+#: exif/main.c:466
 msgid "XML format is not available for Maker Notes"
 msgstr "ХМЛ формат није доступан за Творца белешки"
+
+#: libjpeg/jpeg-data.c:214
+msgid "Data does not follow JPEG specification."
+msgstr "Подаци не прате ЈПЕГ одредбу."
