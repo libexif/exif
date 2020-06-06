@@ -4,19 +4,20 @@
 #
 # Arnaud Launay <asl@launay.org>, 2002.
 # Frédéric Marchal <fmarchal@perso.be>, 2012.
+# Stéphane Aulery <lkppo@free.fr>, 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version: exif 0.6.20\n"
+"Project-Id-Version: exif 0.6.22\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-10-14 20:41-0700\n"
-"PO-Revision-Date: 2012-07-26 09:31+0200\n"
-"Last-Translator: Frédéric Marchal <fmarchal@perso.be>\n"
+"POT-Creation-Date: 2020-05-20 09:44+0200\n"
+"PO-Revision-Date: 2020-06-06 01:34+0200\n"
+"Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
-"X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -60,114 +61,126 @@ msgstr "Attention: Trop de composants spécifiés !"
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
 msgstr "Trop de données EXIF (%i octets). Seuls %i octets sont autorisés."
 
-#: exif/actions.c:186 exif/actions.c:359
+#: exif/actions.c:184 exif/actions.c:385 exif/actions.c:389
+#, c-format
+msgid "Could not write '%s' (%s)."
+msgstr "Ne peut écrire « %s » (%s)."
+
+#: exif/actions.c:188 exif/actions.c:391
 #, c-format
 msgid "Wrote file '%s'."
 msgstr "Écrit le fichier « %s »."
 
-#: exif/actions.c:206
+#: exif/actions.c:208
 #, c-format
 msgid "EXIF entry '%s' "
 msgstr "Entrée EXIF « %s » "
 
-#: exif/actions.c:208
+#: exif/actions.c:210
 #, c-format
 msgid "(0x%x, '%s') "
 msgstr "(0x%x, « %s ») "
 
-#: exif/actions.c:211
+#: exif/actions.c:213
 #, c-format
 msgid "exists in IFD '%s':\n"
 msgstr "existe dans IFD « %s »:\n"
 
-#: exif/actions.c:224
+#: exif/actions.c:226
 msgid "Adding entry..."
 msgstr "Ajout de l'entrée..."
 
-#: exif/actions.c:264
+#: exif/actions.c:266
 #, c-format
 msgid "IFD '%s' does not contain a tag '%s'!"
 msgstr "L'IFD « %s » ne contient pas de marqueur « %s » !"
 
-#: exif/actions.c:294
+#: exif/actions.c:298 libjpeg/jpeg-data.c:311
 #, c-format
 msgid "Could not open '%s' (%s)!"
 msgstr "Ne peut ouvrir « %s » (%s) !"
 
-#: exif/actions.c:303
+#: exif/actions.c:304 exif/actions.c:311 exif/actions.c:323
+#: libjpeg/jpeg-data.c:319 libjpeg/jpeg-data.c:326 libjpeg/jpeg-data.c:332
+#, c-format
+msgid "Could not determine size of '%s' (%s)."
+msgstr "Ne peut déterminer la taille de « %s » (%s)."
+
+#: exif/actions.c:328 exif/actions.c:331 libjpeg/jpeg-data.c:346
+#: libjpeg/jpeg-data.c:351
 #, c-format
 msgid "Could not read '%s' (%s)."
 msgstr "Ne peut lire « %s » (%s)."
 
-#: exif/actions.c:322
+#: exif/actions.c:349
 #, c-format
 msgid "IFD '%s' does not contain tag '%s'."
 msgstr "L'IFD « %s » ne contient pas de marqueur « %s »."
 
-#: exif/actions.c:328
+#: exif/actions.c:355
 #, c-format
 msgid "'%s' does not contain tag '%s'."
 msgstr "« %s » ne contient pas de marqueur « %s »."
 
-#: exif/actions.c:346
+#: exif/actions.c:373
 #, c-format
 msgid "'%s' does not contain a thumbnail!"
 msgstr "« %s » ne contient pas de vignette !"
 
-#: exif/actions.c:354
+#: exif/actions.c:381
 #, c-format
 msgid "Could not open '%s' for writing (%s)!"
 msgstr "Ne peut ouvrir « %s » pour l'écriture (%s) !"
 
-#: exif/actions.c:376
+#: exif/actions.c:409
 #, c-format
 msgid "EXIF tags in '%s':"
 msgstr "Marqueurs EXIF dans « %s » :"
 
-#: exif/actions.c:472
+#: exif/actions.c:507
 #, c-format
 msgid "Unknown format or nonexistent MakerNote.\n"
 msgstr "Format inconnu ou MakerNote inexistante.\n"
 
-#: exif/actions.c:480
+#: exif/actions.c:515
 #, c-format
 msgid "MakerNote does not contain any value.\n"
 msgstr "Aucune valeur dans la MakerNote.\n"
 
-#: exif/actions.c:483
+#: exif/actions.c:518
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
 msgstr[0] "MakerNote contient %i valeur:\n"
 msgstr[1] "MakerNote contient %i valeurs:\n"
 
-#: exif/actions.c:494 exif/main.c:322
+#: exif/actions.c:529 exif/main.c:334
 msgid "Unknown Tag"
 msgstr "Marqueur inconnu"
 
-#: exif/actions.c:506
+#: exif/actions.c:541
 msgid "Unknown value"
 msgstr "Valeur inconnue"
 
-#: exif/actions.c:530
+#: exif/actions.c:566
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
 msgstr "Marqueurs EXIF dans « %s » (ordre des octets « %s ») :"
 
-#: exif/actions.c:536
+#: exif/actions.c:572
 msgid "Tag"
 msgstr "Marqueur"
 
-#: exif/actions.c:542
+#: exif/actions.c:578
 msgid "Value"
 msgstr "Valeur"
 
-#: exif/actions.c:557
+#: exif/actions.c:593
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
 msgstr "Les données EXIF contiennent une vignette (%i octets)."
 
-#: exif/actions.c:599
+#: exif/actions.c:635
 #, c-format
 msgid "ThumbnailSize\t%i\n"
 msgstr "ThumbnailSize\t%i\n"
@@ -280,92 +293,51 @@ msgstr "Montrer ce message d'aide"
 msgid "Display brief usage message"
 msgstr "Afficher une brève note d'utilisation"
 
-#: exif/main.c:263
+#: exif/main.c:270
 msgid "[OPTION...] file"
 msgstr "[OPTION...] fichier"
 
-#: exif/main.c:278
+#: exif/main.c:285
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
 msgstr "IFD « %s » invalide. Les IFDs valides sont « 0 », « 1 », « EXIF », « GPS », et « Interoperability »."
 
-#: exif/main.c:287
+#: exif/main.c:296
 #, c-format
 msgid "Invalid tag '%s'!"
 msgstr "Marqueur « %s » invalide !"
 
-#: exif/main.c:295
+#: exif/main.c:306
 msgid "You need to specify a tag!"
 msgstr "Vous devez spécifier un marqueur !"
 
-#: exif/main.c:300
+#: exif/main.c:311
 msgid "You need to specify an IFD!"
 msgstr "Vous devez spécifier un IFD !"
 
-#: exif/main.c:337
+#: exif/main.c:349
 #, c-format
 msgid "Tag '%s' "
 msgstr "Marqueur « %s » "
 
-#: exif/main.c:339
+#: exif/main.c:351
 #, c-format
 msgid "(0x%04x, '%s'): "
 msgstr "(0x%04x, « %s »): "
 
-#: exif/main.c:353
+#: exif/main.c:365
 msgid "Specify input file or --create-exif"
 msgstr "Spécifiez le fichier d'entrée ou --create-exif"
 
-#: exif/main.c:419
+#: exif/main.c:431
 #, c-format
 msgid "'%s' is not readable or does not contain EXIF data!"
 msgstr "« %s » est illisible ou ne contient pas de données EXIF !"
 
-#: exif/main.c:446
+#: exif/main.c:466
 msgid "XML format is not available for Maker Notes"
 msgstr "Le format XML n'est pas disponible pour les notes du créateur"
 
-#~ msgid "Please specify a tag!"
-#~ msgstr "Veuillez spécifier un marqueur !"
-
-#~ msgid "Could not open '%s' for writing (%m)!"
-#~ msgstr "Ne peut ouvrir '%s' pour l'écriture (%m) !"
-
-#~ msgid "Could not open '%s' (%m)!"
-#~ msgstr "Ne peut ouvrir '%s' (%m) !"
-
-#~ msgid "Could not read '%s' (%m)."
-#~ msgstr "Ne peut lire '%s' (%m)."
-
-#~ msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
-#~ msgstr "L'entrée EXIF '%s' (0x%x, '%s') existe dans l'IFD '%s' :"
-
-#~ msgid "Could not parse JPEG file '%s'."
-#~ msgstr "Ne peut parcourir le fichier JPEG '%s'."
-
-#~ msgid "Could not allocate %i byte(s)."
-#~ msgstr "Ne peut allouer %i octet(s)."
-
-#~ msgid "EXIF MakerNote tags in '%s' ('%s' byte order):"
-#~ msgstr "Marqueurs EXIF MakerNote dans '%s' (ordre des octets '%s') :"
-
-#~ msgid "MakerNote entry '%s' (0x%x, '%s'):"
-#~ msgstr "Entrée MakerNote '%s' (0x%x, '%s') :"
-
-#~ msgid "Select MakerNote tag"
-#~ msgstr "Sélection du marqueur MakerNote"
-
-#~ msgid "ntag"
-#~ msgstr "ntag"
-
-#~ msgid "List all EXIF MakerNote tags"
-#~ msgstr "Liste tous les marqueurs EXIF MakerNote"
-
-#~ msgid "'%s' does not contain EXIF MakerNote data!"
-#~ msgstr "'%s' ne contient pas de données EXIF MakerNote !"
-
-#~ msgid "Invalid MakerNote tag '%s'!"
-#~ msgstr "Marqueur MakerNote '%s' invalide !"
-
-#~ msgid "Please specify a MakerNote tag!"
-#~ msgstr "Veuillez spécifier un marqueur MakerNote !"
+#: libjpeg/jpeg-data.c:214
+msgid "Data does not follow JPEG specification."
+msgstr "Les données ne suivent pas la spécification JPEG."
