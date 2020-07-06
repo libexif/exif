@@ -479,7 +479,7 @@ show_ifd (ExifContent *content, void *data)
 }
 
 static void
-print_hline (unsigned char ids, unsigned int screenwidth)
+print_hline (unsigned int ids, unsigned int screenwidth)
 {
         unsigned int i, width;
 
