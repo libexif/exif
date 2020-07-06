@@ -599,7 +599,7 @@ action_tag_list (ExifData *ed, ExifParams p)
 static void
 show_entry_machine (ExifEntry *e, void *data)
 {
-	unsigned char *ids = data;
+	unsigned int *ids = data;
 	char v[TAG_VALUE_BUF];
 	ExifIfd ifd = exif_entry_get_ifd (e);
 
