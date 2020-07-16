@@ -11,7 +11,7 @@ msgstr ""
 "POT-Creation-Date: 2020-05-20 09:44+0200\n"
 "PO-Revision-Date: 2020-06-23 20:57+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
-"Language-Team: Swedish <tp-sv-list@lists.sourceforge.net>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -340,30 +340,3 @@ msgstr "XML-formatet är inte tillgängligt för Maker Notes"
 #: libjpeg/jpeg-data.c:214
 msgid "Data does not follow JPEG specification."
 msgstr "Data följer inte JPEG-specifikationen."
-
-#~ msgid "Could not open '%s' (%m)!"
-#~ msgstr "Kunde inte öppna \"%s\" (%m)!"
-
-#~ msgid "Could not read '%s' (%m)."
-#~ msgstr "Kunde inte läsa \"%s\" (%m)."
-
-#~ msgid "Could not open '%s' for writing (%m)!"
-#~ msgstr "Kunde inte öppna \"%s\" för skrivning (%m)!"
-
-#~ msgid "Unknown MakerNote format.\n"
-#~ msgstr "Okänt MakerNote-format.\n"
-
-#~ msgid "Please specify a tag!"
-#~ msgstr "Ange en tagg!"
-
-#~ msgid "MakerNote contains 1 value:\n"
-#~ msgstr "MakerNote innehåller ett värde:\n"
-
-#~ msgid "EXIF entry '%s' (0x%x, '%s') exists in IFD '%s':"
-#~ msgstr "EXIF-posten \"%s\" (0x%x, \"%s\") finns i IFD \"%s\":"
-
-#~ msgid "Path '%s' invalid."
-#~ msgstr "Sökvägen \"%s\" är ogiltig."
-
-#~ msgid "Could not read '%s'."
-#~ msgstr "Kunde inte läsa \"%s\"."
