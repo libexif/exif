@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: exif 0.6.22\n"
 "Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-05-20 09:44+0200\n"
-"PO-Revision-Date: 2020-07-11 18:52+0800\n"
+"PO-Revision-Date: 2020-10-29 11:12+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@gmail.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "Language: ms\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Bugs: Report translation errors to the Language-Team address.\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: exif/actions.c:60
 #, c-format
@@ -32,7 +32,7 @@ msgstr "Penetapan nilai untuk tag ini tidak disokong!"
 #: exif/actions.c:94
 #, c-format
 msgid "Too few components specified (need %d, found %d)\n"
-msgstr ""
+msgstr "Terlalu sedikit komponen dinyatakan (perlu %d, jumpa %d)\n"
 
 #: exif/actions.c:99
 #, c-format
@@ -42,7 +42,7 @@ msgstr "Nilai numerik dijangka\n"
 #: exif/actions.c:106
 #, c-format
 msgid "Internal error. Please contact <%s>."
-msgstr ""
+msgstr "Ralat dalaman. Sila hubungi <%s>."
 
 #: exif/actions.c:145
 #, c-format
@@ -52,12 +52,12 @@ msgstr "Belum lagi dilaksanakan!"
 #: exif/actions.c:153
 #, c-format
 msgid "Warning; Too many components specified!"
-msgstr ""
+msgstr "Amaran; Terlalu banyak komponen dinyatakan!"
 
 #: exif/actions.c:175
 #, c-format
 msgid "Too much EXIF data (%i bytes). Only %i bytes are allowed."
-msgstr ""
+msgstr "Terlalu banyak data EXIF (%i bytes). Hanya %i bytes dibenarkan."
 
 #: exif/actions.c:184 exif/actions.c:385 exif/actions.c:389
 #, c-format
@@ -143,13 +143,13 @@ msgstr "Format tidak diketahui atau MakerNote tidak wujud.\n"
 #: exif/actions.c:515
 #, c-format
 msgid "MakerNote does not contain any value.\n"
-msgstr ""
+msgstr "MakerNote tidak mengandungi sebarang nilai.\n"
 
 #: exif/actions.c:518
 #, c-format
 msgid "MakerNote contains %i value:\n"
 msgid_plural "MakerNote contains %i values:\n"
-msgstr[0] ""
+msgstr[0] "MakerNote mengandungi nilai %i:\n"
 
 #: exif/actions.c:529 exif/main.c:334
 msgid "Unknown Tag"
@@ -162,7 +162,7 @@ msgstr "Nilai tidak diketahui"
 #: exif/actions.c:566
 #, c-format
 msgid "EXIF tags in '%s' ('%s' byte order):"
-msgstr ""
+msgstr "Tag EXIF dalam '%s' (susunan byte '%s'):"
 
 #: exif/actions.c:572
 msgid "Tag"
@@ -175,7 +175,7 @@ msgstr "Nilai"
 #: exif/actions.c:593
 #, c-format
 msgid "EXIF data contains a thumbnail (%i bytes)."
-msgstr ""
+msgstr "Data EXIF mengandungi gambar kecil (%i byte)."
 
 #: exif/actions.c:635
 #, c-format
@@ -188,7 +188,7 @@ msgstr "Papar versi perisian"
 
 #: exif/main.c:198
 msgid "Show IDs instead of tag names"
-msgstr ""
+msgstr "Tunjuk ID dan bukannya nama tag"
 
 #: exif/main.c:200
 msgid "Select tag"
@@ -240,7 +240,7 @@ msgstr "FAIL"
 
 #: exif/main.c:218
 msgid "Do not fix existing tags in files"
-msgstr ""
+msgstr "Jangan betulkan tag sedia ada dalam fail"
 
 #: exif/main.c:220
 msgid "Write data to FILE"
@@ -256,11 +256,11 @@ msgstr "RENTETAN"
 
 #: exif/main.c:224
 msgid "Create EXIF data if not existing"
-msgstr ""
+msgstr "Cipta data EXIF jika tidak wujud"
 
 #: exif/main.c:226
 msgid "Output in a machine-readable (tab delimited) format"
-msgstr ""
+msgstr "Keluaran dalam format boleh dibaca mesin (dibatasi tab)"
 
 #: exif/main.c:229
 msgid "Width of output"
@@ -297,7 +297,7 @@ msgstr "[PILIHAN...] fail"
 #: exif/main.c:285
 #, c-format
 msgid "Invalid IFD '%s'. Valid IFDs are '0', '1', 'EXIF', 'GPS', and 'Interoperability'."
-msgstr ""
+msgstr "IFD '%s' tidak sah. IFDs yang sah ialah '0', '1', 'EXIF', 'GPS', dan 'Interoperability'."
 
 #: exif/main.c:296
 #, c-format
@@ -324,7 +324,7 @@ msgstr "(0x%04x, '%s'): "
 
 #: exif/main.c:365
 msgid "Specify input file or --create-exif"
-msgstr ""
+msgstr "Nyatakan fail masukan atau --create-exif"
 
 #: exif/main.c:431
 #, c-format
