@@ -661,6 +661,8 @@ escape_xml(const char *text)
 	char *out;
 	size_t len;
 
+	if (!strlen(text)) return "empty string";
+
 	for (out=escaped, len=0; *text; ++len, ++out, ++text) {
 		/* Make sure there's plenty of room for a quoted character */
 		if ((len + 8) > escaped_size) {
