@@ -11,21 +11,21 @@ AM_SILENT_RULES([yes])
 
 GP_CHECK_SHELL_ENVIRONMENT
 GP_CONFIG_MSG([Build])
-GP_CONFIG_MSG([Source code location],[${srcdir}])
+GP_CONFIG_MSG([Source code location], [${srcdir}])
 
 AC_PROG_CC
 AC_C_INLINE
 AM_PROG_AR
 LT_INIT([win32-dll])
 AM_CPPFLAGS="$CPPFLAGS -I\$(top_srcdir) -I\$(top_builddir)"
-GP_CONFIG_MSG([Compiler],[${CC}])
+GP_CONFIG_MSG([Compiler], [${CC}])
 
 AC_CHECK_FUNCS([isatty fileno])
 
 # ---------------------------------------------------------------------------
 # i18n support
 # ---------------------------------------------------------------------------
-GP_GETTEXT_HACK([${PACKAGE}],[Lutz Mueller and others])
+GP_GETTEXT_HACK([${PACKAGE}], [Lutz Mueller and others])
 ALL_LINGUAS="ast cs da de eo es fi fr fur gl hr id is it ja ko lv ms nl pl pt pt_BR ro ru sk sr sv tr uk vi zh_CN"
 AM_GNU_GETTEXT_VERSION([0.14.1])
 AM_GNU_GETTEXT([external])
@@ -40,7 +40,7 @@ GP_GETTEXT_FLAGS()
 # ---------------------------------------------------------------------------
 AC_CHECK_HEADERS([locale.h])
 AC_CHECK_HEADER([iconv.h], [
-	AC_DEFINE(HAVE_ICONV,1,[whether iconv is available])])
+	AC_DEFINE([HAVE_ICONV], [1], [whether iconv is available])])
 
 dnl Versions of GNU gettext >= 0.10.36 automatically convert messages into
 dnl the correct locale encoding, but with older versions and maybe non-GNU
@@ -49,18 +49,18 @@ AC_ARG_ENABLE(gettext-iconv,
 	      [  --enable-gettext-iconv  convert character encodings (only needed when gettext doesn't do it itself)],
 	      [ AC_DEFINE(ENABLE_GETTEXT_ICONV,1,[whether to run iconv on gettext output]) ])
 
-AC_CHECK_FUNCS(mblen)
+AC_CHECK_FUNCS([mblen])
 
 # ---------------------------------------------------------------------------
 # libraries needed
 # ---------------------------------------------------------------------------
 dnl Need 0.6.18 for exif_loader_get_buf
-GP_CHECK_LIBRARY([LIBEXIF],[libexif],[>= 0.6.18])
+GP_CHECK_LIBRARY([LIBEXIF], [libexif], [>= 0.6.18])
 
 # ---------------------------------------------------------------------------
 # popt.h: Simplifies handling of command-line options enormously.
 # ---------------------------------------------------------------------------
-GP_CHECK_LIBRARY([POPT],[popt],[>= 1.12])
+GP_CHECK_LIBRARY([POPT], [popt], [>= 1.12])
 
 
 # ---------------------------------------------------------------------------
