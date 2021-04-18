@@ -82,10 +82,10 @@ AC_CHECK_HEADERS([unistd.h])
 # ---------------------------------------------------------------------------
 # Warnings: If we have GCC, be paranoid.
 # ---------------------------------------------------------------------------
-if test "x$GCC" = "xyes"; then
+AS_VAR_IF([GCC], [yes], [dnl
     AM_CPPFLAGS="$AM_CPPFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
     AM_LDFLAGS="$AM_LDFLAGS -g -Wall"
-fi
+])
 
 AC_SUBST([AM_CPPFLAGS])dnl
 AC_SUBST([AM_LDFLAGS])dnl
