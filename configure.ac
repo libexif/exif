@@ -45,9 +45,12 @@ AC_CHECK_HEADER([iconv.h], [
 dnl Versions of GNU gettext >= 0.10.36 automatically convert messages into
 dnl the correct locale encoding, but with older versions and maybe non-GNU
 dnl versions the app needs to do that itself.
-AC_ARG_ENABLE(gettext-iconv,
-	      [  --enable-gettext-iconv  convert character encodings (only needed when gettext doesn't do it itself)],
-	      [ AC_DEFINE(ENABLE_GETTEXT_ICONV,1,[whether to run iconv on gettext output]) ])
+AC_ARG_ENABLE([gettext-iconv], [dnl
+  AS_HELP_STRING([--enable-gettext-iconv],
+                 [convert character encodings (only needed when gettext doesn't do it itself)])], [dnl
+  AC_DEFINE([ENABLE_GETTEXT_ICONV], [1],
+            [whether to run iconv on gettext output])
+])
 
 AC_CHECK_FUNCS([mblen])
 
