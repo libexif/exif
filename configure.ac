@@ -3,7 +3,14 @@ AC_INIT([libexif command line interface], [0.6.22.1], [libexif-devel@lists.sourc
 AC_CONFIG_SRCDIR([exif/main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([auto-m4])
-AM_INIT_AUTOMAKE([-Wall gnu 1.14.1 dist-xz dist-bzip2 check-news])
+AM_INIT_AUTOMAKE([
+  -Wall
+  gnu
+  1.14.1
+  dist-xz
+  dist-bzip2
+  check-news
+])
 
 # Use the silent-rules feature when possible.
 m4_ifndef([AM_SILENT_RULES], [m4_define([AM_SILENT_RULES],[])])
