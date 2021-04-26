@@ -12,11 +12,6 @@ install:
     C:\cygwin\setup-x86.exe -qgnNdO -l C:\cygwin\var\cache\setup -R c:\cygwin -s "%CYGWIN_MIRROR%" -P libpopt-devel -P libexif-devel )
 - cmd: if [%CONFIG%]==[cygwin64] (
     C:\cygwin64\setup-x86_64.exe -qgnNdO -l C:\cygwin64\var\cache\setup -R c:\cygwin64 -s "%CYGWIN_MIRROR%" -P libpopt-devel -P libexif-devel )
-# Work around a libpopt-devel-1.16-2 packaging issue that causes the error:
-#   libtool: error: cannot find the library '/usr/lib/libintl.la' or unhandled argument '/usr/lib/libintl.la'
-# See http://www.cygwin.com/ml/cygwin-apps/2017-07/msg00005.html
-- cmd: if [%CONFIG%]==[cygwin] (
-    C:\%CONFIG%\bin\bash -e -l -c "rm /usr/lib/libpopt.la" )
 
 build_script:
 - cmd: SET PATH=c:/%CONFIG%/bin
