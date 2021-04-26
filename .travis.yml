@@ -255,10 +255,10 @@ install:
     if [ '(' "$CONFIG" = "musl" -o "$CONFIG" = "arm-cross" -o "$CONFIG" = "sanitize" ')' -a ! -e "$HOME/popt/lib/libpopt.a" ] ; then
       set -e
       cd "$HOME"
-      POPT_BASE_URL="http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.16"
-      curl --fail --retry 8 -OL "${POPT_BASE_URL}"-12.debian.tar.xz -OL "${POPT_BASE_URL}".orig.tar.gz -OL "${POPT_BASE_URL}"-12.dsc
-      dpkg-source -x popt_1.16-12.dsc
-      cd popt-1.16
+      POPT_BASE_URL="http://us-central1.gce.archive.ubuntu.com/ubuntu/pool/main/p/popt/popt_1.18"
+      curl --fail --retry 8 -OL "${POPT_BASE_URL}"-2build2.debian.tar.xz -OL "${POPT_BASE_URL}".orig.tar.gz -OL "${POPT_BASE_URL}"-2build2.dsc
+      dpkg-source -x popt_1.18-2build2.dsc
+      cd popt-1.18
       # Drop the message catalogs so they aren't built, installed or cached
       sed -i -e 's/\(AM_GNU_GETTEXT_VERSION\)/dnl \1/' configure.ac
       autoreconf -sivf
@@ -292,9 +292,9 @@ script:
   # apt. This can't be built in the install section because it needs the
   # compiler name and flags to be specified.
   - |
-    if [ -e "$HOME"/popt-1.16 ] ; then
+    if [ -e "$HOME"/popt-1.18 ] ; then
       set -e
-      cd "$HOME"/popt-1.16
+      cd "$HOME"/popt-1.18
       # Use the CONFIGURE_OPTS above to get a --host option, if present
       ./configure --prefix="${HOME}/popt" --disable-nls --disable-shared --disable-dependency-tracking $CONFIGURE_OPTS
       make V=1
