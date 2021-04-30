@@ -1,9 +1,9 @@
-AC_PREREQ(2.59)
+AC_PREREQ(2.69)
 AC_INIT([libexif command line interface], [0.6.22.1], [libexif-devel@lists.sourceforge.net], [exif])
 AC_CONFIG_SRCDIR([exif/main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([auto-m4])
-AM_INIT_AUTOMAKE([-Wall gnu 1.9 dist-bzip2 check-news])
+AM_INIT_AUTOMAKE([-Wall gnu 1.14.1 dist-xz dist-bzip2 check-news])
 
 # Use the silent-rules feature when possible.
 m4_ifndef([AM_SILENT_RULES], [m4_define([AM_SILENT_RULES],[])])
@@ -14,13 +14,11 @@ GP_CONFIG_MSG([Build])
 GP_CONFIG_MSG([Source code location],[${srcdir}])
 
 AC_PROG_CC
-AC_C_CONST
 AC_C_INLINE
 AM_PROG_AR
-AM_PROG_LIBTOOL
+LT_INIT([win32-dll])
 AM_CPPFLAGS="$CPPFLAGS -I\$(top_srcdir) -I\$(top_builddir)"
 GP_CONFIG_MSG([Compiler],[${CC}])
-AM_PROG_CC_C_O
 
 AC_CHECK_FUNCS([isatty fileno])
 
