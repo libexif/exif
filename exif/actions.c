@@ -715,7 +715,12 @@ show_entry_xml (ExifEntry *e, void *data)
 		fprintf (stdout, "%s", escape_xml(exif_entry_get_value (e, v, sizeof (v))));
 		fprintf (stdout, "</x%04x>", e->tag);
 	} else {
-		strncpy (t, exif_tag_get_title_in_ifd(e->tag, exif_entry_get_ifd(e)), sizeof (t));
+		const char *title = exif_tag_get_title_in_ifd(e->tag, exif_entry_get_ifd(e));
+		if (!title) {
+			/* might just be an unknown tag */
+			return;
+		}
+		strncpy (t, title, sizeof (t));
 		t[sizeof(t)-1] = 0;
 
 		/* Remove invalid characters from tag eg. (, ), space */
