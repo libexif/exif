@@ -67,6 +67,10 @@ AC_CHECK_FUNCS([mblen])
 # ---------------------------------------------------------------------------
 # libraries needed
 # ---------------------------------------------------------------------------
+PKG_PROG_PKG_CONFIG()
+AC_MSG_CHECKING([for pkg-config program])
+AC_MSG_RESULT([${PKG_CONFIG}])
+
 dnl Need 0.6.18 for exif_loader_get_buf
 GP_CHECK_LIBRARY([LIBEXIF], [libexif], [>= 0.6.18])
 
