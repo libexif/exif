@@ -18,8 +18,8 @@
  * Boston, MA  02110-1301  USA.
  */
 
-#ifndef __UTILS_H__
-#define __UTILS_H__
+#ifndef EXIF__UTILS_H
+#define EXIF__UTILS_H
 
 #include <sys/types.h>
 #include <libexif/exif-tag.h>
@@ -33,4 +33,4 @@ ExifIfd exif_ifd_from_string (const char *string);
 ExifData *exif_get_data_opts(ExifLoader *loader, ExifLog *log, int options, ExifDataType dt);
 size_t exif_mbstrlen(const char *mbs, size_t *len);
 
-#endif /* __UTILS_H__ */
+#endif /* EXIF__UTILS_H */

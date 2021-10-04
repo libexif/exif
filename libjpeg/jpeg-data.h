@@ -18,8 +18,8 @@
  * Boston, MA  02110-1301  USA.
  */
 
-#ifndef __JPEG_DATA_H__
-#define __JPEG_DATA_H__
+#ifndef EXIF__JPEG_DATA_H
+#define EXIF__JPEG_DATA_H
 
 #include "libjpeg/jpeg-marker.h"
 
@@ -89,4 +89,4 @@ void      jpeg_data_append_section (JPEGData *data);
 
 void      jpeg_data_log (JPEGData *data, ExifLog *log);
 
-#endif /* __JPEG_DATA_H__ */
+#endif /* EXIF__JPEG_DATA_H */
