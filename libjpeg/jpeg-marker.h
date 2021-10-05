@@ -17,6 +17,7 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA  02110-1301  USA.
  */
+
 #ifndef EXIF_JPEG_MARKER_H
 #define EXIF_JPEG_MARKER_H
 
