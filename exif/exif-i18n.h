@@ -18,8 +18,8 @@
  * Boston, MA  02110-1301  USA.
  */
 
-#ifndef EXIF__I18N_H
-#define EXIF__I18N_H
+#ifndef EXIF_EXIF_I18N_H
+#define EXIF_EXIF_I18N_H
 
 #ifdef ENABLE_NLS
 #  include <libintl.h>
@@ -53,4 +53,4 @@ const char *exif_i18n_convert_utf8_to_locale (const char *);
 #define C(s) (exif_i18n_convert_utf8_to_locale(s))
 
 
-#endif /* EXIF__I18N_H */
+#endif /* !defined(EXIF_EXIF_I18N_H) */

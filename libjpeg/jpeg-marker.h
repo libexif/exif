@@ -17,8 +17,8 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA  02110-1301  USA.
  */
-#ifndef EXIF__JPEG_MARKER_H
-#define EXIF__JPEG_MARKER_H
+#ifndef EXIF_JPEG_MARKER_H
+#define EXIF_JPEG_MARKER_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -100,4 +100,4 @@ const char *jpeg_marker_get_description (JPEGMarker marker);
 }
 #endif /* __cplusplus */
 
-#endif /* EXIF__JPEG_MARKER_H */
+#endif /* !defined(EXIF_JPEG_MARKER_H) */

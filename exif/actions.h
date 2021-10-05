@@ -18,8 +18,8 @@
  * Boston, MA  02110-1301  USA.
  */
 
-#ifndef EXIF__ACTIONS_H
-#define EXIF__ACTIONS_H
+#ifndef EXIF_ACTIONS_H
+#define EXIF_ACTIONS_H
 
 #include <libexif/exif-data.h>
 
@@ -55,4 +55,4 @@ void action_tag_list_xml     (ExifData *, ExifParams);
 
 void action_mnote_list       (ExifData *, ExifParams);
 
-#endif /* EXIF__ACTIONS_H */
+#endif /* !defined(EXIF_ACTIONS_H) */
