@@ -1,7 +1,7 @@
 # Cirrus CI configuration
 # https://cirrus-ci.com/github/libexif/exif
 
-task:
+freebsd_task:
   name: FreeBSD
   freebsd_instance:
     matrix:
@@ -22,10 +22,38 @@ task:
     - (cd /tmp/libexif && autoreconf -sivf && ./configure --prefix=/tmp/libexif/install && make V=1 && make V=1 install)
   configure_script:
     - autoreconf -sivf
-    - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="/tmp/libexif/install/lib/pkgconfig:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig" POPT_CFLAGS="$(pkg-config --cflags popt)"  POPT_LIBS="$(pkg-config --libs popt)" || { tail -300 config.log; false; }
+    - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="/tmp/libexif/install/lib/pkgconfig:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig" POPT_CFLAGS="$(pkg-config --cflags popt)"  POPT_LIBS="$(pkg-config --libs popt)" || { tail -400 config.log; false; }
   compile_script:
     - make V=1
   test_script:
-    - make V=1 check || { tail -300 test/test-suite.log; false; }
+    - make V=1 check || { tail -400 test/test-suite.log; false; }
+  install_script:
+    - make V=1 install
+
+linux_arm_task:
+  name: ARM Linux
+  arm_container:
+    image: ubuntu:22.04
+    memory: 400M
+
+  env:
+    # Set to 10 instead of 1 to avoid problems when new commits are submitted
+    # during a run.
+    CIRRUS_CLONE_DEPTH: 10
+    CFLAGS: -Wall -Wextra -O2
+    MAKE_FLAGS: -j 2
+
+  pkginstall_script:
+    - apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential autoconf automake autopoint libtool pkgconf git gettext libpopt-dev
+    - git clone --depth=1 https://github.com/libexif/libexif.git /tmp/libexif
+  builddeps_script:
+    - (cd /tmp/libexif && autoreconf -sivf && ./configure --prefix=/tmp/libexif/install && make V=1 && make V=1 install)
+  configure_script:
+    - autoreconf -sivf
+    - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="/tmp/libexif/install/lib/pkgconfig:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig" || { tail -400 config.log; false; }
+  compile_script:
+    - make V=1
+  test_script:
+    - make V=1 check || { tail -400 test/test-suite.log; false; }
   install_script:
     - make V=1 install
