@@ -4,17 +4,17 @@
 freebsd_task:
   name: FreeBSD
   freebsd_instance:
+    memory: 1400M
     matrix:
       image_family: freebsd-14-0
       image_family: freebsd-13-2
-      image_family: freebsd-12-4
 
   env:
     # Set to 10 instead of 1 to avoid problems when new commits are submitted
     # during a run.
     CIRRUS_CLONE_DEPTH: 10
     CFLAGS: -Wall -Wextra -O2
-    MAKE_FLAGS: -j 3
+    MAKEFLAGS: -j 3
 
   pkginstall_script:
     - pkg install -y autoconf automake libtool gettext-tools gettext-runtime popt pkgconf git
@@ -35,14 +35,14 @@ linux_arm_task:
   name: ARM Linux
   arm_container:
     image: ubuntu:22.04
-    memory: 400M
+    memory: 350M
 
   env:
     # Set to 10 instead of 1 to avoid problems when new commits are submitted
     # during a run.
     CIRRUS_CLONE_DEPTH: 10
     CFLAGS: -Wall -Wextra -O2
-    MAKE_FLAGS: -j 2
+    MAKE_FLAGS: -j 3
 
   pkginstall_script:
     - apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential autoconf automake autopoint libtool pkgconf git gettext libpopt-dev
