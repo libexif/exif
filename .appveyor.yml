@@ -1,5 +1,11 @@
 # AppVeyor CI configuration file https://www.appveyor.com/
 image: Visual Studio 2022
+
+skip_commits:
+  files:
+    - '.cirrus.yml'
+    - '.github/**/*'
+
 environment:
   CYGWIN_MIRROR: https://cygwin.mirror.constant.com
   matrix:
