@@ -10,8 +10,8 @@ freebsd_task:
   freebsd_instance:
     memory: 1400M
     matrix:
-      image_family: freebsd-14-1
-      image_family: freebsd-13-4
+      image_family: freebsd-14-2
+      image_family: freebsd-13-5
 
   env:
     # Set to 10 instead of 1 to avoid problems when new commits are submitted
@@ -24,7 +24,7 @@ freebsd_task:
     - pkg install -y autoconf automake libtool gettext-tools gettext-runtime popt pkgconf git
     - git clone --depth=1 https://github.com/libexif/libexif.git /tmp/libexif
   builddeps_script:
-    - (cd /tmp/libexif && autoreconf -sivf && ./configure --prefix=/tmp/libexif/install && make V=1 && make V=1 install)
+    - (cd /tmp/libexif && autoreconf -sivf && ./configure --prefix=/tmp/libexif/install --disable-dependency-tracking && make V=1 && make V=1 install)
   configure_script:
     - autoreconf -sivf
     - ./configure --prefix="${HOME}" CFLAGS="$CFLAGS" PKG_CONFIG_PATH="/tmp/libexif/install/lib/pkgconfig:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig" POPT_CFLAGS="$(pkg-config --cflags popt)"  POPT_LIBS="$(pkg-config --libs popt)" || { tail -400 config.log; false; }
@@ -38,8 +38,10 @@ freebsd_task:
 linux_arm_task:
   name: ARM Linux
   arm_container:
-    image: ubuntu:22.04
-    memory: 350M
+    memory: 370M
+    matrix:
+      image: ubuntu:22.04
+      image: ubuntu:24.04
 
   env:
     # Set to 10 instead of 1 to avoid problems when new commits are submitted
