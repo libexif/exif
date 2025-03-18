@@ -175,7 +175,7 @@ action_save (ExifData *ed, ExifLog *log, ExifParams p, const char *fout)
 			exif_log (log, -1, "exif", _("Too much EXIF data "
 				"(%i bytes). Only %i bytes are allowed."),
 				ds, 0xffff);
-	};
+	}
 
 	jpeg_data_set_exif_data (jdata, ed);
 
@@ -384,7 +384,7 @@ action_save_thumb (ExifData *ed, ExifLog *log, ExifParams p, const char *fout)
 		if (fwrite (ed->data, 1, ed->size, f) != ed->size) {
 			exif_log (log, -1, "exif", _("Could not write '%s' (%s)."),
 				fout, strerror (errno));
-		};
+		}
 		if (fclose (f) == EOF)
 			exif_log (log, -1, "exif", _("Could not write '%s' (%s)."),
 				fout, strerror (errno));

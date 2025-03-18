@@ -132,7 +132,7 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 		s = data->sections[i];
 
 		/* Write the marker */
-		CLEANUP_REALLOC (*d, sizeof (char) * (*ds + 2));
+		CLEANUP_REALLOC (*d, sizeof (char) * (*ds + 2))
 		(*d)[*ds + 0] = 0xff;
 		(*d)[*ds + 1] = s.marker;
 		*ds += 2;
@@ -145,18 +145,18 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 			ed = NULL;
 			exif_data_save_data (s.content.app1, &ed, &eds);
 			if (!ed) break;
-			CLEANUP_REALLOC (*d, sizeof (char) * (*ds + 2));
+			CLEANUP_REALLOC (*d, sizeof (char) * (*ds + 2))
 			(*d)[*ds + 0] = (eds + 2) >> 8;
 			(*d)[*ds + 1] = (eds + 2) >> 0;
 			*ds += 2;
-			CLEANUP_REALLOC (*d, sizeof (char) * (*ds + eds));
+			CLEANUP_REALLOC (*d, sizeof (char) * (*ds + eds))
 			memcpy (*d + *ds, ed, eds);
 			*ds += eds;
 			free (ed);
 			break;
 		default:
 			CLEANUP_REALLOC (*d, sizeof (char) *
-					(*ds + s.content.generic.size + 2));
+					(*ds + s.content.generic.size + 2))
 			(*d)[*ds + 0] = (s.content.generic.size + 2) >> 8;
 			(*d)[*ds + 1] = (s.content.generic.size + 2) >> 0;
 			*ds += 2;
@@ -166,7 +166,7 @@ jpeg_data_save_data (JPEGData *data, unsigned char **d, unsigned int *ds)
 
 			/* In case of SOS, we need to write the data. */
 			if (s.marker == JPEG_MARKER_SOS) {
-				CLEANUP_REALLOC (*d, *ds + data->size);
+				CLEANUP_REALLOC (*d, *ds + data->size)
 				memcpy (*d + *ds, data->data, data->size);
 				*ds += data->size;
 			}
