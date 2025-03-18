@@ -182,7 +182,7 @@ static char *output = NULL;
 static char *ifd_string = NULL, *tag_string = NULL;
 static ExifParams p = {EXIF_INVALID_TAG, EXIF_IFD_COUNT, 0, 0, 80,
 		      		   NULL, NULL,NULL};
-LogArg log_arg = {0, 0, 0};
+static LogArg log_arg = {0, 0, 0};
 
 int
 main (int argc, const char **argv)
