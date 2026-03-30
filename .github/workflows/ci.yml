@@ -60,7 +60,7 @@ jobs:
             configure: --disable-nls
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: 'install prereqs'
         run: sudo apt-get install -y --no-install-suggests --no-install-recommends ${{ matrix.packages }}
@@ -98,7 +98,7 @@ jobs:
             ldflags: -g -O0 --coverage
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: 'install prereqs'
         run: sudo apt-get install -y --no-install-suggests --no-install-recommends ${{ matrix.packages }}
       - name: 'install libexif-testsuite'
