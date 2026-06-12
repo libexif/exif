@@ -3,7 +3,6 @@ image: Visual Studio 2022
 
 skip_commits:
   files:
-    - '.cirrus.yml'
     - '.github/**/*'
 
 environment:

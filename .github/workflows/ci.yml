@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-name: Linux
+name: CI
 
 'on':
   push:
@@ -11,14 +11,12 @@ name: Linux
       - '*/ci'
     paths-ignore:
       - '**/*.md'
-      - '.cirrus.yml'
       - '.appveyor.yml'
   pull_request:
     branches:
       - master
     paths-ignore:
       - '**/*.md'
-      - '.cirrus.yml'
       - '.appveyor.yml'
 
 permissions: {}
@@ -130,3 +128,51 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           file: libexif-testsuite/lcov.info
+
+  freebsd:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: cpa.sh {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        osver: ['13.5', '14.3', '15.0']
+        arch: ['x86_64', 'aarch64']
+        cflags: [-Wall -Wextra -O2]
+    steps:
+      - uses: actions/checkout@v6
+      - name: start VM
+        uses: cross-platform-actions/action@v1
+        with:
+          operating_system: 'freebsd'
+          version: ${{ matrix.osver }}
+          architecture: ${{ matrix.arch }}
+      - name: install deps
+        run: sudo pkg install -y autoconf automake libtool gettext-tools gettext-runtime popt pkgconf git
+      - name: build libexif
+        run: |
+          git clone --depth=1 https://github.com/libexif/libexif.git /tmp/libexif
+          cd /tmp/libexif
+          autoreconf -sivf
+          ./configure --prefix=/tmp/libexif/install --disable-dependency-tracking
+          make -j 3 V=1
+          make -j 3 V=1 install
+      - name: autoconf
+        run: autoreconf -sivf
+      - name: configure
+        if: matrix.osver == '13.5'
+        run: ./configure --prefix="${HOME}" CFLAGS="${{ matrix.cflags }}" PKG_CONFIG_PATH="/tmp/libexif/install/lib/pkgconfig:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig" POPT_CFLAGS="`pkg-config --cflags popt`"  POPT_LIBS="`pkg-config --libs popt`"
+      - name: configure
+        if: matrix.osver != '13.5'
+        run: ./configure --prefix="${HOME}" CFLAGS="${{ matrix.cflags }}" PKG_CONFIG_PATH="/tmp/libexif/install/lib/pkgconfig:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig" POPT_CFLAGS="$(pkg-config --cflags popt)"  POPT_LIBS="$(pkg-config --libs popt)" || { tail -400 config.log; false; }
+      - name: build
+        run: make -j 3 V=1
+      - name: test
+        if: matrix.osver == '13.5'
+        run: make -j 3 V=1 check
+      - name: test
+        if: matrix.osver != '13.5'
+        run: make -j 3 V=1 check || { tail -400 test/test-suite.log; false; }
+      - name: install test
+        run: make -j 3 V=1 install
