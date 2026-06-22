@@ -58,7 +58,7 @@ jobs:
             configure: --disable-nls
 
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6.0.0
 
       - name: 'install prereqs'
         run: sudo apt-get install -y --no-install-suggests --no-install-recommends ${{ matrix.packages }}
@@ -96,7 +96,7 @@ jobs:
             ldflags: -g -O0 --coverage
 
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6.0.0
       - name: 'install prereqs'
         run: sudo apt-get install -y --no-install-suggests --no-install-recommends ${{ matrix.packages }}
       - name: 'install libexif-testsuite'
@@ -141,7 +141,7 @@ jobs:
         arch: ['x86_64', 'aarch64']
         cflags: [-Wall -Wextra -O2]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: start VM
         uses: cross-platform-actions/action@v1
         with:
