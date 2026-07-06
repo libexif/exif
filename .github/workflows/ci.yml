@@ -59,6 +59,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6.0.0
+        with:
+          persist-credentials: false
 
       - name: 'install prereqs'
         run: sudo apt-get install -y --no-install-suggests --no-install-recommends ${{ matrix.packages }}
@@ -97,6 +99,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6.0.0
+        with:
+          persist-credentials: false
       - name: 'install prereqs'
         run: sudo apt-get install -y --no-install-suggests --no-install-recommends ${{ matrix.packages }}
       - name: 'install libexif-testsuite'
@@ -142,6 +146,8 @@ jobs:
         cflags: [-Wall -Wextra -O2]
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: start VM
         uses: cross-platform-actions/action@v1
         with:
