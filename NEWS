@@ -1,6 +1,7 @@
 exif-0.6.22.1 (xxxx-xx-xx):
   * New translations: he, hu
   * Translation updates: de, es, pl, pt, uk, zh_CN, es, sr, vi, fr, sv, ms, ko
+  * Remove ChangeLog file (use git commit logs instead)
 
 exif-0.6.22 (2020-05-19):
   * New translations: ast, fur, ko, ms, pt_BR, ru, tr
